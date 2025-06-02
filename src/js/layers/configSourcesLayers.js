@@ -1,3 +1,6 @@
+import { iplPath } from '../../utils/paths.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
@@ -10,7 +13,7 @@ export function addSources(map, sourceConfig) {
     if (source.type == 'vector') {
         source.tiles =
             [
-                'https://' + [sourceConfig.source.server == 'test' ? 'test-ipl' : 'api'] + '.mobidata-bw.de/geoserver/gwc/service/wmts/rest/' + sourceConfig.source.layer + '/' +
+                'https://' + iplPath + '.mobidata-bw.de/geoserver/gwc/service/wmts/rest/' + sourceConfig.source.layer + '/' +
                 sourceConfig.source.style + '/WebMercatorQuadx2/{z}/{y}/{x}?format=application/vnd.mapbox-vector-tile'
             ],
             source.minzoom = 4,
@@ -24,7 +27,7 @@ export function addSources(map, sourceConfig) {
         const cql = sourceConfig.source.cql ? 'cql_filter=' + encodeURIComponent(sourceConfig.source.cql) : '';
         source.tiles =
             [
-                'https://' + [sourceConfig.source.server == 'test' ? 'test-ipl' : 'api'] + '.mobidata-bw.de/geoserver/ows?SERVICE=WMS&' +
+                'https://' + iplPath + '.mobidata-bw.de/geoserver/ows?SERVICE=WMS&' +
                 'REQUEST=GetMap&' +
                 'VERSION=1.3.0&' +
                 'LAYERS=' + sourceConfig.source.layer + '&' +

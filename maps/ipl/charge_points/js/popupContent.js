@@ -1,3 +1,4 @@
+import { iplPath } from "../../../../src/utils/paths.js";
 import { popupImages } from "../../../../src/js/popupImages.js";
 import { popupCanvas } from "./canvas.js";
 
@@ -80,7 +81,7 @@ export function popupContent(features) {
                 </tr>\
             </table><table>\
                 <tr>\
-                    <td class="attContentLink"><a href="https://api.mobidata-bw.de/ocpdb/api/public/v1/locations/' + id + '" target="_blank">&#10149 Open ChargePoint DataBase<a></td>\
+                    <td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/ocpdb/api/public/v1/locations/' + id + '" target="_blank">&#10149 Open ChargePoint DataBase<a></td>\
                 </tr>\
             </table>';
 
