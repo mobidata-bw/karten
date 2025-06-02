@@ -6,7 +6,7 @@
   <title>Gebündelte E-Ladesäulen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script>
+  <script type="module">
     window.PUBLIC_PATH = import.meta.env.BASE_URL;
   </script>
 </head>
@@ -14,13 +14,13 @@
 <body>
   <a href="https://www.mobidata-bw.de" target="_blank">
     <div id="MobiDataBW">
-      <img src="${PUBLIC_PATH}img/popup/MobiDataBW.svg" alt="MobiData BW®" />
+      <img src="%BASE_URL%img/popup/MobiDataBW.svg" alt="MobiData BW®" />
     </div>
   </a>
   <div id="map" style="position:absolute;top:0;left:0;width:100%;height:100%;margin:0;padding:0;">
     ></div>
 
-  <script type="module" src="js/main.js"></script>
+  <script type="module" src="%BASE_URL%js/main.js"></script>
 </body>
 
 </html>
