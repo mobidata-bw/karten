@@ -1,5 +1,7 @@
+import { basePath } from '../utils/basePaths.js';
+
 export function popupImages(fileName) {
-  const path = `/karten_vite/img/popup/${fileName}`;
+  const path = `${basePath}img/popup/${fileName}`;
   return `
     <th>
       <img
