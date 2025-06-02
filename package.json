@@ -1,0 +1,22 @@
+{
+  "name": "karten",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MobiData BW® Karten mit Vite und MapLibre",
+  "packageManager": "npm@9.6.7",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 5173"
+  },
+  "dependencies": {
+    "@maplibre/maplibre-gl-geocoder": "^1.8.0",
+    "@maplibre/maplibre-gl-inspect": "^1.7.1",
+    "maplibre-gl": "^5.5.0"
+  },
+  "devDependencies": {
+    "fast-glob": "^3.3.3",
+    "vite": "^6.3.5"
+  }
+}
