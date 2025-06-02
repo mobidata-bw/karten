@@ -1,3 +1,4 @@
+import { basePath } from '../utils/basePaths.js';
 import { legendCircle, legendLine, legendRectangle } from './controlLayers.js';
 
 export function addControlLayers(layers, directory, groupOrGroups) {
@@ -5,7 +6,7 @@ export function addControlLayers(layers, directory, groupOrGroups) {
   return layers.map(layer => {
     const { id, label, color, group, subGroup = '' } = layer; //layer.id, layer.label, ...
 
-    const roadworks = "<img class='legendIcon' src='/karten/assets/img/controlElements/verkehrszeichen.svg'></img>";
+    const roadworks = `<img class='legendIcon' src='${basePath}img/controlElements/verkehrszeichen.svg'></img>`;
 
     const symbol =
       layer.group == 'Baustellen' ? roadworks : (

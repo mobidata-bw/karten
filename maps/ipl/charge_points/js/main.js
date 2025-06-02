@@ -3,7 +3,7 @@ import { sourceChargePoints, layersChargePointsPower, layersChargePointsDynamic 
 import { addSources, addLayers } from "../../../../src/js/layers/configSourcesLayers.js";
 import { basemaps } from "../../../../src/js/layerSwitcherControl.js";
 import { initializeControlLayers } from "./controlLayers.js";
-import { popups } from "../../../../src/js/maplibre-popups.js";
+import { popups } from "../../../../src/js/popups.js";
 import { popupContent } from "./popupContent.js";
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';

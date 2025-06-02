@@ -2,7 +2,8 @@
 /* https://docs.maptiler.com/sdk-js/examples/control-style-switcher/      */
 /* ====================================================================== */
 
-import maplibregl from 'maplibre-gl';
+import { basePath } from '../utils/basePaths.js';
+import maplibregl, { validate } from 'maplibre-gl';
 import { addSources, addLayers } from './layers/configSourcesLayers.js';
 export let layerSwitcher;
 
@@ -19,31 +20,31 @@ export function basemaps(map, { basemapSources, basemapLayers }) {
 
     const baseMaps = {
         'streets': {
-            img: '/karten_vite/img/basemaps/streets.png',
+            img: `${basePath}img/basemaps/streets.png`,
             style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
             title: 'Straßen',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
         },
         'bicycle': {
-            img: '/karten_vite/img/basemaps/bicycle.png',
+            img: `${basePath}img/basemaps/bicycle.png`,
             style: 'https://tiles.mobidata-bw.de/styles/bicycle/style.json',
             title: 'Fahrrad',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
         },
         'darkmatter': {
-            img: '/karten_vite/img/basemaps/darkmatter.png',
+            img: `${basePath}img/basemaps/darkmatter.png`,
             style: 'https://tiles.mobidata-bw.de/styles/darkmatter/style.json',
             title: 'Dunkelmodus',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
         },
         'aerialphotos': {
-            img: '/karten_vite/img/basemaps/aerialphotos.png',
+            img: `${basePath}img/basemaps/aerialphotos.png`,
             style: 'https://tiles.mobidata-bw.de/styles/aerialphotos/style.json',
             title: 'Luftbild',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} ${lgl} </div>`
         },
         'basemap': {
-            img: '/karten_vite/img/basemaps/basemap.png',
+            img: `${basePath}img/basemaps/basemap.png`,
             style: 'https://sgx.geodatenzentrum.de/gdz_basemapde_vektor/styles/bm_web_top.json',
             title: 'Geländemodell',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} </div>`
