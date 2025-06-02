@@ -8,8 +8,8 @@
     "start": "npm run dev",
     "dev": "vite --host 0.0.0.0 --port 5173",
     "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0 --port 5173"
-  },
+    "build:test": "vite build --mode test"
+     },
   "dependencies": {
     "@maplibre/maplibre-gl-geocoder": "^1.8.0",
     "@maplibre/maplibre-gl-inspect": "^1.7.1",

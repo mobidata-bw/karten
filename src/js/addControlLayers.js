@@ -1,4 +1,4 @@
-import { basePath } from '../utils/basePaths.js';
+import { basePath } from '../utils/paths.js';
 import { legendCircle, legendLine, legendRectangle } from './controlLayers.js';
 
 export function addControlLayers(layers, directory, groupOrGroups) {

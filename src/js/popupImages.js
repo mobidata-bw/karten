@@ -1,4 +1,4 @@
-import { basePath } from '../utils/basePaths.js';
+import { basePath } from '../utils/paths.js';
 
 export function popupImages(fileName) {
   const path = `${basePath}img/popup/${fileName}`;

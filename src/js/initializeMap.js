@@ -1,4 +1,4 @@
-import { basePath } from '../utils/basePaths.js';
+import { basePath } from '../utils/paths.js';
 
 import 'maplibre-gl/dist/maplibre-gl.css';
 import '@maplibre/maplibre-gl-inspect/dist/maplibre-gl-inspect.css';

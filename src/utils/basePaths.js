@@ -1,1 +1,0 @@
-export const basePath = import.meta.env.PROD ? '/karten_vite/' : '';
