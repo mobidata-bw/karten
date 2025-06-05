@@ -23,7 +23,7 @@ const layers = {
 };
 
 export const layersChargePointsPower = [
-        {
+    {
         id: 'chargePointsPower_Normal',
         label: 'Ladesäule',
         subGroup: 'Ladeleistung',
@@ -32,7 +32,7 @@ export const layersChargePointsPower = [
                 '<=', ['get', 'max_electric_power'], 22000
             ],
         color: '#08a4a7',
-        ...layers,
+        ...layers
     },
     {
         id: 'chargePointsPower_Fast',
@@ -45,7 +45,7 @@ export const layersChargePointsPower = [
         color: '#91FFFF',
         ...layers
     },
-     {
+    {
         id: 'chargePointsPower_Unknown',
         label: 'Unbekannte Ladeleistung',
         subGroup: 'Ladeleistung',
@@ -55,7 +55,7 @@ export const layersChargePointsPower = [
             ],
         color: '#cacaca',
         ...layers
-    }   
+    }
 ];
 
 export const layersChargePointsDynamic = [
