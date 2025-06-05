@@ -1,136 +1,226 @@
-import * as domHelper from "./lib/domHelpers.js";
-import * as mglHelper from "./lib/mglHelpers.js";
+/*******************************************
+ * layerControlModifications.js
+ *
+ * - Keine einzige Zeile im Original-Plugin
+ *   (layerControlGrouped.js) wurde angefasst.
+ * - Alle neuen Flags (Gruppen­ausschluss, exklusive Layer)
+ *   werden hier reinpackt.
+ *******************************************/
 
- 
+import * as mglHelper from "./lib/mglHelpers.js";
+import { layerControlGrouped } from "./layerControlGrouped.js";
+
+/**
+ * Baut in this._groupSettings pro Gruppe die inneren Flags auf:
+ *   {
+ *     excludeOtherGroups: Boolean,      // ob diese Gruppe per-default andere ausschalten soll
+ *     exclusiveWithinGroup: Boolean,    // ob Layer IN dieser Gruppe sich gegenseitig ausschließen
+ *     excludeGroups: null | [String…]    // optionale Liste von Gruppen, die (nur) ausgeschaltet werden, wenn man in diese Gruppe klickt
+ *   }
+ *
+ * Zusätzlich prüft _initGroupSettings jetzt auf zwei neue Instance-Propertys:
+ *   - this._exclusiveAllGroups       (Boolean)
+ *   - this._exclusiveGroupsList      (Array von Group-Namen)
+ *
+ * Wenn _exclusiveAllGroups === true, wird für **jede** Gruppe excludeOtherGroups = true gesetzt.
+ * Wenn _exclusiveGroupsList = ["Gruppe A","Gruppe B"], dann wird nur für diese beiden Gruppen
+ *    excludeOtherGroups = true gesetzt (gegenseitiger Ausschluss innerhalb der Liste).
+ */
+layerControlGrouped.prototype._initGroupSettings = function() {
+  // Nur einmal aufbauen
+  if (this._groupSettings) return;
+
+  this._groupSettings = {};
+
+  // 1) Alle Layer durchlaufen und alle Gruppennamen sammeln
+  this._layers.forEach(layer => {
+    if (!layer.group) {
+      layer.group = "Operational Layers";
+    }
+    if (!this._groupSettings[layer.group]) {
+      this._groupSettings[layer.group] = {
+        excludeOtherGroups: false,
+        exclusiveWithinGroup: false,
+        excludeGroups: null
+      };
+    }
+  });
+
+  // 2) Aus den Layer-Objekten per-layer Flags ziehen
+  this._layers.forEach(layer => {
+    const grp = layer.group;
+    const settings = this._groupSettings[grp];
+
+    if (layer.exclusiveWithinGroup) {
+      settings.exclusiveWithinGroup = true;
+    }
+    if (Array.isArray(layer.excludeGroups)) {
+      settings.excludeGroups = layer.excludeGroups.slice();
+    }
+    // ⚠️ Achtung: layer.excludeOtherGroups wird **jetzt ignoriert**,
+    // weil wir das global steuern wollen (siehe weiter unten).
+    // Wenn du noch vereinzelt per-Layer ausschließen möchtest, kannst du natürlich:
+    //   if (layer.excludeOtherGroups) settings.excludeOtherGroups = true;
+    // aber in der aktuellen Spezifikation wird empfohlen, ausschließlich über
+    //   layerControl._exclusiveAllGroups oder layerControl._exclusiveGroupsList
+    // zu arbeiten, um das Plugin möglichst unberührt zu lassen.
+  });
+
+  // 3) Jetzt prüfen wir, ob auf Instanz-Ebene ein globaler Ausschluss gewünscht ist:
+  //    a) this._exclusiveAllGroups === true → alle Gruppen wechselseitig exkludieren
+  //    b) this._exclusiveGroupsList = [ "Gruppe A", "Gruppe B", … ] → nur diese untereinander exkludieren
+  if (this._exclusiveAllGroups === true) {
+    // Setze für jede Gruppe excludeOtherGroups = true
+    Object.keys(this._groupSettings).forEach(gName => {
+      this._groupSettings[gName].excludeOtherGroups = true;
+    });
+  }
+  else if (Array.isArray(this._exclusiveGroupsList)) {
+    // Nur die Gruppen in dieser Liste bekommen excludeOtherGroups = true
+    const liste = this._exclusiveGroupsList.slice();
+    liste.forEach(gName => {
+      if (this._groupSettings[gName]) {
+        this._groupSettings[gName].excludeOtherGroups = true;
+      }
+    });
+  }
+
+  // 4) Falls Nutzer versehentlich beide Flags gesetzt hat,
+  //    _exclusiveAllGroups hat Vorrang vor _exclusiveGroupsList, weil es genereller ist.
+  //    (wir haben oben bereits abgefragt: if (_exclusiveAllGroups) … else if (_exclusiveGroupsList) …)
+
+  // _groupSettings ist jetzt vollständig – enthält:
+  //   • für jede Gruppe, ob sie (global) andere auschließen soll,
+  //   • ob innerhalb der Gruppe Layers sich gegenseitig ausschließen,
+  //   • und ggf. eine spezifische Liste von Gruppen, die ausgeschlossen werden sollen.
+};
+
+/**
+ * Wird bei jedem Klick auf eine Layer-Checkbox oder einen Gruppen-Header ausgeführt.
+ * 
+ * Ablauf:
+ *   1) this._initGroupSettings() stellt sicher, dass this._groupSettings da ist.
+ *   2) Klick auf Gruppen-Header (data-layergroup)? → schalte ggf. andere Gruppen aus.
+ *   3) Klick auf Layer-Checkbox (data-map-layer)? → wenn in dieser Gruppe 
+ *        • excludeOtherGroups = true   → schalte andere Gruppen aus
+ *        • excludeGroups = [ … ]       → schalte nur diese aufgelisteten Gruppen aus
+ *        • exclusiveWithinGroup = true → schalte Geschwister-Layer in derselben Gruppe aus
+ *   4) Anschließend läuft das originale Verhalten (SetLayerVisibility, Kinder, DirectoryToggle etc.)
+ */
 export function exclusiveLayerGroup(e) {
-  // If the click is on a group header (identified by the data attribute "data-layergroup"),
-  // we delay the execution so that the original code (which toggles all children) runs first.
+  // 1️⃣ Einmal pro Instanz: _groupSettings initialisieren
+  this._initGroupSettings();
+
+  // 2️⃣ Klick auf Gruppen-Header?
   if (e.target.dataset.layergroup) {
+    const groupName = e.target.dataset.layergroup;
+    const groupSetting = this._groupSettings[groupName] || {};
+
+    // Standard-Group-Toggle wird vom Original-Plugin ausgeführt.
+    // Wir koppeln uns per setTimeout an, damit wir erst NACH dem Standard-Toggle
+    // die Ausschlusslogik ausführen:
     setTimeout(() => {
-      // Retrieve the group name from the data attribute of the clicked element.
-      const groupName = e.target.dataset.layergroup;
-      // Find all child toggle elements within the same parent that are marked with "data-master-layer".
-      const childToggles = e.target.parentElement.querySelectorAll("[data-master-layer]");
-      // Check if all child toggles are activated (i.e., checked).
-      // If they are, then we consider the entire group as active.
-      if (domHelper.GetAllChecked(childToggles)) {
-        // Retrieve all elements that are toggles for map layers.
+      // a) Globaler/Gruppen-Flag: OtherGroups ausschalten?
+      if (groupSetting.excludeOtherGroups || Array.isArray(groupSetting.excludeGroups)) {
+        // Entscheide, welche Gruppen wir ausschalten:
+        let groupsToExclude = [];
+
+        if (groupSetting.excludeOtherGroups) {
+          groupsToExclude = Object.keys(this._groupSettings).filter(g => g !== groupName);
+        }
+        if (Array.isArray(groupSetting.excludeGroups)) {
+          groupsToExclude = groupSetting.excludeGroups.slice();
+        }
+
+        // Alle Layer-Checkboxen aus den auszuschaltenden Gruppen "unclicken"
         const allToggles = document.querySelectorAll("[data-map-layer]");
-        // For each toggle, if it belongs to a different group and is currently active,
-        // simulate a click to deactivate it.
         allToggles.forEach(input => {
-          if (input.dataset.group && input.dataset.group !== groupName && input.checked) {
+          if (
+            input.dataset.group &&
+            groupsToExclude.includes(input.dataset.group) &&
+            input.checked
+          ) {
             input.click();
           }
         });
       }
-    }, 0); // Delay execution to let the original toggle logic complete.
-    // Exit the function early as the group header logic is complete.
+    }, 0);
+
+    // Keine weitere Weiterverarbeitung hier; Original-Plugin regelt das Ein-/Ausblenden aller Gruppen-Layer.
     return;
   }
 
-  // For individual layer toggles:
+  // 3️⃣ Klick auf einzelne Layer-Checkbox oder Label?
   let groupName = null;
-  // Check if the clicked element is a map layer toggle and has a group defined.
-  if (e.target.dataset.mapLayer && e.target.dataset.group) {
-    groupName = e.target.dataset.group;
-  } 
-  // Alternatively, if the clicked element is a label and it's associated with an input,
-  // retrieve the group information from the associated input.
+  let activating = false;
+
+  // (A) Wenn direkt das <input data-map-layer> angeklickt wurde
+  if (e.target.dataset.mapLayer) {
+    groupName = e.target.dataset.group || null;
+    activating = e.target.checked;
+  }
+  // (B) Oder wenn das zugehörige <label> angeklickt wurde
   else if (e.target.tagName === "LABEL" && e.target.htmlFor) {
     const associatedInput = document.getElementById(e.target.htmlFor);
-    if (associatedInput && associatedInput.dataset.group) {
-      groupName = associatedInput.dataset.group;
+    if (associatedInput && associatedInput.dataset.mapLayer) {
+      groupName = associatedInput.dataset.group || null;
+      activating = associatedInput.checked;
     }
   }
-  // Determine whether this is an activation (turning on) action.
-  let activating = false;
-  if (e.target.dataset.mapLayer) {
-    if (e.target.checked) {
-      activating = true;
-    }
-  }
-  // If an individual layer toggle is being activated and it belongs to a group,
-  // then deactivate all toggles from other groups.
+
   if (groupName && activating) {
-    const allToggles = document.querySelectorAll("[data-map-layer]");
-    allToggles.forEach(input => {
-      if (input.dataset.group && input.dataset.group !== groupName && input.checked) {
-        input.click();
+    const groupSetting = this._groupSettings[groupName] || {};
+
+    // a) Gruppen-Ausschluss (Global oder spez. Liste)?
+    if (groupSetting.excludeOtherGroups || Array.isArray(groupSetting.excludeGroups)) {
+      let groupsToExclude = [];
+
+      if (groupSetting.excludeOtherGroups) {
+        // Alle anderen Gruppen außer groupName
+        groupsToExclude = Object.keys(this._groupSettings).filter(g => g !== groupName);
       }
-    });
-  }
+      if (Array.isArray(groupSetting.excludeGroups)) {
+        // Nur die in excludeGroups gelisteten
+        groupsToExclude = groupSetting.excludeGroups.slice();
+      }
 
-  // Continue with the original event processing logic:
-
-  // If the clicked element is a layer control button, remove the "collapsed" class.
-  if (e.target.dataset.layerControl) {
-    e.target.classList.remove("collapsed");
-    return;
-  }
-  // If the clicked element is a checkbox container, simulate a click on its first child element,
-  // which is likely the actual checkbox.
-  if (e.target.className === "checkbox") {
-    e.target.children[0].click();
-    return;
-  }
-  // If the clicked element is a map layer toggle:
-  if (e.target.dataset.mapLayer) {
-    // Set the visibility of the map layer based on whether it is checked.
-    mglHelper.SetLayerVisibility(this._map, e.target.checked, e.target.id);
-    // If the toggle has children layers (indicated by "data-children"),
-    // then find all elements that are children (marked with "data-parent") and simulate a click on them.
-    if (e.target.dataset.children) {
-      const children = document.querySelectorAll("[data-parent]");
-      for (let i = 0; i < children.length; i++) {
-        if (children[i].dataset.parent === e.target.id) {
-          children[i].click();
+      const allToggles = document.querySelectorAll("[data-map-layer]");
+      allToggles.forEach(input => {
+        if (
+          input.dataset.group &&
+          groupsToExclude.includes(input.dataset.group) &&
+          input.checked
+        ) {
+          input.click();
         }
-      }
+      });
     }
-    return;
-  }
-  // If the clicked element is a directory toggle (for expanding/collapsing a section):
-  if (e.target.dataset.directoryToggle) {
-    // Toggle the collapsed state of the header based on the visibility of the third child element.
-    if (e.target.parentElement.children[2].style.display != "none") {
-      e.target.parentElement.children[0].className = "collapsed";
-    } else {
-      e.target.parentElement.children[0].className = "";
+
+    // b) Innerhalb-der-Gruppe-Ausschluss?
+    if (groupSetting.exclusiveWithinGroup) {
+      const siblings = document.querySelectorAll(
+        `[data-map-layer][data-group="${groupName}"]`
+      );
+      siblings.forEach(input => {
+        // deactivate all siblings except the one we just clicked
+        const clickedId = e.target.dataset.mapLayer ? e.target.id : e.target.htmlFor;
+        if (input.id !== clickedId && input.checked) {
+          input.click();
+        }
+      });
     }
-    // Toggle the display of children elements using a helper function.
-    domHelper.ToggleChildren(e.target.parentElement, 2);
-    // After a delay, check if the toggled element is in the viewport. If not, adjust the location hash to scroll it into view.
-    setTimeout(function () {
-      if (!isScrolledIntoView(e.target.parentElement)) {
-        window.location.hash = e.target.id;
-      }
-    }, 410);
-    // Resize the map after a short delay to ensure the layout adjusts correctly.
-    setTimeout(() => {
-      this._map.resize();
-    }, 450);
-    return;
   }
-  
-  // Helper function: Checks if an element is fully visible in the viewport.
-  function isScrolledIntoView(el) {
-    const rect = el.getBoundingClientRect();
-    return rect.top >= 0 && rect.bottom <= window.innerHeight;
-  }
-  
-  // If the container has a "_collapsed" flag set, attach mouse enter and leave event listeners.
-  // These listeners will remove or add the "collapsed" class to expand/collapse the container.
-  if (this._collapsed) {
-    this._div.addEventListener("mouseenter", function (e) {
-      setTimeout(function () {
-        e.target.classList.remove("collapsed");
-      }, 0);
-      return;
-    });
-    this._div.addEventListener("mouseleave", function (e) {
-      e.target.classList.add("collapsed");
-      return;
-    });
-  }
+
+  // 4️⃣ Anschließend lässt das Original-Plugin seine Standard-Logik weiterlaufen
+  //     (SetLayerVisibility, Kinder-Layer, Directory-Toggle, Zoom-Checks usw.).
+  //     Wir greifen hier **nicht** per e.preventDefault() ein, sondern
+  //     überlassen dem Original alles Weitere.
 }
+
+
+/***************************************************
+ * Export (falls du es modulbasiert importieren willst)
+ ***************************************************/
+export default {
+  exclusiveLayerGroup
+};
