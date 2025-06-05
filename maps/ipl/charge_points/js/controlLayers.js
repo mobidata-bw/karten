@@ -11,6 +11,8 @@ export function initializeControlLayers(map) {
         layers: addControlLayers(layers, 'Gebündelte E-Ladesäulen')
     };
 
+    config._exclusiveAllGroups = true;
+
     map.addControl(new layerControlGrouped(config), 'top-right');
 
 };

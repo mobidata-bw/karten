@@ -32,7 +32,7 @@ export const layersChargePointsPower = [
                 '<=', ['get', 'max_electric_power'], 22000
             ],
         color: '#08a4a7',
-        ...layers
+        ...layers,
     },
     {
         id: 'chargePointsPower_Fast',
