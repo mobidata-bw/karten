@@ -1,4 +1,4 @@
-import { occupancy, types } from '/karten/assets/js/layers/parkApi/parkApiStyles.js';
+import { occupancy, types } from '../../../../src/js/layers/parkApi/parkApiStyles.js';
 
 
 // ==============================

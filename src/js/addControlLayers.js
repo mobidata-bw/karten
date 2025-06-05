@@ -4,7 +4,7 @@ import { legendCircle, legendLine, legendRectangle } from './controlLayers.js';
 export function addControlLayers(layers, directory, groupOrGroups) {
 
   return layers.map(layer => {
-    const { id, label, color, group, subGroup = '', type, exclusiveWithinGroup } = layer; //layer.id, layer.label, ...
+    const { id, label, color, group, subGroup = '', type, exclusiveWithinGroup } = layer;
 
     const roadworks = `<img class='legendIcon' src='${basePath}img/controlElements/verkehrszeichen.svg'></img>`;
 
@@ -18,7 +18,8 @@ export function addControlLayers(layers, directory, groupOrGroups) {
     return {
       id,
       name: symbol + label,
-      group: groupOrGroups == 'group' ? group : subGroup,
+      subGroup: subGroup,
+      group: groupOrGroups == 'group' ? group : subGroup,      
       directory,  
       exclusiveWithinGroup: layer.exclusiveWithinGroup
     };

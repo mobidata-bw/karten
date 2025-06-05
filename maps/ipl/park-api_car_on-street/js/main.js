@@ -1,15 +1,33 @@
-import { map, shape, fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder } from '/karten/assets/js/maplibre-initializeMap.js';
-import { sourceParkApiCarOnStreet, layersParkApiCarOnStreetOccupancy, layersParkApiCarOnStreetObjects, layersParkApiCarOnStreetSpecialParking } from './layers.js';
-import { addSources, addLayers } from '/karten/assets/js/layers/maplibre-configSourcesLayers.js';
-import { basemaps } from '/karten/assets/js/maplibre-layerSwitcherControl.js';
-import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '/karten/assets/js/maplibre-popups.js';
-import { popupContent } from '/karten/assets/js/layers/parkApi/parkApiPopups.js';
+import {
+    map,
+    shape,
+    fillShape,
+    lineShape,
+    maplibreInspectControl,
+    maplibreNavigationControl,
+    geocoder
+} from '../../../../src/js/initializeMap.js';
+import { 
+    sourceParkApiCarOnStreet, 
+    layersParkApiCarOnStreetOccupancy, 
+    layersParkApiCarOnStreetObjects, 
+    layersParkApiCarOnStreetSpecialParking 
+} from './layers.js';
+import { 
+    addSources, 
+    addLayers 
+} from '../../../../src/js/layers/configSourcesLayers.js';
+import { basemaps } from "../../../../src/js/layerSwitcherControl.js";
+import { initializeControlLayers } from "./controlLayers.js";
+import { popups } from "../../../../src/js/popups.js";
+import { popupContent } from "../../../../src/js/layers/parkApi/parkApiPopups.js";
+import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
+import '../../../../src/css/layerSwitcherControl.css';
+import '../../../../src/css/global.css';
+
 export let layers;
 
-
-const basemapSources = [];
-const basemapLayers = [];
+const basemapSources = [], basemapLayers = [];
 
 
 window.addEventListener('DOMContentLoaded', () => {

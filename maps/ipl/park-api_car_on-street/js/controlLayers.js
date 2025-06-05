@@ -1,6 +1,7 @@
-import { layerControlGrouped } from '/karten/assets/plugins/mapbox-layer-control/layerControlGrouped.js';
+import { layerControlGrouped } from '../../../../src/plugins/mapbox-layer-control/layerControlGrouped.js';
+import '../../../../src/plugins/mapbox-layer-control/layerControl-patch.js';
 import { layers } from './main.js';
-import { addControlLayers } from '/karten/assets/js/addControlLayers.js';
+import { addControlLayers } from '../../../../src/js/addControlLayers.js';
 
 
 export function initializeControlLayers(map) {
@@ -10,8 +11,11 @@ export function initializeControlLayers(map) {
         layers: addControlLayers(layers, 'Gebündelte Straßen-Parkplätze')
     };
 
-    map.addControl(new layerControlGrouped(config), 'top-right');
-
-    // map.moveLayer('parkApiCarOnStreetSpecialParking_Disabled', 'parkApiCarOnStreetSpecialParking_Carsharing');
+    const layerControl = new layerControlGrouped(config);
+ 
+    layerControl._exclusiveAllGroups = true;
+    // layerControl._exclusiveGroupsList = ['Ladeleistung', 'Belegung'];
+  
+    map.addControl(layerControl, 'top-right');
 
 };

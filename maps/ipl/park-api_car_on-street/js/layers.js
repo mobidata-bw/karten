@@ -1,4 +1,4 @@
-import { occupancy, objects, specialParking } from '/karten/assets/js/layers/parkApi/parkApiStyles.js';
+import { occupancy, objects, specialParking } from '../../../../src/js/layers/parkApi/parkApiStyles.js';
 
 
 // ==============================
@@ -75,24 +75,28 @@ export const layersParkApiCarOnStreetSpecialParking = [
         id: 'parkApiCarOnStreetSpecialParking_Disabled',
         visibility: 'none',
         ...specialParking.DISABLED,
-        ...layers
+        ...layers,
+        exclusiveWithinGroup: true
     },
     {
         id: 'parkApiCarOnStreetSpecialParking_Family',
         visibility: 'none',
         ...specialParking.FAMILY,
-        ...layers
+        ...layers,
+        exclusiveWithinGroup: true
     },
     {
         id: 'parkApiCarOnStreetSpecialParking_Charging',
         visibility: 'none',
         ...specialParking.CHARGING,
-        ...layers
+        ...layers,
+        exclusiveWithinGroup: true
     },
     {
         id: 'parkApiCarOnStreetSpecialParking_Carsharing',
         visibility: 'none',
         ...specialParking.CARSHARING,
-        ...layers
+        ...layers,
+        exclusiveWithinGroup: true
     }
 ];
