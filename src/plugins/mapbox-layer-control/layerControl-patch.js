@@ -2,22 +2,25 @@ import { layerControlGrouped } from "./layerControlGrouped.js";
 import { exclusiveLayerGroup } from "./layerControlModifications.js";
 
 (function() {
-  const originalOnAdd = layerControlGrouped.prototype.onAdd;
-
+  const origOnAdd = layerControlGrouped.prototype.onAdd;
   layerControlGrouped.prototype.onAdd = function(map) {
-    const div = originalOnAdd.call(this, map);
-    div._pluginInstance = this;
+    // 1) Build original control (legend + inputs)
+    const container = origOnAdd.call(this, map);
 
-    div.addEventListener(
-      "click",
-      (e) => {
-        setTimeout(() => {
-          exclusiveLayerGroup.call(this, e);
-        }, 0);
-      },
-      false
-    );
+    // 2) For each layer object, find <input#layer.id[data-map-layer]>
+    //    and set data-subgroup from layer.subGroup
+    this._layers.forEach(layer => {
+      const inp = container.querySelector(`input#${CSS.escape(layer.id)}[data-map-layer]`);
+      if (inp && typeof layer.subGroup === "string" && layer.subGroup) {
+        inp.dataset.subgroup = layer.subGroup;
+      }
+    });
 
-    return div;
+    // 3) Attach click listener: let original run first, then exclusiveLayerGroup
+    container.addEventListener("click", e => {
+      setTimeout(() => exclusiveLayerGroup.call(this, e), 0);
+    }, false);
+
+    return container;
   };
 })();
