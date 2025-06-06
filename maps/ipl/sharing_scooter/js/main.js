@@ -11,11 +11,11 @@ import {
     sourceSharingVehicles,
     sourceSharingStationsScooter,
     layersSharingScooter as layers
-} from "./layers.js";
+} from './layers.js';
 import {
     addSources,
     addLayers
-} from "../../../../src/js/layers/configSourcesLayers.js";
+} from '../../../../src/js/layers/configSourcesLayers.js';
 import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
 import { initializeControlLayers } from './controlLayers.js';
 import { popups } from '../../../../src/js/popups.js';

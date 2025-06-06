@@ -17,13 +17,14 @@ import {
     addSources, 
     addLayers 
 } from '../../../../src/js/layers/configSourcesLayers.js';
-import { basemaps } from "../../../../src/js/layerSwitcherControl.js";
-import { initializeControlLayers } from "./controlLayers.js";
-import { popups } from "../../../../src/js/popups.js";
-import { popupContent } from "../../../../src/js/layers/parkApi/parkApiPopups.js";
+import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
+import { initializeControlLayers } from './controlLayers.js';
+import { popups } from '../../../../src/js/popups.js';
+import { popupContent } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
+import '../css/styles.css';
 
 export let layers;
 

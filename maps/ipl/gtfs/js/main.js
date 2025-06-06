@@ -7,12 +7,14 @@ import {
     maplibreNavigationControl,
     geocoder
 } from '../../../../src/js/initializeMap.js';
+import { wms } from '../../../../src/js/wms.js';
 import {
-    sourceParkApiBicycle, 
-    layersParkApiBicycleOccupancy, 
-    layersParkApiBicycleTypes,
-    sourceParkApiItem, 
-    layersParkApiItemOccupancy
+    sourceTransitStops, 
+    layersTransitStops,
+    sourceTransitStations, 
+    layersTransitStations,
+    sourceTransitShapes, 
+    layersTransitShapes
 } from './layers.js';
 import {
     addSources,
@@ -20,14 +22,14 @@ import {
 } from '../../../../src/js/layers/configSourcesLayers.js';
 import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
 import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../../src/js/popups.js';
-import { popupContent } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
+import { popups } from '../../../../src/js/popups.js';;
+import { popupContentTransitStops, popupContentTransitStations, popupContentTransitShapes } from './popupContent.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
+import '../css/styles.css';
 
-export { layersParkApiItemOccupancy };
-export let layers, layersBicycle;
+export let layers;
 
 const basemapSources = [], basemapLayers = [];
 
@@ -57,27 +59,33 @@ window.addEventListener('DOMContentLoaded', () => {
         map.addLayer(lineShape);
 
 
-        // PROJECT LAYERS             
+        // PROJECT LAYERS            
         const sources = [
-            { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
-            { id: 'sourceParkApiItem', source: sourceParkApiItem },
+            { id: 'sourceTransitStops', source: sourceTransitStops },
+            { id: 'sourceTransitStations', source: sourceTransitStations },
+            { id: sourceTransitShapes[0].id, source: sourceTransitShapes[0] },
+            { id: sourceTransitShapes[1].id, source: sourceTransitShapes[1] },
+            { id: sourceTransitShapes[2].id, source: sourceTransitShapes[2] },
+            { id: sourceTransitShapes[3].id, source: sourceTransitShapes[3] },
+            { id: sourceTransitShapes[4].id, source: sourceTransitShapes[4] },
+            { id: sourceTransitShapes[5].id, source: sourceTransitShapes[5] }
         ];
+
         sources.forEach(source => addSources(map, source));
 
-        layersBicycle = [
-            ...layersParkApiBicycleOccupancy,
-            ...layersParkApiBicycleTypes,
-        ];
+
         layers = [
-            ...layersBicycle,
-            ...layersParkApiItemOccupancy
+            ...layersTransitStops,
+            ...layersTransitStations,
+            ...layersTransitShapes
         ];
+
         layers.forEach(layer => addLayers(map, layer));
 
 
         // ==============================
         // LAYER CONTROL
-        // ============================== 
+        // ==============================
         initializeControlLayers(map);
 
 
@@ -99,7 +107,14 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layers, popupContent);
+        popups(map, layersTransitStops, popupContentTransitStops);
+        popups(map, layersTransitStations, popupContentTransitStations);
+
+
+        // ==============================
+        // WMS & POPUPS
+        // ==============================    
+        wms(map, layersTransitShapes, popupContentTransitShapes);
 
 
     });

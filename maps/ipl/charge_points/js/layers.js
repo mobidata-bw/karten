@@ -16,7 +16,7 @@ const layers = {
     sourceLayer: 'charge_points',
     group: 'E-Ladesäulen',
     circleRadius: [
-        "interpolate", ["linear"], ["zoom"],
+        'interpolate', ['linear'], ['zoom'],
         6, 4,
         12, 5
     ],

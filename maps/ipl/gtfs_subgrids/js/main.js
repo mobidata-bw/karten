@@ -8,11 +8,8 @@ import {
     geocoder
 } from '../../../../src/js/initializeMap.js';
 import {
-    sourceParkApiBicycle, 
-    layersParkApiBicycleOccupancy, 
-    layersParkApiBicycleTypes,
-    sourceParkApiItem, 
-    layersParkApiItemOccupancy
+    sourceTransitShapes,
+    layersTransitShapes as layers 
 } from './layers.js';
 import {
     addSources,
@@ -21,13 +18,12 @@ import {
 import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
 import { initializeControlLayers } from './controlLayers.js';
 import { popups } from '../../../../src/js/popups.js';
-import { popupContent } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
+import { popupContentTransitShapes } from './popupContent.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
 
-export { layersParkApiItemOccupancy };
-export let layers, layersBicycle;
+export { layers };
 
 const basemapSources = [], basemapLayers = [];
 
@@ -57,27 +53,25 @@ window.addEventListener('DOMContentLoaded', () => {
         map.addLayer(lineShape);
 
 
-        // PROJECT LAYERS             
+        // PROJECT LAYERS            
         const sources = [
-            { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
-            { id: 'sourceParkApiItem', source: sourceParkApiItem },
+            { id: 'sourceTransitShapes', source: sourceTransitShapes }
         ];
         sources.forEach(source => addSources(map, source));
 
-        layersBicycle = [
-            ...layersParkApiBicycleOccupancy,
-            ...layersParkApiBicycleTypes,
-        ];
-        layers = [
-            ...layersBicycle,
-            ...layersParkApiItemOccupancy
-        ];
+        // layers = [
+        //     ...layersTransitShapes_SubGrid1,
+        //     ...layersTransitShapes_SubGrid2,
+        //     ...layersTransitShapes_SubGrid3,
+        //     ...layersTransitShapes_SubGrid4,
+        //     ...layersTransitShapes_SubGrid5
+        // ];
         layers.forEach(layer => addLayers(map, layer));
 
 
         // ==============================
         // LAYER CONTROL
-        // ============================== 
+        // ==============================
         initializeControlLayers(map);
 
 
@@ -99,7 +93,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layers, popupContent);
+        popups(map, layers, popupContentTransitShapes);
 
 
     });

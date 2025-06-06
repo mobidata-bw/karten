@@ -7,27 +7,23 @@ import {
     maplibreNavigationControl,
     geocoder
 } from '../../../../src/js/initializeMap.js';
+import { popupContent } from './popupContent.js';
+import { wms } from '../../../../src/js/wms.js';
 import {
-    sourceParkApiBicycle, 
-    layersParkApiBicycleOccupancy, 
-    layersParkApiBicycleTypes,
-    sourceParkApiItem, 
-    layersParkApiItemOccupancy
+    sourceRoadworks,
+    layersRoadworks as layers
 } from './layers.js';
 import {
-    addSources,
-    addLayers
+addSources,
+addLayers
 } from '../../../../src/js/layers/configSourcesLayers.js';
 import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
 import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../../src/js/popups.js';
-import { popupContent } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
 
-export { layersParkApiItemOccupancy };
-export let layers, layersBicycle;
+export { layers };
 
 const basemapSources = [], basemapLayers = [];
 
@@ -59,19 +55,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // PROJECT LAYERS             
         const sources = [
-            { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
-            { id: 'sourceParkApiItem', source: sourceParkApiItem },
+            { id: 'sourceRoadworks', source: sourceRoadworks },
         ];
         sources.forEach(source => addSources(map, source));
 
-        layersBicycle = [
-            ...layersParkApiBicycleOccupancy,
-            ...layersParkApiBicycleTypes,
-        ];
-        layers = [
-            ...layersBicycle,
-            ...layersParkApiItemOccupancy
-        ];
         layers.forEach(layer => addLayers(map, layer));
 
 
@@ -97,12 +84,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         // ==============================
-        // POPUPS
-        // ==============================       
-        popups(map, layers, popupContent);
+        // WMS & POPUPS
+        // ==============================    
+        wms(map, layers, popupContent);
 
 
     });
-
 
 });

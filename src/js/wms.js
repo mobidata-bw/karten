@@ -1,3 +1,5 @@
+import maplibregl from 'maplibre-gl';
+
 export function wms(map, layers, popupContent) {
 
     // ==============================
