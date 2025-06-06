@@ -7,14 +7,13 @@ import {
     maplibreNavigationControl,
     geocoder
 } from '../../../../src/js/initializeMap.js';
-import { wms } from '../../../../src/js/wms.js';
+import { shapeRegierungsbezirke, lineShapeRegierungsbezirke } from './initializeMap.js';
 import {
-    sourceTransitStops, 
-    layersTransitStops,
-    sourceTransitStations, 
-    layersTransitStations,
-    sourceTransitShapes, 
-    layersTransitShapes
+    sourceOepnvGueteklassenStuttgart,
+    sourceOepnvGueteklassenKarlsruhe,
+    sourceOepnvGueteklassenFreiburg,
+    sourceOepnvGueteklassenTuebingen,
+    layersOepnvGueteklassen as layers
 } from './layers.js';
 import {
     addSources,
@@ -23,13 +22,13 @@ import {
 import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
 import { initializeControlLayers } from './controlLayers.js';
 import { popups } from '../../../../src/js/popups.js';
-import { popupContentTransitStops, popupContentTransitStations, popupContentTransitShapes } from './popupContent.js';
+import { popupContent } from './popupContent.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
 import '../css/styles.css';
 
-export let layers;
+export { layers };
 
 const basemapSources = [], basemapLayers = [];
 
@@ -37,7 +36,7 @@ const basemapSources = [], basemapLayers = [];
 window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
-    // MAP CONTROLS
+    // INITIALIZE MAP
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
 
@@ -54,38 +53,29 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         // DEFAULT LAYERS
+        map.addSource('shapeRegierungsbezirke', shapeRegierungsbezirke);
+        map.addLayer(lineShapeRegierungsbezirke);
+
         map.addSource('shape', shape);
         map.addLayer(fillShape);
         map.addLayer(lineShape);
 
 
-        // PROJECT LAYERS            
+        // PROJECT LAYERS    
         const sources = [
-            { id: 'sourceTransitStops', source: sourceTransitStops },
-            { id: 'sourceTransitStations', source: sourceTransitStations },
-            { id: sourceTransitShapes[0].id, source: sourceTransitShapes[0] },
-            { id: sourceTransitShapes[1].id, source: sourceTransitShapes[1] },
-            { id: sourceTransitShapes[2].id, source: sourceTransitShapes[2] },
-            { id: sourceTransitShapes[3].id, source: sourceTransitShapes[3] },
-            { id: sourceTransitShapes[4].id, source: sourceTransitShapes[4] },
-            { id: sourceTransitShapes[5].id, source: sourceTransitShapes[5] }
+            { id: 'sourceOepnvGueteklassenStuttgart', source: sourceOepnvGueteklassenStuttgart },
+            { id: 'sourceOepnvGueteklassenKarlsruhe', source: sourceOepnvGueteklassenKarlsruhe },
+            { id: 'sourceOepnvGueteklassenFreiburg', source: sourceOepnvGueteklassenFreiburg },
+            { id: 'sourceOepnvGueteklassenTuebingen', source: sourceOepnvGueteklassenTuebingen }
         ];
-
         sources.forEach(source => addSources(map, source));
-
-
-        layers = [
-            ...layersTransitStops,
-            ...layersTransitStations,
-            ...layersTransitShapes
-        ];
 
         layers.forEach(layer => addLayers(map, layer));
 
 
         // ==============================
         // LAYER CONTROL
-        // ==============================
+        // ==============================     
         initializeControlLayers(map);
 
 
@@ -94,6 +84,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         basemapSources.push(
             { id: 'shape', source: shape },
+            { id: 'shapeRegierungsbezirke', source: shapeRegierungsbezirke },
             ...sources
         );
 
@@ -106,15 +97,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // ==============================
         // POPUPS
-        // ==============================       
-        popups(map, layersTransitStops, popupContentTransitStops);
-        popups(map, layersTransitStations, popupContentTransitStations);
+        // ============================== 
+        popups(map, layers, popupContent);
 
-
-        // ==============================
-        // WMS & POPUPS
-        // ==============================    
-        wms(map, layersTransitShapes, popupContentTransitShapes);
 
 
     });

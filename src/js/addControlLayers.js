@@ -1,28 +1,45 @@
 import { basePath } from '../utils/paths.js';
 import { legendCircle, legendLine, legendRectangle } from './controlLayers.js';
 
-const legendSymbols = { legendCircle, legendLine, legendRectangle };
 
 export function addControlLayers(layers, directory, groupOrGroups) {
 
   return layers.map(layer => {
-    const { id, label, color, group, subGroup = '', type, exclusiveWithinGroup, symbol: whichSymbol } = layer;
+    const {
+      id,
+      label,
+      color,
+      group,
+      subGroup = '',
+      type,
+      exclusiveWithinGroup,
+      symbol: whichSymbol
+    } = layer;
 
-    const roadworks = `<img class='legendIcon' src='${basePath}img/controlElements/verkehrszeichen.svg'></img>`;
+     let fallbackSymbol;
+     if (group === 'Baustellen') {
+       fallbackSymbol = `<img class='legendIcon' src='${basePath}img/controlElements/verkehrszeichen.svg'></img>`;
+     } else if (group === 'ÖPNV-Linien' || type === 'line') {
+       fallbackSymbol = legendLine(color);
+     } else if (type === 'fill') {
+       fallbackSymbol = legendRectangle(color);
+     } else {
+       fallbackSymbol = legendCircle(color);
+     }
 
-    const symbol = layer.symbol() || legendCircle(color);
-      // layer.legendColor == 'none' ? '' : (
-      // layer.group == 'Baustellen' ? roadworks : (
-      //   (layer.group == 'ÖPNV-Linien' || layer.type == 'line') ? legendLine(color) :
-      //     (layer.type == 'fill' ? legendRectangle(color) :
-      //       legendCircle(color))));
+     const legendSymbol = layer.legendColor === 'none'
+       ? ''
+       : (typeof whichSymbol === 'function'
+           ? whichSymbol()
+           : fallbackSymbol
+         );
 
     return {
       id,
-      name: symbol + label,
-      group: groupOrGroups == 'group' ? group : subGroup || group,      
-      subGroup: subGroup,   
-      directory,  
+      name: legendSymbol + label,
+      group: groupOrGroups == 'group' ? group : subGroup || group,
+      subGroup: subGroup,
+      directory,
       exclusiveWithinGroup
     };
   })
