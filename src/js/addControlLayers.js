@@ -11,17 +11,17 @@ export function addControlLayers(layers, directory, groupOrGroups) {
     const symbol =
       layer.legendColor == 'none' ? '' : (
       layer.group == 'Baustellen' ? roadworks : (
-        (layer.group == 'Ã–PNV-Linien' || layer.type == 'line') ? legendLine(color) :
+        (layer.group == 'ÖPNV-Linien' || layer.type == 'line') ? legendLine(color) :
           (layer.type == 'fill' ? legendRectangle(color) :
             legendCircle(color))));
 
     return {
       id,
       name: symbol + label,
-      subGroup: subGroup,
-      group: groupOrGroups == 'group' ? group : subGroup,      
+      group: groupOrGroups == 'group' ? group : subGroup || group,      
+      subGroup: subGroup,   
       directory,  
-      exclusiveWithinGroup: layer.exclusiveWithinGroup
+      exclusiveWithinGroup
     };
   })
     .reverse()
