@@ -10,7 +10,7 @@ export function addControlLayers(layers, directory, groupOrGroups) {
 
     const roadworks = `<img class='legendIcon' src='${basePath}img/controlElements/verkehrszeichen.svg'></img>`;
 
-    const symbol = legendSymbols[whichSymbol](color) || legendCircle(color);
+    const symbol = layer.symbol() || legendCircle(color);
       // layer.legendColor == 'none' ? '' : (
       // layer.group == 'Baustellen' ? roadworks : (
       //   (layer.group == 'ÖPNV-Linien' || layer.type == 'line') ? legendLine(color) :
