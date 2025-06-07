@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MobiData BW® - Data Center</title>
+</head>
+
+<link rel="stylesheet" href="css/styles.css" />
+
+<body id="bodyCentered">
+  <a id="MobiDataBW1" href="https://www.mobidata-bw.de" target="_blank">
+    <div id="MobiDataBW">
+      <img src="/karten/assets/img/MobiDataBW.svg" alt="MobiData BW®">
+    </div>
+  </a>
+  <h2>Data Center - Anmeldung</h2>
+  <p>Bitte geben Sie Ihre Zugangsdaten ein.</p>
+  <form id="loginForm">
+    <label for="username">Benutzername:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label id="passwordMargin" for="password">Passwort:</label>
+    <input type="password" id="password" name="password" required>
+    <br><br>
+    <button type="submit">Anmelden</button>
+  </form>
+  <div id="errorMessage" class="error"></div>
+  <script>
+
+    const validUsername = "j.zieger@herrenberg.de";
+    const validPassword = "herrenberg2025";
+
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (username === validUsername && password === validPassword) {
+
+        window.location.href = "datenprofil.html";
+      } else {
+
+        document.getElementById("errorMessage").textContent = "Ungültiger Benutzername oder Passwort";
+      }
+
+    });
+
+  </script>
+</body>
+
+</html>
