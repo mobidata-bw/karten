@@ -63,7 +63,7 @@ export function addLayers(map, layerConfig) {
         circle: {
             'circle-radius': layerConfig.circleRadius || 5, // default: '5'
             'circle-color': layerConfig.color,
-            // 'circle-opacity': 0.8,
+            'circle-opacity': 0.8,
             'circle-stroke-color': layerConfig.circleStrokeColor || 'black',
             'circle-stroke-width': layerConfig.circleStrokeWidth || 0.5
         },

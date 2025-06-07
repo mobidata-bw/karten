@@ -3,7 +3,7 @@
 
 const parkApiCarOnStreet = `
 
-                <div><img id="formLogo" src="/public/img/MobiDataBW.svg"></a><img></div>
+                <div><img id="formLogo" src="/img/MobiDataBW.svg"></a><img></div>
 
 				<form id="form">
 

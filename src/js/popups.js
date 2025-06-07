@@ -12,7 +12,7 @@ export function popups(map, layers, popupContent, popupCanvas) {
           
             if (geometry.type === 'Point') {
                 coordinates = geometry.coordinates;
-            } else /*if (geometry.type === 'LineString')*/ {
+            } else {
                 coordinates = [e.lngLat.lng, e.lngLat.lat];
             }
 
