@@ -16,23 +16,23 @@ export function addControlLayers(layers, directory, groupOrGroups) {
       symbol: whichSymbol
     } = layer;
 
-     let fallbackSymbol;
-     if (group === 'Baustellen') {
-       fallbackSymbol = `<img class='legendIcon' src='${basePath}img/controlElements/verkehrszeichen.svg'></img>`;
-     } else if (group === 'ÖPNV-Linien' || type === 'line') {
-       fallbackSymbol = legendLine(color);
-     } else if (type === 'fill') {
-       fallbackSymbol = legendRectangle(color);
-     } else {
-       fallbackSymbol = legendCircle(color);
-     }
-
-     const legendSymbol = layer.legendColor === 'none'
-       ? ''
-       : (typeof whichSymbol === 'function'
-           ? whichSymbol()
-           : fallbackSymbol
-         );
+    /* SYMBOL */
+    let fallbackSymbol;
+    if (group === 'Baustellen') {
+      fallbackSymbol = `<img class='legendIcon' src='${basePath}img/controlElements/verkehrszeichen.svg'></img>`;
+    } else if (group === 'ÖPNV-Linien' || type === 'line') {
+      fallbackSymbol = legendLine(color);
+    } else if (type === 'fill') {
+      fallbackSymbol = legendRectangle(color);
+    } else {
+      fallbackSymbol = legendCircle(color);
+    }
+    const legendSymbol = layer.legendColor === 'none'
+      ? ''
+      : (typeof whichSymbol === 'function'
+        ? whichSymbol()
+        : fallbackSymbol
+      );
 
     return {
       id,
@@ -40,7 +40,15 @@ export function addControlLayers(layers, directory, groupOrGroups) {
       group: groupOrGroups == 'group' ? group : subGroup || group,
       subGroup: subGroup,
       directory,
-      exclusiveWithinGroup
+      exclusiveWithinGroup,
+      metadata: {
+        lazyLoading: true,
+        source: {
+          id: layer.source,
+          type: "geojson",
+          data: layer.url
+        }
+      }
     };
   })
     .reverse()
