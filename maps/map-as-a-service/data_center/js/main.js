@@ -22,8 +22,13 @@ import { initializeControlLayers } from './controlLayers.js';
 import { popups } from '../../../../src/js/popups.js';
 import { popupContent as popupContentIpl } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
 import { popupContent as popupContentDataCenter } from './popupContent.js';
+
+import maplibregl from 'maplibre-gl';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
+import { NotificationsControl } from '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js';
+
 import '@geoman-io/maplibre-geoman-free/dist/maplibre-geoman.css';
+import '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.css';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
@@ -33,7 +38,7 @@ import '../css/styles.css';
 import { config } from './formGlobalVariables.js';
 import { formCreateTableRecords } from './formCreateTableRecords.js'
 export { layersIpl };
-export let layers = [], layersDataCenter = [], updateDataCenter;
+export let sourcesIpl = [], sourcesDataCenter = [], layers = [], layersDataCenter = [], updateDataCenter, notificationControl;
 
 const basemapSources = [], basemapLayers = [];
 
@@ -51,8 +56,21 @@ window.addEventListener('DOMContentLoaded', () => {
     maplibreInspectControl(map);
     maplibreNavigationControl(map);
 
+    map.addControl(
+        notificationControl = new NotificationsControl({
+            timeout: 3000,
+            closable: true,
+            dismissable: true
+        }),
+        'bottom-right');
+
 
     map.on('load', () => {
+
+        sourcesIpl = [{ id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }];
+        sourcesIpl.forEach(src => addSources(map, src));
+        basemapSources.push(...sourcesIpl);
+        basemapLayers.push(...layersIpl);
 
 
         // ==============================
@@ -60,7 +78,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================    
         updateDataCenter = function updateDataCenter() {
 
-            const sourcesDataCenter = [
+            sourcesDataCenter = [
                 {
                     url: 'https://app.nocodb.com/api/v2/tables/m8djfhqn3wv21gi/records?offset=0&limit=25&where=&viewId=vw7kwxaqt2xvp9x0',
                     id: 'sourceParkingSites'
@@ -164,7 +182,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // when everything is done, then fill Array()
             return Promise.all(promises).then(() => {
                 layersDataCenter = [parkingSites, parkingSpots];
-           
+
                 popups(map, layersDataCenter, popupContentDataCenter);
             });
 
@@ -172,12 +190,34 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         updateDataCenter().then(() => {
-            // erst jetzt sind die DataCenter-Layer wirklich da
-            layers = [               
+
+            sourcesIpl = [
+                { id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }
+            ];
+            sourcesIpl.forEach(source => addSources(map, source));
+
+            layers = [
                 ...layersDataCenter,
                 ...layersIpl
             ];
             layersIpl.forEach(layer => addLayers(map, layer));
+
+
+            // ==============================
+            // BASEMAP LAYERS
+            // ============================== 
+            basemapSources.push(
+                { id: 'shape', source: shape },
+                ...sourcesIpl,
+                ...sourcesDataCenter
+            );
+
+            basemapLayers.push(
+                fillShape,
+                lineShape,
+                ...layers
+            );
+
 
 
             // ==============================
@@ -205,26 +245,8 @@ window.addEventListener('DOMContentLoaded', () => {
         map.addLayer(lineShape);
 
 
-        // PROJECT LAYERS    
-        const sourcesIpl = [
-            { id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }
-        ];
-        sourcesIpl.forEach(source => addSources(map, source));
 
 
-        // ==============================
-        // BASEMAP LAYERS
-        // ============================== 
-        basemapSources.push(
-            { id: 'shape', source: shape },
-            ...sourcesIpl
-        );
-
-        basemapLayers.push(
-            fillShape,
-            lineShape,
-            ...layers
-        );
 
 
         // ==============================
@@ -289,21 +311,29 @@ window.addEventListener('DOMContentLoaded', () => {
         //     }
         // });
 
+
+
         config.formParkingObject.addEventListener("change", function () {
             if (config.formParkingObject.value == 'Parkstreifen') {
                 setTimeout(() => {
                     document.getElementById('geoJsonButton').addEventListener("click", function () {
-                        map.gm.enableDraw("line");
+                        gm.enableDraw('line');
+
                     });
                 }, 100);
             } else if (config.formParkingObject.value == 'Einzelparkplatz') {
                 setTimeout(() => {
                     document.getElementById('latLonButton').addEventListener("click", function () {
-                        map.gm.enableDraw("circle_marker");
+                        gm.enableDraw('circle_marker');
                     });
                 }, 100);
+            } else {
+                gm.removeControl();
             }
         });
+
+
+
 
 
 

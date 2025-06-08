@@ -6,8 +6,6 @@ import { addControlLayers } from '../../../../src/js/addControlLayers.js';
 
 export function initializeControlLayers(map) {
 
-    console.log(layers)
-
     const config = {
         collapsed: false,
         layers: addControlLayers(layers, 'Legende')

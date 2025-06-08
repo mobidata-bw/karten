@@ -1,3 +1,7 @@
+:root {
+	--fontFamily: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 /* headings */
 h4 {
 	margin-bottom: 0;

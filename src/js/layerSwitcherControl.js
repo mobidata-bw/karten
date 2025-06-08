@@ -127,8 +127,7 @@ export function basemaps(map, { basemapSources, basemapLayers }) {
 
 
                     // if dark mode is selected, set white instead of black color
-                    // fillShape and fillLine therefore must be the first two layers
-                    // handed over to the array 'layers'    
+                    // fillShape and fillLine therefore must be the first two layers handed over to the array 'layers'    
                     if (base.title == 'Dunkelmodus') {
                         basemapLayers[0].paint['fill-color'] = 'white';
                         basemapLayers[1].paint['line-color'] = 'white';

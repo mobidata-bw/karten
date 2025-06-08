@@ -1,19 +1,15 @@
 import { config } from './formGlobalVariables.js';
-export { formCreateTableRecords };
 
-function formCreateTableRecords(map, callback) {
+
+export function formCreateTableRecords(map, callback) {
     let geometry;
     let latitude, longitude, geoJson;
 
     /* GET GEOMETRIES */
-    map.on('pm:create', function (e) {
+    map.on('gm:create', function (e) {
 
-        // point
-        var layer = e.layer;
-        var feature = layer.toGeoJSON();
-        var coordinates = feature.geometry.coordinates;
+        const feature = e.feature.getGeoJson();
 
-        // geoJson          
         function geoJsonType(type, coordinates) {
             geoJson = {
                 type: type,
@@ -21,14 +17,20 @@ function formCreateTableRecords(map, callback) {
             }
         };
 
-
         if (config.formParkingObject.value == 'Parkstreifen') {
+            let coordinates = [];
+            feature.geometry.coordinates.forEach(function (coordinate) {
+                coordinates.push(
+                    Number(coordinate[0].toFixed(6)),
+                    Number(coordinate[1].toFixed(6))
+                )
+            });
             geometry = 'LineString';
             geoJsonType(geometry, coordinates);
         }
         else if (config.formParkingObject.value == 'Einzelparkplatz') {
-            latitude = coordinates[1].toString();
-            longitude = coordinates[0].toString();
+            latitude = feature.geometry.coordinates[0].toFixed(6);
+            longitude = feature.geometry.coordinates[1].toFixed(6);
             geometry = 'Point';
         };
 

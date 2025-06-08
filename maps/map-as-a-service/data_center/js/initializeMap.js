@@ -7,7 +7,7 @@ import maplibregl from 'maplibre-gl';
 // ==============================
 export const map = new maplibregl.Map({
     container: 'map',
-    center: [8.885, 48.599],
+    center: [8.940, 48.599],
     zoom: 12,
     minZoom: 10,
     // maxBounds: [[9.378527, 47.614124], [9.560952, 47.737803]],
