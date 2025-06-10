@@ -1,13 +1,13 @@
 import {
+    fillShape,
+    lineShape,
     maplibreInspectControl,
     maplibreNavigationControl,
     geocoder
 } from '../../../../src/js/initializeMap.js';
 import {
     map,
-    shape,
-    fillShape,
-    lineShape
+    shape
 } from './initializeMap.js';
 import {
     sourceParkApiCarOnStreet,
@@ -17,13 +17,12 @@ import {
     addSources,
     addLayers
 } from '../../../../src/js/layers/configSourcesLayers.js';
-import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
+// import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
 import { initializeControlLayers } from './controlLayers.js';
 import { popups } from '../../../../src/js/popups.js';
 import { popupContent as popupContentIpl } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
 import { popupContent as popupContentDataCenter } from './popupContent.js';
 
-import maplibregl from 'maplibre-gl';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
 import { NotificationsControl } from '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js';
 
@@ -40,7 +39,7 @@ import { formCreateTableRecords } from './formCreateTableRecords.js'
 export { layersIpl };
 export let sourcesIpl = [], sourcesDataCenter = [], layers = [], layersDataCenter = [], updateDataCenter, notificationControl;
 
-const basemapSources = [], basemapLayers = [];
+// const basemapSources = [], basemapLayers = [];
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -49,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    basemaps(map, { basemapSources, basemapLayers });
+    // basemaps(map, { basemapSources, basemapLayers });
 
     geocoder(map);
 
@@ -69,8 +68,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         sourcesIpl = [{ id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }];
         sourcesIpl.forEach(src => addSources(map, src));
-        basemapSources.push(...sourcesIpl);
-        basemapLayers.push(...layersIpl);
+        // basemapSources.push(...sourcesIpl);
+        // basemapLayers.push(...layersIpl);
 
 
         // ==============================
@@ -191,10 +190,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
         updateDataCenter().then(() => {
 
-            sourcesIpl = [
-                { id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }
-            ];
-            sourcesIpl.forEach(source => addSources(map, source));
+            // sourcesIpl = [
+            //     { id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }
+            // ];
+            // sourcesIpl.forEach(source => addSources(map, source));
 
             layers = [
                 ...layersDataCenter,
@@ -206,17 +205,17 @@ window.addEventListener('DOMContentLoaded', () => {
             // ==============================
             // BASEMAP LAYERS
             // ============================== 
-            basemapSources.push(
-                { id: 'shape', source: shape },
-                ...sourcesIpl,
-                ...sourcesDataCenter
-            );
+            // basemapSources.push(
+            //     { id: 'shape', source: shape },
+            //     ...sourcesIpl,
+            //     ...sourcesDataCenter
+            // );
 
-            basemapLayers.push(
-                fillShape,
-                lineShape,
-                ...layers
-            );
+            // basemapLayers.push(
+            //     fillShape,
+            //     lineShape,
+            //     ...layers
+            // );
 
 
 
