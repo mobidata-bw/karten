@@ -5,7 +5,7 @@ import fg from 'fast-glob';
 export default defineConfig(({ mode }) => {
 
   const env = loadEnv(mode, process.cwd(), '');
-  const basePath = env.VITE_BASE_PATH;    
+  const basePath = env.VITE_BASE_PATH;
 
   return {
     base: basePath,
@@ -19,6 +19,16 @@ export default defineConfig(({ mode }) => {
           entries[name] = resolve(__dirname, file);
           return entries;
         }, {})
+      },
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/maplibre-gl')) return 'vendor-maplibre';
+          if (id.includes('node_modules/@maplibre/')) return 'vendor-maplibre-plugins';
+          if (id.includes('node_modules/@geoman-io/')) return 'vendor-geoman';
+          if (id.includes('node_modules/maplibre-notifications-master'))
+            return 'vendor-notifications';
+          if (id.includes('node_modules')) return 'vendor-others';
+        }
       },
       outDir: 'dist',
       emptyOutDir: true

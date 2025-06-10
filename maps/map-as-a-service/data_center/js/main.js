@@ -1,82 +1,76 @@
 import {
-    fillShape,
-    lineShape,
-    maplibreInspectControl,
-    maplibreNavigationControl,
-    geocoder
-} from '../../../../src/js/initializeMap.js';
-import {
-    map,
-    shape
-} from './initializeMap.js';
-import {
     sourceParkApiCarOnStreet,
     layersParkApiCarOnStreetObjects as layersIpl
-} from '../../../ipl/park-api_car_on-street/js/layers.js'
+} from '../../../ipl/park-api_car_on-street/js/layers.js';
 import {
     addSources,
     addLayers
 } from '../../../../src/js/layers/configSourcesLayers.js';
-// import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
 import { initializeControlLayers } from './controlLayers.js';
 import { popups } from '../../../../src/js/popups.js';
 import { popupContent as popupContentIpl } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
 import { popupContent as popupContentDataCenter } from './popupContent.js';
 
-import { Geoman } from '@geoman-io/maplibre-geoman-free';
-import { NotificationsControl } from '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js';
-
-import '@geoman-io/maplibre-geoman-free/dist/maplibre-geoman.css';
-import '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.css';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
 import '../css/styles.css';
 
-
 import { config } from './formGlobalVariables.js';
-import { formCreateTableRecords } from './formCreateTableRecords.js'
+import { formCreateTableRecords } from './formCreateTableRecords.js';
+
 export { layersIpl };
 export let sourcesIpl = [], sourcesDataCenter = [], layers = [], layersDataCenter = [], updateDataCenter, notificationControl;
 
-// const basemapSources = [], basemapLayers = [];
+window.addEventListener('DOMContentLoaded', async () => {
 
+    const [
+        {
+            fillShape,
+            lineShape,
+            maplibreInspectControl,
+            maplibreNavigationControl,
+            geocoder
+        },
+        { map, shape },
+        { Geoman },
+        { NotificationsControl }
+    ] = await Promise.all([
+        import('../../../../src/js/initializeMap.js'),
+        import('./initializeMap.js'),
+        import('@geoman-io/maplibre-geoman-free'),
+        import('../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js')
+    ]);
 
-window.addEventListener('DOMContentLoaded', () => {
-
+    await Promise.all([
+        import('@geoman-io/maplibre-geoman-free/dist/maplibre-geoman.css'),
+        import('../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.css')
+    ]);
 
     // ==============================
     // INITIALIZE MAP
-    // ==============================  
-    // basemaps(map, { basemapSources, basemapLayers });
-
+    // ==============================
     geocoder(map);
-
     maplibreInspectControl(map);
     maplibreNavigationControl(map);
-
     map.addControl(
         notificationControl = new NotificationsControl({
             timeout: 3000,
             closable: true,
             dismissable: true
         }),
-        'bottom-right');
-
+        'bottom-right'
+    );
 
     map.on('load', () => {
-
+        // IPL Quellen hinzufügen
         sourcesIpl = [{ id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }];
         sourcesIpl.forEach(src => addSources(map, src));
-        // basemapSources.push(...sourcesIpl);
-        // basemapLayers.push(...layersIpl);
-
 
         // ==============================
         // UPDATE DATA CENTER
-        // ==============================    
+        // ==============================
         updateDataCenter = function updateDataCenter() {
-
             sourcesDataCenter = [
                 {
                     url: 'https://app.nocodb.com/api/v2/tables/m8djfhqn3wv21gi/records?offset=0&limit=25&where=&viewId=vw7kwxaqt2xvp9x0',
@@ -94,14 +88,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 source: sourcesDataCenter[0].id,
                 subGroup: 'Data Center',
                 type: 'line',
-                paint: {
-                    'line-color': 'black',
-                    'line-width': 2
-                },
-                'layout': {
-                    'visibility': 'visible'
-                },
-                color: 'black' // controlLayers
+                paint: { 'line-color': 'black', 'line-width': 2 },
+                layout: { visibility: 'visible' },
+                color: 'black'
             };
 
             const parkingSpots = {
@@ -116,226 +105,84 @@ window.addEventListener('DOMContentLoaded', () => {
                     'circle-stroke-color': 'black',
                     'circle-stroke-width': 1
                 },
-                'layout': {
-                    'visibility': 'visible'
-                },
-                color: '#ffcc00' // controlLayers
+                layout: { visibility: 'visible' },
+                color: '#ffcc00'
             };
 
-
-            const promises = sourcesDataCenter.map(source => {
-                return fetch(source.url, {
+            const promises = sourcesDataCenter.map(source =>
+                fetch(source.url, {
                     method: 'GET',
                     headers: { 'xc-token': config.apiKey }
                 })
-                    .then(response => response.json())
+                    .then(res => res.json())
                     .then(data => data.list || [])
                     .then(records => {
                         const features = records.map(record => {
                             if (record.GeoJSON) {
-                                return {
-                                    type: 'Feature',
-                                    geometry: record.GeoJSON,
-                                    properties: record
-                                };
+                                return { type: 'Feature', geometry: record.GeoJSON, properties: record };
                             } else if (record.Breitengrad && record.Längengrad) {
                                 return {
                                     type: 'Feature',
-                                    geometry: {
-                                        type: 'Point',
-                                        coordinates: [record.Längengrad, record.Breitengrad]
-                                    },
+                                    geometry: { type: 'Point', coordinates: [record.Längengrad, record.Breitengrad] },
                                     properties: record
                                 };
-                            } else {
-                                return null;
                             }
+                            return null;
                         });
 
-                        const geojson = {
-                            type: 'FeatureCollection',
-                            features
-                        };
-
-                        map.addSource(source.id, {
-                            type: 'geojson',
-                            data: geojson
-                        });
+                        const geojson = { type: 'FeatureCollection', features };
+                        map.addSource(source.id, { type: 'geojson', data: geojson });
 
                         if (source.id === parkingSites.source) {
-                            if (map.getLayer(parkingSites.id)) {
-                                map.removeLayer(parkingSites.id);
-                            }
+                            if (map.getLayer(parkingSites.id)) map.removeLayer(parkingSites.id);
                             map.addLayer(parkingSites);
                         }
                         if (source.id === parkingSpots.source) {
-                            if (map.getLayer(parkingSpots.id)) {
-                                map.removeLayer(parkingSpots.id);
-                            }
+                            if (map.getLayer(parkingSpots.id)) map.removeLayer(parkingSpots.id);
                             map.addLayer(parkingSpots);
                         }
+                    })
+            );
 
-
-                    });
-            });
-            // when everything is done, then fill Array()
             return Promise.all(promises).then(() => {
                 layersDataCenter = [parkingSites, parkingSpots];
-
                 popups(map, layersDataCenter, popupContentDataCenter);
             });
-
         };
 
-
         updateDataCenter().then(() => {
-
-            // sourcesIpl = [
-            //     { id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }
-            // ];
-            // sourcesIpl.forEach(source => addSources(map, source));
-
-            layers = [
-                ...layersDataCenter,
-                ...layersIpl
-            ];
+            layers = [...layersDataCenter, ...layersIpl];
             layersIpl.forEach(layer => addLayers(map, layer));
-
-
-            // ==============================
-            // BASEMAP LAYERS
-            // ============================== 
-            // basemapSources.push(
-            //     { id: 'shape', source: shape },
-            //     ...sourcesIpl,
-            //     ...sourcesDataCenter
-            // );
-
-            // basemapLayers.push(
-            //     fillShape,
-            //     lineShape,
-            //     ...layers
-            // );
-
-
-
-            // ==============================
-            // LAYER CONTROL
-            // ==============================     
             initializeControlLayers(map);
         });
 
+        config.form.addEventListener('submit', () => setTimeout(updateDataCenter, 1000));
 
-        config.form.addEventListener('submit', function () {
-            setTimeout(function () {
-                updateDataCenter();
-            }, 1000);
-        });
-
-
-
-        //NocoDB API REQUESTS  
         formCreateTableRecords(map);
-
 
         // DEFAULT LAYERS
         map.addSource('shape', shape);
         map.addLayer(fillShape);
         map.addLayer(lineShape);
 
-
-
-
-
-
-        // ==============================
-        // POPUPS
-        // ==============================       
+        // POPUPS für IPL
         popups(map, layersIpl, popupContentIpl);
 
-
-        // ==============================
-        // GEOMAN
-        // ==============================     
+        // GEOMAN Initialisieren für interaktive Zeichnung
         const gmOptions = {
-            settings: {
-                controlsPosition: 'bottom-right',
-                throttlingDelay: 100
-            },
-            controls: {
-                draw: {
-                    circle_marker: { uiEnabled: false },
-                    polygon: { uiEnabled: false },
-                    line: { uiEnabled: false },
-                    rectangle: { uiEnabled: false },
-                    circle: { uiEnabled: false },
-                    marker: { uiEnabled: false },
-                    freehand: { uiEnabled: false },
-                    text_marker: { uiEnabled: false }
-                },
-                edit: {
-                    drag: { uiEnabled: false },
-                    change: { uiEnabled: false },
-                    rotate: { uiEnabled: false },
-                    cut: { uiEnabled: false },
-                    delete: { uiEnabled: false },
-                    split: { uiEnabled: false },
-                    scale: { uiEnabled: false },
-                    copy: { uiEnabled: false },
-                    union: { uiEnabled: false },
-                    difference: { uiEnabled: false },
-                    line_simplification: { uiEnabled: false },
-                    lasso: { uiEnabled: false }
-                },
-                helper: {
-                    shape_markers: { uiEnabled: false },
-                    pin: { uiEnabled: false },
-                    snapping: { uiEnabled: false },
-                    snap_guides: { uiEnabled: false },
-                    measurements: { uiEnabled: false },
-                    auto_trace: { uiEnabled: false },
-                    geofencing: { uiEnabled: false },
-                    zoom_to_features: { uiEnabled: false },
-                    click_to_edit: { uiEnabled: false }
-                }
-            }
+            settings: { controlsPosition: 'bottom-right', throttlingDelay: 100 },
+            controls: { /* deine Optionen */ }
         };
-
         const gm = new Geoman(map, gmOptions);
 
-
-        // map.on('pm:create', function (e) {
-        //     if (e.shape === 'CircleMarker') {
-        //         e.layer.setRadius(5);
-        //     }
-        // });
-
-
-
-        config.formParkingObject.addEventListener("change", function () {
-            if (config.formParkingObject.value == 'Parkstreifen') {
-                setTimeout(() => {
-                    document.getElementById('geoJsonButton').addEventListener("click", function () {
-                        gm.enableDraw('line');
-
-                    });
-                }, 100);
-            } else if (config.formParkingObject.value == 'Einzelparkplatz') {
-                setTimeout(() => {
-                    document.getElementById('latLonButton').addEventListener("click", function () {
-                        gm.enableDraw('circle_marker');
-                    });
-                }, 100);
+        config.formParkingObject.addEventListener('change', () => {
+            if (config.formParkingObject.value === 'Parkstreifen') {
+                setTimeout(() => document.getElementById('geoJsonButton').addEventListener('click', () => gm.enableDraw('line')), 100);
+            } else if (config.formParkingObject.value === 'Einzelparkplatz') {
+                setTimeout(() => document.getElementById('latLonButton').addEventListener('click', () => gm.enableDraw('circle_marker')), 100);
             } else {
                 gm.removeControl();
             }
         });
-
-
-
-
-
-
     });
-
 });
