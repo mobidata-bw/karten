@@ -20,16 +20,9 @@ export default defineConfig(({ mode }) => {
           return entries;
         }, {})
       },
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/maplibre-gl')) return 'vendor-maplibre';
-          if (id.includes('node_modules/@maplibre/')) return 'vendor-maplibre-plugins';
-          if (id.includes('node_modules/@geoman-io/')) return 'vendor-geoman';
-          if (id.includes('node_modules/maplibre-notifications-master'))
-            return 'vendor-notifications';
-          if (id.includes('node_modules')) return 'vendor-others';
-        }
-      },
+      // input: {
+      //   data_center: resolve(__dirname, 'maps/map-as-a-service/data_center/erfassung.html')
+      // },      
       outDir: 'dist',
       emptyOutDir: true
     },

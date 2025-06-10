@@ -4,21 +4,21 @@
 export const sourceOepnvGueteklassenStuttgart = {
     type: 'geojson',
     data: {
-        type: "FeatureCollection",
+        type: 'FeatureCollection',
         features: []
     }
 };
 export const sourceOepnvGueteklassenKarlsruhe = {
     type: 'geojson',
     data: {
-        type: "FeatureCollection",
+        type: 'FeatureCollection',
         features: []
     }
 };
 export const sourceOepnvGueteklassenFreiburg = {
     type: 'geojson',
     data: {
-        type: "FeatureCollection",
+        type: 'FeatureCollection',
         features: []
     }
 
@@ -26,7 +26,7 @@ export const sourceOepnvGueteklassenFreiburg = {
 export const sourceOepnvGueteklassenTuebingen = {
     type: 'geojson',
     data: {
-        type: "FeatureCollection",
+        type: 'FeatureCollection',
         features: []
     }
 };

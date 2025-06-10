@@ -24,21 +24,21 @@ export function popupContent(feature) {
     return '<table>\
                 <tr>' + 
                     popupImages('OpenStreetMap') +
-                    ((id == undefined) ? '' : ('<th class="title">' + id + '</th>')) + 
-                    ((id2 == undefined) ? '' : ('<th class="title">' + id2 + '</th>')) + 
+                    ((!id) ? '' : ('<th class="title">' + id + '</th>')) + 
+                    ((!id2) ? '' : ('<th class="title">' + id2 + '</th>')) + 
                 '</tr>\
             </table><br><table>\
                 <tr>' + 
-                    ((checkDate == undefined && checkDa1 == undefined && checkDa3 == undefined && checkDa5 == undefined && surveyDat == undefined) ? '' : ('<td class="att">Letze Überprüfung</td>')) + 
-                    ((checkDate == undefined) ? '' : ('<td class="attContent">' + checkDate + '</td>')) +
-                    ((checkDa1 == undefined) ? '' : ('<td class="attContent">' + checkDa1 + '</td>')) +
-                    ((checkDa2 == undefined) ? '' : ('<td class="attContent">' + checkDa2 + '</td>')) +
-                    ((checkDa3 == undefined) ? '' : ('<td class="attContent">' + checkDa3 + '</td>')) +
-                    ((checkDa4 == undefined) ? '' : ('<td class="attContent">' + checkDa4 + '</td>')) +
-                    ((checkDa5 == undefined) ? '' : ('<td class="attContent">' + checkDa5 + '</td>')) +
-                    ((surveyDat == undefined) ? '' : ('<td class="attContent">' + surveyDat + '</td>')) +
+                    ((!checkDate  && !checkDa1 && !checkDa2 && !checkDa3 && !checkDa4 && !checkDa5 && !surveyDat) ? '' : ('<td class="att">Letze Überprüfung</td>')) + 
+                    ((!checkDate) ? '' : ('<td class="attContent">' + checkDate + '</td>')) +
+                    ((!checkDa1) ? '' : ('<td class="attContent">' + checkDa1 + '</td>')) +
+                    ((!checkDa2) ? '' : ('<td class="attContent">' + checkDa2 + '</td>')) +
+                    ((!checkDa3) ? '' : ('<td class="attContent">' + checkDa3 + '</td>')) +
+                    ((!checkDa4) ? '' : ('<td class="attContent">' + checkDa4 + '</td>')) +
+                    ((!checkDa5) ? '' : ('<td class="attContent">' + checkDa5 + '</td>')) +
+                    ((!surveyDat) ? '' : ('<td class="attContent">' + surveyDat + '</td>')) +
                 '</tr><tr>' + 
-                    ((highway == undefined) ? '' : ('<td class="att">Straßentyp</td>')) +
+                    ((!highway) ? '' : ('<td class="att">Straßentyp</td>')) +
                     ((highway == 'crossing') ? ('<td class="attContent">Fußgängerüberweg</td>') : '') +
                     ((highway == 'footway') ? ('<td class="attContent">Gehweg</td>') : '') +
                     ((highway == 'cycleway') ? ('<td class="attContent">Radweg</td>') : '') +
@@ -50,13 +50,13 @@ export function popupContent(feature) {
                     ((turningCircle == 'turning_circle') ? ('<td class="attContent">Wendestelle</td>') : '') +
                     ((turningCircle == 'traffic_signals') ? ('<td class="attContent">Ampel</td>') : '') +
                 '</tr><tr>' + 
-                    ((kerb == undefined) ? '' : ('<td class="att">Bordstein</td>')) +
+                    ((!kerb) ? '' : ('<td class="att">Bordstein</td>')) +
                     ((kerb == 'no') ? ('<td class="attContent">nein</td>') : '') +
                     ((kerb == 'lowered') ? ('<td class="attContent">abgesenkt</td>') : '') +
                     ((kerb == 'raised') ? ('<td class="attContent">erhöht</td>') : '') +
                     ((kerb == 'flush') ? ('<td class="attContent">auf Straßenebene</td>') : '') +
                 '</tr><tr>' + 
-                    ((surface == undefined) ? '' : ('<td class="att">Oberfläche</td>')) +
+                    ((!surface) ? '' : ('<td class="att">Oberfläche</td>')) +
                     ((surface == 'asphalt') ? ('<td class="attContent">Asphalt</td>') : '') +
                     ((surface == 'paving_stones') ? ('<td class="attContent">Pflastersteine</td>') : '') +
                     ((surface == 'sett') ? ('<td class="attContent">Behauenes Steinpflaster</td>') : '') +
@@ -71,14 +71,14 @@ export function popupContent(feature) {
                     ((surface == 'unhewn_cobblestone') ? ('<td class="attContent">Rohes Kopfsteinpflaster</td>') : '') +
                     ((surface == 'unpaved') ? ('<td class="attContent">Ohne Straßenbelag</td>') : '') +                    
                 '</tr><tr>' + 
-                    ((wheelchair == undefined) ? '' : ('<td class="att">Rollstuhlbefahrbarkeit</td>')) + 
+                    ((!wheelchair) ? '' : ('<td class="att">Rollstuhlbefahrbarkeit</td>')) + 
                     ((wheelchair == 'yes') ? ('<td class="attContent">ja</td>') : '') +
                     ((wheelchair == 'no') ? ('<td class="attContent">nein</td>') : '') +
                     ((wheelchair == 'limited') ? ('<td class="attContent">begrenzt</td>') : '') +              
                 '</tr>\
             </table><table>\
                 <tr>' +
-                    ((image == undefined) ? '' : ('<td class="attContentLink"><a href="' + image + '" target="_blank">&#10149 Foto</a></td>')) + 
+                    ((!image) ? '' : ('<td class="attContentLink"><a href="' + image + '" target="_blank">&#10149 Foto</a></td>')) + 
                 '</tr>\
             </table>';
 };

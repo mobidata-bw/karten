@@ -22,14 +22,14 @@ export const layersCountCar = [
         label: 'Temporäre Zählstellen',
         filter:
             [
-                "case",
-                ["<", ["zoom"], 10],
+                'case',
+                ['<', ['zoom'], 10],
                 [
-                    "all",
-                    ["==", ["get", "zstart"], "TM"],
+                    'all',
+                    ['==', ['get', 'zstart'], 'TM'],
                     ['==', ['get', 'klasse'], 'A'],
                 ],
-                ["==", ["get", "zstart"], "TM"],
+                ['==', ['get', 'zstart'], 'TM'],
             ],
         color: '#7D97DD',
         ...countCar
@@ -39,14 +39,14 @@ export const layersCountCar = [
         label: 'Dauerzählstellen',
         filter:
             [
-                "case",
-                ["<", ["zoom"], 10],
+                'case',
+                ['<', ['zoom'], 10],
                 [
-                    "all",
-                    ["==", ["get", "zstart"], "DZ"],
+                    'all',
+                    ['==', ['get', 'zstart'], 'DZ'],
                     ['==', ['get', 'klasse'], 'A'],
                 ],
-                ["==", ["get", "zstart"], "DZ"],
+                ['==', ['get', 'zstart'], 'DZ'],
             ],
         color: '#FF5050',
         ...countCar
@@ -56,14 +56,14 @@ export const layersCountCar = [
         label: 'Manuelle Zählstellen',
         filter:
             [
-                "case",
-                ["<", ["zoom"], 10],
+                'case',
+                ['<', ['zoom'], 10],
                 [
-                    "all",
-                    ["==", ["get", "zstart"], "MZ"],
+                    'all',
+                    ['==', ['get', 'zstart'], 'MZ'],
                     ['==', ['get', 'klasse'], 'A'],
                 ],
-                ["==", ["get", "zstart"], "MZ"],
+                ['==', ['get', 'zstart'], 'MZ'],
             ],
         color: '#fffb05',
         ...countCar

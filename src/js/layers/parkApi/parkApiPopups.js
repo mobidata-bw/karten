@@ -42,7 +42,7 @@ export function popupContent(features) {
 
     let date, time;
 
-    if (realtime_data_updated_at != undefined) {
+    if (realtime_data_updated_at) {
         ({ date, time } = timeStamps(realtime_data_updated_at));
     };
 
@@ -99,8 +99,7 @@ export function popupContent(features) {
 
 
     /* LOGOS */
-    let logo = '';
-    let datengeber = '';
+    let logo = '', datengeber = '';
 
     for (let key in datengeberMapping) {
         if (source_id == key) {
@@ -115,7 +114,7 @@ export function popupContent(features) {
         '<table>\
                 <tr>' +
         logo +
-        ((name == undefined) ? '' : (
+        ((!name) ? '' : (
             '<th class="title">' + name + '</th>'
         )) +
         '</table><br><table>' +
@@ -125,13 +124,13 @@ export function popupContent(features) {
             datengeber +
             '</tr>'
         )) +
-        ((operator_name == undefined || operator_name == '-' || operator_name == '') ? '' : (
+        ((!operator_name || operator_name == '-' || operator_name == '') ? '' : (
             '<tr>\
             <td class="att">Betreiber</td>\
             <td class="attContent">' + operator_name + '</td>\
         </tr> '
         )) +
-        ((type == undefined) ? '' : (
+        ((!type) ? '' : (
             '<tr>\
             <td class="att">Typ</td>' +
             ((type == 'ON_STREET') ? ('<td class="attContent">Straßenparkplatz</td>') : '') +
@@ -150,13 +149,13 @@ export function popupContent(features) {
             ((type == 'OTHER') ? ('<td class="attContent">Sonstige</td>') : '') +
             '</tr>'
         )) +
-        ((address == undefined || address == '') ? '' : (
+        ((!address || address == '') ? '' : (
             '<tr>\
                 <td class="att">Adresse</td>\
                 <td class="attContent">' + address + '</td>\
             </tr>'
         )) +
-        ((park_and_ride_type == undefined) ? '' : (
+        ((!park_and_ride_type) ? '' : (
             '<tr>\
             <td class="att">P+R-Typ</td>' +
             ((park_and_ride_type == 'CARPOOL') ? ('<td class="attContent">Fahrgemeinschaft</td>') : '') +
@@ -167,7 +166,7 @@ export function popupContent(features) {
             ((park_and_ride_type == 'NO') ? ('<td class="attContent">nein</td>') : '') +
             '</tr>'
         )) +
-        ((realtime_opening_status == undefined) ? '' : (
+        ((!realtime_opening_status) ? '' : (
             '<tr>\
             <td class="att">Status</td>' +
             ((realtime_opening_status == 'OPEN') ? ('<td class="attContent">geöffnet</td>') : '') +
@@ -175,7 +174,7 @@ export function popupContent(features) {
             ((realtime_opening_status == 'UNKNOWN') ? ('<td class="attContent">unbekannt</td>') : '') +
             '</tr>'
         )) +
-        ((realtime_data_updated_at == undefined) ? '' : (
+        ((!realtime_data_updated_at) ? '' : (
             '<tr>\
             <td class="att">Stand Echtzeitinformationen</td>' +
             (realtime_data_outdated ? '<td class="attContent outDated">' + date + ', ' + time + '</td>' : '<td class="attContent">' + date + ', ' + time + '</td>') +
@@ -200,7 +199,7 @@ export function popupContent(features) {
                 ((realtime_status == 'UNKNOWN') ? ('<td class="attContent">- / 1</td>') : '') +
                 ((has_realtime_data == false) ? ('<td class="attContent">- / 1</td>') : '') +
                 '</tr><tr>' +
-                ((restriction_type == undefined) ? '' : (
+                ((!restriction_type) ? '' : (
                     '<tr>\
                     <td class="att">Parkberechtigte</td>' +
                     ((restriction_type == '') ? ('<td class="attContent">alle</td>') : '') +
@@ -209,13 +208,13 @@ export function popupContent(features) {
                     ((restriction_type.match('FAMILY')) ? ('<td class="attContent">Familien</td>') : '') +
                     '</tr>'
                 )) +
-                ((restriction_hours == undefined) ? '' : (
+                ((!restriction_hours) ? '' : (
                     '<tr>\
                         <td class="att">Parkzeiten</td>\
                         <td class="attContent">' + restriction_hours + '</td>\
                     </tr>'
                 )) +
-                ((restriction_max_stay == undefined) ? '' : (
+                ((!restriction_max_stay) ? '' : (
                     '<tr>\
                         <td class="att">Max. Parkdauer</td>\
                         <td class="attContent">' + restriction_max_stay + '</td>\
@@ -224,38 +223,38 @@ export function popupContent(features) {
             ) :
             /* PARKING SITE */
             (
-                ((capacity == undefined && realtime_capacity == undefined) ? '' : ('<td class="att2">alle (frei/gesamt)</td>')) +
+                ((!capacity && !realtime_capacity) ? '' : ('<td class="att2">alle (frei/gesamt)</td>')) +
                 ('<td class="attContent2">' +
-                    (((realtime_free_capacity == undefined) ? '-' : realtime_free_capacity)
+                    (((!realtime_free_capacity) ? '-' : realtime_free_capacity)
                         + ' / ' +
-                        ((realtime_capacity == undefined && capacity === undefined) ? '-' : ((realtime_capacity !== undefined) ? realtime_capacity : capacity))) +
+                        ((!realtime_capacity && !capacity) ? '-' : ((realtime_capacity) ? realtime_capacity : capacity))) +
                     '</td>') +
                 '</tr>' +
-                ((capacity_disabled == undefined || capacity_disabled == '0') ? '' : (
+                ((!capacity_disabled || capacity_disabled == '0') ? '' : (
                     '<tr>\
                         <td class="att2">für Behinderte</td>\
                         <td class="attContent2">' + capacity_disabled + '</td>\
                     </tr>'
                 )) +
-                ((capacity_woman == undefined || capacity_woman == '0') ? '' : (
+                ((!capacity_woman || capacity_woman == '0') ? '' : (
                     '<tr>\
                         <td class="att2">für Frauen</td>\
                         <td class="attContent2">' + capacity_woman + '</td>\
                     </tr>'
                 )) +
-                ((capacity_family == undefined || capacity_family == '0') ? '' : (
+                ((!capacity_family || capacity_family == '0') ? '' : (
                     '<tr>\
                         <td class="att2">für Familien</td>\
                         <td class="attContent2">' + capacity_family + '</td>\
                      </tr>'
                 )) +
-                ((capacity_charging == undefined || capacity_charging == '0') ? '' : (
+                ((!capacity_charging || capacity_charging == '0') ? '' : (
                     '<tr>\
                         <td class="att2">mit Lademöglichkeit</td>\
                         <td class="attContent2">' + capacity_charging + '</td>\
                     </tr>'
                 )) +
-                ((capacity_carsharing == undefined || capacity_carsharing == '0') ? '' : (
+                ((!capacity_carsharing || capacity_carsharing == '0') ? '' : (
                     '<tr>\
                         <td class="att2">für Carsharing</td>\
                         <td class="attContent2">' + capacity_carsharing + '</td>'
@@ -267,12 +266,12 @@ export function popupContent(features) {
             </div>\
             <table id="divURLs">\
                 <tr>' +
-        ((public_url == undefined) ? '' :
+        ((!public_url) ? '' :
             ('<td class="attContentLink"><a href="' + public_url + '" target="_blank">&#10149 Datengeber<a></td>')) +
-        ((public_url == undefined) ?
+        ((!public_url) ?
             ('<td class="attContentLink"><a href="https://api.mobidata-bw.de/park-api/api/public/v3/parking-' + `${parking_object}s/` + id + '" target="_blank">&#10149 ParkAPI<a></td>') :
             ('<td class="attContentLink"><a href="https://api.mobidata-bw.de/park-api/api/public/v3/parking-' + `${parking_object}s/` + id + '" class="photoMargin" target="_blank">&#10149 ParkAPI<a></td>')) +
-        ((photo_url == undefined) ? '' : ('<td class="attContentLink"><a href="' + photo_url + '" class="photoMargin" target="_blank">&#10149 Foto<a></td>')) +
+        ((!photo_url) ? '' : ('<td class="attContentLink"><a href="' + photo_url + '" class="photoMargin" target="_blank">&#10149 Foto<a></td>')) +
         '</tr>\
             </table>';
 

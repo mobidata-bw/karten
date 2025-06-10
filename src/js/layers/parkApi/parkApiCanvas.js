@@ -6,7 +6,7 @@ export function popupCanvas(features) {
 
     // console.log("capacity:", capacity, "realtimeCapacity:", realtimeCapacity, "realtimeFreeCapacity:", realtimeFreeCapacity);
 
-    if ((realtimeFreeCapacity !== undefined && capacity !== undefined) && (capacity !== 0 || realtimeCapacity !== 0)) {
+    if ((realtimeFreeCapacity && capacity) && (capacity != 0 || realtimeCapacity != 0)) {
         const anchor = document.getElementById("anchor-" + features.id);
 
         if (anchor) {
@@ -18,7 +18,7 @@ export function popupCanvas(features) {
             // if (!canvas) return;
             const ctx = canvas.getContext("2d");
 
-            const finalCapacity = realtimeCapacity !== undefined ? realtimeCapacity : capacity;
+            const finalCapacity = realtimeCapacity ? realtimeCapacity : capacity;
             const freeShare = realtimeFreeCapacity / finalCapacity;
             const occupiedShare = (finalCapacity - realtimeFreeCapacity) / finalCapacity;
 

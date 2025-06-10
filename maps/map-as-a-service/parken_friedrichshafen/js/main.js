@@ -1,29 +1,3 @@
-import {
-    fillShape,
-    lineShape,
-    maplibreInspectControl,
-    maplibreNavigationControl,
-    geocoder
-} from '../../../../src/js/initializeMap.js';
-import {
-    map,
-    shape
-} from './initializeMap.js';
-import {
-    sourceParking,
-    layersParkingOnStreet,
-    layersParkingOther,
-    sourceTaxi,
-    layersTaxi
-} from './layers.js';
-import {
-    addSources,
-    addLayers
-} from '../../../../src/js/layers/configSourcesLayers.js';
-import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
-import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../../src/js/popups.js';
-import { popupContentOnStreet, popupContentTaxis } from './popupContent.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
@@ -33,16 +7,41 @@ export let layers;
 const basemapSources = [], basemapLayers = [];
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+
+    // ==============================
+    // LOAD MODULES
+    // ==============================  
+    const [
+        { fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder },
+        { map, shape },
+        {
+            sourceParking, layersParkingOnStreet, layersParkingOther,
+            sourceTaxi, layersTaxi
+        },
+        { addSources, addLayers },
+        { initializeControlLayers },
+        { popups },
+        {
+            popupContentOnStreet,
+            popupContentTaxis
+        }
+    ] = await Promise.all([
+        import('../../../../src/js/initializeMap.js'),
+        import('./initializeMap.js'),
+        import('./layers.js'),
+        import('../../../../src/js/layers/configSourcesLayers.js'),
+        import('./controlLayers.js'),
+        import('../../../../src/js/popups.js'),
+        import('./popupContent.js')
+    ]);
+
 
     // ==============================
     // INITIALIZE MAP
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
-
-
     geocoder(map);
-
     maplibreInspectControl(map);
     maplibreNavigationControl(map);
 

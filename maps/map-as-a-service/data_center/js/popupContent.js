@@ -32,7 +32,7 @@ export function popupContent(records) {
     return '<table>\
                 <tr>' +
         popupImages('Stadt Herrenberg') +
-        ((Name == '' || Name == undefined) ? '' : ('<th class="title">' + Name + '</th>')) +
+        ((Name == '' || !Name) ? '' : ('<th class="title">' + Name + '</th>')) +
         '</tr>\
             </table><br><table>\
                 <tr>\
@@ -42,25 +42,25 @@ export function popupContent(records) {
                     <td class="att">Anzahl Stellplätze</td>\
                     <td class="attContent">' + anzahlStellplaetze + '</td>\
                 </tr>' +
-        ((adresseStrasseNummer == '' && adressePlzStadt == '' || adresseStrasseNummer == undefined && adressePlzStadt == undefined) ? '' : (
+        ((adresseStrasseNummer == '' && adressePlzStadt == '' || !adresseStrasseNummer && !adressePlzStadt) ? '' : (
             '<tr>\
                     <td class="att">Adresse</td>\
                     <td class="attContent">' + adresseStrasseNummer + ', ' + adressePlzStadt + '</td>\
                 </tr>'
         )) +
-        ((Ausrichtung == '' || Ausrichtung == undefined) ? '' : (
+        ((Ausrichtung == '' || !Ausrichtung) ? '' : (
             '<tr>\
                     <td class="att">Ausrichtung</td>\
                     <td class="attContent">' + Ausrichtung + '</td>\
                 </tr>'
         )) +
-        ((Linientyp == '' || Linientyp == undefined) ? '' : (
+        ((Linientyp == '' || !Linientyp) ? '' : (
             '<tr>\
                     <td class="att">Linientyp</td>\
                     <td class="attContent">' + Linientyp + '</td>\
                 </tr>'
         )) +
-        ((Verortung == '' || Verortung == undefined) ? '' : (
+        ((Verortung == '' || !Verortung) ? '' : (
             '<tr>\
                     <td class="att">Verortung</td>\
                     <td class="attContent">' + Verortung + '</td>\
@@ -78,19 +78,19 @@ export function popupContent(records) {
                     <td class="attContent">' + ((wochentagBeginn == null || wochentagEnde == null) ? '' : wochentagBeginn) + ' ' + zeitraumBeginn + ' - ' + ((wochentagBeginn == null || wochentagEnde == null) ? '' : wochentagEnde) + ' ' + zeitraumEnde + '</td>\
                 </tr>'
         )) +
-        ((Parkberechtigte == '' || Parkberechtigte == undefined) ? '' : (
+        ((Parkberechtigte == '' || !Parkberechtigte) ? '' : (
             '<tr>\
                     <td class="att">Parkberechtigte</td>\
                     <td class="attContent">' + Parkberechtigte + '</td>\
                 </tr>'
         )) +
-        ((maximaleParkdauer == undefined) ? '' : (
+        ((!maximaleParkdauer) ? '' : (
             '<tr>\
                     <td class="att">Maximale Parkdauer</td>\
                     <td class="attContent">' + maximaleParkdauer + '</td>\
                 </tr>'
         )) +
-        ((Beschreibung == undefined || Beschreibung == '') ? '' : (
+        ((!Beschreibung || Beschreibung == '') ? '' : (
             '<tr>\
                     <td class="att">Beschreibung</td>\
                     <td class="attContent">' + Beschreibung + '</td>\

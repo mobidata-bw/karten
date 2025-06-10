@@ -26,7 +26,7 @@ export function popupContent(feature) {
                     <td class="attContent">' + counterSideId + '</td>\
                 </tr>\
             </table>' +
-        ((all == undefined) ? '' :
+        ((!all) ? '' :
             ('<br><table>\
                 <tr>\
                     <td class="title title2">Jährliche Zähldaten seit 2013 (in Mio.)</td>\

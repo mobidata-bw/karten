@@ -1,46 +1,43 @@
-import {
-    map,
-    shape,
-    fillShape,
-    lineShape,
-    maplibreInspectControl,
-    maplibreNavigationControl,
-    geocoder
-} from '../../../../src/js/initializeMap.js';
-import {
-    sourceParkApiBicycle, 
-    layersParkApiBicycleOccupancy, 
-    layersParkApiBicycleTypes,
-    sourceParkApiItem, 
-    layersParkApiItemOccupancy
-} from './layers.js';
-import {
-    addSources,
-    addLayers
-} from '../../../../src/js/layers/configSourcesLayers.js';
-import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
-import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../../src/js/popups.js';
-import { popupContent } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
 
-export { layersParkApiItemOccupancy };
-export let layers, layersBicycle;
+export let layers, layersBicycle, layersItem;
 
 const basemapSources = [], basemapLayers = [];
 
+window.addEventListener('DOMContentLoaded', async () => {
 
-window.addEventListener('DOMContentLoaded', () => {
+    // ==============================
+    // LOAD MODULES
+    // ==============================  
+    const [
+        { map, shape, fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder },
+        {
+            sourceParkApiBicycle, layersParkApiBicycleOccupancy, layersParkApiBicycleTypes,
+            sourceParkApiItem, layersParkApiItemOccupancy
+        },
+        { addSources, addLayers },
+        { basemaps },
+        { initializeControlLayers },
+        { popups },
+        { popupContent }
+    ] = await Promise.all([
+        import('../../../../src/js/initializeMap.js'),
+        import('./layers.js'),
+        import('../../../../src/js/layers/configSourcesLayers.js'),
+        import('../../../../src/js/layerSwitcherControl.js'),
+        import('./controlLayers.js'),
+        import('../../../../src/js/popups.js'),
+        import('../../../../src/js/layers/parkApi/parkApiPopups.js')
+    ]);
+
 
     // ==============================
     // MAP CONTROLS
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
-
     geocoder(map);
-
     maplibreInspectControl(map);
     maplibreNavigationControl(map);
 
@@ -68,6 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersParkApiBicycleOccupancy,
             ...layersParkApiBicycleTypes,
         ];
+        layersItem = layersParkApiItemOccupancy;
         layers = [
             ...layersBicycle,
             ...layersParkApiItemOccupancy

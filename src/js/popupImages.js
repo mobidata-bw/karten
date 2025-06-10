@@ -1,5 +1,6 @@
 import { basePath } from '../utils/paths.js';
 
+
 export function popupImages(fileName) {
   const path = `${basePath}img/popup/${fileName}`;
   return `
@@ -18,4 +19,4 @@ export function popupImages(fileName) {
       />
     </th>
   `;
-}
+};

@@ -8,7 +8,6 @@ let layerControl = null;
 
 export function initializeControlLayers(map) {
 
-
     /* DYNAMIC VISIBILITY */
     const currentZoom = map.getZoom();
     

@@ -4,11 +4,13 @@ import { popupImages } from "../../../../src/js/popupImages.js";
 export function popupContentTransitStops(features) {
 
     /* INITIALIZE VARIABLES */
-    const stopName = features.stop_name;
-    const stopId = features.stop_id;
-    const wheelchairBoarding = features.wheelchair_boarding;
-    const stopIdStation = stopId.split('_')[0];
-    const locationType = features.location_type;
+    const {
+        stop_name,
+        stop_id,
+        wheelchair_boarding,
+        location_type
+    } = features;
+    const stopIdStation = stop_id.split('_')[0];
     const urlDepartures = 'https://www.efa-bw.de/rtMonitor/XSLT_DM_REQUEST?itdLPxx_banner=mobidatabw.png&itdLPxx_branding=mobidatabw&locationServerActive=1&' +
         'stateless=1&sRaLP=1&itdLPxx_generalInfo=false&mode=direct&type_dm=any&itdLPxx_stopname=false&itdLPxx_genICS=false&itdLPxx_stopICS=false&' +
         'itdLPxx_depLineICS=false&itdLPxx_depStopICS=false&itdLPxx_hint=false&itdLPxx_useRealtime=true';
@@ -20,14 +22,14 @@ export function popupContentTransitStops(features) {
     return '<table>\
                 <tr>' +
         popupImages('Piktogramm_Haltestelle') +
-        '<th class="title">' + stopName + '</th>\
+        '<th class="title">' + stop_name + '</th>\
                 </tr>\
             </table><br><table>\
                 <tr>\
                     <td class="att">Haltesteig-ID</td>\
-                    <td class="attContent">' + stopId + '</td>\
+                    <td class="attContent">' + stop_id + '</td>\
                 </tr>'+
-        ((wheelchairBoarding == 'accessible') ? (
+        ((wheelchair_boarding == 'accessible') ? (
             '<tr>\
                 <td class="att" > Barrierefreiheit</td >\
                 <td class="attContent">Rollstuhl-Einstiegsmöglichkeit</td>\
@@ -36,11 +38,11 @@ export function popupContentTransitStops(features) {
         '<tr>\
             </table><table>\
                 <tr>\
-                    <td colspan="2" class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/stops?stop_id=eq.' + stopId + '" target="_blank">&#10149 Haltestelle/Station<a></td>\
+                    <td colspan="2" class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/stops?stop_id=eq.' + stop_id + '" target="_blank">&#10149 Haltestelle/Station<a></td>\
                 </tr><tr>' +
-        ((locationType == 'station') ?
+        ((location_type == 'station') ?
             ('<td class="attContentLink"><a href="' + urlDepartures + '&name_dm=' + stopIdStation + '" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="' + urlArrivals + '&name_dm=' + stopIdStation + '" target="_blank">&#10149 Ankunftsmonitor<a></td>') :
-            ('<td class="attContentLink"><a href="' + urlDepartures + '&name_dm=' + stopId + '" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="' + urlArrivals + '&name_dm=' + stopId + '" target="_blank">&#10149 Ankunftsmonitor<a></td>')) +
+            ('<td class="attContentLink"><a href="' + urlDepartures + '&name_dm=' + stop_id + '" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="' + urlArrivals + '&name_dm=' + stop_id + '" target="_blank">&#10149 Ankunftsmonitor<a></td>')) +
         '</tr>\
             </table>';
 
@@ -49,22 +51,24 @@ export function popupContentTransitStops(features) {
 export function popupContentTransitStations(features) {
 
     /* INITIALIZE VARIABLES */
-    const prioRouteType = features.prio_route_type;
-    const stationName = features.station_name;
-    const stationId = features.station_id;
+    const {
+        prio_route_type,
+        station_name,
+        station_id
+    } = features;
 
     /* POPUP CONTENT */
     return '<table>\
                 <tr>' +
-        ((prioRouteType == '0') ? popupImages('Piktogramm_U_Bahn') : '') +
-        ((prioRouteType == '2') ? popupImages('Piktogramm_Bahn') : '') +
-        ((prioRouteType == '3') ? popupImages('Piktogramm_Bus') : '') +
-        '<th class="title">' + stationName + '</th>\
+        ((prio_route_type == '0') ? popupImages('Piktogramm_U_Bahn') : '') +
+        ((prio_route_type == '2') ? popupImages('Piktogramm_Bahn') : '') +
+        ((prio_route_type == '3') ? popupImages('Piktogramm_Bus') : '') +
+        '<th class="title">' + station_name + '</th>\
                 </tr>\
             </table><br><table>\
                 <tr>\
                     <td class="att">Haltestellen-ID</td>\
-                    <td class="attContent">' + stationId + '</td>\
+                    <td class="attContent">' + station_id + '</td>\
                </tr>\
             </table>';
 };
@@ -73,16 +77,16 @@ export function popupContentTransitShapes(features) {
     // console.log(features)
 
     /* INITIALIZE VARIABLES */
-    const routeNames = features.route_names;
-    const routeIds = features.route_ids;
-    const agencyId = features.agency_id;
-    const agencyName = features.agency_name;
-    const agencyUrl = features.agency_url;
+    const {
+        route_names,
+        route_ids,
+        agency_id,
+        agency_name,
+        agency_url
+    } = features;
 
     /* TEILNETZE */
-    var teilnetzeMapping = new Map();
-
-    teilnetzeMapping = {
+    const teilnetzeMapping = {
 
         /* DB-TOECHTER */
         "rab": { teilnetz: "Regionalverkehr Alb-Bodensee", teilnetzBeschreibung: "", datengeber: "Regionalverkehr Alb-Bodensee", verkehrsmittel: "Bus" },
@@ -133,9 +137,9 @@ export function popupContentTransitShapes(features) {
     }
 
 
-    const routeIdsPrefix = routeIds.split("-")[0];
+    const routeIdsPrefix = route_ids.split("-")[0];
     let teilnetze = '', teilnetzeBeschreibung = '', datengeber = '', verkehrsmittel = '';
-    for (var teilnetz in teilnetzeMapping) {
+    for (let teilnetz in teilnetzeMapping) {
         teilnetz = teilnetz.split("-")[0];
         if (routeIdsPrefix == teilnetz) {
             teilnetze += teilnetzeMapping[teilnetz].teilnetz;
@@ -153,22 +157,22 @@ export function popupContentTransitShapes(features) {
     return '<table>\
                 <tr>' +
         ((teilnetze == 'Verschiedene Eisenbahngesellschaften' || teilnetze == '') ? '' : (((teilnetze == 'Move (TUTicket)' || teilnetze == 'Move (VSB)') || teilnetze == 'Move (VVR)') ? popupImages("MOVE") : popupImages(teilnetze))) +
-        '<th class="title">' + routeNames + '</th>\
+        '<th class="title">' + route_names + '</th>\
                 </tr>\
             </table>\
         <br><table>\
                 <tr>\
                     <td class="att">Linien-ID</td>\
-                    <td class="attContent">' + routeIds + '</td>\
+                    <td class="attContent">' + route_ids + '</td>\
                 </tr><tr>\
                     <td class="att">Betreiber-ID</td>\
-                    <td class="attContent">' + agencyId + '</td>\
+                    <td class="attContent">' + agency_id + '</td>\
                 </tr><tr>\
                     <td class="att">Betreibername</td>\
-                    <td class="attContent">' + agencyName + '</td>\
+                    <td class="attContent">' + agency_name + '</td>\
                 </tr><tr>\
                     <td class="att">Betreiber-Webseite</td>\
-                    <td class="attContent"><a href="' + agencyUrl + '" target="_blank">Link</a></td>\
+                    <td class="attContent"><a href="' + agency_url + '" target="_blank">Link</a></td>\
                 </tr>\
             </table>' +
         ((teilnetze == '') ? '' : (
@@ -215,8 +219,8 @@ export function popupContentTransitShapes(features) {
         )) +
         '<table>\
                 <tr>\
-                    <td class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/routes?route_id=eq.' + routeIds + '" target="_blank">&#10149 Linie<a></td>\
-                    <td class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/trips?route_id=eq.' + routeIds + '" class="photoMargin" target="_blank">&#10149 Fahrten<a></td>\
+                    <td class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/routes?route_id=eq.' + route_ids + '" target="_blank">&#10149 Linie<a></td>\
+                    <td class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/trips?route_id=eq.' + route_ids + '" class="photoMargin" target="_blank">&#10149 Fahrten<a></td>\
                 </tr>\
             </table>';
 }

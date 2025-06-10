@@ -1,0 +1,1 @@
+const e={type:"geojson",data:"https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/regierungsbezirke.geojson"},n={id:"lineShapeRegierungsbezirke",type:"line",source:"shapeRegierungsbezirke",paint:{"line-color":"black","line-width":1}};export{n as lineShapeRegierungsbezirke,e as shapeRegierungsbezirke};

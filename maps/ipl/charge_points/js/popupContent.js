@@ -53,19 +53,19 @@ export function popupContent(features) {
                     <td class="att">Datengeber</td>' +
         datengeber +
         '</tr>' +
-        ((operatorName == undefined || operatorName == '') ? '' : (
+        ((!operatorName || operatorName == '') ? '' : (
             '<tr>\
         <td class="att">Betreiber</td>\
         <td class="attContent">' + operatorName + '</td>\
         </tr>'
         )) +
-        ((name == undefined) ? '' : (
+        ((!name) ? '' : (
             '<tr>\
             <td class="att">Name</td>\
             <td class="attContent">' + name + '</td>\
             </tr>'
         )) +
-        ((maxElectricPower == undefined) ? '' : (
+        ((!maxElectricPower) ? '' : (
             '<tr>\
                 <td class="att">Max. Ladeleistung</td>\
                 <td class="attContent">' + (maxElectricPower / 1000).toLocaleString('de-DE') + 'kW' + '</td>\

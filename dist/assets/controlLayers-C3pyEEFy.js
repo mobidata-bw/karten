@@ -1,0 +1,1 @@
+import{a as l,l as t}from"./addControlLayers-Cok5tCjc.js";import{l as a}from"./ipl/charge_points-Cq0Vtviy.js";import"./paths-kVD327XS.js";import"./controlLayers-nwXqyDIR.js";import"./global-C1BlPy0S.js";function m(r){const e={collapsed:!1,layers:l(a,"Gebündelte E-Ladesäulen")},o=new t(e);o._exclusiveAllGroups=!0,r.addControl(o,"top-right")}export{m as initializeControlLayers};

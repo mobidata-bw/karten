@@ -13,7 +13,7 @@ export function initializeControlLayers(map) {
 
     const layerControl = new layerControlGrouped(config);
  
-    layerControl._exclusiveAllGroups = true;
+    // layerControl._exclusiveAllGroups = true;
     // layerControl._exclusiveGroupsList = ['Ladeleistung', 'Belegung'];
   
     map.addControl(layerControl, 'top-right');

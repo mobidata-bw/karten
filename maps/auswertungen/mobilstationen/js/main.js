@@ -1,32 +1,3 @@
-import {
-    map,
-    shape,
-    fillShape,
-    lineShape,
-    maplibreInspectControl,
-    maplibreNavigationControl,
-    geocoder
-} from '../../../../src/js/initializeMap.js';
-import {
-    sourceMobilstationen,
-    sourceOEV,
-    sourceMIV,
-    sourceFahrrad,
-    sourceScooter,
-    layersMobilstationen,
-    layersOEV,
-    layersScooter,
-    layersFahrrad,
-    layersMIV
-} from "./layers.js";
-import {
-    addSources,
-    addLayers
-} from '../../../../src/js/layers/configSourcesLayers.js';
-import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
-import { initializeControlLayers } from "./controlLayers.js";
-import { popups } from '../../../../src/js/popups.js';
-import { popupContentOEV, popupContentMIV, popupContentFahrrad, popupContentScooter } from "./popupContent.js";
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
@@ -36,15 +7,46 @@ export let layers;
 const basemapSources = [], basemapLayers = [];
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+
+    // ==============================
+    // LOAD MODULES
+    // ==============================  
+    const [
+        { map, shape, fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder },
+        {
+            sourceMobilstationen, layersMobilstationen,
+            sourceOEV, layersOEV,
+            sourceMIV, layersMIV,
+            sourceFahrrad, layersFahrrad,
+            sourceScooter, layersScooter
+        },
+        { addSources, addLayers },
+        { basemaps },
+        { initializeControlLayers },
+        { popups },
+        {
+            popupContentOEV,
+            popupContentMIV,
+            popupContentFahrrad,
+            popupContentScooter
+        }
+    ] = await Promise.all([
+        import('../../../../src/js/initializeMap.js'),
+        import('./layers.js'),
+        import('../../../../src/js/layers/configSourcesLayers.js'),
+        import('../../../../src/js/layerSwitcherControl.js'),
+        import('./controlLayers.js'),
+        import('../../../../src/js/popups.js'),
+        import('./popupContent.js')
+    ]);
+
 
     // ==============================
     // INITIALIZE MAP
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
-
     geocoder(map);
-
     maplibreInspectControl(map);
     maplibreNavigationControl(map);
 
@@ -109,7 +111,7 @@ window.addEventListener('DOMContentLoaded', () => {
         popups(map, layersMIV, popupContentMIV);
         popups(map, layersFahrrad, popupContentFahrrad);
         popups(map, layersScooter, popupContentScooter);
-       
+
 
     });
 

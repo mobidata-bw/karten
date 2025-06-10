@@ -1,22 +1,3 @@
-import { shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz } from './initializeMap.js';
-import { map } from '../../../gebuendelte_daten/js/main.js';
-import {
-    sourceKonstanzPls,
-    layersKonstanzPls,
-    sourceKonstanzBehindertenparken,
-    layersKonstanzBehindertenparken
-} from './layers.js';
-import {
-    addSources,
-    addLayers
-} from '../../../../src/js/layers/configSourcesLayers.js';
-import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../../src/js/popups.js';
-import {
-    popKonstanzPls,
-    popKonstanzBehindertenparken
-} from './popupContent.js';
-import { layerSwitcher } from '../../../../src/js/layerSwitcherControl.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
@@ -24,8 +5,38 @@ import '../../../../src/css/global.css';
 export let layers;
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
 
+    // ==============================
+    // LOAD MODULES
+    // ==============================  
+    const [
+        { shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz },
+        { map },
+        {
+            sourceKonstanzPls, layersKonstanzPls,
+            sourceKonstanzBehindertenparken, layersKonstanzBehindertenparken
+        },
+        { addSources, addLayers },
+        { initializeControlLayers },
+        { popups },
+        {
+            popKonstanzPls,
+            popKonstanzBehindertenparken
+        },
+        { layerSwitcher }
+    ] = await Promise.all([
+        import('./initializeMap.js'),
+        import('../../../gebuendelte_daten/js/main.js'),
+        import('./layers.js'),
+        import('../../../../src/js/layers/configSourcesLayers.js'),
+        import('./controlLayers.js'),
+        import('../../../../src/js/popups.js'),
+        import('./popupContent.js'),
+        import('../../../../src/js/layerSwitcherControl.js')
+    ]);
+
+    
     // ==============================
     // INITIALIZE MAP
     // ==============================  

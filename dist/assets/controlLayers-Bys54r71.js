@@ -1,0 +1,1 @@
+import{a,l}from"./addControlLayers-Cok5tCjc.js";import{l as e}from"./auswertungen/oepnv_gueteklassen-C-H_q05D.js";import"./paths-kVD327XS.js";import"./controlLayers-nwXqyDIR.js";import"./global-C1BlPy0S.js";function d(o){const r={collapsed:!1,layers:a(e,"ÖPNV-Güteklassen")},t=new l(r);o.addControl(t,"top-right")}export{d as initializeControlLayers};

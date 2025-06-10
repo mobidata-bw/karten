@@ -1,29 +1,3 @@
-import {
-    map,
-    shape,
-    fillShape,
-    lineShape,
-    maplibreInspectControl,
-    maplibreNavigationControl,
-    geocoder
-} from '../../../../src/js/initializeMap.js';
-import { wms } from '../../../../src/js/wms.js';
-import {
-    sourceTransitStops, 
-    layersTransitStops,
-    sourceTransitStations, 
-    layersTransitStations,
-    sourceTransitShapes, 
-    layersTransitShapes
-} from './layers.js';
-import {
-    addSources,
-    addLayers
-} from '../../../../src/js/layers/configSourcesLayers.js';
-import { basemaps } from '../../../../src/js/layerSwitcherControl.js';
-import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../../src/js/popups.js';
-import { popupContentTransitStops, popupContentTransitStations, popupContentTransitShapes } from './popupContent.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
@@ -34,15 +8,41 @@ export let layers;
 const basemapSources = [], basemapLayers = [];
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+
+    // ==============================
+    // LOAD MODULES
+    // ==============================  
+    const [
+        { map, shape, fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder },
+        {
+            sourceTransitStops, layersTransitStops,
+            sourceTransitStations, layersTransitStations,
+            sourceTransitShapes, layersTransitShapes
+        },
+        { wms },
+        { addSources, addLayers },
+        { basemaps },
+        { initializeControlLayers },
+        { popups },
+        { popupContentTransitStops, popupContentTransitStations, popupContentTransitShapes }
+    ] = await Promise.all([
+        import('../../../../src/js/initializeMap.js'),
+        import('./layers.js'),
+        import('../../../../src/js/wms.js'),
+        import('../../../../src/js/layers/configSourcesLayers.js'),
+        import('../../../../src/js/layerSwitcherControl.js'),
+        import('./controlLayers.js'),
+        import('../../../../src/js/popups.js'),
+        import('./popupContent.js')
+    ]);
+
 
     // ==============================
     // MAP CONTROLS
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
-
     geocoder(map);
-
     maplibreInspectControl(map);
     maplibreNavigationControl(map);
 
@@ -70,16 +70,13 @@ window.addEventListener('DOMContentLoaded', () => {
             { id: sourceTransitShapes[4].id, source: sourceTransitShapes[4] },
             { id: sourceTransitShapes[5].id, source: sourceTransitShapes[5] }
         ];
-
         sources.forEach(source => addSources(map, source));
-
 
         layers = [
             ...layersTransitStops,
             ...layersTransitStations,
             ...layersTransitShapes
         ];
-
         layers.forEach(layer => addLayers(map, layer));
 
 

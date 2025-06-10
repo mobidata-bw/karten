@@ -12,21 +12,21 @@ export const sourceOEV = {
 export const sourceScooter = {
     type: 'geojson',
     data: {
-        type: "FeatureCollection",
+        type: 'FeatureCollection',
         features: []
     }
 };
 export const sourceFahrrad = {
     type: 'geojson',
     data: {
-        type: "FeatureCollection",
+        type: 'FeatureCollection',
         features: []
     }
 };
 export const sourceMIV = {
     type: 'geojson',
     data: {
-        type: "FeatureCollection",
+        type: 'FeatureCollection',
         features: []
     }
 };

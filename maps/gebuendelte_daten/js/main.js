@@ -1,119 +1,102 @@
-import {
-    map,
-    shape,
-    fillShape,
-    lineShape,
-    maplibreInspectControl,
-    maplibreNavigationControl,
-    geocoder
-} from '../../../src/js/initializeMap.js';
-
-import { wms } from '../../../src/js/wms.js';
-import {
-    sourceParkApiCarBuildings,
-    layersParkApiCarBuildingsOccupancy
-} from '../../ipl/park-api_car_buildings/js/layers.js';
-import {
-    sourceParkApiCarOnStreet,
-    layersParkApiCarOnStreetOccupancy
-} from '../../ipl/park-api_car_on-street/js/layers.js';
-import {
-    sourceParkApiBicycle,
-    layersParkApiBicycleOccupancy
-} from '../../ipl/park-api_bicycle/js/layers.js';
-import { sourceSharingVehicles } from '../../../src/js/layers/sharing/sharingVehicles.js';
-import {
-    sourceSharingStationsCar,
-    layersSharingCar
-} from '../../ipl/sharing_car/js/layers.js';
-import {
-    sourceSharingStationsBicycle,
-    layersSharingBicycle
-} from '../../ipl/sharing_bicycle/js/layers.js';
-import {
-    sourceSharingStationsScooter,
-    layersSharingScooter
-} from '../../ipl/sharing_scooter/js/layers.js';
-import {
-    sourceSharingStationsCargoBicycle,
-    layersSharingCargoBicycle
-} from '../../ipl/sharing_cargo_bicycle/js/layers.js';
-import {
-    sourceChargePoints,
-    layersChargePointsPower
-} from '../../ipl/charge_points/js/layers.js';
-import {
-    sourceRadvis,
-    layersRadvis
-} from '../../ipl/radvis_cycle_network/js/layers.js';
-import {
-    sourceTransitStops,
-    sourceTransitStations,
-    sourceTransitShapes,
-    layersTransitStops,
-    layersTransitStations,
-    layersTransitShapes
-} from '../../ipl/gtfs/js/layers.js';
-import {
-    sourceRoadworks,
-    layersRoadworks
-} from '../../ipl/roadworks/js/layers.js';
-import {
-    sourceCountCar,
-    layersCountCar
-} from '../../count_car/js/layers.js';
-import {
-    sourceCountBicycle,
-    layersCountBicycle
-} from '../../count_bicycle/js/layers.js';
-import {
-    sourceFootway,
-    sourceMarked,
-    sourceUncontrolled,
-    sourceZebra,
-    layersPedestrianCrossings
-} from '../../pedestrian_crossings/js/layers.js';
-import {
-    addSources,
-    addLayers
-} from '../../../src/js/layers/configSourcesLayers.js';
-
-import { basemaps } from '../../../src/js/layerSwitcherControl.js';
-import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../src/js/popups.js';
-import { popupContent as popupContentParkApi } from '../../../src/js/layers/parkApi/parkApiPopups.js';
-import { popupContent as popupContentSharing } from '../../../src/js/layers/sharing/sharingPopups.js';
-import { popupContent as popupContentChargePoints } from '../../ipl/charge_points/js/popupContent.js';
-import { popupContent as popupContentRadvis } from '../../ipl/radvis_cycle_network/js/popupContent.js';
-import {
-    popupContentTransitStops,
-    popupContentTransitStations,
-    popupContentTransitShapes
-} from '../../ipl/gtfs/js/popupContent.js';
-import { popupContent as popupContentRoadworks } from '../../ipl/roadworks/js/popupContent.js';
-import { popupContent as popupContentCountCar } from '../../count_car/js/popupContent.js';
-import { popupContent as popupContentCountBicycle } from '../../count_bicycle/js/popupContent.js';
-import { popupContent as popupContentPedestrianCrossings } from '../../pedestrian_crossings/js/popupContent.js';
-
 import '../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../src/css/layerSwitcherControl.css';
 import '../../../src/css/global.css';
 
-export let layers, layersIpl, layersGeoJson;
-export { map };
+export let map, layers, layersIpl, layersGeoJson;
 
 const basemapSources = [], basemapLayers = [];
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+
+    // ==============================
+    // LOAD MODULES
+    // ==============================  
+    const [
+        { map: initialMap, shape, fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder },
+        { sourceParkApiCarBuildings, layersParkApiCarBuildingsOccupancy },
+        { sourceParkApiCarOnStreet, layersParkApiCarOnStreetOccupancy },
+        { sourceParkApiBicycle, layersParkApiBicycleOccupancy },
+        { sourceSharingVehicles },
+        { sourceSharingStationsCar, layersSharingCar },
+        { sourceSharingStationsBicycle, layersSharingBicycle },
+        { sourceSharingStationsScooter, layersSharingScooter },
+        { sourceSharingStationsCargoBicycle, layersSharingCargoBicycle },
+        { sourceChargePoints, layersChargePointsPower },
+        { sourceRadvis, layersRadvis },
+        {
+            sourceTransitStops, layersTransitStops,
+            sourceTransitStations, layersTransitStations,
+            sourceTransitShapes, layersTransitShapes
+        },
+        { sourceRoadworks, layersRoadworks },
+        { sourceCountCar, layersCountCar },
+        { sourceCountBicycle, layersCountBicycle },
+        {
+            sourceFootway,
+            sourceMarked,
+            sourceUncontrolled,
+            sourceZebra,
+            layersPedestrianCrossings },
+        { wms },
+        { addSources, addLayers },
+        { basemaps },
+        { initializeControlLayers },
+        { popups },
+        { popupContent: popupContentParkApi },
+        { popupContent: popupContentSharing },
+        { popupContent: popupContentChargePoints },
+        { popupContent: popupContentRadvis },
+        {
+            popupContentTransitStops,
+            popupContentTransitStations,
+            popupContentTransitShapes
+        },
+        { popupContent: popupContentRoadworks },
+        { popupContent: popupContentCountCar },
+        { popupContent: popupContentCountBicycle },
+        { popupContent: popupContentPedestrianCrossings }
+    ] = await Promise.all([
+        import('../../../src/js/initializeMap.js'),
+        import('../../ipl/park-api_car_buildings/js/layers.js'),
+        import('../../ipl/park-api_car_on-street/js/layers.js'),
+        import('../../ipl/park-api_bicycle/js/layers.js'),
+        import('../../../src/js/layers/sharing/sharingVehicles.js'),
+        import('../../ipl/sharing_car/js/layers.js'),
+        import('../../ipl/sharing_bicycle/js/layers.js'),
+        import('../../ipl/sharing_scooter/js/layers.js'),
+        import('../../ipl/sharing_cargo_bicycle/js/layers.js'),
+        import('../../ipl/charge_points/js/layers.js'),
+        import('../../ipl/radvis_cycle_network/js/layers.js'),
+        import('../../ipl/gtfs/js/layers.js'),
+        import('../../ipl/roadworks/js/layers.js'),
+        import('../../count_car/js/layers.js'),
+        import('../../count_bicycle/js/layers.js'),
+        import('../../pedestrian_crossings/js/layers.js'),
+        import('../../../src/js/wms.js'),
+        import('../../../src/js/layers/configSourcesLayers.js'),
+        import('../../../src/js/layerSwitcherControl.js'),
+        import('./controlLayers.js'),
+        import('../../../src/js/popups.js'),
+        import('../../../src/js/layers/parkApi/parkApiPopups.js'),
+        import('../../../src/js/layers/sharing/sharingPopups.js'),
+        import('../../ipl/charge_points/js/popupContent.js'),
+        import('../../ipl/radvis_cycle_network/js/popupContent.js'),
+        import('../../ipl/gtfs/js/popupContent.js'),
+        import('../../ipl/roadworks/js/popupContent.js'),
+        import('../../count_car/js/popupContent.js'),
+        import('../../count_bicycle/js/popupContent.js'),
+        import('../../pedestrian_crossings/js/popupContent.js')
+    ]);
+
+    map = initialMap;
+
 
     // ==============================
     // MAP CONTROLS
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
-
     geocoder(map);
-
     maplibreInspectControl(map);
     maplibreNavigationControl(map);
 

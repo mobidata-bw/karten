@@ -1,0 +1,1 @@
+const r={layer:"MobiData-BW:sharing_vehicles",style:"MobiData-BW:mdbw_sharing_vehicles_default",bounds:[4,45.8,13.5,54.6]},s={source:"sourceSharingVehicles",sourceLayer:"sharing_vehicles",label:"Free-Floating-Fahrzeuge",filter:e=>["==",["get","form_factor"],e],color:"#91FFFF"};export{s as sharingVehicles,r as sourceSharingVehicles};

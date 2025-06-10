@@ -72,13 +72,13 @@ export function exclusiveLayerGroup(e) {
 
   // 3) Layer checkbox or label clicked?
   let gn = null, sgn = null, act = false;
-  if (e.target.dataset.mapLayer !== undefined) {
+  if (e.target.dataset.mapLayer) {
     gn  = e.target.dataset.group    || null;
     sgn = e.target.dataset.subgroup || null;
     act = e.target.checked;
   } else if (e.target.tagName === "LABEL" && e.target.htmlFor) {
     const inp = document.getElementById(e.target.htmlFor);
-    if (inp && inp.dataset.mapLayer !== undefined) {
+    if (inp && inp.dataset.mapLayer) {
       gn  = inp.dataset.group    || null;
       sgn = inp.dataset.subgroup || null;
       act = inp.checked;
@@ -102,7 +102,7 @@ export function exclusiveLayerGroup(e) {
     // 3.b) Exclude siblings in same subGroup if configured
     if (gs.exclusiveWithinGroup && sgn) {
       document.querySelectorAll(`input[data-map-layer][data-subgroup="${sgn}"]`).forEach(inp => {
-        const clickedId = (e.target.dataset.mapLayer !== undefined)
+        const clickedId = (e.target.dataset.mapLayer)
           ? e.target.id
           : e.target.htmlFor;
         if (inp.id !== clickedId && inp.checked) {

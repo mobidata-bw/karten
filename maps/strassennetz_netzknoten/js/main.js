@@ -1,29 +1,3 @@
-import {
-    map,
-    shape,
-    fillShape,
-    lineShape,
-    maplibreInspectControl,
-    maplibreNavigationControl,
-    geocoder
-} from '../../../src/js/initializeMap.js';
-import {
-    sourceStrassennetz, 
-    sourceNetzknoten,
-    layersStrassennetz, 
-    layersNetzknoten
-} from "./layers.js";
-import {
-    addSources,
-    addLayers
-} from '../../../src/js/layers/configSourcesLayers.js';
-import { basemaps } from '../../../src/js/layerSwitcherControl.js';
-import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../src/js/popups.js';
-import { 
-    popupContentStrassennetz, 
-    popupContentNetzknoten 
-} from "./popupContent.js";
 import '../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../src/css/layerSwitcherControl.css';
 import '../../../src/css/global.css';
@@ -33,15 +7,38 @@ export let layers;
 const basemapSources = [], basemapLayers = [];
 
 
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', async () => {
+
+    // ==============================
+    // LOAD MODULES
+    // ==============================  
+    const [
+        { map, shape, fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder },
+        {
+            sourceStrassennetz, layersStrassennetz,
+            sourceNetzknoten, layersNetzknoten
+        },
+        { addSources, addLayers },
+        { basemaps },
+        { initializeControlLayers },
+        { popups },
+        { popupContentStrassennetz, popupContentNetzknoten }
+    ] = await Promise.all([
+        import('../../../src/js/initializeMap.js'),
+        import('./layers.js'),
+        import('../../../src/js/layers/configSourcesLayers.js'),
+        import('../../../src/js/layerSwitcherControl.js'),
+        import('./controlLayers.js'),
+        import('../../../src/js/popups.js'),
+        import('./popupContent.js')
+    ]);
+
 
     // ==============================
     // INITIALIZE MAP
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
-
     geocoder(map);
-
     maplibreInspectControl(map);
     maplibreNavigationControl(map);
 
@@ -66,7 +63,6 @@ window.addEventListener('DOMContentLoaded', () => {
         sources.forEach(source => addSources(map, source));
 
         layers = [
-          
             ...layersNetzknoten,
             ...layersStrassennetz,
         ];
