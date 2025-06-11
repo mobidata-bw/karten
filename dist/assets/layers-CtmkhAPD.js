@@ -1,1 +1,0 @@
-const r={type:"raster",layer:"MobiData-BW:roadworks"},o=[{id:"roadworks",label:"Baustellen",group:"Baustellen",type:"raster",source:"sourceRoadworks",layer:"MobiData-BW:roadworks",style:"mdbw_traffic_roadworks_default"}];export{o as layersRoadworks,r as sourceRoadworks};

@@ -3,10 +3,17 @@ import { basePath } from '../utils/paths.js';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import '@maplibre/maplibre-gl-inspect/dist/maplibre-gl-inspect.css';
 import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
+import '../plugins/mapbox-layer-control/layerControl.min.css';
+import '../css/layerSwitcherControl.css';
+import '../css/global.css';
 
 import maplibregl from 'maplibre-gl';
 import MaplibreInspect from '@maplibre/maplibre-gl-inspect';
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
+
+export { addSources, addLayers } from '../js/layers/configSourcesLayers.js';
+export { basemaps } from '../js/layerSwitcherControl.js';
+export { popups } from '../js/popups.js';
 
 
 // ==============================
@@ -54,7 +61,7 @@ export const lineShape = {
 // ==============================
 // MAP CONTROLS
 // ==============================
-export function maplibreInspectControl(map) {
+export function maplibreControls(map) {
 
     map.addControl(
         new MaplibreInspect({
@@ -65,10 +72,6 @@ export function maplibreInspectControl(map) {
         }),
         'top-left'
     );
-
-};
-
-export function maplibreNavigationControl(map) {
 
     map.addControl(
         new maplibregl.NavigationControl({

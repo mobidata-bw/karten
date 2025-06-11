@@ -1,10 +1,10 @@
 /* ====================================================================== */
 /* https://docs.maptiler.com/sdk-js/examples/control-style-switcher/      */
 /* ====================================================================== */
-
 import { basePath } from '../utils/paths.js';
 import maplibregl from 'maplibre-gl';
 import { addSources, addLayers } from './layers/configSourcesLayers.js';
+
 export let layerSwitcher;
 
 

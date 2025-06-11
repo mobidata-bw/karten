@@ -2,6 +2,8 @@ import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
 
+import { getMap, initializedMap } from '../../../gebuendelte_daten/js/main.js';
+
 export let layers;
 
 
@@ -10,9 +12,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     // ==============================
     // LOAD MODULES
     // ==============================  
+    await initializedMap;
+    const map = getMap();
+
+    
     const [
         { shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz },
-        { map },
         {
             sourceKonstanzPls, layersKonstanzPls,
             sourceKonstanzBehindertenparken, layersKonstanzBehindertenparken
@@ -27,7 +32,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         { layerSwitcher }
     ] = await Promise.all([
         import('./initializeMap.js'),
-        import('../../../gebuendelte_daten/js/main.js'),
         import('./layers.js'),
         import('../../../../src/js/layers/configSourcesLayers.js'),
         import('./controlLayers.js'),

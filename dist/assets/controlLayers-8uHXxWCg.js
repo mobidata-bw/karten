@@ -1,1 +1,0 @@
-import{a as t,l as a}from"./addControlLayers-Cok5tCjc.js";import{l as e}from"./ipl/gtfs-BRt_2Eao.js";import"./paths-kVD327XS.js";import"./controlLayers-nwXqyDIR.js";import"./global-C1BlPy0S.js";function m(o){const r={collapsed:!1,layers:t(e,"Gebündelte Soll-Fahrplandaten","group")},l=new a(r);o.addControl(l,"top-right")}export{m as initializeControlLayers};

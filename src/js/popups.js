@@ -1,6 +1,8 @@
 import maplibregl from 'maplibre-gl';
 
-export function popups(map, layers, popupContent, popupCanvas) {
+
+export function popups(map, layers, popupContent, popupCanvas) {   
+ 
     layers.forEach((layer) => {
 
         map.on('click', layer.id, (e) => {

@@ -1,1 +1,0 @@
-import{a,l as e}from"./addControlLayers-Cok5tCjc.js";import{l}from"./pedestrian_crossings-C792RQxW.js";import"./paths-kVD327XS.js";import"./controlLayers-nwXqyDIR.js";import"./global-C1BlPy0S.js";function m(o){const r={collapsed:!1,layers:a(l,"Legende")},t=new e(r);o.addControl(t,"top-right")}export{m as initializeControlLayers};

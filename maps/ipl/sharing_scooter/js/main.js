@@ -2,6 +2,8 @@ import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
 import '../../../../src/css/layerSwitcherControl.css';
 import '../../../../src/css/global.css';
 
+// import { initializeMap } from '../../../../src/js/initializeMap.js';
+
 export let layers;
 
 const basemapSources = [], basemapLayers = [];

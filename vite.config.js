@@ -14,15 +14,15 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        input: fg.sync('maps/**/index.html').reduce((entries, file) => {
-          const name = file.replace(/^maps\/(.+)\/index\.html$/, '$1');
-          entries[name] = resolve(__dirname, file);
-          return entries;
-        }, {})
+        //   input: fg.sync('maps/**/index.html').reduce((entries, file) => {
+        //     const name = file.replace(/^maps\/(.+)\/index\.html$/, '$1');
+        //     entries[name] = resolve(__dirname, file);
+        //     return entries;
+        //   }, {})
+        input: {
+          charge_points: resolve(__dirname, 'maps/gebuendelte_daten/index.html')
+        }       
       },
-      // input: {
-      //   data_center: resolve(__dirname, 'maps/map-as-a-service/data_center/erfassung.html')
-      // },      
       outDir: 'dist',
       emptyOutDir: true
     },
