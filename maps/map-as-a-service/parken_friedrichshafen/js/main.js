@@ -1,56 +1,41 @@
-import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
-import '../../../../src/css/layerSwitcherControl.css';
-import '../../../../src/css/global.css';
+import {
+    fillShape, lineShape, maplibreControls, geocoder,
+    addSources, addLayers,
+    basemaps,
+    popups
+} from '../../../../src/js/initializeMap.js';
+import {
+    map, shape
+} from './initializeMap.js';
+import {
+    sourceParking, layersParkingOnStreet, layersParkingOther,
+    sourceTaxi, layersTaxi
+} from './layers.js';
+import {
+    popupContentOnStreet,
+    popupContentTaxis
+} from './popupContent.js';
+import { initializeControlLayers } from './controlLayers.js';
 
 export let layers;
 
 const basemapSources = [], basemapLayers = [];
 
 
-window.addEventListener('DOMContentLoaded', async () => {
-
-    // ==============================
-    // LOAD MODULES
-    // ==============================  
-    const [
-        { fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder },
-        { map, shape },
-        {
-            sourceParking, layersParkingOnStreet, layersParkingOther,
-            sourceTaxi, layersTaxi
-        },
-        { addSources, addLayers },
-        { initializeControlLayers },
-        { popups },
-        {
-            popupContentOnStreet,
-            popupContentTaxis
-        }
-    ] = await Promise.all([
-        import('../../../../src/js/initializeMap.js'),
-        import('./initializeMap.js'),
-        import('./layers.js'),
-        import('../../../../src/js/layers/configSourcesLayers.js'),
-        import('./controlLayers.js'),
-        import('../../../../src/js/popups.js'),
-        import('./popupContent.js')
-    ]);
-
+window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
     // INITIALIZE MAP
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
     geocoder(map);
-    maplibreInspectControl(map);
-    maplibreNavigationControl(map);
+    maplibreControls(map);
 
 
     // ==============================
     // SOURCES AND LAYERS
     // ==============================
     map.on('load', () => {
-
 
         // DEFAULT LAYERS
         map.addSource('shape', shape);

@@ -1,4 +1,4 @@
-import { occupancy, types, objects, specialParking } from '../../../../src/js/layers/parkApi/parkApiStyles.js';
+import { occupancy, types, objects, specialParking } from '../../../../src/js/layers/parkApi/layers.js';
 
 
 // ==============================

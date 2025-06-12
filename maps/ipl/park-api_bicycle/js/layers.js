@@ -1,4 +1,4 @@
-import { occupancy, types } from '../../../../src/js/layers/parkApi/parkApiStyles.js';
+import { occupancy, types } from '../../../../src/js/layers/parkApi/layers.js';
 
 
 // ==============================
@@ -130,36 +130,35 @@ export const layersParkApiItemOccupancy = [
     {
         id: 'parkApiItemOccupancy_NoRealtimeInformation',
         ...occupancy.NO_REALTIME_INFORMATION,
-        subGroup: 'Belegung ', // overwrite parkApiStyles.js
+        subGroup: 'Belegung ', // overwrite layers.js
         visibility: 'none',
         ...layersItem
     },
     {
         id: 'parkApiItemOccupancy_OutdatedRealtimeInformation',
         ...occupancy.OUTDATED_REALTIME_INFORMATION,
-        subGroup: 'Belegung ', // overwrite parkApiStyles.js
+        subGroup: 'Belegung ', // overwrite layers.js
         visibility: 'none',
         ...layersItem
     },
     {
         id: 'parkApiItemOccupancy_VeryLowAvailabilityOrClosed',
         ...occupancy.VERY_LOW_AVAILABILITY_OR_CLOSED,
-        subGroup: 'Belegung ', // overwrite parkApiStyles.js
-
+        subGroup: 'Belegung ', // overwrite layers.js
         visibility: 'none',
         ...layersItem
     },
     {
         id: 'parkApiItemOccupancy_LowAvailability',
         ...occupancy.LOW_AVAILABILITY,
-        subGroup: 'Belegung ', // overwrite parkApiStyles.js
+        subGroup: 'Belegung ', // overwrite layers.js
         visibility: 'none',
         ...layersItem
     },
     {
         id: 'parkApiItemOccupancy_HighAvailability',
         ...occupancy.HIGH_AVAILABILITY,
-        subGroup: 'Belegung ', // overwrite parkApiStyles.js
+        subGroup: 'Belegung ', // overwrite layers.js
         visibility: 'none',
         ...layersItem
     }

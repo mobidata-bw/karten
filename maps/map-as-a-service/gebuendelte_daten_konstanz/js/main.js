@@ -1,46 +1,26 @@
-import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
-import '../../../../src/css/layerSwitcherControl.css';
-import '../../../../src/css/global.css';
 
-import { getMap, initializedMap } from '../../../gebuendelte_daten/js/main.js';
+import { map } from '../../../gebuendelte_daten/js/main.js';
+import {shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz } from './initializeMap.js';
+import {   
+    addSources, addLayers,  
+    popups
+} from '../../../../src/js/initializeMap.js';
+import {
+    sourceKonstanzPls, layersKonstanzPls,
+    sourceKonstanzBehindertenparken, layersKonstanzBehindertenparken
+} from './layers.js';
+import {
+    popKonstanzPls,
+    popKonstanzBehindertenparken
+} from './popupContent.js';
+import { initializeControlLayers } from './controlLayers.js';
+import { layerSwitcher } from '../../../../src/js/layerSwitcherControl.js';
 
 export let layers;
 
 
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener('DOMContentLoaded', () => {
 
-    // ==============================
-    // LOAD MODULES
-    // ==============================  
-    await initializedMap;
-    const map = getMap();
-
-    
-    const [
-        { shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz },
-        {
-            sourceKonstanzPls, layersKonstanzPls,
-            sourceKonstanzBehindertenparken, layersKonstanzBehindertenparken
-        },
-        { addSources, addLayers },
-        { initializeControlLayers },
-        { popups },
-        {
-            popKonstanzPls,
-            popKonstanzBehindertenparken
-        },
-        { layerSwitcher }
-    ] = await Promise.all([
-        import('./initializeMap.js'),
-        import('./layers.js'),
-        import('../../../../src/js/layers/configSourcesLayers.js'),
-        import('./controlLayers.js'),
-        import('../../../../src/js/popups.js'),
-        import('./popupContent.js'),
-        import('../../../../src/js/layerSwitcherControl.js')
-    ]);
-
-    
     // ==============================
     // INITIALIZE MAP
     // ==============================  

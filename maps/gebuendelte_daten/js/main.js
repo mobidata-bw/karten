@@ -1,7 +1,11 @@
 import {
     map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers, basemaps, popups
+    addSources, addLayers, 
+    basemaps, 
+    popups,
+    wms
 } from '../../../src/js/initializeMap.js';
+
 import { sourceParkApiCarBuildings, layersParkApiCarBuildingsOccupancy } from '../../ipl/park-api_car_buildings/js/layers.js';
 import { sourceParkApiCarOnStreet, layersParkApiCarOnStreetOccupancy } from '../../ipl/park-api_car_on-street/js/layers.js';
 import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../ipl/park-api_bicycle/js/layers.js';
@@ -21,10 +25,9 @@ import { sourceRoadworks, layersRoadworks } from '../../ipl/roadworks/js/layers.
 import { sourceCountCar, layersCountCar } from '../../count_car/js/layers.js';
 import { sourceCountBicycle, layersCountBicycle } from '../../count_bicycle/js/layers.js';
 import { sourceFootway, sourceMarked, sourceUncontrolled, sourceZebra, layersPedestrianCrossings } from '../../pedestrian_crossings/js/layers.js';
-import { wms } from '../../../src/js/wms.js';
-import { initializeControlLayers } from './controlLayers.js';
-import { popupContent as popupContentParkApi } from '../../../src/js/layers/parkApi/parkApiPopups.js';
-import { popupContent as popupContentSharing } from '../../../src/js/layers/sharing/sharingPopups.js';
+
+import { popupContent as popupContentParkApi } from '../../../src/js/layers/parkApi/popupContent.js';
+import { popupContent as popupContentSharing } from '../../../src/js/layers/sharing/popupContent.js';
 import { popupContent as popupContentChargePoints } from '../../ipl/charge_points/js/popupContent.js';
 import { popupContent as popupContentRadvis } from '../../ipl/radvis_cycle_network/js/popupContent.js';
 import {
@@ -37,7 +40,11 @@ import { popupContent as popupContentCountCar } from '../../count_car/js/popupCo
 import { popupContent as popupContentCountBicycle } from '../../count_bicycle/js/popupContent.js';
 import { popupContent as popupContentPedestrianCrossings } from '../../pedestrian_crossings/js/popupContent.js';
 
+import { initializeControlLayers } from './controlLayers.js';
+
 export let layers, layersIpl, layersGeoJson;
+
+export { map };
 
 const basemapSources = [], basemapLayers = [];
 
@@ -56,7 +63,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // SOURCES AND LAYERS
     // ==============================
     map.on('load', () => {
-
 
         // DEFAULT LAYERS
         map.addSource('shape', shape);

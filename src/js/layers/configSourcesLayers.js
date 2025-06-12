@@ -44,6 +44,14 @@ export function addSources(map, sourceConfig) {
     }
     else if (source.type == 'geojson') {
         source.data = sourceConfig.source.data
+
+        if (source.buffer) {
+            source.buffer = sourceConfig.source.buffer
+        };
+        if (source.tolerance) {
+            source.tolerance = sourceConfig.source.tolerance
+        };
+      
         // source.cluster = true;             
         // source.clusterMaxZoom = 14;
         // source.clusterRadius = 2

@@ -1,59 +1,41 @@
-import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
-import '../../../../src/css/layerSwitcherControl.css';
-import '../../../../src/css/global.css';
 import '../css/styles.css';
+
+import {
+    map, shape, fillShape, lineShape, maplibreControls, geocoder,
+    addSources, addLayers,
+    basemaps,
+    popups
+} from '../../../../src/js/initializeMap.js';
+import { shapeRegierungsbezirke, lineShapeRegierungsbezirke } from './initializeMap.js';
+import {
+    sourceOepnvGueteklassenStuttgart,
+    sourceOepnvGueteklassenKarlsruhe,
+    sourceOepnvGueteklassenFreiburg,
+    sourceOepnvGueteklassenTuebingen,
+    layersOepnvGueteklassen
+} from './layers.js';
+import { popupContent } from './popupContent.js';
+import { initializeControlLayers } from './controlLayers.js';
 
 export let layers;
 
 const basemapSources = [], basemapLayers = [];
 
 
-window.addEventListener('DOMContentLoaded', async () => {
-
-    // ==============================
-    // LOAD MODULES
-    // ==============================  
-    const [
-        { map, shape, fillShape, lineShape, maplibreInspectControl, maplibreNavigationControl, geocoder },
-        { shapeRegierungsbezirke, lineShapeRegierungsbezirke },
-        {
-            sourceOepnvGueteklassenStuttgart,
-            sourceOepnvGueteklassenKarlsruhe,
-            sourceOepnvGueteklassenFreiburg,
-            sourceOepnvGueteklassenTuebingen,
-            layersOepnvGueteklassen
-        },
-        { addSources, addLayers },
-        { basemaps },
-        { initializeControlLayers },
-        { popups },
-        { popupContent }
-    ] = await Promise.all([
-        import('../../../../src/js/initializeMap.js'),
-        import('./initializeMap.js'),
-        import('./layers.js'),
-        import('../../../../src/js/layers/configSourcesLayers.js'),
-        import('../../../../src/js/layerSwitcherControl.js'),
-        import('./controlLayers.js'),
-        import('../../../../src/js/popups.js'),
-        import('./popupContent.js')
-    ]);
-
+window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
     // INITIALIZE MAP
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
     geocoder(map);
-    maplibreInspectControl(map);
-    maplibreNavigationControl(map);
+    maplibreControls(map);
 
 
     // ==============================
     // SOURCES AND LAYERS
     // ==============================
     map.on('load', () => {
-
 
         // DEFAULT LAYERS
         map.addSource('shapeRegierungsbezirke', shapeRegierungsbezirke);

@@ -8,7 +8,7 @@ import {
 } from '../../../../src/js/layers/configSourcesLayers.js';
 import { initializeControlLayers } from './controlLayers.js';
 import { popups } from '../../../../src/js/popups.js';
-import { popupContent as popupContentIpl } from '../../../../src/js/layers/parkApi/parkApiPopups.js';
+import { popupContent as popupContentIpl } from '../../../../src/js/layers/parkApi/popupContent.js';
 import { popupContent as popupContentDataCenter } from './popupContent.js';
 
 import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
@@ -22,7 +22,7 @@ import { formCreateTableRecords } from './formCreateTableRecords.js';
 export { layersIpl };
 export let sourcesIpl = [], sourcesDataCenter = [], layers = [], layersDataCenter = [], updateDataCenter, notificationControl;
 
-window.addEventListener('DOMContentLoaded', async () => {
+window.addEventListener('DOMContentLoaded', () => {
 
     const [
         {
@@ -51,8 +51,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     // INITIALIZE MAP
     // ==============================
     geocoder(map);
-    maplibreInspectControl(map);
-    maplibreNavigationControl(map);
+    maplibreControls(map);
+    
     map.addControl(
         notificationControl = new NotificationsControl({
             timeout: 3000,

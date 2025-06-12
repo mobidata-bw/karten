@@ -26,7 +26,7 @@ export function initializeControlLayers(map) {
     // ============================== 
     const config2 = {
         collapsed: false,
-        layers: addControlLayers(layersItem, 'Gebündelte Fahrradabstellanlagen')
+        layers: addControlLayers(layersItem, 'Schließfächer an Fahrradabstellanlagen')
     };
 
     const layerControl2 = new layerControlGrouped(config2);

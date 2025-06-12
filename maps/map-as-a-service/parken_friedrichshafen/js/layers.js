@@ -3,12 +3,12 @@
 // ==============================
 export const sourceParking = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/friedrichshafen_inventory.geojson'
+    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/friedrichshafen_inventory.geojson'   
 };
 
 export const sourceTaxi = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/taxistaende.geojson'
+    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/taxistaende.geojson'   
 };
 
 
@@ -30,7 +30,7 @@ const parking = {
 export const layersParkingOnStreet = [
     {
         id: 'parkingOnStreet1',
-        label : 'Parken mit Parkscheibe/Bewohnerparken',
+        label: 'Parken mit Parkscheibe/Bewohnerparken',
         subGroup: 'Straßenparkplätze',
         filter:
             [

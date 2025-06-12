@@ -61,7 +61,7 @@ const oepnvGueteklassen = {
         '#cacaca'
     ],
     fillOpacity: 1,
-    fillOutlineColor: 'transparent'  
+    fillOutlineColor: 'transparent'
 };
 
 

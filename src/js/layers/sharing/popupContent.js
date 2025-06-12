@@ -1,7 +1,7 @@
 import { timeStamps } from '../../timeStamps.js';
 import { popupImages } from "../../popupImages.js";
 import { sharingNoRealtimeDataPopups, sharingNoGraphQlStations, sharingNoGraphQlVehicles } from './sharingFilters.js';
-import { graphQlStation, graphQlVehicle } from './sharingGraphQl.js';
+import { graphQlStation, graphQlVehicle } from './popupGraphQl.js';
 
 
 export function popupContent(features) {

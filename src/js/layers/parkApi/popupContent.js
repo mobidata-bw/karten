@@ -1,6 +1,6 @@
 import { timeStamps } from '../../timeStamps.js';
 import { popupImages } from '../../popupImages.js';
-import { popupCanvas } from './parkApiCanvas.js';
+import { popupCanvas } from './popupCanvas.js';
 
 export function popupContent(features) {
     // console.log(features);
