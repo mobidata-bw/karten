@@ -17,5 +17,5 @@ karten-test:
 	sudo mv karten_test_vite /var/www/html/daten/public
 
 karten-%:
-	sudo rm -rf /var/www/html/daten/public/karten/$*
-	sudo mv dist/maps/$* /var/www/html/daten/public/karten
+	sudo rm -rf /var/www/html/daten/public/karten_vite/$*
+	sudo mv dist/maps/$* /var/www/html/daten/public/karten_vite
