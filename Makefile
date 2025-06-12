@@ -6,15 +6,24 @@
   karten-auswertungen-% \
   karten-map-as-a-service-%
 
+# karten:
+# 	cp -r dist karten
+# 	cd karten && mv maps/* .
+# 	rm -rf karten/maps
+# 	mv karten karten_vite
+# 	sudo rm -rf /var/www/html/daten/public/karten_vite	
+# 	sudo mv karten_vite /var/www/html/daten/public
+# 	sudo rm -rf /var/www/html/daten/public/karten_vite/map-as-a-service/data_center
+# 	sudo cp -r ../data_center /var/www/html/daten/public/karten_vite/map-as-a-service
+
 karten:
 	cp -r dist karten
 	cd karten && mv maps/* .
-	rm -rf karten/maps
-	mv karten karten_vite
-	sudo rm -rf /var/www/html/daten/public/karten_vite	
-	sudo mv karten_vite /var/www/html/daten/public
-	sudo rm -rf /var/www/html/daten/public/karten_vite/map-as-a-service/data_center
-	sudo cp -r ../data_center /var/www/html/daten/public/karten_vite/map-as-a-service
+	rm -rf karten/maps	
+	sudo rm -rf /var/www/html/daten/public/karten	
+	sudo mv karten /var/www/html/daten/public
+	sudo rm -rf /var/www/html/daten/public/karten/map-as-a-service/data_center
+	sudo cp -r ../data_center /var/www/html/daten/public/karten/map-as-a-service
 
 karten-test:
 	cp -r dist karten_test
