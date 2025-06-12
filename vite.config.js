@@ -14,14 +14,14 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        //   input: fg.sync('maps/**/index.html').reduce((entries, file) => {
-        //     const name = file.replace(/^maps\/(.+)\/index\.html$/, '$1');
-        //     entries[name] = resolve(__dirname, file);
-        //     return entries;
-        //   }, {})
-        input: {
-          charge_points: resolve(__dirname, 'maps/gebuendelte_daten/index.html')
-        }       
+        input: fg.sync('maps/**/index.html').reduce((entries, file) => {
+          const name = file.replace(/^maps\/(.+)\/index\.html$/, '$1');
+          entries[name] = resolve(__dirname, file);
+          return entries;
+        }, {})
+        // input: {
+        //   charge_points: resolve(__dirname, 'maps/gebuendelte_daten/index.html')
+        // }       
       },
       outDir: 'dist',
       emptyOutDir: true
