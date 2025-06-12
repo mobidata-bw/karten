@@ -1,4 +1,10 @@
-.PHONY: karten
+.PHONY: \
+  karten \
+  karten-test \
+  karten-% \
+  karten-ipl-% \
+  karten-auswertungen-% \
+  karten-map-as-a-service-%
 
 karten:
 	cp -r dist karten
@@ -19,3 +25,15 @@ karten-test:
 karten-%:
 	sudo rm -rf /var/www/html/daten/public/karten_vite/$*
 	sudo cp -r dist/maps/$* /var/www/html/daten/public/karten_vite/$*
+
+karten-ipl-%:
+	sudo rm -rf /var/www/html/daten/public/karten_vite/ipl/$*
+	sudo cp -r dist/maps/ipl/$* /var/www/html/daten/public/karten_vite/ipl/$*
+
+karten-auswertungen-%:
+	sudo rm -rf /var/www/html/daten/public/karten_vite/auswertungen/$*
+	sudo cp -r dist/maps/auswertungen/$* /var/www/html/daten/public/karten_vite/auswertungen/$*
+
+karten-map-as-a-service-%:
+	sudo rm -rf /var/www/html/daten/public/karten_vite/map-as-a-service/$*
+	sudo cp -r dist/maps/map-as-a-service/$* /var/www/html/daten/public/karten_vite/map-as-a-service/$*
