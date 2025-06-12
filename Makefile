@@ -1,4 +1,4 @@
-.PHONY: \
+.PHONY:
   karten \
   karten-test \
   karten-% \
@@ -13,6 +13,8 @@ karten:
 	mv karten karten_vite
 	sudo rm -rf /var/www/html/daten/public/karten_vite	
 	sudo mv karten_vite /var/www/html/daten/public
+	sudo rm -rf /var/www/html/daten/public/karten_vite/map-as-a-service/data_center
+	sudo cp -r ../data_center /var/www/html/daten/public/karten_vite/map-as-a-service
 
 karten-test:
 	cp -r dist karten_test
