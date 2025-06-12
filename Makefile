@@ -1,20 +1,10 @@
-.PHONY:
+.PHONY: \
   karten \
   karten-test \
   karten-% \
   karten-ipl-% \
   karten-auswertungen-% \
   karten-map-as-a-service-%
-
-# karten:
-# 	cp -r dist karten
-# 	cd karten && mv maps/* .
-# 	rm -rf karten/maps
-# 	mv karten karten_vite
-# 	sudo rm -rf /var/www/html/daten/public/karten_vite	
-# 	sudo mv karten_vite /var/www/html/daten/public
-# 	sudo rm -rf /var/www/html/daten/public/karten_vite/map-as-a-service/data_center
-# 	sudo cp -r ../data_center /var/www/html/daten/public/karten_vite/map-as-a-service
 
 karten:
 	cp -r dist karten
