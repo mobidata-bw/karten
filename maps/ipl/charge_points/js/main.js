@@ -1,7 +1,6 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
+    initializeMap, shape, fillShape, lineShape, maplibreControls, geocoder,
     addSources, addLayers,
-    basemaps,
     popups
 } from '../../../../src/js/initializeMap.js';
 import { sourceChargePoints, layersChargePointsPower, layersChargePointsDynamic } from './layers.js';
@@ -10,15 +9,13 @@ import { initializeControlLayers } from './controlLayers.js';
 
 export let layers;
 
-const basemapSources = [], basemapLayers = [];
-
 
 window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
     // MAP CONTROLS
-    // ==============================  
-    basemaps(map, { basemapSources, basemapLayers });
+    // ==============================    
+    const map = initializeMap();
     geocoder(map);
     maplibreControls(map);
 
@@ -27,7 +24,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // SOURCES AND LAYERS
     // ==============================
     map.on('load', () => {
-
 
         // DEFAULT LAYERS
         map.addSource('shape', shape);
@@ -52,21 +48,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // LAYER CONTROL
         // ============================== 
         initializeControlLayers(map);
-
-
-        // ==============================
-        // BASEMAP LAYERS
-        // ============================== 
-        basemapSources.push(
-            { id: 'shape', source: shape },
-            ...sources
-        );
-
-        basemapLayers.push(
-            fillShape,
-            lineShape,
-            ...layers
-        );
 
 
         // ==============================
