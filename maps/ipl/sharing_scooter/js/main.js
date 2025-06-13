@@ -4,9 +4,9 @@ import {
     basemaps,
     popups
 } from '../../../../src/js/initializeMap.js';
-import { 
+import {
     sourceSharingVehicles,
-            sourceSharingStationsScooter, layersSharingScooter
+    sourceSharingStationsScooter, layersSharingScooter
 } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/sharing/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================  
     basemaps(map, { basemapSources, basemapLayers });
     geocoder(map);
-    maplibreControls(map);    
+    maplibreControls(map);
 
 
     // ==============================

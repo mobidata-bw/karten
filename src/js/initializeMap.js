@@ -1,5 +1,3 @@
-import { basePath } from '../utils/paths.js';
-
 import 'maplibre-gl/dist/maplibre-gl.css';
 import '@maplibre/maplibre-gl-inspect/dist/maplibre-gl-inspect.css';
 import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
@@ -35,7 +33,7 @@ export const map = new maplibregl.Map({
 // ==============================
 export const shape = {
     'type': 'geojson',
-    'data': `${basePath}data/boundaries/shapesBadenWuerttemberg.geojson`
+    'data': 'https://www.mobidata-bw.de/karten_geojsons/public/data/boundaries/shapesBadenWuerttemberg.geojson'
 };
 
 export const fillShape = {
