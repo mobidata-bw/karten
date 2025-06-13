@@ -19,15 +19,13 @@ import { initializeControlLayers } from './controlLayers.js';
 
 export let layers;
 
-const basemapSources = [], basemapLayers = [];
-
 
 window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    basemaps(map, { basemapSources, basemapLayers });
+    basemaps(map);
     geocoder(map);
     maplibreControls(map);
 
@@ -63,22 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================     
         initializeControlLayers(map);
 
-
-        // ==============================
-        // BASEMAP LAYERS
-        // ============================== 
-        basemapSources.push(
-            { id: 'shape', source: shape },
-            ...sources
-        );
-
-        basemapLayers.push(
-            fillShape,
-            lineShape,
-            ...layers
-        );
-
-
+      
         // ==============================
         // POPUPS
         // ============================== 
