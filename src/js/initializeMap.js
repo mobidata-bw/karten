@@ -18,9 +18,6 @@ export { wms } from '../js/wms.js';
 // ==============================
 // MAP
 // ==============================
-let attributionControl = null;
-
-
 export function initializeMap() {
 
     const mapLibre = "<a href='https://maplibre.org/' target='_blank'>MapLibre</a>";
@@ -72,31 +69,55 @@ export function initializeMap() {
     });
 
     const styleFlipperControl = new StyleFlipperControl(mapStyles);
-   
     styleFlipperControl.setCurrentStyleCode('streets');
-
     map.addControl(styleFlipperControl, 'bottom-left');
 
-    attributionControl = new maplibregl.AttributionControl({
+    let attributionControl = new maplibregl.AttributionControl({
         compact: true,
         customAttribution: mapStyles['Straßen'].attribution
     });
     map.addControl(attributionControl);
 
-    // if (attributionControl != null) {
-    //     map.removeControl(attributionControl);
-    // }
+    map.once('styledata', () => {
 
-    // attributionControl = new maplibregl.AttributionControl({
-    //     compact: true,
-    //     customAttribution: base.attribution
-    // });
+        map.on('styledata', () => {
 
-    // map.addControl(attributionControl);
+            const currentStyle = map.getStyle().name;
+            let attribution = mapStyles['Straßen'].attribution;
 
+            switch (currentStyle) {
+                case 'Street':
+                    attribution = mapStyles['Straßen'].attribution;
+                    break;
+                case 'CycloBright':
+                    attribution = mapStyles['Fahrrad'].attribution;
+                    break;
+                case 'Dark Matter':
+                    attribution = mapStyles['Dunkelmodus'].attribution;
+                    break;
+                case 'Labeled Aerial Photos':
+                    attribution = mapStyles['Luftbilder'].attribution;
+                    break;
+                case 'bm_web_top':
+                    attribution = mapStyles['Geländemodell'].attribution;
+                    break;
+            };
+
+            setTimeout(() => {
+                map.removeControl(attributionControl);
+                attributionControl = new maplibregl.AttributionControl({
+                    compact: true,
+                    customAttribution: attribution
+                });
+                map.addControl(attributionControl);
+            }, 0);
+
+        });
+
+    });
 
     return map;
-    
+
 };
 
 

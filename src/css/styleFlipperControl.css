@@ -1,15 +1,15 @@
 #map .style-flipper-control {
 	background: rgba(255, 255, 255, 0.8);
 	border-radius: 8px;
-	padding: 8px;
+	padding: 6px;
 }
 
 #map .style-flipper-control .map-style {
-	width: 50px;
-	height: 50px;
+	width: 75px;
+	height: 75px;
 	border-radius: 4px;
 }
 
 #map .style-flipper-control .map-style.active {
-	border: 2px solid #ff6b6b;
+	border: 3px solid #ff6b6b;
 }
