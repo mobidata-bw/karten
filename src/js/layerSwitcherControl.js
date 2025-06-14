@@ -51,8 +51,8 @@ export function basemaps(map) {
                     else if (shapeLayer.type == 'fill') {
                         map.setPaintProperty(shapeLayer.id, 'fill-color', 'white');
                     }
-
                 });
+
             }
 
         }, 0);

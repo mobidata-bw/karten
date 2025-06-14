@@ -1,7 +1,6 @@
 /* ====================================================================== */
 /* https://docs.maptiler.com/sdk-js/examples/control-style-switcher/      */
 /* ====================================================================== */
-
 .maplibregl-ctrl-basemaps {
     display: flex;
     flex-direction: row;
@@ -43,4 +42,34 @@
 .maplibregl-ctrl-basemaps.closed .basemap.active {
     display: block;
     border: 2px solid #ccc;
+}
+
+
+.maplibregl-ctrl-basemaps .basemap {
+	border-radius: var(--borderRadius);
+}
+
+.maplibregl-ctrl-basemaps {
+	bottom: 0px;
+}
+
+@media (max-width: 575px) {
+	.maplibregl-ctrl-basemaps .basemap {
+		width: 45px;
+		height: 45px;
+	}
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+	.maplibregl-ctrl-basemaps .basemap {
+		width: 55px;
+		height: 55px;
+	}
+}
+
+@media (min-width: 992px) {
+	.maplibregl-ctrl-basemaps .basemap {
+		width: 75px;
+		height: 75px;
+	}
 }

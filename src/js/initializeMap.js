@@ -3,6 +3,8 @@ import '@maplibre/maplibre-gl-inspect/dist/maplibre-gl-inspect.css';
 import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
 import '../plugins/mapbox-layer-control/layerControl.min.css';
 import '../css/layerSwitcherControl.css';
+import '../css/geocoder.css';
+import '../css/layerControl.css';
 import '../css/global.css';
 
 import maplibregl from 'maplibre-gl';

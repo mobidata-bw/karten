@@ -19,7 +19,6 @@ import { initializeControlLayers } from './controlLayers.js';
 
 export let layers;
 
-const basemapSources = [], basemapLayers = [];
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -27,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    basemaps(map, { basemapSources, basemapLayers });
+    basemaps(map);
     geocoder(map);
     maplibreControls(map);
 
