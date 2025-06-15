@@ -26,7 +26,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     map.on('load', () => {
 
-
         // DEFAULT LAYERS
         map.addSource('shape', shape);
         map.addLayer(fillShape);

@@ -13,7 +13,6 @@ import { initializeControlLayers } from './controlLayers.js';
 export let layers;
 
 
-
 window.addEventListener('DOMContentLoaded', () => {   
 
     // ==============================
@@ -28,7 +27,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // SOURCES AND LAYERS
     // ==============================
     map.on('load', () => {
-
 
         // DEFAULT LAYERS
         map.addSource('shape', shape);
@@ -56,22 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         initializeControlLayers(map);
 
-
-        // ==============================
-        // BASEMAP LAYERS
-        // ============================== 
-        basemapSources.push(
-            { id: 'shape', source: shape },
-            ...sources
-        );
-
-        basemapLayers.push(
-            fillShape,
-            lineShape,
-            ...layers
-        );
-
-
+       
         // ==============================
         // POPUPS
         // ==============================       

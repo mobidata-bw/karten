@@ -23,27 +23,27 @@ const layers = {
 
 export const layersParkApiCarBuildingsOccupancy = [
     {
-        id: 'layersParkApiCarBuildingsOccupancy_NoRealtimeInformation',
+        id: 'parkApiCarBuildingsOccupancy_NoRealtimeInformation',
         ...occupancy.NO_REALTIME_INFORMATION,
         ...layers
     },
     {
-        id: 'layersParkApiCarBuildingsOccupancy_OutdatedRealtimeInformation',
+        id: 'parkApiCarBuildingsOccupancy_OutdatedRealtimeInformation',
         ...occupancy.OUTDATED_REALTIME_INFORMATION,
         ...layers
     },
     {
-        id: 'layersParkApiCarBuildingsOccupancy_VeryLowAvailabilityOrClosed',
+        id: 'parkApiCarBuildingsOccupancy_VeryLowAvailabilityOrClosed',
         ...occupancy.VERY_LOW_AVAILABILITY_OR_CLOSED,
         ...layers
     },
     {
-        id: 'layersParkApiCarBuildingsOccupancy_LowAvailability',
+        id: 'parkApiCarBuildingsOccupancy_LowAvailability',
         ...occupancy.LOW_AVAILABILITY,
         ...layers
     },
     {
-        id: 'layersParkApiCarBuildingsOccupancy_HighAvailability',
+        id: 'parkApiCarBuildingsOccupancy_HighAvailability',
         ...occupancy.HIGH_AVAILABILITY,
         ...layers
     }

@@ -27,7 +27,6 @@ import { initializeControlLayers } from './controlLayers.js';
 export let layersDatenspaziergang, layersIpl;
 
 
-
 window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
@@ -90,22 +89,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // LAYER CONTROL
         // ==============================     
         initializeControlLayers(map);
-
-
-        // ==============================
-        // BASEMAP LAYERS
-        // ============================== 
-        basemapSources.push(
-            { id: 'shape', source: shape },
-            ...sources
-        );
-
-        basemapLayers.push(
-            fillShape,
-            lineShape,
-            ...layersIpl,
-            ...layersDatenspaziergang
-        );
 
 
         // ==============================

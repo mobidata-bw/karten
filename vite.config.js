@@ -14,8 +14,8 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        input: fg.sync('maps/**/index.html').reduce((entries, file) => {
-          const name = file.replace(/^maps\/(.+)\/index\.html$/, '$1');
+        input: fg.sync('maps/**/*.html').reduce((entries, file) => {
+          const name = file.replace(/^maps\/(.+)\.html$/, '$1');
           entries[name] = resolve(__dirname, file);
           return entries;
         }, {})

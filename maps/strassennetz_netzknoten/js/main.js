@@ -17,7 +17,6 @@ import { initializeControlLayers } from './controlLayers.js';
 export let layers;
 
 
-
 window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
@@ -60,26 +59,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         // ==============================
-        // BASEMAP LAYERS
-        // ============================== 
-        basemapSources.push(
-            { id: 'shape', source: shape },
-            ...sources
-        );
-
-        basemapLayers.push(
-            fillShape,
-            lineShape,
-            ...layers
-        );
-
-
-        // ==============================
         // POPUPS
         // ============================== 
         popups(map, layersStrassennetz, popupContentStrassennetz);
         popups(map, layersNetzknoten, popupContentNetzknoten);
-
 
 
     });

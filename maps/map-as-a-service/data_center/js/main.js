@@ -1,19 +1,22 @@
 import {
+    fillShape, lineShape, maplibreControls, geocoder,
+    addSources, addLayers,
+    basemaps,
+    popups
+} from '../../../../src/js/initializeMap.js';
+import { map, shape } from './initializeMap.js';
+import { Geoman } from '@geoman-io/maplibre-geoman-free';
+import { NotificationsControl } from '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js';
+import {
     sourceParkApiCarOnStreet,
     layersParkApiCarOnStreetObjects as layersIpl
 } from '../../../ipl/park-api_car_on-street/js/layers.js';
-import {
-    addSources,
-    addLayers
-} from '../../../../src/js/layers/configSourcesLayers.js';
 import { initializeControlLayers } from './controlLayers.js';
-import { popups } from '../../../../src/js/popups.js';
 import { popupContent as popupContentIpl } from '../../../../src/js/layers/parkApi/popupContent.js';
 import { popupContent as popupContentDataCenter } from './popupContent.js';
 
-import '../../../../src/plugins/mapbox-layer-control/layerControl.min.css';
-import '../../../../src/css/layerSwitcherControl.css';
-import '../../../../src/css/global.css';
+import '@geoman-io/maplibre-geoman-free/dist/maplibre-geoman.css';
+import '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.css';
 import '../css/styles.css';
 
 import { config } from './formGlobalVariables.js';
@@ -22,37 +25,17 @@ import { formCreateTableRecords } from './formCreateTableRecords.js';
 export { layersIpl };
 export let sourcesIpl = [], sourcesDataCenter = [], layers = [], layersDataCenter = [], updateDataCenter, notificationControl;
 
+
 window.addEventListener('DOMContentLoaded', () => {
 
-    const [
-        {
-            fillShape,
-            lineShape,
-            maplibreInspectControl,
-            maplibreNavigationControl,
-            geocoder
-        },
-        { map, shape },
-        { Geoman },
-        { NotificationsControl }
-    ] = await Promise.all([
-        import('../../../../src/js/initializeMap.js'),
-        import('./initializeMap.js'),
-        import('@geoman-io/maplibre-geoman-free'),
-        import('../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js')
-    ]);
-
-    await Promise.all([
-        import('@geoman-io/maplibre-geoman-free/dist/maplibre-geoman.css'),
-        import('../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.css')
-    ]);
 
     // ==============================
     // INITIALIZE MAP
     // ==============================
+    basemaps(map);
     geocoder(map);
     maplibreControls(map);
-    
+
     map.addControl(
         notificationControl = new NotificationsControl({
             timeout: 3000,
@@ -62,10 +45,15 @@ window.addEventListener('DOMContentLoaded', () => {
         'bottom-right'
     );
 
+
+    // ==============================
+    // SOURCES AND LAYERS
+    // ==============================
     map.on('load', () => {
-        // IPL Quellen hinzufügen
+
         sourcesIpl = [{ id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }];
         sourcesIpl.forEach(src => addSources(map, src));
+
 
         // ==============================
         // UPDATE DATA CENTER
@@ -165,13 +153,36 @@ window.addEventListener('DOMContentLoaded', () => {
         map.addLayer(fillShape);
         map.addLayer(lineShape);
 
-        // POPUPS für IPL
+
+        // ==============================
+        // POPUPS
+        // ============================== 
         popups(map, layersIpl, popupContentIpl);
 
-        // GEOMAN Initialisieren für interaktive Zeichnung
+
+        // ==============================
+        // GEOMAN
+        // ============================== 
         const gmOptions = {
             settings: { controlsPosition: 'bottom-right', throttlingDelay: 100 },
-            controls: { /* deine Optionen */ }
+            controls: {
+                draw: {
+                    circle_marker: { uiEnabled: false }, polygon: { uiEnabled: false }, line: { uiEnabled: false },
+                    rectangle: { uiEnabled: false }, circle: { uiEnabled: false }, marker: { uiEnabled: false },
+                    freehand: { uiEnabled: false }, text_marker: { uiEnabled: false }
+                },
+                edit: {
+                    drag: { uiEnabled: false }, change: { uiEnabled: false }, rotate: { uiEnabled: false },
+                    cut: { uiEnabled: false }, delete: { uiEnabled: false }, split: { uiEnabled: false },
+                    scale: { uiEnabled: false }, copy: { uiEnabled: false }, union: { uiEnabled: false },
+                    difference: { uiEnabled: false }, line_simplification: { uiEnabled: false }, lasso: { uiEnabled: false }
+                },
+                helper: {
+                    shape_markers: { uiEnabled: false }, pin: { uiEnabled: false }, snapping: { uiEnabled: false },
+                    snap_guides: { uiEnabled: false }, measurements: { uiEnabled: false }, auto_trace: { uiEnabled: false },
+                    geofencing: { uiEnabled: false }, zoom_to_features: { uiEnabled: false }, click_to_edit: { uiEnabled: false }
+                }
+            }
         };
         const gm = new Geoman(map, gmOptions);
 

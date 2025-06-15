@@ -3,6 +3,7 @@ import { map } from '../../../gebuendelte_daten/js/main.js';
 import {shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz } from './initializeMap.js';
 import {   
     addSources, addLayers,  
+    basemaps,
     popups
 } from '../../../../src/js/initializeMap.js';
 import {
@@ -24,9 +25,10 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
+    basemaps(map);
+
     map.removeControl(layerSwitcher);
     map.setCenter([9.156810, 47.701872]);
-    map.setStyle('https://tiles.mobidata-bw.de/styles/streets/style.json');
     map.setMaxBounds([
         [9.034195, 47.606163],
         [9.286880, 47.780866]
@@ -72,7 +74,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         popups(map, layersKonstanzPls, popKonstanzPls);
         popups(map, layersKonstanzBehindertenparken, popKonstanzBehindertenparken);
-
 
 
     });
