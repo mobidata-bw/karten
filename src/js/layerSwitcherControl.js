@@ -1,7 +1,6 @@
 /* ====================================================================== */
 /* https://docs.maptiler.com/sdk-js/examples/control-style-switcher/      */
 /* ====================================================================== */
-import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
 import { basePath } from '../utils/paths.js';
 import maplibregl from 'maplibre-gl';
 
@@ -12,55 +11,9 @@ let attributionControl = null;
 
 export function basemaps(map) {
 
-    const sources = new Map(), layers = new Map();
-
-    const addSource = map.addSource.bind(map);
-    map.addSource = (id, src) => {
-        sources.set(id, src);
-        return addSource(id, src);
-    };
-
-    const addLayer = map.addLayer.bind(map);
-    map.addLayer = (layer) => {
-        layers.set(layer.id, layer);
-        return addLayer(layer);
-    };
-
-    map.on('styledata', () => {
-        setTimeout(() => {
-
-            for (let [id, src] of sources) {
-                if (!map.getSource(id)) map.addSource(id, src);
-            }
-            for (let layer of layers.values()) {
-                if (!map.getLayer(layer.id)) map.addLayer(layer);
-            }
-
-
-            if (map.getStyle().name == 'Dark Matter') {
-
-                const shapeLayers = map
-                    .getStyle()
-                    .layers
-                    .filter(layer => /Shape$/.test(layer.id));
-
-                shapeLayers.forEach(shapeLayer => {
-                    if (shapeLayer.type == 'line') {
-                        map.setPaintProperty(shapeLayer.id, 'line-color', 'white');
-                    }
-                    else if (shapeLayer.type == 'fill') {
-                        map.setPaintProperty(shapeLayer.id, 'fill-color', 'white');
-                    }
-                });
-
-            }
-
-        }, 0);
-    });
-
-
-
-
+    // ==============================
+    // BASEMAPS & ATTRIBUTIONS
+    // ==============================    
     const mapLibre = "<a href='https://maplibre.org/' target='_blank'>MapLibre</a>";
     const openStreetMap = "<a href='https://www.openstreetmap.org/copyright' target='_blank'>© OpenStreetMap Mitwirkende</a>";
     const mapTiler = "<a href='https://www.maptiler.com/copyright/' target='_blank'>© MapTiler</a>";
@@ -110,6 +63,9 @@ export function basemaps(map) {
     let initialStyle = Object.keys(baseMaps)[0];
 
 
+    // ==============================
+    // DEFINE CLASS
+    // ==============================  
     class layerSwitcherControl {
         constructor(options) {
             this._options = { ...options };
@@ -174,17 +130,6 @@ export function basemaps(map) {
                     map.addControl(attributionControl);
 
 
-                    // // if dark mode is selected, set white instead of black color
-                    // // fillShape and fillLine therefore must be the first two layers handed over to the array 'layers'    
-                    // if (base.title == 'Dunkelmodus') {
-                    //     layers[0].paint['fill-color'] = 'white';
-                    //     layers[1].paint['line-color'] = 'white';
-                    // } else {
-                    //     layers[0].paint['fill-color'] = 'black';
-                    //     layers[1].paint['line-color'] = 'black';
-                    // };
-
-
                 });
                 basemapContainer.classList.add('hidden');
                 this._container.appendChild(basemapContainer);
@@ -204,52 +149,63 @@ export function basemaps(map) {
 
     map.setStyle(baseMaps[initialStyle].style);
 
-    // /* Fix that with each setStyle() all layers and sources are removed */
-    // map.on('styledata', () => {
-
-    //     setTimeout(() => {
-
-    //         basemapSources.forEach((sourceConfig) => {
-
-    //             if (!map.getSource(sourceConfig.id)) {
-
-    //                 if (sourceConfig.id == 'shape') {
-    //                     map.addSource(sourceConfig.id, sourceConfig.source);
-    //                 }
-    //                 else {
-    //                     addSources(map, sourceConfig);
-    //                 }
-
-    //             }
-    //         });
-
-    //         basemapLayers.forEach((layerConfig) => {
-
-    //             if (!map.getLayer(layerConfig.id)) {
-
-    //                 // fillShape and lineShape are not added to the map through addLayers()
-    //                 if (layerConfig.id == 'fillShape' || layerConfig.id == 'lineShape') {
-    //                     map.addLayer(layerConfig);
-    //                 }
-
-    //                 else {
-    //                     addLayers(map, layerConfig);
-    //                 }
-
-    //             };
-
-    //         });
-
-    //     }, 100);
-
-    // });
-
 
     layerSwitcher = new layerSwitcherControl({ basemaps: baseMaps, initialBasemap: { id: initialStyle } });
 
     map.addControl(layerSwitcher, 'bottom-left');
 
     // map.addControl(new layerSwitcherControl({ basemaps: baseMaps, initialBasemap: { id: initialStyle } }), 'bottom-left');
+
+
+    // ==============================
+    // RE-ADD SOURCES & LAYERS
+    // ==============================  
+    const sources = new Map(), layers = new Map();
+
+    const addSource = map.addSource.bind(map);
+    map.addSource = (id, src) => {
+        sources.set(id, src);
+        return addSource(id, src);
+    };
+
+    const addLayer = map.addLayer.bind(map);
+    map.addLayer = (layer) => {
+        layers.set(layer.id, layer);
+        return addLayer(layer);
+    };
+
+    map.on('styledata', () => {
+        setTimeout(() => {
+
+            for (let [id, src] of sources) {
+                if (!map.getSource(id)) map.addSource(id, src);
+            }
+            for (let layer of layers.values()) {
+                if (!map.getLayer(layer.id)) map.addLayer(layer);
+            }
+
+
+            if (map.getStyle().name == 'Dark Matter') {
+
+                const shapeLayers = map
+                    .getStyle()
+                    .layers
+                    .filter(layer => layer.id.includes('Shape'));
+
+                shapeLayers.forEach(shapeLayer => {
+                    if (shapeLayer.type == 'line') {
+                        map.setPaintProperty(shapeLayer.id, 'line-color', 'white');
+                    }
+                    else if (shapeLayer.type == 'fill') {
+                        map.setPaintProperty(shapeLayer.id, 'fill-color', 'white');
+                    }
+                });
+
+            }
+
+        }, 0);
+    });
+
 
 
 };

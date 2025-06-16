@@ -1,9 +1,8 @@
 
 import { map } from '../../../gebuendelte_daten/js/main.js';
-import {shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz } from './initializeMap.js';
-import {   
-    addSources, addLayers,  
-    basemaps,
+import { shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz } from './initializeMap.js';
+import {
+    addSources, addLayers,
     popups
 } from '../../../../src/js/initializeMap.js';
 import {
@@ -15,7 +14,6 @@ import {
     popKonstanzBehindertenparken
 } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
-import { layerSwitcher } from '../../../../src/js/layerSwitcherControl.js';
 
 export let layers;
 
@@ -25,9 +23,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    basemaps(map);
-
-    map.removeControl(layerSwitcher);
     map.setCenter([9.156810, 47.701872]);
     map.setMaxBounds([
         [9.034195, 47.606163],
@@ -45,8 +40,14 @@ window.addEventListener('DOMContentLoaded', () => {
         map.addLayer(fillShapeKonstanz);
         map.addLayer(lineShapeKonstanz);
 
-        map.setLayoutProperty('fillShape', 'visibility', 'none');
-        map.setLayoutProperty('lineShape', 'visibility', 'none');
+        map.on('styledata', () => {
+            if (map.getLayer('fillShape')) {
+                map.setLayoutProperty('fillShape', 'visibility', 'none');
+            }
+            if (map.getLayer('lineShape')) {
+                map.setLayoutProperty('lineShape', 'visibility', 'none');
+            }
+        });
 
 
         // PROJECT LAYERS    

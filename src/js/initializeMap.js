@@ -35,8 +35,7 @@ export const map = new maplibregl.Map({
 // ==============================
 export const shape = {
     'type': 'geojson',
-    // 'data': 'https://www.mobidata-bw.de/karten_geojsons/public/data/boundaries/shapesBadenWuerttemberg.geojson'
-    'data': 'data/shapesBadenWuerttemberg.geojson'
+    'data': 'https://www.mobidata-bw.de/karten_geojsons/public/data/boundaries/shapesBadenWuerttemberg.geojson'
 };
 
 export const fillShape = {
