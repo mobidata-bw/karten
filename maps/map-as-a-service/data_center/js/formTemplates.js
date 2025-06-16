@@ -1,11 +1,10 @@
-// import { basePath } from '../../../../src/utils/paths.js';
-
-
 const parkApiCarOnStreet = `
+
+<div id="divForm">		
 
                 <div><img id="formLogo" src="/img/MobiDataBW.svg"></a><img></div>
 
-				<form id="form">
+								<form id="form">
 
 
                 <h2>Eingabemaske Straßen-Parkplätze</h2>
@@ -48,7 +47,21 @@ const parkApiCarOnStreet = `
 				<div id="divDuplicateId"></div>		
 				<div id="divDuplicateAdditionalInformation"></div>	
 
+				</form>
+
+				</div>
+
 			`;
 
+			document.addEventListener('DOMContentLoaded', () => {
+				// 1) EXISTIERENDEN Container holen – NICHT neu anlegen
+				const container = document.getElementById('divForm');
+				if (!container) {
+				  console.error('Element mit id="divForm" nicht gefunden!');
+				  return;
+				}
+			  
+				// 2) Formular-HTML hineinsetzen
+				container.innerHTML = parkApiCarOnStreet;
 
-document.getElementById('form').innerHTML = parkApiCarOnStreet;
+			});
