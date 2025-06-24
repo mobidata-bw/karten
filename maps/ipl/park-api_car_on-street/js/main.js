@@ -1,10 +1,7 @@
-import 'maplibre-gl/dist/maplibre-gl.css';
-import maplibregl from 'maplibre-gl';
-
 import '../css/styles.css';
 
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
+    createMap, shape, fillShape, lineShape, maplibreControls, geocoder,
     addSources, addLayers,
     basemaps,
     popups
@@ -21,6 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = createMap();
     basemaps(map);
     geocoder(map);
     maplibreControls(map);
