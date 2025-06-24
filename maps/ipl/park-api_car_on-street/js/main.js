@@ -23,22 +23,44 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================  
     // basemaps(map);
 
+    const CENTER = [9.0, 48.68];
+    const ZOOM   = window.innerWidth < 577 ? 6 : 7.1;
+    const BOUNDS = [
+      [5.8,  47.2],   // Southwest: [lon, lat]
+      [15.2, 55.1]    // Northeast: [lon, lat]
+    ];
+  
     const map = new maplibregl.Map({
-        container: 'map',
-        center: [9.000, 48.680],
-        zoom: window.innerWidth < 577 ? 6 : 7.1,
-        minZoom: 4,
-        maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
-        style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
-        attributionControl: false
+      container: 'map',
+      style:     'https://tiles.mobidata-bw.de/styles/streets/style.json',
+      center:    CENTER,       // initial, kann überschrieben werden
+      zoom:      ZOOM,         // initial
+      minZoom:   4,
+      maxBounds: BOUNDS,       // initial, aber nur im Konstruktor evtl. nicht früh genug
+      attributionControl: false
     });
-    geocoder(map);
+
+    function resetView() {
+        map.setCenter(CENTER);
+        map.setZoom(ZOOM);
+        map.setMaxBounds(BOUNDS);
+      }
+    
+      // 2) jedes Mal, wenn der Style (wieder) geladen ist
+      map.on('style.load', resetView);
+    
+      // 3) falls Style schon vor Listener-Registrierung geladen ist
+      if (map.isStyleLoaded && map.isStyleLoaded()) {
+        resetView();
+      }
+
+          geocoder(map);
     maplibreControls(map);
 
 
     // ==============================
     // SOURCES AND LAYERS
-    // ==============================
+    // ==============================   
     map.on('load', () => {
 
         // DEFAULT LAYERS
