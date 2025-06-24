@@ -22,12 +22,12 @@ karten-test:
 	sudo rm -rf /var/www/html/daten/public/karten_test
 	sudo mv karten_test /var/www/html/daten/public
 
-karten-vite:
-	cp -r dist karten_vite
-	cd karten_vite && mv maps/* .
-	rm -rf karten_vite/maps	
-	sudo rm -rf /var/www/html/daten/public/karten_vite
-	sudo mv karten_vite /var/www/html/daten/public
+karten-dev:
+	cp -r dist karten_dev
+	cd karten_dev && mv maps/* .
+	rm -rf karten_dev/maps	
+	sudo rm -rf /var/www/html/daten/public/karten_dev
+	sudo mv karten_dev /var/www/html/daten/public
 
 karten-%:
 	sudo rm -rf /var/www/html/daten/public/karten_vite/$*

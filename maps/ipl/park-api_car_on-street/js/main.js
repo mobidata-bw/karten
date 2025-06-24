@@ -13,12 +13,12 @@ import { initializeControlLayers } from './controlLayers.js';
 export let layers;
 
 
-window.addEventListener('DOMContentLoaded', () => {   
+window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
     // MAP CONTROLS
     // ==============================  
-    basemaps(map);
+    // basemaps(map);
     geocoder(map);
     maplibreControls(map);
 
@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         initializeControlLayers(map);
 
-       
+
         // ==============================
         // POPUPS
         // ==============================       
