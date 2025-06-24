@@ -3,12 +3,12 @@
 // ==============================
 export const sourceKonstanzPls = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/gebuendelte_daten_konstanz/konstanz_pls.geojson'
+    data: '/karten_geojsons/maps/map-as-a-service/gebuendelte_daten_konstanz/konstanz_pls.geojson'
 };
 
 export const sourceKonstanzBehindertenparken = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/gebuendelte_daten_konstanz/konstanz_behindertenparken.geojson'
+    data: '/karten_geojsons/maps/map-as-a-service/gebuendelte_daten_konstanz/konstanz_behindertenparken.geojson'
 };
 
 // ==============================

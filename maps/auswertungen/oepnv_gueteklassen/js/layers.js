@@ -73,7 +73,7 @@ export const layersOepnvGueteklassen = [
         visibility: 'none',
         legendColor: 'none',
         ...oepnvGueteklassen,
-        url: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_tuebingen.geojson'
+        url: '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_tuebingen.geojson'
     },
     {
         id: 'oepnvGueteklassenFreiburg',
@@ -82,7 +82,7 @@ export const layersOepnvGueteklassen = [
         visibility: 'none',
         legendColor: 'none',
         ...oepnvGueteklassen,
-        url: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_freiburg.geojson'
+        url: '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_freiburg.geojson'
     },
     {
         id: 'oepnvGueteklassenKarlsruhe',
@@ -91,7 +91,7 @@ export const layersOepnvGueteklassen = [
         visibility: 'none',
         legendColor: 'none',
         ...oepnvGueteklassen,
-        url: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_karlsruhe.geojson'
+        url: '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_karlsruhe.geojson'
     },
     {
         id: 'oepnvGueteklassenStuttgart',
@@ -99,6 +99,6 @@ export const layersOepnvGueteklassen = [
         source: 'sourceOepnvGueteklassenStuttgart',
         legendColor: 'none',
         ...oepnvGueteklassen,
-        url: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_stuttgart.geojson'
+        url: '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_stuttgart.geojson'
     }
 ];

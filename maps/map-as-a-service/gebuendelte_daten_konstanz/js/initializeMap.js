@@ -1,6 +1,6 @@
 export const shapeKonstanz = {
     'type': 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/gebuendelte_daten_konstanz/shapesKonstanz.geojson'
+    data: '/karten_geojsons/maps/map-as-a-service/gebuendelte_daten_konstanz/shapesKonstanz.geojson'
 };
 
 export const fillShapeKonstanz = {

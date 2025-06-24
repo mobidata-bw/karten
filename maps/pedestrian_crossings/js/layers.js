@@ -3,22 +3,22 @@
 // ==============================
 export const sourceFootway = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/pedestrian_crossings/footway.geojson'
+    data: '/karten_geojsons/maps/pedestrian_crossings/footway.geojson'
 };
 
 export const sourceMarked = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/pedestrian_crossings/marked.geojson'
+    data: '/karten_geojsons/maps/pedestrian_crossings/marked.geojson'
 };
 
 export const sourceUncontrolled = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/pedestrian_crossings/uncontrolled.geojson'
+    data: '/karten_geojsons/maps/pedestrian_crossings/uncontrolled.geojson'
 };
 
 export const sourceZebra = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/pedestrian_crossings/zebra.geojson'
+    data: '/karten_geojsons/maps/pedestrian_crossings/zebra.geojson'
 };
 
 

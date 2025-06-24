@@ -3,12 +3,12 @@
 // ==============================
 export const sourceParking = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/friedrichshafen_inventory.geojson'   
+    data: '/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/friedrichshafen_inventory.geojson'   
 };
 
 export const sourceTaxi = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/taxistaende.geojson'   
+    data: '/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/taxistaende.geojson'   
 };
 
 

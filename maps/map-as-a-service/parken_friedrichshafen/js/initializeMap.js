@@ -12,5 +12,5 @@ export const map = new maplibregl.Map({
 
 export const shape = {
     'type': 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/shapesFriedrichshafen.geojson'
+    data: '/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/shapesFriedrichshafen.geojson'
 };

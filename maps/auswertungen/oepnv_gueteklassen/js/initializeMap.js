@@ -1,6 +1,6 @@
 export const shapeRegierungsbezirke = {
     'type': 'geojson',
-    'data': 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/regierungsbezirke.geojson'
+    'data': '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/regierungsbezirke.geojson'
 };
 
 export const lineShapeRegierungsbezirke = {

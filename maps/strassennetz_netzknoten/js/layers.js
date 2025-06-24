@@ -3,7 +3,7 @@
 // ==============================
 export const sourceStrassennetz = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/strassennetz_netzknoten/BLK_Strassennetz_250130.geojson'
+    data: '/karten_geojsons/maps/strassennetz_netzknoten/BLK_Strassennetz_250130.geojson'
 };
 
 export const sourceNetzknoten = {
@@ -71,6 +71,6 @@ export const layersNetzknoten = [
         source: 'sourceNetzknoten',
         color: '#e12942',
         visibility: 'none',
-        url: 'https://www.mobidata-bw.de/karten_geojsons/maps/strassennetz_netzknoten/BLK_Netzknoten_250130.geojson'
+        url: '/karten_geojsons/maps/strassennetz_netzknoten/BLK_Netzknoten_250130.geojson'
     }
 ];

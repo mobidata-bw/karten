@@ -3,7 +3,7 @@
 // ==============================
 export const sourceCountBicycle = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/count_bicycle/fahrradzaehler_tageswerten_gesamt.geojson'
+    data: '/karten_geojsons/maps/count_bicycle/fahrradzaehler_tageswerten_gesamt.geojson'
 };
 
 

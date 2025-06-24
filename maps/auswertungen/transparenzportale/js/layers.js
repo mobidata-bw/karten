@@ -3,7 +3,7 @@
 // ==============================
 export const sourceTransparenzportale = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/transparenzportale/transparenzportale.geojson',
+    data: '/karten_geojsons/maps/auswertungen/transparenzportale/transparenzportale.geojson',
 };
 
 

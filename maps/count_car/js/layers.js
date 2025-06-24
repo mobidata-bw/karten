@@ -3,7 +3,7 @@
 // ==============================
 export const sourceCountCar = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/count_car/SVZ-Zaehlstellen_231011_augmented_SVZ2023.geojson'
+    data: '/karten_geojsons/maps/count_car/SVZ-Zaehlstellen_231011_augmented_SVZ2023.geojson'
 };
 
 

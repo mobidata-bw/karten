@@ -3,12 +3,12 @@
 // ==============================
 export const sourceRoute = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/datenspaziergang/route.geojson' 
+    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/route.geojson' 
 };
 
 export const sourceStations = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/map-as-a-service/datenspaziergang/stations.geojson'   
+    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/stations.geojson'   
 };
 
 
