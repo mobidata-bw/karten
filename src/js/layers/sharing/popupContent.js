@@ -1,3 +1,4 @@
+import { iplPath } from '../../../utils/paths.js';
 import { timeStamps } from '../../timeStamps.js';
 import { popupImages } from "../../popupImages.js";
 import { sharingNoRealtimeDataPopups, sharingNoGraphQlStations, sharingNoGraphQlVehicles } from './sharingFilters.js';
@@ -184,8 +185,8 @@ export function popupContent(features) {
     '</tr>\
             </table><table>\
                 <tr>' +
-    (!station_id ? '' : ('<td class="attContentLink"><a href="https://api.mobidata-bw.de/sharing/gbfs/' + feed_id + '/station_status" target="_blank">&#10149 GBFS-Feed<a></td>')) +
-    (!vehicle_id ? '' : ('<td class="attContentLink"><a href="https://api.mobidata-bw.de/sharing/gbfs/' + feed_id + '/free_bike_status" target="_blank">&#10149 GBFS-Feed<a></td>')) +
+    (!station_id ? '' : ('<td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/sharing/gbfs/' + feed_id + '/station_status" target="_blank">&#10149 GBFS-Feed<a></td>')) +
+    (!vehicle_id ? '' : ('<td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/sharing/gbfs/' + feed_id + '/free_bike_status" target="_blank">&#10149 GBFS-Feed<a></td>')) +
     ((!station_id || noGraphQlStations) ? '' : (`<td class="attContentLink"><a id="placeholderStation" class="photoMargin" target="_blank">&#10149 Station (GraphQL)</a></td>`)) +
     ((!vehicle_id || noGraphQlVehicles) ? '' : (`<td class="attContentLink"><a id="placeholderVehicle" class="photoMargin" target="_blank">&#10149 Fahrzeug (GraphQL)</a></td>`)) +
     '</tr>\

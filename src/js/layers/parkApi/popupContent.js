@@ -1,3 +1,4 @@
+import { iplPath } from '../../../utils/paths.js';
 import { timeStamps } from '../../timeStamps.js';
 import { popupImages } from '../../popupImages.js';
 import { popupCanvas } from './popupCanvas.js';
@@ -269,8 +270,8 @@ export function popupContent(features) {
         ((!public_url) ? '' :
             ('<td class="attContentLink"><a href="' + public_url + '" target="_blank">&#10149 Datengeber<a></td>')) +
         ((!public_url) ?
-            ('<td class="attContentLink"><a href="https://api.mobidata-bw.de/park-api/api/public/v3/parking-' + `${parking_object}s/` + id + '" target="_blank">&#10149 ParkAPI<a></td>') :
-            ('<td class="attContentLink"><a href="https://api.mobidata-bw.de/park-api/api/public/v3/parking-' + `${parking_object}s/` + id + '" class="photoMargin" target="_blank">&#10149 ParkAPI<a></td>')) +
+            ('<td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/park-api/api/public/v3/parking-' + `${parking_object}s/` + id + '" target="_blank">&#10149 ParkAPI<a></td>') :
+            ('<td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/park-api/api/public/v3/parking-' + `${parking_object}s/` + id + '" class="photoMargin" target="_blank">&#10149 ParkAPI<a></td>')) +
         ((!photo_url) ? '' : ('<td class="attContentLink"><a href="' + photo_url + '" class="photoMargin" target="_blank">&#10149 Foto<a></td>')) +
         '</tr>\
             </table>';

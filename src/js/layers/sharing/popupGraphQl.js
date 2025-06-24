@@ -1,6 +1,9 @@
+import { iplPath } from '../../../utils/paths.js';
+
+
 export async function graphQlStation(id) {
 
-  return fetch("https://api.mobidata-bw.de/sharing/graphql", {
+  return fetch(`https://${iplPath}.mobidata-bw.de/sharing/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -95,7 +98,7 @@ export async function graphQlStation(id) {
 
 export async function graphQlVehicle(id) {
 
-  return fetch("https://api.mobidata-bw.de/sharing/graphql", {
+  return fetch(`https://${iplPath}.mobidata-bw.de/sharing/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

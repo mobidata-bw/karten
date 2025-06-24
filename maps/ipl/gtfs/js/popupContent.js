@@ -1,3 +1,4 @@
+import { iplPath } from '../../../../src/utils/paths.js';
 import { popupImages } from "../../../../src/js/popupImages.js";
 
 
@@ -38,7 +39,7 @@ export function popupContentTransitStops(features) {
         '<tr>\
             </table><table>\
                 <tr>\
-                    <td colspan="2" class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/stops?stop_id=eq.' + stop_id + '" target="_blank">&#10149 Haltestelle/Station<a></td>\
+                    <td colspan="2" class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/gtfs/stops?stop_id=eq.' + stop_id + '" target="_blank">&#10149 Haltestelle/Station<a></td>\
                 </tr><tr>' +
         ((location_type == 'station') ?
             ('<td class="attContentLink"><a href="' + urlDepartures + '&name_dm=' + stopIdStation + '" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="' + urlArrivals + '&name_dm=' + stopIdStation + '" target="_blank">&#10149 Ankunftsmonitor<a></td>') :
@@ -219,8 +220,8 @@ export function popupContentTransitShapes(features) {
         )) +
         '<table>\
                 <tr>\
-                    <td class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/routes?route_id=eq.' + route_ids + '" target="_blank">&#10149 Linie<a></td>\
-                    <td class="attContentLink"><a href="https://api.mobidata-bw.de/gtfs/trips?route_id=eq.' + route_ids + '" class="photoMargin" target="_blank">&#10149 Fahrten<a></td>\
+                    <td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/gtfs/routes?route_id=eq.' + route_ids + '" target="_blank">&#10149 Linie<a></td>\
+                    <td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/gtfs/trips?route_id=eq.' + route_ids + '" class="photoMargin" target="_blank">&#10149 Fahrten<a></td>\
                 </tr>\
             </table>';
 }

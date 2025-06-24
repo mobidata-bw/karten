@@ -1,3 +1,4 @@
+import { iplPath } from '../utils/paths.js';
 import maplibregl from 'maplibre-gl';
 
 
@@ -82,7 +83,7 @@ export function wms(map, layers, popupContent) {
             const queryString = Object.keys(params)
                 .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
                 .join('&');
-            const url = `https://api.mobidata-bw.de/geoserver/ows?${queryString}`;
+            const url = `https://${iplPath}.mobidata-bw.de/geoserver/ows?${queryString}`;
 
 
             // ==============================
