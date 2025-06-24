@@ -26,7 +26,7 @@ export const map = new maplibregl.Map({
     // zoom: window.innerWidth < 577 ? 6 : 7.1,
     zoom: 7.1,
     minZoom: 4,
-    maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
+    // maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
     attributionControl: false
 });
 
