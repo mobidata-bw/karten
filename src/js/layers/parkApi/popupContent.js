@@ -95,7 +95,10 @@ export function popupContent(features) {
         "51": "Stadt Friedrichshafen",
         "52": "Stadt Freiburg im Breisgau",
         "53": "Stadt Freiburg im Breisgau",
-        "54": "Stadt Ulm"
+        "54": "Stadt Ulm",
+        "55": "Stadt Mannheim",
+        "56": "Stadt Freiburg",
+        "57": "Stadt Freiburg"
     };
 
 
