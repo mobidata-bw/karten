@@ -3,32 +3,23 @@
 // ==============================
 export const sourceMobilstationen = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/mobilstationen/Mobilstationen.geojson'
+    data: '/karten_geojsons/maps/auswertungen/mobilstationen/Mobilstationen.geojson'
 };
 export const sourceOEV = {
     type: 'geojson',
-    data: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/mobilstationen/OEV.geojson'
+    data: '/karten_geojsons/maps/auswertungen/mobilstationen/OEV.geojson'
 };
 export const sourceScooter = {
     type: 'geojson',
-    data: {
-        type: 'FeatureCollection',
-        features: []
-    }
+    data: '/karten_geojsons/maps/auswertungen/mobilstationen/Scooter.geojson'
 };
 export const sourceFahrrad = {
     type: 'geojson',
-    data: {
-        type: 'FeatureCollection',
-        features: []
-    }
+    data: '/karten_geojsons/maps/auswertungen/mobilstationen/Fahrrad.geojson'
 };
 export const sourceMIV = {
     type: 'geojson',
-    data: {
-        type: 'FeatureCollection',
-        features: []
-    }
+    data: '/karten_geojsons/maps/auswertungen/mobilstationen/MIV.geojson'
 };
 
 
@@ -126,8 +117,7 @@ export const layersScooter = [
         source: 'sourceScooter',
         color: '#5353ec',
         ...mobilitaetsAngebote,
-        ...ohneMS,
-        url: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/mobilstationen/Scooter.geojson'
+        ...ohneMS    
     }
 ];
 
@@ -139,8 +129,7 @@ export const layersFahrrad = [
         source: 'sourceFahrrad',
         color: '#b9d8ae',
         ...mobilitaetsAngebote,
-        ...ohneMS,
-        url: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/mobilstationen/Fahrrad.geojson'
+        ...ohneMS
     }
 ];
 
@@ -152,7 +141,6 @@ export const layersMIV = [
         source: 'sourceMIV',
         color: '#fbe870',
         ...mobilitaetsAngebote,
-        ...ohneMS,
-        url: 'https://www.mobidata-bw.de/karten_geojsons/maps/auswertungen/mobilstationen/MIV.geojson'
+        ...ohneMS      
     }
 ];

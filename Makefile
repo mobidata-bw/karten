@@ -19,9 +19,15 @@ karten-test:
 	cp -r dist karten_test
 	cd karten_test && mv maps/* .
 	rm -rf karten_test/maps
-	mv karten_test karten_test
 	sudo rm -rf /var/www/html/daten/public/karten_test
 	sudo mv karten_test /var/www/html/daten/public
+
+karten-vite:
+	cp -r dist karten_vite
+	cd karten_vite && mv maps/* .
+	rm -rf karten_vite/maps	
+	sudo rm -rf /var/www/html/daten/public/karten_vite
+	sudo mv karten_vite /var/www/html/daten/public
 
 karten-%:
 	sudo rm -rf /var/www/html/daten/public/karten_vite/$*
