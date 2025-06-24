@@ -4,7 +4,7 @@ import { popupImages } from '../../popupImages.js';
 import { popupCanvas } from './popupCanvas.js';
 
 export function popupContent(features) {
-    // console.log(features);
+    console.log(features);
 
     popupCanvas(features);
 

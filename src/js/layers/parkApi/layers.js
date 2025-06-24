@@ -29,7 +29,9 @@ export const occupancy = {
         subGroup: 'Belegung',
         filter:
             [
-                '==', ['get', 'realtime_data_outdated'], true
+                'all',
+                ['==', ['get', 'realtime_data_outdated'], true],
+                ['!=', ['get', 'source_id'], 55] // Mannheim exception                
             ],
         color: '#cacaca'
     },
@@ -64,13 +66,22 @@ export const occupancy = {
                             ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
                         ]
                     ],
-                    ['!=', ['get', 'realtime_data_outdated'], true]
+                    [
+                        'any',
+                        ['==', ['get', 'realtime_data_outdated'], false],
+                        ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                    ]
                 ],
                 /* PARKING SPOT */
                 [
                     'all',
                     ['==', ['get', 'parking_object'], 'spot'],
-                    ['==', ['get', 'realtime_status'], 'TAKEN']
+                    ['==', ['get', 'realtime_status'], 'TAKEN'],
+                    [
+                        'any',
+                        ['==', ['get', 'realtime_data_outdated'], false],
+                        ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                    ]
                 ]
             ],
         color: '#ed0000'
@@ -111,7 +122,11 @@ export const occupancy = {
                     ]
                 ],
                 ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
-                ['!=', ['get', 'realtime_data_outdated'], true]
+                [
+                    'any',
+                    ['==', ['get', 'realtime_data_outdated'], false],
+                    ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                ]
             ],
         color: '#dfab27'
     },
@@ -138,13 +153,22 @@ export const occupancy = {
                         0.2
                     ],
                     ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
-                    ['!=', ['get', 'realtime_data_outdated'], true]
+                    [
+                        'any',
+                        ['==', ['get', 'realtime_data_outdated'], false],
+                        ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                    ]
                 ],
                 /* PARKING SPOT */
                 [
                     'all',
                     ['==', ['get', 'parking_object'], 'spot'],
-                    ['==', ['get', 'realtime_status'], 'AVAILABLE']
+                    ['==', ['get', 'realtime_status'], 'AVAILABLE'],
+                    [
+                        'any',
+                        ['==', ['get', 'realtime_data_outdated'], false],
+                        ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                    ]
                 ],
             ],
         color: '#059b02'
