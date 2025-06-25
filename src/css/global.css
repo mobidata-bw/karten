@@ -16,6 +16,11 @@ body {
 	inset: 0;
 }
 
+.maplibregl-canvas {
+	width: 100% !important;
+	height: 100% !important;
+}
+
 :root {
 	--primaryColor: #006eaf;
 	--secondaryColor: #ffcc00;
