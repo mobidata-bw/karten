@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================  
-    // basemaps(map);
+    basemaps(map);
     geocoder(map);
     maplibreControls(map);
 
