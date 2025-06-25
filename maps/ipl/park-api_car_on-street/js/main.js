@@ -1,10 +1,10 @@
 import '../css/styles.css';
 
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers  
 } from '../../../../src/js/initializeMap.js';
 import { sourceParkApiCarOnStreet, layersParkApiCarOnStreetOccupancy, layersParkApiCarOnStreetObjects, layersParkApiCarOnStreetSpecialParking } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/parkApi/popupContent.js';
@@ -15,18 +15,17 @@ export let layers;
 
 window.addEventListener('DOMContentLoaded', () => {
 
-        // ==============================
+    // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = initializeMap();   
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
 
-  
+
     // ==============================
     // SOURCES AND LAYERS
     // ==============================
-    map.on('load', () => {            
+    map.on('load', () => {
 
         // DEFAULT LAYERS
         map.addSource('shape', shape);

@@ -17,81 +17,36 @@ export { popups } from '../js/popups.js';
 export { wms } from '../js/wms.js';
 
 
-// ==============================
-// MAP
-// ==============================
-export const map = new maplibregl.Map({
-    container: 'map',
-    center: [9.000, 48.680],
-    zoom: window.innerWidth < 577 ? 6 : 7.1,
-    minZoom: 4,
-    maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
-    attributionControl: false,
-    pixelRatio: 1
-});
 
+export function initializeMap() {
 
-// ==============================
-// SOURCES AND LAYERS
-// ==============================
-export const shape = {
-    'type': 'geojson',
-    'data': '/karten_geojsons/public/data/boundaries/shapesBadenWuerttemberg.geojson'
-};
+    // ==============================
+    // MAP
+    // ==============================
+    const map = new maplibregl.Map({
+        container: 'map',
+        center: [9.000, 48.680],
+        zoom: window.innerWidth < 577 ? 6 : 7.1,
+        minZoom: 4,
+        maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
+        attributionControl: false,
+        pixelRatio: 1
+    });
 
-export const fillShape = {
-    'id': 'fillShape',
-    'type': 'fill',
-    'source': 'shape',
-    'paint': {
-        'fill-color': 'black',
-        'fill-opacity': 0.1,
-    }
-};
+    map.once('style.load', () => {
+        // zwingt MapLibre, die echte CSS-Breite des #map-Containers neu zu messen
+        map.resize();
+        // und setzt anschließend nochmals exakt Dein Wunsch-Center/Zoom
+        map.jumpTo({
+            center: [9.0, 48.68],
+            zoom: window.innerWidth < 577 ? 6 : 7.1
+        });
+    });
+    
 
-export const lineShape = {
-    'id': 'lineShape',
-    'type': 'line',
-    'source': 'shape',
-    'paint': {
-        'line-color': 'black',
-        'line-width': 2
-    }
-};
-
-
-// ==============================
-// MAP CONTROLS
-// ==============================
-export function maplibreControls(map) {
-
-    map.addControl(
-        new MaplibreInspect({
-            popup: new maplibregl.Popup({
-                closeButton: false,
-                closeOnClick: false
-            })
-        }),
-        'top-left'
-    );
-
-    map.addControl(
-        new maplibregl.NavigationControl({
-            showZoom: window.innerWidth < 577 ? false : true,
-            showCompass: true,
-            visualizePitch: true,
-        }),
-        'top-left'
-    );
-
-};
-
-
-// ==============================
-// GEOCODER
-// ==============================
-export function geocoder(map) {
-
+    // ==============================
+    // GEOCODER
+    // ==============================
     const geocoderApi = {
         forwardGeocode: async (config) => {
             const features = [];
@@ -154,4 +109,59 @@ export function geocoder(map) {
 
     );
 
+
+    // ==============================
+    // MAP CONTROLS
+    // ==============================
+    map.addControl(
+        new MaplibreInspect({
+            popup: new maplibregl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            })
+        }),
+        'top-left'
+    );
+    map.addControl(
+        new maplibregl.NavigationControl({
+            showZoom: window.innerWidth < 577 ? false : true,
+            showCompass: true,
+            visualizePitch: true,
+        }),
+        'top-left'
+    );
+
+
+
+    return map;
+
+};
+
+
+// ==============================
+// SOURCES AND LAYERS
+// ==============================
+export const shape = {
+    'type': 'geojson',
+    'data': '/karten_geojsons/public/data/boundaries/shapesBadenWuerttemberg.geojson'
+};
+
+export const fillShape = {
+    'id': 'fillShape',
+    'type': 'fill',
+    'source': 'shape',
+    'paint': {
+        'fill-color': 'black',
+        'fill-opacity': 0.1,
+    }
+};
+
+export const lineShape = {
+    'id': 'lineShape',
+    'type': 'line',
+    'source': 'shape',
+    'paint': {
+        'line-color': 'black',
+        'line-width': 2
+    }
 };
