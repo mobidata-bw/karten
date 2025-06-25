@@ -1,7 +1,7 @@
 import '../css/styles.css';
 
 import {
-    createMap, shape, fillShape, lineShape, maplibreControls, geocoder,
+    map, shape, fillShape, lineShape, maplibreControls, geocoder,
     addSources, addLayers,
     basemaps,
     popups
@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================  
-    const map = createMap();
     basemaps(map);
     geocoder(map);
     maplibreControls(map);
@@ -28,6 +27,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // SOURCES AND LAYERS
     // ==============================
     map.on('load', () => {
+
+        map.panTo([9.000, 48.680]);
 
         // DEFAULT LAYERS
         map.addSource('shape', shape);
