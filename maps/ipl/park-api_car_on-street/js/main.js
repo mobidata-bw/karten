@@ -30,7 +30,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // map.jumpTo({ center: [9, 48.68], zoom: 7.1 });
         // map.panTo([9, 48.68]);
-        map.setCenter([9,48.68]);     
+
+        // map.setCenter([9,48.68]);     
      
 
         // DEFAULT LAYERS

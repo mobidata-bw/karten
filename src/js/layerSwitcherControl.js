@@ -147,7 +147,7 @@ export function basemaps(map) {
         }
     };
 
-    map.setStyle(baseMaps[initialStyle].style);
+    // map.setStyle(baseMaps[initialStyle].style); // AUSKOMMENTIERT
 
 
     layerSwitcher = new layerSwitcherControl({ basemaps: baseMaps, initialBasemap: { id: initialStyle } });

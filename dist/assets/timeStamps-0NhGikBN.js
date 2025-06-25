@@ -1,1 +1,0 @@
-function n(e){const i=e.replace(" ","T").replace(/(\.\d{3})\d+/,"$1")+"Z",t=new Date(i),d=t.toLocaleDateString("de-DE",{day:"2-digit",month:"2-digit",year:"2-digit"}),o=t.toLocaleTimeString("de-DE",{hour:"2-digit",minute:"2-digit",second:"2-digit"});return{date:d,time:o}}export{n as t};
