@@ -23,25 +23,25 @@ export function initializeMap() {
     // ==============================
     // MAP
     // ==============================
+    const center = [9.000, 48.680];
+    const zoom = window.innerWidth < 577 ? 6 : 7.1;
+
     const map = new maplibregl.Map({
         container: 'map',
         style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
-        center: [9.000, 48.680],
-        zoom: window.innerWidth < 577 ? 6 : 7.1,
+        center: center,
+        zoom: zoom,
         minZoom: 4,
         maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
         attributionControl: false,
         pixelRatio: 1
     });
 
-    map.once('idle', () => {
+    // map.once('idle', () => {
+    map.once('load', () => {
         map.resize();
-        map.jumpTo({
-            center: [9.000, 48.68],
-            zoom: window.innerWidth < 577 ? 6 : 7.1
-        });
-
-        // map.getContainer().style.visibility = 'visible';
+        map.jumpTo({ center: center, zoom: zoom });
+        map.getContainer().style.visibility = 'visible';
     });
 
 
