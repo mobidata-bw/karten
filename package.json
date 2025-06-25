@@ -5,8 +5,7 @@
   "description": "MobiData BW® Karten mit Vite und MapLibre",
   "packageManager": "npm@9.6.7",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "vite --port 5173 --mode vite",
+    "liveserver": "vite --port 5173 --mode liveserver",
     "build": "vite build",
     "build:test": "vite build --mode test",
     "build:dev": "vite build --mode development"

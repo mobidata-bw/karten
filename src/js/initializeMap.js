@@ -34,14 +34,14 @@ export function initializeMap() {
         pixelRatio: 1
     });
 
-    map.once('load', () => {
+    map.once('idle', () => {
         map.resize();
         map.jumpTo({
             center: [9.000, 48.68],
             zoom: window.innerWidth < 577 ? 6 : 7.1
         });
 
-        map.getContainer().style.visibility = 'visible';
+        // map.getContainer().style.visibility = 'visible';
     });
 
 
