@@ -14,6 +14,7 @@ body {
 #map {
 	position: absolute;
 	inset: 0;
+	visibility: hidden; /* hide until map is initialized */
 }
 
 :root {

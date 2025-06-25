@@ -40,6 +40,8 @@ export function initializeMap() {
             center: [9.000, 48.68],
             zoom: window.innerWidth < 577 ? 6 : 7.1
         });
+
+        map.getContainer().style.visibility = 'visible';
     });
 
 
