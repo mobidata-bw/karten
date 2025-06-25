@@ -27,10 +27,9 @@ export const map = new maplibregl.Map({
     // style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
     minZoom: 4,
     maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
-    attributionControl: false
+    attributionControl: false,
+    pixelRatio: 1
 });
-
-map.setPixelRatio(1);
 
 
 // ==============================
