@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     map.on('load', () => {
 
-        map.panTo([9.000, 48.680]);
+        map.jumpTo({ center: [9, 48.68], zoom: 7.1 });
 
         // DEFAULT LAYERS
         map.addSource('shape', shape);
