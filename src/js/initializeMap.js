@@ -25,6 +25,7 @@ export function initializeMap() {
     // ==============================
     const map = new maplibregl.Map({
         container: 'map',
+        style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
         center: [9.000, 48.680],
         zoom: window.innerWidth < 577 ? 6 : 7.1,
         minZoom: 4,
@@ -42,7 +43,7 @@ export function initializeMap() {
             zoom: window.innerWidth < 577 ? 6 : 7.1
         });
     });
-    
+
 
     // ==============================
     // GEOCODER

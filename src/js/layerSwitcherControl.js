@@ -147,14 +147,12 @@ export function basemaps(map) {
         }
     };
 
-    map.setStyle(baseMaps[initialStyle].style);
+    // map.setStyle(baseMaps[initialStyle].style);
 
 
     layerSwitcher = new layerSwitcherControl({ basemaps: baseMaps, initialBasemap: { id: initialStyle } });
 
     map.addControl(layerSwitcher, 'bottom-left');
-
-    // map.addControl(new layerSwitcherControl({ basemaps: baseMaps, initialBasemap: { id: initialStyle } }), 'bottom-left');
 
 
     // ==============================
