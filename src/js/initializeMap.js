@@ -34,12 +34,10 @@ export function initializeMap() {
         pixelRatio: 1
     });
 
-    map.once('style.load', () => {
-        // zwingt MapLibre, die echte CSS-Breite des #map-Containers neu zu messen
+    map.once('load', () => {
         map.resize();
-        // und setzt anschließend nochmals exakt Dein Wunsch-Center/Zoom
         map.jumpTo({
-            center: [9.0, 48.68],
+            center: [9.000, 48.68],
             zoom: window.innerWidth < 577 ? 6 : 7.1
         });
     });
