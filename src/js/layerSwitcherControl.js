@@ -20,18 +20,18 @@ export function basemaps(map) {
     const lgl = "<a href='https://www.lgl-bw.de/' target='_blank'>© LGL-BW</a>";
 
     const baseMaps = {
-        // 'streets': {
-        //     img: `${basePath}img/basemaps/streets.png`,
-        //     style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
-        //     title: 'Straßen',
-        //     attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
-        // },
-        // 'bicycle': {
-        //     img: `${basePath}img/basemaps/bicycle.png`,
-        //     style: 'https://tiles.mobidata-bw.de/styles/bicycle/style.json',
-        //     title: 'Fahrrad',
-        //     attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
-        // },
+        'streets': {
+            img: `${basePath}img/basemaps/streets.png`,
+            style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
+            title: 'Straßen',
+            attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
+        },
+        'bicycle': {
+            img: `${basePath}img/basemaps/bicycle.png`,
+            style: 'https://tiles.mobidata-bw.de/styles/bicycle/style.json',
+            title: 'Fahrrad',
+            attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
+        },
         'darkmatter': {
             img: `${basePath}img/basemaps/darkmatter.png`,
             style: 'https://tiles.mobidata-bw.de/styles/darkmatter/style.json',
@@ -44,19 +44,18 @@ export function basemaps(map) {
             title: 'Luftbild',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} ${lgl} </div>`
         },
-        // 'basemap': {
-        //     img: `${basePath}img/basemaps/terrain.png`,
-        //     style: 'https://sgx.geodatenzentrum.de/gdz_basemapde_vektor/styles/bm_web_top.json',
-        //     title: 'Geländemodell',
-        //     attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} </div>`
-        // }
+        'basemap': {
+            img: `${basePath}img/basemaps/terrain.png`,
+            style: 'https://sgx.geodatenzentrum.de/gdz_basemapde_vektor/styles/bm_web_top.json',
+            title: 'Geländemodell',
+            attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} </div>`
+        }
     };
 
     /* Default Attribution Control */
     attributionControl = new maplibregl.AttributionControl({
         compact: true,
-        // customAttribution: baseMaps['streets'].attribution
-        customAttribution: baseMaps['darkmatter'].attribution
+        customAttribution: baseMaps['streets'].attribution
     });
     map.addControl(attributionControl);
 

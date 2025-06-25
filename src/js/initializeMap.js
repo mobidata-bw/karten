@@ -22,7 +22,7 @@ export { wms } from '../js/wms.js';
 // ==============================
 export const map = new maplibregl.Map({
     container: 'map',
-    center: [9.000, 48.680],
+    // center: [9.000, 48.680],
     zoom: window.innerWidth < 577 ? 6 : 7.1,
     // style: 'https://tiles.mobidata-bw.de/styles/darkmatter/style.json',
     minZoom: 4,
