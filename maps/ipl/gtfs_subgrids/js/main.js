@@ -1,8 +1,8 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,   
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { sourceTransitShapes, layersTransitShapes } from './layers.js';
 import { popupContentTransitShapes as popupContent } from '../../gtfs/js/popupContent.js';
@@ -13,12 +13,11 @@ export let layers;
 
 window.addEventListener('DOMContentLoaded', () => {
 
-     // ==============================
+    // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = initializeMap();
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);  
 
 
     // ==============================
@@ -47,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         initializeControlLayers(map);
 
-     
+
         // ==============================
         // POPUPS
         // ==============================       

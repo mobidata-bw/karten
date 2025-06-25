@@ -1,15 +1,13 @@
 import {
-    fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import {
-    map, shape
-} from './initializeMap.js';
+import { shape } from './initializeMap.js';
 import {
     sourceRoute, layersRoute,
-    sourceStations, layersStations    
+    sourceStations, layersStations
 } from './layers.js';
 import { sourceChargePoints, layersChargePointsDynamic } from '../../../ipl/charge_points/js/layers.js';
 import { sourceSharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
@@ -32,9 +30,12 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
+    const map = initializeMap({
+        center: [9.1798, 48.7759],
+        zoom: window.innerWidth < 577 ? 12.5 : 14.5,
+        minZoom: 12
+    });
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
 
 
     // ==============================

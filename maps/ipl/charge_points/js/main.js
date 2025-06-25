@@ -1,8 +1,8 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,   
     popups,
-    basemaps
+    basemaps,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { sourceChargePoints, layersChargePointsPower, layersChargePointsDynamic } from './layers.js';
 import { popupContent } from './popupContent.js';
@@ -16,9 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================    
-    basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
+    const map = initializeMap();   
+    basemaps(map);  
 
 
     // ==============================

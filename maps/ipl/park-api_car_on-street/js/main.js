@@ -18,8 +18,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================  
-    const map = initializeMap();   
-    basemaps(map);
+    const map = initializeMap();  
+    basemaps(map);  
 
 
     // ==============================

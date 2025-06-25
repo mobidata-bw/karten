@@ -1,10 +1,10 @@
 import '../css/styles.css';
 
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+   initializeMap, shape, fillShape, lineShape, 
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../src/js/initializeMap.js';
 import { sourceCountCar, layersCountCar } from './layers.js';
 import { popupContent } from './popupContent.js';
@@ -18,9 +18,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
+    const map = initializeMap();  
+    basemaps(map);  
 
 
     // ==============================

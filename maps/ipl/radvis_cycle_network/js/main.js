@@ -1,8 +1,8 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { sourceRadvis, layersRadvis } from './layers.js';
 import { popupContent } from './popupContent.js';
@@ -17,9 +17,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // MAP CONTROLS
     // ==============================  
     // basemaps(map);
-    basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
+    const map = initializeMap();   
+    basemaps(map);  
 
 
     // ==============================
@@ -52,11 +51,11 @@ window.addEventListener('DOMContentLoaded', () => {
             initializeControlLayers(map);
         });
 
-      
+
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layers, popupContent);            
+        popups(map, layers, popupContent);
 
 
     });

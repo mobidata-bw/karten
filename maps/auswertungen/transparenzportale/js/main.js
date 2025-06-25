@@ -1,8 +1,8 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { sourceTransparenzportale, layersTransparenzportale } from './layers.js';
 import { popupContent } from './popupContent.js';
@@ -16,9 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
+    const map = initializeMap();
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
 
 
     // ==============================

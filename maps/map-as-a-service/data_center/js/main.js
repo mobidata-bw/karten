@@ -1,10 +1,10 @@
 import {
-    fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { map, shape } from './initializeMap.js';
+import { shape } from './initializeMap.js';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
 import { NotificationsControl } from '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js';
 import {
@@ -32,9 +32,13 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================
+    const map = initializeMap({
+        center: [8.940, 48.599],
+        zoom: 12,
+        minZoom: 10
+    });
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
+
 
     map.addControl(
         notificationControl = new NotificationsControl({

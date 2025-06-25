@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+	<meta charset="utf-8" />
+	<title>MobiData BW® - Data Center</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <script type="module" crossorigin src="/karten_dev/assets/map-as-a-service/data_center/erfassung-BRNJ38Ll.js"></script>
+  <link rel="modulepreload" crossorigin href="/karten_dev/assets/addControlLayers-CNKtgh8B.js">
+  <link rel="modulepreload" crossorigin href="/karten_dev/assets/timeStamps-0NhGikBN.js">
+  <link rel="modulepreload" crossorigin href="/karten_dev/assets/popupImages-DCqawI2Q.js">
+  <link rel="modulepreload" crossorigin href="/karten_dev/assets/popupContent-CVfIe296.js">
+  <link rel="modulepreload" crossorigin href="/karten_dev/assets/layers-Dk_NnXY2.js">
+  <link rel="modulepreload" crossorigin href="/karten_dev/assets/popups-Co44ZkH2.js">
+  <link rel="stylesheet" crossorigin href="/karten_dev/assets/addControlLayers-Cpv8i_xA.css">
+  <link rel="stylesheet" crossorigin href="/karten_dev/assets/erfassung-qGsZM9oI.css">
+  <link rel="stylesheet" crossorigin href="/karten_dev/assets/styles-y6dRxP_G.css">
+</head>
+
+<body>
+	<a href="https://www.mobidata-bw.de" target="_blank">
+		<div id="MobiDataBW">
+			<img src="/karten_dev/img/MobiDataBW.svg" alt="MobiData BW®" />
+		</div>
+	</a>
+
+
+
+	<div id="divHtml" style="width:100%">
+
+		<div id="divMap" style="width:65%">
+
+			<div id="map" style="position:absolute;top:0;left:0;margin:0;padding:0"></div>
+
+		</div>
+
+		<div id="divSheets" style="width:35%">
+
+			<form id="form"></form>
+
+			<div id="divForm"></div>
+
+			<script>
+				const buttons = `		
+
+			<div id="divSave"></div>			
+
+			<a id="DataCenterButton" 
+					href="https://app.nocodb.com/#/whm32cms/pdfcfogveoqxj22" 
+					target="_blank">
+					<div class="container">
+						Meine Daten
+					</div>
+			</a>`
+
+				document.getElementById('form').innerHTML += buttons;
+
+			</script>
+
+
+
+			</form>
+
+		</div>
+
+	</div>
+
+
+</body>
+
+</html>

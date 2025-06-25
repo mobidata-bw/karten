@@ -14,14 +14,14 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-      //   input: fg.sync('maps/**/*.html').reduce((entries, file) => {
-      //     const name = file.replace(/^maps\/(.+)\.html$/, '$1');
-      //     entries[name] = resolve(__dirname, file);
-      //     return entries;
-      //   }, {})
-        input: {
-          parkApiCarOnStreet: resolve(__dirname, 'maps/ipl/park-api_car_on-street/index.html')
-        }       
+        input: fg.sync('maps/**/*.html').reduce((entries, file) => {
+          const name = file.replace(/^maps\/(.+)\.html$/, '$1');
+          entries[name] = resolve(__dirname, file);
+          return entries;
+        }, {})
+        // input: {
+        //   parkApiCarOnStreet: resolve(__dirname, 'maps/ipl/park-api_car_on-street/index.html')
+        // }       
       },
       outDir: 'dist',
       emptyOutDir: true

@@ -1,8 +1,8 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,
     basemaps,
-    wms
+    wms,
+    addSources, addLayers,
 } from '../../../../src/js/initializeMap.js';
 import { sourceRoadworks, layersRoadworks } from './layers.js';
 import { popupContent } from './popupContent.js';
@@ -12,13 +12,12 @@ export let layers;
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    
+
     // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = initializeMap();
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);   
 
 
     // ==============================

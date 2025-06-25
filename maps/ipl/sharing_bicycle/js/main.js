@@ -1,12 +1,12 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { 
+import {
     sourceSharingVehicles,
-    sourceSharingStationsBicycle, layersSharingBicycle 
+    sourceSharingStationsBicycle, layersSharingBicycle
 } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/sharing/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -15,14 +15,13 @@ export let layers;
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  
+
     // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = initializeMap();
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
-    
+
 
     // ==============================
     // SOURCES AND LAYERS

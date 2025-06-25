@@ -1,8 +1,8 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,    
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
     sourceParkApiBicycle, layersParkApiBicycleOccupancy, layersParkApiBicycleTypes,
@@ -15,13 +15,12 @@ export let layers, layersBicycle, layersItem;
 
 
 window.addEventListener('DOMContentLoaded', () => {
-   
+
     // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = initializeMap();
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
 
 
     // ==============================
@@ -58,7 +57,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // LAYER CONTROL
         // ============================== 
         initializeControlLayers(map);
-     
+
 
         // ==============================
         // POPUPS

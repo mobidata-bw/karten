@@ -1,12 +1,10 @@
 import {
-    fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import {
-    map, shape
-} from './initializeMap.js';
+import { shape } from './initializeMap.js';
 import {
     sourceParking, layersParkingOnStreet, layersParkingOther,
     sourceTaxi, layersTaxi
@@ -25,9 +23,12 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
+    const map = initializeMap({
+        center: [9.479215, 47.655577],
+        zoom: window.innerWidth < 577 ? 12.5 : 14.5,
+        minZoom: 12
+    });
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
 
 
     // ==============================
@@ -61,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================     
         initializeControlLayers(map);
 
-      
+
         // ==============================
         // POPUPS
         // ============================== 

@@ -1,9 +1,9 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers, 
-    basemaps, 
+    initializeMap, map, shape, fillShape, lineShape,
+    basemaps,
     popups,
-    wms
+    wms,
+    addSources, addLayers
 } from '../../../src/js/initializeMap.js';
 
 import { sourceParkApiCarBuildings, layersParkApiCarBuildingsOccupancy } from '../../ipl/park-api_car_buildings/js/layers.js';
@@ -48,13 +48,12 @@ export { map };
 
 
 window.addEventListener('DOMContentLoaded', () => {
-  
+
     // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = initializeMap();
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
 
 
     // ==============================
@@ -138,7 +137,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // LAYER CONTROL
         // ============================== 
         initializeControlLayers(map);
-       
+
 
         // ==============================
         // POPUPS

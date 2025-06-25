@@ -1,8 +1,8 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
     sourceSharingVehicles,
@@ -19,9 +19,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================  
-    basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
+    const map = initializeMap();  
+    basemaps(map);  
 
 
     // ==============================

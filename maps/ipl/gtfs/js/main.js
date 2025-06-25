@@ -1,11 +1,11 @@
 import '../css/styles.css';
 
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,
     basemaps,
     popups,
-    wms
+    wms,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
     sourceTransitStops, layersTransitStops,
@@ -27,9 +27,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = initializeMap();
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
 
 
     // ==============================
@@ -68,7 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // LAYER CONTROL
         // ==============================
         initializeControlLayers(map);
-      
+
 
         // ==============================
         // POPUPS

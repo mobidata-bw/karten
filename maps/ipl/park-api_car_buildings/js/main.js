@@ -1,8 +1,8 @@
 import {
-    map, shape, fillShape, lineShape, maplibreControls, geocoder,
-    addSources, addLayers,
+    initializeMap, shape, fillShape, lineShape,
     basemaps,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { sourceParkApiCarBuildings, layersParkApiCarBuildingsOccupancy, layersParkApiCarBuildingsObjects, layersParkApiCarBuildingsTypes, layersParkApiCarBuildingsSpecialParking } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/parkApi/popupContent.js';
@@ -16,9 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================  
+    const map = initializeMap();
     basemaps(map);
-    geocoder(map);
-    maplibreControls(map);
 
 
     // ==============================
@@ -52,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // LAYER CONTROL
         // ============================== 
         initializeControlLayers(map);
-      
+
 
         // ==============================
         // POPUPS
