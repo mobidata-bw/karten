@@ -30,6 +30,8 @@ export const map = new maplibregl.Map({
     attributionControl: false
 });
 
+map.setPixelRatio(1);
+
 
 // ==============================
 // SOURCES AND LAYERS
