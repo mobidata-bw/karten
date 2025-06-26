@@ -20,17 +20,17 @@ export let layers;
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    // ==============================
-    // INITIALIZE MAP
-    // ==============================  
-    map.setCenter([9.156810, 47.701872]);
-    map.setMaxBounds([
-        [9.034195, 47.606163],
-        [9.286880, 47.780866]
-    ]);
-
-
     map.on('load', () => {
+
+        // ==============================
+        // INITIALIZE MAP
+        // ==============================  
+        map.setCenter([9.156810, 47.701872]);
+        map.setMaxBounds([
+            [9.034195, 47.606163],
+            [9.286880, 47.780866]
+        ]);
+
 
         // ==============================
         // SOURCES AND LAYERS
@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-       
+
         const sources = [
             { id: 'sourceKonstanzPls', source: sourceKonstanzPls },
             { id: 'sourceKonstanzBehindertenparken', source: sourceKonstanzBehindertenparken }

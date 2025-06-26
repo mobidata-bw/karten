@@ -11,6 +11,7 @@ import {
 import { sourceChargePoints, layersChargePointsDynamic } from '../../../ipl/charge_points/js/layers.js';
 import { sourceSharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
 import { sourceSharingStationsScooter, layersSharingScooter } from '../../../ipl/sharing_scooter/js/layers.js';
+import { sourceTransitStops, layersTransitStops } from '../../../ipl/gtfs/js/layers.js';
 import { sourceSharingStationsCar, layersSharingCar } from '../../../ipl/sharing_car/js/layers.js';
 import { sourceCountBicycle, layersCountBicycle } from '../../../count_bicycle/js/layers.js';
 import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../../ipl/park-api_bicycle/js/layers.js';
@@ -49,6 +50,7 @@ window.addEventListener('DOMContentLoaded', () => {
             { id: 'sourceChargePoints', source: sourceChargePoints },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
             { id: 'sourceSharingStationsScooter', source: sourceSharingStationsScooter },
+            { id: 'sourceTransitStops', source: sourceTransitStops },
             { id: 'sourceSharingStationsCar', source: sourceSharingStationsCar },
             { id: 'sourceCountBicycle', source: sourceCountBicycle },
             { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle }
@@ -59,14 +61,14 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersRoute,
             ...layersStations
         ];
-        addLayers(map, ...layersDatenspaziergang);
-
+        layersDatenspaziergang.forEach(layer => addLayers(map, layer));      
         layersIpl = [
-            ...layersChargePointsDynamic,
-            ...layersSharingScooter,
-            ...layersCountBicycle,
-            ...layersSharingCar,
-            ...layersParkApiBicycleOccupancy
+            ...layersChargePointsDynamic.map(layer => ({ ...layer, group: 'Station 1: E-Ladesäulen' })),
+            ...layersSharingScooter.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' })),
+            ...layersTransitStops.map(layer => ({ ...layer, group: 'Station 3: Haltestellen' })), ,
+            ...layersCountBicycle.filter(layer => layer.id == 'countBicycle3').map(layer => ({ ...layer, label: 'Fahrradzählstellen', group: 'Station 4: Fahrradzählstellen' })),
+            ...layersSharingCar.filter(layer => layer.id != 'sharingCar_StationsOutdatedRealtimeData' && layer.id != 'sharingCar_Vehicles').map(layer => ({ ...layer, group: 'Station 5: Carsharing' })),
+            ...layersParkApiBicycleOccupancy.filter(layer => layer.id != 'parkApiBicycleOccupancy_OutdatedRealtimeInformation').map(layer => ({ ...layer, group: 'Station 6: Fahrradabstellanlagen' }))
         ];
         layersIpl.forEach(layer => {
             if (layer.source != 'sourceChargePoints') {
@@ -93,7 +95,7 @@ window.addEventListener('DOMContentLoaded', () => {
         popups(map, layersSharingScooter, popupContentSharing);
         popups(map, layersSharingCar, popupContentSharing);
         popups(map, layersCountBicycle, popupContentCountBicycle);
-        popups(map, layersCountBicycle, popupContentParkApi);
+        popups(map, layersParkApiBicycleOccupancy, popupContentParkApi);
 
 
     });

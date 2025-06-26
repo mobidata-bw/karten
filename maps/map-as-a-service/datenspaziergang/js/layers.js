@@ -4,11 +4,13 @@
 export const sourceRoute = {
     type: 'geojson',
     data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/route.geojson' 
+    // data: 'data/route.geojson'  
 };
 
 export const sourceStations = {
     type: 'geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/stations.geojson'   
+    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/stations.geojson'  
+    // data: 'data/stations.geojson'  
 };
 
 
@@ -23,7 +25,7 @@ export const layersRoute = [
         color: 'black',
         lineWidth:
             [
-                "interpolate", ["linear"], ["zoom"],
+                'interpolate', ['linear'], ['zoom'],
                 14, 3,
                 20, 5
             ]

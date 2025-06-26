@@ -1,0 +1,103 @@
+{
+  "type": "FeatureCollection",
+  "features": [    
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 3",
+        "Location": "Stadtbahnhaltestelle Börsenplatz"
+      },
+      "geometry": {
+        "coordinates": [
+          9.177203657249919,
+          48.780141017735446
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 4",
+        "Location": "Radzählstelle Lautenschlagerstraße"
+      },
+      "geometry": {
+        "coordinates": [
+          9.177310065983505,
+          48.780265134896894
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 5",
+        "Location": "Carsharing Station stadtmobil"
+      },
+      "geometry": {
+        "coordinates": [
+          9.179051077197727,
+          48.78238774886884
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 6 und Abschluss",
+        "Location": "Fahrrad-Sammelgaragen"
+      },
+      "geometry": {
+        "coordinates": [
+          9.180786937983612,
+          48.78310793838534
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Start des Datenspaziergangs",
+        "Location": "Haus der Wirtschaft"
+      },
+      "geometry": {
+        "coordinates": [
+          9.174263253274802,
+          48.77919914978074
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 1",
+        "Location": "E-Ladestation Stadtwerke Stuttgart"
+      },
+      "geometry": {
+        "coordinates": [
+          9.171977511063062,
+          48.776843212515445
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 2",
+        "Location": "E-Scooter Abstellfläche"
+      },
+      "geometry": {
+        "coordinates": [
+          9.174585446497076,
+          48.77626645327541
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+}

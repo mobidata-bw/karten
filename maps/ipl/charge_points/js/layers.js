@@ -65,7 +65,7 @@ export const layersChargePointsDynamic = [
         subGroup: 'Belegung',
         filter:
             [
-                '!=', ['get', 'chargepoint_static_count'], 0
+                '==', ['get', 'source'], 'bnetza_api'
             ],
         color: '#615fdf',
         visibility: 'none',
@@ -77,10 +77,10 @@ export const layersChargePointsDynamic = [
         subGroup: 'Belegung',
         filter:
             [
-                '==', ['get', 'chargepoint_static_count'], 0
+                '!=', ['get', 'source'], 'bnetza_api'
             ],
         color: '#dfab27',
         visibility: 'none',
         ...layers
-    },
+    }
 ];

@@ -1,0 +1,188 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            9.174282954705092,
+            48.77919929248148
+          ],
+          [
+            9.17452758118408,
+            48.77889065263189
+          ],
+          [
+            9.173214919214956,
+            48.77774526058607
+          ],
+          [
+            9.171979175737505,
+            48.77685170361994
+          ],
+          [
+            9.171864089257951,
+            48.776750352272515
+          ],
+          [
+            9.172760113188971,
+            48.776334835941775
+          ],
+          [
+            9.172899998218508,
+            48.77625779489141
+          ],
+          [
+            9.172983862105292,
+            48.776326423192195
+          ],
+          [
+            9.173170517351807,
+            48.77623325340103
+          ],
+          [
+            9.173760430432988,
+            48.77666913966454
+          ],
+          [
+            9.174585088896862,
+            48.77626701246419
+          ],
+          [
+            9.174960089120418,
+            48.776115871795426
+          ],
+          [
+            9.176809407943196,
+            48.7778846213948
+          ],
+          [
+            9.175681538781966,
+            48.77835739148287
+          ],
+          [
+            9.177227010188602,
+            48.78015244265194
+          ],
+          [
+            9.177336970408817,
+            48.78030397095404
+          ],
+          [
+            9.179144789618533,
+            48.78237376733907
+          ],
+          [
+            9.180056786792278,
+            48.783353020125176
+          ],
+          [
+            9.180797513266157,
+            48.78311945577491
+          ]
+        ],
+        "type": "LineString"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 3",
+        "Location": "Stadtbahnhaltestelle Börsenplatz"
+      },
+      "geometry": {
+        "coordinates": [
+          9.177203657249919,
+          48.780141017735446
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 4",
+        "Location": "Radzählstelle Lautenschlagerstraße"
+      },
+      "geometry": {
+        "coordinates": [
+          9.177310065983505,
+          48.780265134896894
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 5",
+        "Location": "Carsharing Station stadtmobil"
+      },
+      "geometry": {
+        "coordinates": [
+          9.179051077197727,
+          48.78238774886884
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 6 und Abschluss",
+        "Location": "Fahrrad-Sammelgaragen"
+      },
+      "geometry": {
+        "coordinates": [
+          9.180786937983612,
+          48.78310793838534
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Start des Datenspaziergangs",
+        "Location": "Haus der Wirtschaft"
+      },
+      "geometry": {
+        "coordinates": [
+          9.174263253274802,
+          48.77919914978074
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 1",
+        "Location": "E-Ladestation Stadtwerke Stuttgart"
+      },
+      "geometry": {
+        "coordinates": [
+          9.171977511063062,
+          48.776843212515445
+        ],
+        "type": "Point"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "Station 2",
+        "Location": "E-Scooter Abstellfläche"
+      },
+      "geometry": {
+        "coordinates": [
+          9.174585446497076,
+          48.77626645327541
+        ],
+        "type": "Point"
+      }
+    }
+  ]
+}
