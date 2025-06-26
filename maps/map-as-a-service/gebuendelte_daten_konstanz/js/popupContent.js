@@ -105,7 +105,7 @@ export function popKonstanzBehindertenparken(feature) {
     /* POPUP CONTENT */
     return '<table>\
             <tr>\
-                <th><img src="../../../../public/img/popup/Stadt Konstanz.svg" class="image"></th>\
+                <th><img src="../../../../img/popup/Stadt Konstanz.svg" class="image"></th>\
                 <th class="title">' + Name + '</th>\
             </tr>\
         </table><br><table>\
