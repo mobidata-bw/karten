@@ -48,13 +48,30 @@ export const layersStations = [
     }
 ];
 
-export const layersAbstellzonen = [
+export const layersScooterZones = [
     {
-        id: 'abstellzonen',
+        id: 'abstellverbotszonen',
+        label: 'Abstellverbotszonen',
+        type: 'fill',
+        source: 'sourceAbstellzonen',
+        color: 'yellow',
+        fillOpacity: 0.5,
+        filter:
+            [
+                '==', ['get', 'layer'], 'Abstellverbotszonen'
+            ]
+    },
+    {
+        id: 'abstellflaechen',
         label: 'Abstellflächen',
         type: 'fill',
         source: 'sourceAbstellzonen',
-        color: 'blue',
-        fillOpacity: 0.5
+        color: 'lightgreen',
+        fillOpacity: 0.5,
+        filter:
+            [
+                '==', ['get', 'layer'], 'E-Scooter-Abstellflächen'
+            ]
     }
 ];
+

@@ -7,7 +7,7 @@ import {
 import {
     sourceRoute, layersRoute,
     sourceStations, layersStations,
-    sourceAbstellzonen, layersAbstellzonen
+    sourceAbstellzonen, layersScooterZones
 } from './layers.js';
 import { sourceChargePoints, layersChargePointsDynamic } from '../../../ipl/charge_points/js/layers.js';
 import { sourceSharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
@@ -66,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
         layersDatenspaziergang.forEach(layer => addLayers(map, layer));   
         
         scooter = [
-            ...layersAbstellzonen.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' })),
+            ...layersScooterZones.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' })),
             ...layersSharingScooter.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' }))
         ];
 

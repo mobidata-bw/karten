@@ -5,7 +5,7 @@ import {
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
-    sourceGuide, layersGuide,
+    sourceGuides, layersGuides,
     sourceNichtGefahreneTracen, layersNichtGefahreneTracen
 } from './layers.js';
 import { popupContent } from './popupContent.js';
@@ -34,13 +34,13 @@ window.addEventListener('DOMContentLoaded', () => {
         // SOURCES AND LAYERS
         // ==============================   
         const sources = [
-            { id: 'sourceGuide', source: sourceGuide },
+            { id: 'sourceGuides', source: sourceGuides },
             { id: 'sourceNichtGefahreneTracen', source: sourceNichtGefahreneTracen }
         ];
         sources.forEach(source => addSources(map, source));
 
         layers = [
-            ...layersGuide,
+            ...layersGuides,
             ...layersNichtGefahreneTracen
         ];
         layers.forEach(layer => addLayers(map, layer));
