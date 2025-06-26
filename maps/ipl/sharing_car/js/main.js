@@ -1,10 +1,10 @@
 import {
-    initializeMap, shape, fillShape, lineShape,
+    initializeMap,
     basemaps,
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { 
+import {
     sourceSharingVehicles,
     sourceSharingStationsCar, layersSharingCar
 } from './layers.js';
@@ -19,23 +19,15 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // MAP CONTROLS
     // ==============================  
-    const map = initializeMap();  
-    basemaps(map);  
+    const map = initializeMap();
+    basemaps(map);
 
 
-    // ==============================
-    // SOURCES AND LAYERS
-    // ==============================
     map.on('load', () => {
 
-
-        // DEFAULT LAYERS
-        map.addSource('shape', shape);
-        map.addLayer(fillShape);
-        map.addLayer(lineShape);
-
-
-        // PROJECT LAYERS             
+        // ==============================
+        // SOURCES AND LAYERS
+        // ==============================
         const sources = [
             { id: 'sourceSharingStationsCar', source: sourceSharingStationsCar },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles }
@@ -50,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // LAYER CONTROL
         // ============================== 
         initializeControlLayers(map);
-     
+
 
         // ==============================
         // POPUPS

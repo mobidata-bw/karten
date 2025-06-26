@@ -1,5 +1,5 @@
 import {
-    initializeMap, fillShape, lineShape,
+    initializeMap,
     basemaps,
     popups,
     addSources, addLayers
@@ -26,23 +26,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const map = initializeMap({
         center: [9.479215, 47.655577],
         zoom: window.innerWidth < 577 ? 12.5 : 14.5,
-        minZoom: 12
+        minZoom: 12,
+        shape: 'shapeFriedrichshafen.geojson'
     });
     basemaps(map);
 
 
-    // ==============================
-    // SOURCES AND LAYERS
-    // ==============================
     map.on('load', () => {
 
-        // DEFAULT LAYERS
-        map.addSource('shape', shape);
-        map.addLayer(fillShape);
-        map.addLayer(lineShape);
-
-
-        // PROJECT LAYERS    
+        // ==============================
+        // SOURCES AND LAYERS
+        // ==============================
         const sources = [
             { id: 'sourceParking', source: sourceParking },
             { id: 'sourceTaxi', source: sourceTaxi }

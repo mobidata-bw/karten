@@ -1,7 +1,7 @@
 import '../css/styles.css';
 
 import {
-    initializeMap, shape, fillShape, lineShape,
+    initializeMap,
     basemaps,
     popups,
     addSources, addLayers
@@ -29,12 +29,11 @@ window.addEventListener('DOMContentLoaded', () => {
     basemaps(map);
 
 
-    // ==============================
-    // SOURCES AND LAYERS
-    // ==============================
     map.on('load', () => {
 
-        // DEFAULT LAYERS
+        // ==============================
+        // SOURCES AND LAYERS
+        // ==============================        
         map.addSource('shapeRegierungsbezirke', shapeRegierungsbezirke);
         map.addLayer(lineShapeRegierungsbezirke);
 
@@ -43,7 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
         map.addLayer(lineShape);
 
 
-        // PROJECT LAYERS    
         const sources = [
             { id: 'sourceOepnvGueteklassenStuttgart', source: sourceOepnvGueteklassenStuttgart },
             { id: 'sourceOepnvGueteklassenKarlsruhe', source: sourceOepnvGueteklassenKarlsruhe },

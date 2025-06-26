@@ -1,10 +1,9 @@
 import {
-    initializeMap, fillShape, lineShape,
+    initializeMap,
     basemaps,
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { shape } from './initializeMap.js';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
 import { NotificationsControl } from '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js';
 import {
@@ -35,7 +34,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const map = initializeMap({
         center: [8.940, 48.599],
         zoom: 12,
-        minZoom: 10
+        minZoom: 10,
+        shape: 'shapesKonstanz'
     });
     basemaps(map);
 
@@ -50,11 +50,11 @@ window.addEventListener('DOMContentLoaded', () => {
     );
 
 
-    // ==============================
-    // SOURCES AND LAYERS
-    // ==============================
     map.on('load', () => {
 
+        // ==============================
+        // SOURCES AND LAYERS
+        // ==============================
         sourcesIpl = [{ id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }];
         sourcesIpl.forEach(src => addSources(map, src));
 
@@ -152,12 +152,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         formCreateTableRecords(map);
 
-        // DEFAULT LAYERS
-        map.addSource('shape', shape);
-        map.addLayer(fillShape);
-        map.addLayer(lineShape);
-
-
+       
         // ==============================
         // POPUPS
         // ============================== 

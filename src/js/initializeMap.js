@@ -20,7 +20,7 @@ export let map;
 
 
 
-export function initializeMap({ center, zoom, minZoom } = {}) {
+export function initializeMap({ center, zoom, minZoom, shape } = {}) {
 
     // ==============================
     // MAP
@@ -46,6 +46,39 @@ export function initializeMap({ center, zoom, minZoom } = {}) {
             zoom: zoom || defaultZoom
         });
         map.getContainer().style.visibility = 'visible';
+    });
+
+
+    // ==============================
+    // SOURCES AND LAYERS
+    // ==============================
+    map.on('load', () => {
+
+        map.addSource('shape', {
+            'type': 'geojson',
+            'data': shape ? `/karten_geojsons/boundaries/${shape}` : '/karten_geojsons/boundaries/shapesBadenWuerttemberg.geojson'
+        });
+
+        map.addLayer({
+            'id': 'fillShape',
+            'type': 'fill',
+            'source': 'shape',
+            'paint': {
+                'fill-color': 'black',
+                'fill-opacity': 0.1,
+            }
+        });
+
+        map.addLayer({
+            'id': 'lineShape',
+            'type': 'line',
+            'source': 'shape',
+            'paint': {
+                'line-color': 'black',
+                'line-width': 2
+            }
+        });
+
     });
 
 
@@ -140,33 +173,4 @@ export function initializeMap({ center, zoom, minZoom } = {}) {
 
     return map;
 
-};
-
-
-// ==============================
-// SOURCES AND LAYERS
-// ==============================
-export const shape = {
-    'type': 'geojson',
-    'data': '/karten_geojsons/public/data/boundaries/shapesBadenWuerttemberg.geojson'
-};
-
-export const fillShape = {
-    'id': 'fillShape',
-    'type': 'fill',
-    'source': 'shape',
-    'paint': {
-        'fill-color': 'black',
-        'fill-opacity': 0.1,
-    }
-};
-
-export const lineShape = {
-    'id': 'lineShape',
-    'type': 'line',
-    'source': 'shape',
-    'paint': {
-        'line-color': 'black',
-        'line-width': 2
-    }
 };

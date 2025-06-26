@@ -1,10 +1,9 @@
 import {
-    initializeMap, fillShape, lineShape,
+    initializeMap,
     basemaps,
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { shape } from './initializeMap.js';
 import {
     sourceRoute, layersRoute,
     sourceStations, layersStations
@@ -33,23 +32,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const map = initializeMap({
         center: [9.1798, 48.7759],
         zoom: window.innerWidth < 577 ? 12.5 : 14.5,
-        minZoom: 12
+        minZoom: 12,
+        shape: 'shapesStuttgart.geojson'
     });
     basemaps(map);
 
 
-    // ==============================
-    // SOURCES AND LAYERS
-    // ==============================
     map.on('load', () => {
 
-        // DEFAULT LAYERS
-        map.addSource('shape', shape);
-        map.addLayer(fillShape);
-        map.addLayer(lineShape);
-
-
-        // PROJECT LAYERS    
+        // ==============================
+        // SOURCES AND LAYERS
+        // ==============================   
         const sources = [
             { id: 'sourceRoute', source: sourceRoute },
             { id: 'sourceStations', source: sourceStations },

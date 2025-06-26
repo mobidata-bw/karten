@@ -2,8 +2,8 @@
 import { map } from '../../../gebuendelte_daten/js/main.js';
 import { shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz } from './initializeMap.js';
 import {
-    addSources, addLayers,
-    popups
+    popups,
+    addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
     sourceKonstanzPls, layersKonstanzPls,
@@ -30,12 +30,11 @@ window.addEventListener('DOMContentLoaded', () => {
     ]);
 
 
-    // ==============================
-    // SOURCES AND LAYERS
-    // ==============================
     map.on('load', () => {
 
-        // DEFAULT LAYERS
+        // ==============================
+        // SOURCES AND LAYERS
+        // ==============================
         map.addSource('shapeKonstanz', shapeKonstanz);
         map.addLayer(fillShapeKonstanz);
         map.addLayer(lineShapeKonstanz);
@@ -49,8 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-
-        // PROJECT LAYERS    
+       
         const sources = [
             { id: 'sourceKonstanzPls', source: sourceKonstanzPls },
             { id: 'sourceKonstanzBehindertenparken', source: sourceKonstanzBehindertenparken }

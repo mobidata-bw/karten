@@ -1,5 +1,5 @@
 import {
-    initializeMap, shape, fillShape, lineShape,  
+    initializeMap,
     basemaps,
     popups,
     addSources, addLayers
@@ -31,18 +31,11 @@ window.addEventListener('DOMContentLoaded', () => {
     basemaps(map);
 
 
-    // ==============================
-    // SOURCES AND LAYERS
-    // ==============================
     map.on('load', () => {
 
-        // DEFAULT LAYERS
-        map.addSource('shape', shape);
-        map.addLayer(fillShape);
-        map.addLayer(lineShape);
-
-
-        // PROJECT LAYERS    
+        // ==============================
+        // SOURCES AND LAYERS
+        // ==============================
         const sources = [
             { id: 'sourceMobilstationen', source: sourceMobilstationen },
             { id: 'sourceOEV', source: sourceOEV },
