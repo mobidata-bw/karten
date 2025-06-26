@@ -6,7 +6,8 @@ import {
 } from '../../../../src/js/initializeMap.js';
 import {
     sourceRoute, layersRoute,
-    sourceStations, layersStations
+    sourceStations, layersStations,
+    sourceAbstellzonen, layersAbstellzonen
 } from './layers.js';
 import { sourceChargePoints, layersChargePointsDynamic } from '../../../ipl/charge_points/js/layers.js';
 import { sourceSharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
@@ -22,7 +23,7 @@ import { popupContent as popupContentCountBicycle } from '../../../count_bicycle
 import { popupContent as popupContentParkApi } from '../../../../src/js/layers/parkApi/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
-export let layersDatenspaziergang, layersIpl;
+export let layersDatenspaziergang, layersIpl, scooter;
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -47,6 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const sources = [
             { id: 'sourceRoute', source: sourceRoute },
             { id: 'sourceStations', source: sourceStations },
+            { id: 'sourceAbstellzonen', source: sourceAbstellzonen },
             { id: 'sourceChargePoints', source: sourceChargePoints },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
             { id: 'sourceSharingStationsScooter', source: sourceSharingStationsScooter },
@@ -61,10 +63,16 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersRoute,
             ...layersStations
         ];
-        layersDatenspaziergang.forEach(layer => addLayers(map, layer));      
+        layersDatenspaziergang.forEach(layer => addLayers(map, layer));   
+        
+        scooter = [
+            ...layersAbstellzonen.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' })),
+            ...layersSharingScooter.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' }))
+        ];
+
         layersIpl = [
             ...layersChargePointsDynamic.map(layer => ({ ...layer, group: 'Station 1: E-Ladesäulen' })),
-            ...layersSharingScooter.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' })),
+            ...scooter,
             ...layersTransitStops.map(layer => ({ ...layer, group: 'Station 3: Haltestellen' })), ,
             ...layersCountBicycle.filter(layer => layer.id == 'countBicycle3').map(layer => ({ ...layer, label: 'Fahrradzählstellen', group: 'Station 4: Fahrradzählstellen' })),
             ...layersSharingCar.filter(layer => layer.id != 'sharingCar_StationsOutdatedRealtimeData' && layer.id != 'sharingCar_Vehicles').map(layer => ({ ...layer, group: 'Station 5: Carsharing' })),

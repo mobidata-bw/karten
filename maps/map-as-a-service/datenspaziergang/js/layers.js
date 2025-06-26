@@ -3,14 +3,19 @@
 // ==============================
 export const sourceRoute = {
     type: 'geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/route.geojson' 
+    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/route.geojson'
     // data: 'data/route.geojson'  
 };
 
 export const sourceStations = {
     type: 'geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/stations.geojson'  
+    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/stations.geojson'
     // data: 'data/stations.geojson'  
+};
+
+export const sourceAbstellzonen = {
+    type: 'geojson',
+    data: 'data/abstellzonen.geojson'
 };
 
 
@@ -39,5 +44,16 @@ export const layersStations = [
         color: 'black',
         circleRadius: 6,
         circleOpacity: 1
+    }
+];
+
+export const layersAbstellzonen = [
+    {
+        id: 'abstellzonen',
+        label: 'Abstellflächen',
+        type: 'fill',
+        source: 'sourceAbstellzonen',
+        color: 'blue',
+        fillOpacity: 0.5
     }
 ];
