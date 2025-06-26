@@ -37,10 +37,6 @@ window.addEventListener('DOMContentLoaded', () => {
         map.addSource('shapeRegierungsbezirke', shapeRegierungsbezirke);
         map.addLayer(lineShapeRegierungsbezirke);
 
-        map.addSource('shape', shape);
-        map.addLayer(fillShape);
-        map.addLayer(lineShape);
-
 
         const sources = [
             { id: 'sourceOepnvGueteklassenStuttgart', source: sourceOepnvGueteklassenStuttgart },

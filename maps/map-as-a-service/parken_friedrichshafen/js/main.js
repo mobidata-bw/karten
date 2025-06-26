@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
         center: [9.479215, 47.655577],
         zoom: window.innerWidth < 577 ? 12.5 : 14.5,
         minZoom: 12,
-        shape: 'shapeFriedrichshafen.geojson'
+        shape: 'shapesFriedrichshafen.geojson'
     });
     basemaps(map);
 
