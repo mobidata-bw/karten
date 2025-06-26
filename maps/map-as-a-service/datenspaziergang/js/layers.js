@@ -15,7 +15,8 @@ export const sourceStations = {
 
 export const sourceAbstellzonen = {
     type: 'geojson',
-    data: 'data/abstellzonen.geojson'
+    data: '/karten_geojsons/maps/map-as-a-service/datenspaziergang/abstellzonen.geojson'
+    // data: 'data/abstellzonen.geojson'
 };
 
 
