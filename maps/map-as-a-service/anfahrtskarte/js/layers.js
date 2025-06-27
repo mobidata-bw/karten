@@ -3,12 +3,14 @@
 // ==============================
 export const sourceGuides = {
     type: 'geojson',
-    data: 'data/Touren_Guides.geojson'
+    // data: 'data/Touren_Guides.geojson',
+    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/Touren_Guides.geojson'
 };
 
 export const sourceNichtGefahreneTracen = {
     type: 'geojson',
-    data: 'data/Nicht_gefahrene_Tracen.geojson'
+    // data: 'data/Nicht_gefahrene_Tracen.geojson'
+    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/Nicht_gefahrene_Tracen.geojson'
 };
 
 
