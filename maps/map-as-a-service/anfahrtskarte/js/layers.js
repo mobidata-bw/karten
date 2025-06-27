@@ -1,16 +1,16 @@
 // ==============================
 // SOURCES
 // ==============================
-export const sourceGuides = {
+export const sourceTourenGuides = {
     type: 'geojson',
     // data: 'data/Touren_Guides.geojson',
     data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/Touren_Guides.geojson'
 };
 
-export const sourceNichtGefahreneTracen = {
+export const sourceTourenOhneGuides = {
     type: 'geojson',
-    // data: 'data/Nicht_gefahrene_Tracen.geojson'
-    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/Nicht_gefahrene_Tracen.geojson'
+    // data: 'data/Touren_ohne_Guides.geojson'
+    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/Touren_ohne_Guides.geojson'
 };
 
 
@@ -18,84 +18,95 @@ export const sourceNichtGefahreneTracen = {
 // LAYERS
 // ==============================
 const guides = {
-    group: 'Guides',
+    group: 'Touren mit Guides',
     type: 'line',
-    source: 'sourceGuides',
+    source: 'sourceTourenGuides',
     lineWidth:
-    [
-        'interpolate', ['linear'], ['zoom'],
-        14, 3,
-        20, 5
-    ]
+        [
+            'interpolate', ['linear'], ['zoom'],
+            14, 3,
+            20, 5
+        ]
 };
 
 
-export const layersGuides = [
+export const layersTourenGuides = [
     {
         id: 'guides1',
-        label: 'Christoph Wastian',   
+        label: 'Christoph Wastian',
         color: 'green',
         filter:
-        [
-            '==', ['get', 'Guide'], 'Christoph Wastian'
-        ],
-        ...guides     
+            [
+                '==', ['get', 'Guide'], 'Christoph Wastian'
+            ],
+        ...guides
     },
     {
         id: 'guides2',
-        label: 'Monika Burkard',   
+        label: 'Monika Burkard',
         color: 'red',
         filter:
-        [
-            '==', ['get', 'Guide'], 'Monika Burkard'
-        ],
-        ...guides     
+            [
+                '==', ['get', 'Guide'], 'Monika Burkard'
+            ],
+        ...guides
     },
     {
         id: 'guides3',
-        label: 'Paul Antoine Hillaert',   
+        label: 'Paul Antoine Hillaert',
         color: 'orange',
         filter:
-        [
-            '==', ['get', 'Guide'], 'Paul Antoine Hillaert'
-        ],
-        ...guides     
+            [
+                '==', ['get', 'Guide'], 'Paul Antoine Hillaert'
+            ],
+        ...guides
     },
     {
         id: 'guides4',
-        label: 'Katharina Bitterle',   
+        label: 'Katharina Bitterle',
         color: 'green',
         filter:
-        [
-            '==', ['get', 'Guide'], 'Katharina Bitterle'
-        ],
-        ...guides     
-    }    ,
+            [
+                '==', ['get', 'Guide'], 'Katharina Bitterle'
+            ],
+        ...guides
+    },
     {
         id: 'guides5',
-        label: 'Alexander Migl (ab Vaihingen), Malte Höfner (ab S-Süd)',   
+        label: 'Alexander Migl (ab Vaihingen), Malte Höfner (ab S-Süd)',
         color: 'blue',
         filter:
-        [
-            '==', ['get', 'Guide'], 'Alexander Migl (ab Vaihingen), Malte Höfner (ab S-Süd)'
-        ],
-        ...guides     
-    }  
+            [
+                '==', ['get', 'Guide'], 'Alexander Migl (ab Vaihingen), Malte Höfner (ab S-Süd)'
+            ],
+        ...guides
+    }
 ];
 
-export const layersNichtGefahreneTracen = [
+
+export const layersTourenOhneGuides = [
     {
         id: 'nichtGefahreneTracen',
-        label: 'Sonstige Fahrten',
-        group: 'Sonstige Fahrten',
+        label: 'Touren ohne Guides',
+        group: 'Touren ohne Guides',
         type: 'line',
-        source: 'sourceNichtGefahreneTracen',
-        color: 'red',
+        source: 'sourceTourenOhneGuides',
         lineWidth:
             [
                 'interpolate', ['linear'], ['zoom'],
                 14, 3,
                 20, 5
-            ]
+            ],
+        color: [
+            'match',
+            ['get', 'name'],
+            'Fahrt am Morgen', '#e41a1c',
+            'Stuttgart-West (8,3 km)', '#377eb8',
+            'Stuttgart-West -> Stuttgart-Nord (1)', '#4daf4a',
+            'Stuttgart-West -> Stuttgart-Nord (2)', '#984ea3',
+            'Stuttgart-Ost -> Stuttgart-Nord (2,9 km)', '#ff7f00',
+            '#000000'
+        ],
+        visibility: 'none'
     }
 ];
