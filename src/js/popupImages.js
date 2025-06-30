@@ -11,10 +11,18 @@ export function popupImages(fileName) {
         class="image"
         style="visibility:hidden"
         onload="this.style.visibility='visible'"
-        onerror="
-          this.onerror = null;
-          this.src = '${path}.png';
-          this.alt = 'Logo von ${fileName}'
+        onerror="         
+          if (this.src.endsWith('.svg')) {
+            this.onerror = function() {             
+              this.onerror = null;
+              this.src = '${path}.jpg';
+            };
+            this.src = '${path}.png';
+          }         
+          else if (this.src.endsWith('.png')) {
+            this.onerror = null;
+            this.src = '${path}.jpg';
+          }
         "
       />
     </th>
