@@ -1,26 +1,36 @@
 // ==============================
 // SOURCES
 // ==============================
-export const sourceTourenGuides = {
+export const sourceNvbw = {
     type: 'geojson',
-    // data: 'data/Touren_Guides.geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/Touren_Guides.geojson'
+    // data: 'data/nvbw.geojson'
+    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/nvbw.geojson'
 };
 
-export const sourceTourenOhneGuides = {
+export const sourceTouren = {
     type: 'geojson',
-    // data: 'data/Touren_ohne_Guides.geojson'
-    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/Touren_ohne_Guides.geojson'
+    // data: 'data/touren.geojson',
+    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/touren.geojson'
 };
 
 
 // ==============================
 // LAYERS
 // ==============================
-const guides = {
-    group: 'Touren mit Guides',
+export const layersNvbw = [
+    {
+        id: 'nvbw',
+        type: 'fill',
+        source: 'sourceNvbw',
+        color: '#006eaf',
+        fillOutlineColor: 'black'
+    }
+];
+
+
+const touren = {
     type: 'line',
-    source: 'sourceTourenGuides',
+    source: 'sourceTouren',
     lineWidth:
         [
             'interpolate', ['linear'], ['zoom'],
@@ -29,84 +39,124 @@ const guides = {
         ]
 };
 
-
 export const layersTourenGuides = [
     {
         id: 'guides1',
-        label: 'Christoph Wastian',
+        label: 'Bad Cannstatt > König-Karl-Brücke > Rosensteinpark',
+        group: 'Touren mit Guides',
         color: 'green',
         filter:
             [
                 '==', ['get', 'Guide'], 'Christoph Wastian'
             ],
-        ...guides
+        ...touren
     },
     {
         id: 'guides2',
-        label: 'Monika Burkard',
+        label: 'Westbahnhof > Reinsburgstr. > Theo > Hbf.',
+        group: 'Touren mit Guides',
         color: 'red',
         filter:
             [
                 '==', ['get', 'Guide'], 'Monika Burkard'
             ],
-        ...guides
+        ...touren
     },
     {
         id: 'guides3',
-        label: 'Paul Antoine Hillaert',
+        label: 'S-West, Hölderlinplatz - Eberhardstr. > Schlossgarten',
+        group: 'Touren mit Guides',
         color: 'orange',
         filter:
             [
                 '==', ['get', 'Guide'], 'Paul Antoine Hillaert'
             ],
-        ...guides
+        ...touren
     },
     {
         id: 'guides4',
-        label: 'Katharina Bitterle',
+        label: 'S-West Bebelstr. > Theo > Hbf > Milaneo',
+        group: 'Touren mit Guides',
         color: 'green',
         filter:
             [
                 '==', ['get', 'Guide'], 'Katharina Bitterle'
             ],
-        ...guides
+        ...touren
     },
     {
         id: 'guides5',
-        label: 'Alexander Migl (ab Vaihingen), Malte Höfner (ab S-Süd)',
+        label: 'S-Vaihingen > Hauptradroute 1 > S-Süd > Schlossgarten',
+        group: 'Touren mit Guides',
         color: 'blue',
         filter:
             [
                 '==', ['get', 'Guide'], 'Alexander Migl (ab Vaihingen), Malte Höfner (ab S-Süd)'
             ],
-        ...guides
+        ...touren
     }
 ];
 
 
 export const layersTourenOhneGuides = [
     {
-        id: 'nichtGefahreneTracen',
-        label: 'Touren ohne Guides',
+        id: 'ohneGuides1',
+        label: 'Heusteigviertel > Schlossgarten > Rosensteinpark',
         group: 'Touren ohne Guides',
-        type: 'line',
-        source: 'sourceTourenOhneGuides',
-        lineWidth:
+        color: '#e41a1c',
+        visibility: 'none',
+        filter:
             [
-                'interpolate', ['linear'], ['zoom'],
-                14, 3,
-                20, 5
+                '==', ['get', 'name'], 'Fahrt am Morgen'
             ],
-        color: [
-            'match',
-            ['get', 'name'],
-            'Fahrt am Morgen', '#e41a1c',
-            'Stuttgart-West (8,3 km)', '#377eb8',
-            'Stuttgart-West -> Stuttgart-Nord (1)', '#4daf4a',
-            'Stuttgart-West -> Stuttgart-Nord (2)', '#984ea3',
-            'Stuttgart-Ost -> Stuttgart-Nord (2,9 km)', '#ff7f00',
-            '#000000'
-        ],
-        visibility: 'none'
+        ...touren
+    },
+    {
+        id: 'ohneGuides2',
+        label: 'S-West > Killesberg > Feuerbacher Tal > Pragsattel',
+        group: 'Touren ohne Guides',
+        color: '#377eb8',
+        visibility: 'none',
+        filter:
+            [
+                '==', ['get', 'name'], 'Stuttgart-West -> Stuttgart-Nord (1)'
+            ],
+        ...touren
+    },
+    {
+        id: 'ohneGuides3',
+        label: 'S-Ost > Rosensteinpark > Posthof',
+        group: 'Touren ohne Guides',
+        color: '#4daf4a',
+        visibility: 'none',
+        filter:
+            [
+                '==', ['get', 'name'], 'Stuttgart-Ost -> Stuttgart-Nord (2,9 km)'
+            ],
+        ...touren
+    },
+    {
+        id: 'ohneGuides4',
+        label: 'S-West > Katharinenhospital > Milaneo (und zurück)',
+        group: 'Touren ohne Guides',
+        color: '#984ea3',
+        visibility: 'none',
+        filter:
+            [
+                '==', ['get', 'name'], 'Stuttgart-West (8,3 km)'
+            ],
+        ...touren
+    },
+    {
+        id: 'ohneGuides5',
+        label: 'S-West > Panoramastr. > Milaneo',
+        group: 'Touren ohne Guides',
+        color: '#ff7f00',
+        visibility: 'none',
+        filter:
+            [
+                '==', ['get', 'name'], 'Stuttgart-West -> Stuttgart-Nord (2)'
+            ],
+        ...touren
     }
 ];
