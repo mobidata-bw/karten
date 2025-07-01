@@ -4,7 +4,7 @@ import { popupImages } from '../../popupImages.js';
 import { popupCanvas } from './popupCanvas.js';
 
 export function popupContent(features) {
-    // console.log(features);
+    console.log(features);
 
     popupCanvas(features);
 
@@ -201,7 +201,7 @@ export function popupContent(features) {
                 ((realtime_status == 'AVAILABLE') ? ('<td class="attContent">1 / 1</td>') : '') +
                 ((realtime_status == 'TAKEN') ? ('<td class="attContent">0 / 1</td>') : '') +
                 ((realtime_status == 'UNKNOWN') ? ('<td class="attContent">- / 1</td>') : '') +
-                ((has_realtime_data == false) ? ('<td class="attContent">- / 1</td>') : '') +
+                ((has_realtime_data == undefined) ? ('<td class="attContent">- / 1</td>') : '') +
                 '</tr><tr>' +
                 ((!restriction_type) ? '' : (
                     '<tr>\

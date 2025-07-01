@@ -4,7 +4,7 @@
 export const sourceRadvis = {
     layer: 'MobiData-BW:radvis_cycle_network',
     style: 'MobiData-BW:mdbw_radvis_cn_all',
-    bounds: [7.5, 47.5, 10.2, 49.6]
+    // bounds: [7.5, 47.5, 10.2, 49.6]
 };
 
 

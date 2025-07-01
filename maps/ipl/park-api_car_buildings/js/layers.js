@@ -87,12 +87,6 @@ export const layersParkApiCarBuildingsObjects = [
         id: 'parkApiCarBuildingsObjects_Spot',
         visibility: 'none',
         ...objects.PARKING_SPOT,
-        filter:
-            [
-                'all',
-                ['==', ['get', 'parking_object'], 'spot'],
-                ['==', ['get', 'source_id'], 37] /* TEST: 37, PROD: 54*/
-            ],
         ...layers
     }
 ];

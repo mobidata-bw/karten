@@ -60,12 +60,6 @@ export const layersParkApiCarOnStreetObjects = [
         id: 'parkApiCarOnStreetObjects_Spot',
         visibility: 'none',
         ...objects.PARKING_SPOT,
-        filter:
-            [
-                'all',
-                ['==', ['get', 'parking_object'], 'spot'],
-                ['!=', ['get', 'source_id'], 54] /* TEST: 37, PROD: 54*/
-            ],
         ...layers
     }
 ];
