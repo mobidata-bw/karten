@@ -11,9 +11,11 @@ import { sourceParkApiCarOnStreet, layersParkApiCarOnStreetOccupancy } from '../
 import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../ipl/park-api_bicycle/js/layers.js';
 import { sourceSharingVehicles } from '../../../src/js/layers/sharing/sharingVehicles.js';
 import { sourceSharingStationsCar, layersSharingCar } from '../../ipl/sharing_car/js/layers.js';
-import { sourceSharingStationsBicycle, layersSharingBicycle } from '../../ipl/sharing_bicycle/js/layers.js';
+import { 
+    sourceSharingStationsBicycle, layersSharingBicycle,
+    sourceSharingStationsCargoBicycle, layersSharingCargoBicycle
+} from '../../ipl/sharing_bicycle/js/layers.js';
 import { sourceSharingStationsScooter, layersSharingScooter } from '../../ipl/sharing_scooter/js/layers.js';
-import { sourceSharingStationsCargoBicycle, layersSharingCargoBicycle } from '../../ipl/sharing_cargo_bicycle/js/layers.js';
 import { sourceChargePoints, layersChargePointsPower } from '../../ipl/charge_points/js/layers.js';
 import { sourceRadvis, layersRadvis } from '../../ipl/radvis_cycle_network/js/layers.js';
 import {
