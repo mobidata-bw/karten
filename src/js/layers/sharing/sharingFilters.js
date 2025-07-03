@@ -32,6 +32,6 @@ export const sharingNoGraphQlVehicles = [
     "regiorad_stuttgart",
     "callabike", 
     "callabike_ice", 
-    "pickebike_basel",
+    // "pickebike_basel",
     "carvelo2go_ch"
 ];       
