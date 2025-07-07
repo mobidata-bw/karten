@@ -23,8 +23,8 @@ export const sharingVehicles = {
 export const sourceSharingStations = {
     layer: 'MobiData-BW:sharing_stations',
     style: 'MobiData-BW:mdbw_sharing_stations_default',
-    bounds: [6.0, 45.8, 13.5, 54.6],
-    server: 'test'
+    bounds: [4.0, 45.8, 13.5, 54.6],
+    // server: 'test'
 };
 
 const sharingNoRealtimeData = [
@@ -44,25 +44,25 @@ export const sharingStations = {
     NO_REALTIME_DATA: {
         label: 'Station ohne Echtzeitdaten',
         color: '#615fdf',
-        buildFilter: (mode) => [
+        filter: (mode) => [
             'all',
             sharingNoRealtimeData,
-            ['>=', ['get', `num_${mode}s_available`], 0]
+            ['>=', ['get', `num_${mode}_available`], 0]
         ]
     },
     OUTDATED_REALTIME_DATA: {
         label: 'Station mit veralteten Echtzeitdaten',
-        buildFilter: (mode) => [
+        filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
             ['==', ['get', 'realtime_data_outdated'], true],
-            ['>=', ['get', `num_${mode}s_available`], 0]
+            ['>=', ['get', `num_${mode}_available`], 0]
         ],
         color: '#cacaca'
     },
     FREE: {
         label: 'Station mit freien Fahrzeugen',
-        buildFilter: (mode) => [
+        filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
             ['any',
@@ -70,13 +70,13 @@ export const sharingStations = {
                 ['==', ['get', 'realtime_data_outdated'], false]
             ],
             ['>', ['get', 'num_vehicles_available'], 0],
-            ['>=', ['get', `num_${mode}s_available`], 0]
+            ['>=', ['get', `num_${mode}_available`], 0]
         ],
         color: '#fffb05'
     },
     OCCUPIED: {
         label: 'Station ohne freie Fahrzeuge',
-        buildFilter: (mode) => [
+        filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
             ['any',
@@ -84,7 +84,7 @@ export const sharingStations = {
                 ['==', ['get', 'realtime_data_outdated'], false]
             ],
             ['==', ['get', 'num_vehicles_available'], 0],
-            ['>=', ['get', `num_${mode}s_available`], 0]
+            ['>=', ['get', `num_${mode}_available`], 0]
         ],
         color: '#ffb805'
     }

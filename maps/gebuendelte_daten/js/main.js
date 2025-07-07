@@ -9,13 +9,11 @@ import {
 import { sourceParkApiCarBuildings, layersParkApiCarBuildingsOccupancy } from '../../ipl/park-api_car_buildings/js/layers.js';
 import { sourceParkApiCarOnStreet, layersParkApiCarOnStreetOccupancy } from '../../ipl/park-api_car_on-street/js/layers.js';
 import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../ipl/park-api_bicycle/js/layers.js';
-import { sourceSharingVehicles } from '../../../src/js/layers/sharing/sharingVehicles.js';
-import { sourceSharingStationsCar, layersSharingCar } from '../../ipl/sharing_car/js/layers.js';
-import { 
-    sourceSharingStationsBicycle, layersSharingBicycle,
-    sourceSharingStationsCargoBicycle, layersSharingCargoBicycle
-} from '../../ipl/sharing_bicycle/js/layers.js';
-import { sourceSharingStationsScooter, layersSharingScooter } from '../../ipl/sharing_scooter/js/layers.js';
+import { sourceSharingVehicles, sourceSharingStations } from '../../../src/js/layers/sharing/layers.js';
+import { layersSharingCar } from '../../ipl/sharing_car/js/layers.js';
+import { layersSharingBicycle, layersSharingCargoBicycle } from '../../ipl/sharing_bicycle/js/layers.js';
+import { layersSharingScooter } from '../../ipl/sharing_scooter/js/layers.js';
+import { layersSharingMoped } from '../../ipl/sharing_moped/js/layers.js';
 import { sourceChargePoints, layersChargePointsPower } from '../../ipl/charge_points/js/layers.js';
 import { sourceRadvis, layersRadvis } from '../../ipl/radvis_cycle_network/js/layers.js';
 import {
@@ -68,10 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
             { id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet },
             { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
-            { id: 'sourceSharingStationsCar', source: sourceSharingStationsCar },
-            { id: 'sourceSharingStationsBicycle', source: sourceSharingStationsBicycle },
-            { id: 'sourceSharingStationsScooter', source: sourceSharingStationsScooter },
-            { id: 'sourceSharingStationsCargoBicycle', source: sourceSharingStationsCargoBicycle },
+            { id: 'sourceSharingStations', source: sourceSharingStations },
             { id: 'sourceChargePoints', source: sourceChargePoints },
             { id: 'sourceRadvis', source: sourceRadvis },
             { id: 'sourceTransitStops', source: sourceTransitStops },
@@ -100,6 +95,7 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersSharingBicycle,
             ...layersSharingScooter,
             ...layersSharingCargoBicycle,
+            ...layersSharingMoped,
             ...layersChargePointsPower,
             ...layersRadvis,
             ...layersTransitStops,
@@ -144,6 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
         popups(map, layersSharingBicycle, popupContentSharing);
         popups(map, layersSharingScooter, popupContentSharing);
         popups(map, layersSharingCargoBicycle, popupContentSharing);
+        popups(map, layersSharingMoped, popupContentSharing);
         popups(map, layersChargePointsPower, popupContentChargePoints);
         popups(map, layersRadvis, popupContentRadvis);
         popups(map, layersTransitStops, popupContentTransitStops);

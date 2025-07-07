@@ -1,5 +1,5 @@
-import { sharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
-export { sourceSharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
+import { sharingVehicles } from '../../../../src/js/layers/sharing/layers.js';
+export { sourceSharingVehicles } from '../../../../src/js/layers/sharing/layers.js';
 
 
 // ==============================
@@ -7,9 +7,9 @@ export { sourceSharingVehicles } from '../../../../src/js/layers/sharing/sharing
 // ==============================
 export const layersSharingMoped = [
     {
-        id: 'sharingCar_Vehicles',
+        id: 'sharingMoped_Vehicles',
         group: 'Moped-Sharing',
         ...sharingVehicles,
-        filter: ['==', ['get', 'form_factor'], 'moped']
+        filter: sharingVehicles.filter('moped')
     }   
 ];

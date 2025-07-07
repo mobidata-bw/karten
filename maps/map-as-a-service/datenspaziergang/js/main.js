@@ -10,10 +10,10 @@ import {
     sourceAbstellzonen, layersScooterZones
 } from './layers.js';
 import { sourceChargePoints, layersChargePointsDynamic } from '../../../ipl/charge_points/js/layers.js';
-import { sourceSharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
-import { sourceSharingStationsScooter, layersSharingScooter } from '../../../ipl/sharing_scooter/js/layers.js';
+import { sourceSharingVehicles, sourceSharingStations } from '../../../../src/js/layers/sharing/layers.js';
+import { layersSharingScooter } from '../../../ipl/sharing_scooter/js/layers.js';
 import { sourceTransitStops, layersTransitStops } from '../../../ipl/gtfs/js/layers.js';
-import { sourceSharingStationsCar, layersSharingCar } from '../../../ipl/sharing_car/js/layers.js';
+import { layersSharingCar } from '../../../ipl/sharing_car/js/layers.js';
 import { sourceCountBicycle, layersCountBicycle } from '../../../count_bicycle/js/layers.js';
 import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../../ipl/park-api_bicycle/js/layers.js';
 import { popupContent as popupContentStations } from './popupContent.js';
@@ -51,9 +51,8 @@ window.addEventListener('DOMContentLoaded', () => {
             { id: 'sourceAbstellzonen', source: sourceAbstellzonen },
             { id: 'sourceChargePoints', source: sourceChargePoints },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
-            { id: 'sourceSharingStationsScooter', source: sourceSharingStationsScooter },
+            { id: 'sourceSharingStations', source: sourceSharingStations },
             { id: 'sourceTransitStops', source: sourceTransitStops },
-            { id: 'sourceSharingStationsCar', source: sourceSharingStationsCar },
             { id: 'sourceCountBicycle', source: sourceCountBicycle },
             { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle }
         ];

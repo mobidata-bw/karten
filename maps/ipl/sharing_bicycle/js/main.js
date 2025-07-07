@@ -6,8 +6,9 @@ import {
 } from '../../../../src/js/initializeMap.js';
 import {
     sourceSharingVehicles,
-    sourceSharingStationsBicycle, layersSharingBicycle,
-    sourceSharingStationsCargoBicycle, layersSharingCargoBicycle
+    sourceSharingStations,
+    layersSharingBicycle,
+    layersSharingCargoBicycle
 } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/sharing/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -31,8 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         const sources = [
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
-            { id: 'sourceSharingStationsBicycle', source: sourceSharingStationsBicycle },
-            { id: 'sourceSharingStationsCargoBicycle', source: sourceSharingStationsCargoBicycle }
+            { id: 'sourceSharingStations', source: sourceSharingStations }          
         ];
         sources.forEach(source => addSources(map, source));
 

@@ -1,25 +1,13 @@
-import { sharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
-import { sharingStations } from '../../../../src/js/layers/sharing/sharingStations.js';
-export { sourceSharingVehicles } from '../../../../src/js/layers/sharing/sharingVehicles.js';
-
-
-// ==============================
-// SOURCES
-// ==============================
-export const sourceSharingStationsScooter = {
-    layer: 'MobiData-BW:sharing_stations_scooters_standing',
-    style: 'MobiData-BW:mdbw_sharing_stations_default',
-    bounds: [4.3, 46.9, 9.9, 50.0],
-    // server: 'test'
-};
+import { sharingVehicles, sharingStations } from '../../../../src/js/layers/sharing/layers.js';
+export { sourceSharingVehicles, sourceSharingStations } from '../../../../src/js/layers/sharing/layers.js';
 
 
 // ==============================
 // LAYERS
 // ==============================
 const sharingStationsScooter = {
-    source: 'sourceSharingStationsScooter',
-    sourceLayer: 'sharing_stations_scooters_standing',
+    source: 'sourceSharingStations',
+    sourceLayer: 'sharing_stations',
     group: 'E-Scooter-Sharing'
 };
 
@@ -31,14 +19,22 @@ export const layersSharingScooter = [
         filter: sharingVehicles.filter('scooter')
     },
     {
+        id: 'sharingScooter_StationsOutdatedRealtimeData',
+        ...sharingStations.OUTDATED_REALTIME_DATA,
+        filter: sharingStations.OUTDATED_REALTIME_DATA.filter('scooters_standing'),
+        ...sharingStationsScooter
+    },
+    {
         id: 'sharingScooter_StationsOccupied',
         ...sharingStations.OCCUPIED,
+        filter: sharingStations.NO_REALTIME_DATA.filter('scooters_standing'),
         ...sharingStationsScooter
     },
     {
         id: 'sharingScooter_StationsFree',
         ...sharingStationsScooter,
          ...sharingStations.FREE,
+         filter: sharingStations.NO_REALTIME_DATA.filter('scooters_standing'),
         ...sharingStationsScooter
     }
 ];
