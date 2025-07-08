@@ -11,7 +11,7 @@ export const sourceSharingVehicles = {
 export const sharingVehicles = {
     source: 'sourceSharingVehicles',
     sourceLayer: 'sharing_vehicles',
-    label: 'Free-Floating-Fahrzeuge',
+    label: 'Free-Floating-Fahrzeug',
     filter: mode => ['==', ['get', 'form_factor'], mode],
     color: '#91FFFF'
 };
@@ -54,6 +54,7 @@ export const sharingStations = {
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
+            ['!', ['has', 'num_scooters_standing_available']],
             ['==', ['get', 'realtime_data_outdated'], true],
             ['>=', ['get', `num_${mode}_available`], 0]
         ],
@@ -64,11 +65,16 @@ export const sharingStations = {
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
-            ['any',
-                ['!', ['has', 'realtime_data_outdated']],
-                ['==', ['get', 'realtime_data_outdated'], false]
-            ],
-            ['>', ['get', `num_${mode}_available`], 0]
+            ['>', ['get', `num_${mode}_available`], 0],
+            [
+                'any',
+                ['has', 'num_scooters_standing_available'],
+                [
+                    'all',
+                    ['!', ['has', 'num_scooters_standing_available']],
+                    ['==', ['get', 'realtime_data_outdated'], false]
+                ]
+            ]
         ],
         color: '#fffb05'
     },
@@ -77,11 +83,16 @@ export const sharingStations = {
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
-            ['any',
-                ['!', ['has', 'realtime_data_outdated']],
-                ['==', ['get', 'realtime_data_outdated'], false]
-            ],
-            ['==', ['get', `num_${mode}_available`], 0]
+            ['==', ['get', `num_${mode}_available`], 0],
+            [
+                'any',
+                ['has', 'num_scooters_standing_available'],
+                [
+                    'all',
+                    ['!', ['has', 'num_scooters_standing_available']],
+                    ['==', ['get', 'realtime_data_outdated'], false]
+                ]
+            ]
         ],
         color: '#ffb805'
     }

@@ -15,7 +15,11 @@ export function popupContent(features) {
     vehicle_id,
     name,
     capacity,
-    num_vehicles_available,
+    num_cars_available,
+    num_bicycles_available,
+    num_scooters_standing_available,
+    num_cargo_bicycles_available,
+    num_mopeds_available,
     propulsion_type,
     current_fuel_percent,
     current_range_meters,
@@ -24,7 +28,7 @@ export function popupContent(features) {
     rental_uris_ios,
     rental_uris_android,
     last_reported,
-    realtime_data_outdated    
+    realtime_data_outdated
   } = features;
 
   let date, time;
@@ -133,11 +137,15 @@ export function popupContent(features) {
       <td class="attContent">' + parseInt(capacity) + '</td>\
     </tr>'
     )) +
-    (!num_vehicles_available ? '' : ('<td class="att">Verfügbare Fahrzeuge</td>')) +
-    ((feed_id == noRealtimeData) ?
-      ('<td class="attContent"><i>keine Echtzeitdaten</i></td>') :
-      (!num_vehicles_available ? '' : ('<td class="attContent">' + num_vehicles_available + '</td>'))) +
-    '</tr><tr>' +
+    (vehicle_id ? '' : (
+      '<tr>\
+    <td class="att">Verfügbare Fahrzeuge</td>' +
+      ((feed_id == noRealtimeData) ?
+        ('<td class="attContent"><i>keine Echtzeitdaten</i></td>') :
+        ('<td class="attContent">' + (num_cars_available ?? num_bicycles_available ?? num_scooters_standing_available ?? num_cargo_bicycles_available ?? num_mopeds_available) + '</td>')) +
+      '</tr>'
+    )) +
+    '<tr>' +
     (!propulsion_type ? '' : ('<td class="att">Antriebsart</td>')) +
     ((propulsion_type == 'electric') ? ('<td class="attContent">elektrisch</td>') : '') +
     ((propulsion_type == 'electric_assist') ? ('<td class="attContent">elektrische Unterstützung</td>') : '') +
@@ -176,11 +184,11 @@ export function popupContent(features) {
         (!rental_uris_ios ? '' : ('<a href="' + rental_uris_ios + '" target="_blank">IOS</a>'))) +
 
       '</td>') +
-    ((!last_reported || feed_id == noRealtimeData)? '' : (
+    ((!last_reported || feed_id == noRealtimeData) ? '' : (
       '<tr>\
         <td class="att">Stand Echtzeitdaten</td>' +
-        (realtime_data_outdated ? ('<td class="attContent outDated">' + date + ', ' + time) : ('<td class="attContent">' + date + ', ' + time + '</td>')) +
-    '</tr>'
+      (realtime_data_outdated ? ('<td class="attContent outDated">' + date + ', ' + time) : ('<td class="attContent">' + date + ', ' + time + '</td>')) +
+      '</tr>'
     )) +
     '</tr>\
             </table><table>\
