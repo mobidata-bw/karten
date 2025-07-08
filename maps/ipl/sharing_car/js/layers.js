@@ -5,42 +5,41 @@ export { sourceSharingVehicles, sourceSharingStations } from '../../../../src/js
 // ==============================
 // LAYERS
 // ==============================
-const sharingStationsCar = {
-    source: 'sourceSharingStations',
-    sourceLayer: 'sharing_stations',
-    group: 'Carsharing'   
-};
-
-
 export const layersSharingCar = [
     {
-        id: 'sharingCar_Vehicles',
+        id: 'sharingCar_VehiclesNoRealtimeData',
         group: 'Carsharing',
-        ...sharingVehicles,
-        filter: sharingVehicles.filter('car')
+        ...sharingVehicles.OUTDATED_REALTIME_DATA,
+        filter: sharingVehicles.OUTDATED_REALTIME_DATA.filter('car')
+    },
+    {
+        id: 'sharingCar_VehiclesRealtimeData',
+        group: 'Carsharing',
+        ...sharingVehicles.REALTIME_DATA,
+        filter: sharingVehicles.REALTIME_DATA.filter('car')
     },
     {
         id: 'sharingCar_StationsNoRealtimeData',
+        group: 'Carsharing',
         ...sharingStations.NO_REALTIME_DATA,
-        filter: sharingStations.NO_REALTIME_DATA.filter('cars'),
-        ...sharingStationsCar
+        filter: sharingStations.NO_REALTIME_DATA.filter('cars')
     },
     {
         id: 'sharingCar_StationsOutdatedRealtimeData',
+        group: 'Carsharing',
         ...sharingStations.OUTDATED_REALTIME_DATA,
-        filter: sharingStations.OUTDATED_REALTIME_DATA.filter('cars'),
-        ...sharingStationsCar
+        filter: sharingStations.OUTDATED_REALTIME_DATA.filter('cars')
     },
     {
         id: 'sharingCar_StationsOccupied',
+        group: 'Carsharing',
         ...sharingStations.OCCUPIED,
-        filter: sharingStations.OCCUPIED.filter('cars'),
-        ...sharingStationsCar
+        filter: sharingStations.OCCUPIED.filter('cars')
     },
     {
         id: 'sharingCar_StationsFree',
+        group: 'Carsharing',
         ...sharingStations.FREE,
-        filter: sharingStations.FREE.filter('cars'),
-        ...sharingStationsCar
+        filter: sharingStations.FREE.filter('cars')
     }
 ];

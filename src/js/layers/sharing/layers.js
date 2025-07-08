@@ -7,13 +7,32 @@ export const sourceSharingVehicles = {
     bounds: [4.0, 45.8, 13.5, 54.6]
 };
 
-
-export const sharingVehicles = {
+const layersSharingVehicles = {
     source: 'sourceSharingVehicles',
     sourceLayer: 'sharing_vehicles',
-    label: 'Free-Floating-Fahrzeug',
-    filter: mode => ['==', ['get', 'form_factor'], mode],
-    color: '#91FFFF'
+};
+
+export const sharingVehicles = {
+    OUTDATED_REALTIME_DATA: {
+        label: 'Fahrzeug mit veralteten Echzeitdaten',
+        filter: (mode) => [
+            'all',
+            ['==', ['get', 'form_factor'], mode],
+            ['==', ['get', 'realtime_data_outdated'], true]
+        ],
+        color: '#cacaca',
+        ...layersSharingVehicles
+    },
+    REALTIME_DATA: {
+        label: 'Fahrzeug',
+        filter: (mode) => [
+            'all',
+            ['==', ['get', 'form_factor'], mode],
+            ['==', ['get', 'realtime_data_outdated'], false]
+        ],
+        color: '#91FFFF',
+        ...layersSharingVehicles
+    }
 };
 
 
@@ -38,16 +57,21 @@ const sharingNoRealtimeData = [
     ['match', ['slice', ['get', 'feed_id'], 0, 8], 'teilauto', true, false]
 ];
 
+const layersSharingStations = {
+    source: 'sourceSharingStations',
+    sourceLayer: 'sharing_stations',
+};
 
 export const sharingStations = {
     NO_REALTIME_DATA: {
         label: 'Station ohne Echtzeitdaten',
-        color: '#615fdf',
         filter: (mode) => [
             'all',
             sharingNoRealtimeData,
             ['>=', ['get', `num_${mode}_available`], 0]
-        ]
+        ],
+        color: '#615fdf',
+        ...layersSharingStations
     },
     OUTDATED_REALTIME_DATA: {
         label: 'Station mit veralteten Echtzeitdaten',
@@ -58,7 +82,8 @@ export const sharingStations = {
             ['==', ['get', 'realtime_data_outdated'], true],
             ['>=', ['get', `num_${mode}_available`], 0]
         ],
-        color: '#cacaca'
+        color: '#cacaca',
+        ...layersSharingStations
     },
     FREE: {
         label: 'Station mit freien Fahrzeugen',
@@ -76,7 +101,8 @@ export const sharingStations = {
                 ]
             ]
         ],
-        color: '#fffb05'
+        color: '#fffb05',
+        ...layersSharingStations
     },
     OCCUPIED: {
         label: 'Station ohne freie Fahrzeuge',
@@ -94,6 +120,7 @@ export const sharingStations = {
                 ]
             ]
         ],
-        color: '#ffb805'
+        color: '#ffb805',
+        ...layersSharingStations
     }
 };

@@ -5,30 +5,29 @@ export { sourceSharingVehicles, sourceSharingStations } from '../../../../src/js
 // ==============================
 // LAYERS
 // ==============================
-const sharingStationsScooter = {
-    source: 'sourceSharingStations',
-    sourceLayer: 'sharing_stations',
-    group: 'E-Scooter-Sharing'
-};
-
-export const layersSharingScooter = [
+export const layersSharingScooter = [    
     {
-        id: 'sharingScooter_Vehicles',
+        id: 'sharingScooter_VehiclesNoRealtimeData',
         group: 'E-Scooter-Sharing',
-        ...sharingVehicles,
-        filter: sharingVehicles.filter('scooter')
+        ...sharingVehicles.OUTDATED_REALTIME_DATA,
+        filter: sharingVehicles.OUTDATED_REALTIME_DATA.filter('scooter')
+    },
+    {
+        id: 'sharingScooter_VehiclesRealtimeData',
+        group: 'E-Scooter-Sharing',
+        ...sharingVehicles.REALTIME_DATA,
+        filter: sharingVehicles.REALTIME_DATA.filter('scooter')
     },
     {
         id: 'sharingScooter_StationsOccupied',
+        group: 'E-Scooter-Sharing',
         ...sharingStations.OCCUPIED,
-        filter: sharingStations.OCCUPIED.filter('scooters_standing'),
-        ...sharingStationsScooter
+        filter: sharingStations.OCCUPIED.filter('scooters_standing')
     },
     {
         id: 'sharingScooter_StationsFree',
-        ...sharingStationsScooter,
-         ...sharingStations.FREE,
-         filter: sharingStations.FREE.filter('scooters_standing'),
-        ...sharingStationsScooter
+        group: 'E-Scooter-Sharing',
+        ...sharingStations.FREE,
+        filter: sharingStations.FREE.filter('scooters_standing')
     }
 ];

@@ -5,48 +5,53 @@ export { sourceSharingVehicles, sourceSharingStations } from '../../../../src/js
 // ==============================
 // LAYERS
 // ==============================
-const sharingStationsBicycle = {
-    source: 'sourceSharingStations',
-    sourceLayer: 'sharing_stations'    
-};
-
 export const layersSharingBicycle = [
     {
-        id: 'sharingBicycle_VehiclesBicycle',
+        id: 'sharingBicycle_VehiclesNoRealtimeData',
         group: 'Bikesharing',
-        ...sharingVehicles,
-        filter: sharingVehicles.filter('bicycle')
+        ...sharingVehicles.OUTDATED_REALTIME_DATA,
+        filter: sharingVehicles.OUTDATED_REALTIME_DATA.filter('bicycle')
+    },
+    {
+        id: 'sharingBicycle_VehiclesRealtimeData',
+        group: 'Bikesharing',
+        ...sharingVehicles.REALTIME_DATA,
+        filter: sharingVehicles.REALTIME_DATA.filter('bicycle')
     },
     {
         id: 'sharingBicycle_StationsOutdatedRealtimeData',
         group: 'Bikesharing',
         ...sharingStations.OUTDATED_REALTIME_DATA,
-        filter: sharingStations.OUTDATED_REALTIME_DATA.filter('bicycles'),
-        ...sharingStationsBicycle
+        filter: sharingStations.OUTDATED_REALTIME_DATA.filter('bicycles')
     },
     {
         id: 'sharingBicycle_StationsOccupied',
         group: 'Bikesharing',
         ...sharingStations.OCCUPIED,
-        filter: sharingStations.OCCUPIED.filter('bicycles'),
-        ...sharingStationsBicycle
+        filter: sharingStations.OCCUPIED.filter('bicycles')
     },
     {
         id: 'sharingBicycle_StationsFree',
         group: 'Bikesharing',
         ...sharingStations.FREE,
-        filter: sharingStations.FREE.filter('bicycles'),
-        ...sharingStationsBicycle
+        filter: sharingStations.FREE.filter('bicycles')
     }
 ];
 
 
 export const layersSharingCargoBicycle = [
     {
-        id: 'sharingCargoBicycleVehicles',
+        id: 'sharingCargoBicycle_VehiclesNoRealtimeData',
         group: 'Lastenrad-Sharing',
-        ...sharingVehicles,
-        filter: sharingVehicles.filter('cargo_bicycle'),
+        ...sharingVehicles.OUTDATED_REALTIME_DATA,
+        filter: sharingVehicles.OUTDATED_REALTIME_DATA.filter('cargo_bicycle'),
+        visibility: 'none'
+    },
+    {
+        id: 'sharingCargoBicycle_VehiclesRealtimeData',
+        group: 'Lastenrad-Sharing',
+        ...sharingVehicles.REALTIME_DATA,
+        filter: sharingVehicles.REALTIME_DATA.filter('cargo_bicycle'),
         visibility: 'none'
     },
     {
@@ -54,7 +59,6 @@ export const layersSharingCargoBicycle = [
         group: 'Lastenrad-Sharing',
         ...sharingStations.NO_REALTIME_DATA,
         filter: sharingStations.NO_REALTIME_DATA.filter('cargo_bicycles'),
-        ...sharingStationsBicycle,
         visibility: 'none'
     },
     {
@@ -62,7 +66,6 @@ export const layersSharingCargoBicycle = [
         group: 'Lastenrad-Sharing',
         ...sharingStations.OUTDATED_REALTIME_DATA,
         filter: sharingStations.OUTDATED_REALTIME_DATA.filter('cargo_bicycles'),
-        ...sharingStationsBicycle,
         visibility: 'none'
     },
     {
@@ -70,7 +73,6 @@ export const layersSharingCargoBicycle = [
         group: 'Lastenrad-Sharing',
         ...sharingStations.OCCUPIED,
         filter: sharingStations.OCCUPIED.filter('cargo_bicycles'),
-        ...sharingStationsBicycle,
         visibility: 'none'
     },
     {
@@ -78,7 +80,6 @@ export const layersSharingCargoBicycle = [
         group: 'Lastenrad-Sharing',
         ...sharingStations.FREE,
         filter: sharingStations.FREE.filter('cargo_bicycles'),
-        ...sharingStationsBicycle,
         visibility: 'none'
     }
 ];
