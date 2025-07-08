@@ -23,8 +23,7 @@ export const sharingVehicles = {
 export const sourceSharingStations = {
     layer: 'MobiData-BW:sharing_stations',
     style: 'MobiData-BW:mdbw_sharing_stations_default',
-    bounds: [4.0, 45.8, 13.5, 54.6],
-    // server: 'test'
+    bounds: [4.0, 45.8, 13.5, 54.6]
 };
 
 const sharingNoRealtimeData = [
@@ -69,8 +68,7 @@ export const sharingStations = {
                 ['!', ['has', 'realtime_data_outdated']],
                 ['==', ['get', 'realtime_data_outdated'], false]
             ],
-            ['>', ['get', 'num_vehicles_available'], 0],
-            ['>=', ['get', `num_${mode}_available`], 0]
+            ['>', ['get', `num_${mode}_available`], 0]
         ],
         color: '#fffb05'
     },
@@ -83,8 +81,7 @@ export const sharingStations = {
                 ['!', ['has', 'realtime_data_outdated']],
                 ['==', ['get', 'realtime_data_outdated'], false]
             ],
-            ['==', ['get', 'num_vehicles_available'], 0],
-            ['>=', ['get', `num_${mode}_available`], 0]
+            ['==', ['get', `num_${mode}_available`], 0]
         ],
         color: '#ffb805'
     }

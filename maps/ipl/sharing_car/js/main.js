@@ -37,6 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
         layers = layersSharingCar;
         layers.forEach(layer => addLayers(map, layer));
 
+        console.log(layersSharingCar)
 
         // ==============================
         // LAYER CONTROL
