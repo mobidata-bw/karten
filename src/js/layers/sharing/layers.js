@@ -14,7 +14,8 @@ const layersSharingVehicles = {
 
 export const sharingVehicles = {
     OUTDATED_REALTIME_DATA: {
-        label: 'Fahrzeug mit veralteten Echzeitdaten',
+        // label: 'Fahrzeug mit veralteten Echzeitdaten',
+        label: 'Veraltete Echzeitdaten',
         filter: (mode) => [
             'all',
             ['==', ['get', 'form_factor'], mode],
@@ -24,7 +25,8 @@ export const sharingVehicles = {
         ...layersSharingVehicles
     },
     REALTIME_DATA: {
-        label: 'Fahrzeug',
+        // label: 'Fahrzeug',
+        label: 'Vergübare Fahrzeuge',
         filter: (mode) => [
             'all',
             ['==', ['get', 'form_factor'], mode],
@@ -64,7 +66,8 @@ const layersSharingStations = {
 
 export const sharingStations = {
     NO_REALTIME_DATA: {
-        label: 'Station ohne Echtzeitdaten',
+        // label: 'Station ohne Echtzeitdaten',
+        label: 'Ohne Echtzeitdaten',
         filter: (mode) => [
             'all',
             sharingNoRealtimeData,
@@ -74,7 +77,8 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OUTDATED_REALTIME_DATA: {
-        label: 'Station mit veralteten Echtzeitdaten',
+        // label: 'Station mit veralteten Echtzeitdaten',
+         label: 'Veraltete Echtzeitdaten',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
@@ -86,7 +90,8 @@ export const sharingStations = {
         ...layersSharingStations
     },
     FREE: {
-        label: 'Station mit freien Fahrzeugen',
+        // label: 'Station mit freien Fahrzeugen',
+        label: 'Mit freien Fahrzeugen',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
@@ -105,7 +110,8 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OCCUPIED: {
-        label: 'Station ohne freie Fahrzeuge',
+        // label: 'Station ohne freie Fahrzeuge',
+        label: 'Ohne freie Fahrzeuge',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
