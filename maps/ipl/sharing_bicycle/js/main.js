@@ -13,7 +13,7 @@ import {
 import { popupContent } from '../../../../src/js/layers/sharing/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
-export let layers;
+export let layers, layersBicycle, layersCargoBicycle;
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -32,10 +32,12 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         const sources = [
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
-            { id: 'sourceSharingStations', source: sourceSharingStations }          
+            { id: 'sourceSharingStations', source: sourceSharingStations }
         ];
         sources.forEach(source => addSources(map, source));
 
+        layersBicycle = layersSharingBicycle;
+        layersCargoBicycle = layersSharingCargoBicycle;
         layers = [
             ...layersSharingBicycle,
             ...layersSharingCargoBicycle

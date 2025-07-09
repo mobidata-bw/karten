@@ -8,13 +8,13 @@ export const sourceSharingVehicles = {
 };
 
 const layersSharingVehicles = {
+    subGroup: 'Free-Floating-Fahrzeuge',
     source: 'sourceSharingVehicles',
-    sourceLayer: 'sharing_vehicles',
+    sourceLayer: 'sharing_vehicles'
 };
 
 export const sharingVehicles = {
     OUTDATED_REALTIME_DATA: {
-        // label: 'Fahrzeug mit veralteten Echzeitdaten',
         label: 'Veraltete Echzeitdaten',
         filter: (mode) => [
             'all',
@@ -25,8 +25,7 @@ export const sharingVehicles = {
         ...layersSharingVehicles
     },
     REALTIME_DATA: {
-        // label: 'Fahrzeug',
-        label: 'Vergübare Fahrzeuge',
+        label: 'Freie Fahrzeuge',
         filter: (mode) => [
             'all',
             ['==', ['get', 'form_factor'], mode],
@@ -60,14 +59,14 @@ const sharingNoRealtimeData = [
 ];
 
 const layersSharingStations = {
+    subGroup: 'Stationen',
     source: 'sourceSharingStations',
-    sourceLayer: 'sharing_stations',
+    sourceLayer: 'sharing_stations'
 };
 
 export const sharingStations = {
     NO_REALTIME_DATA: {
-        // label: 'Station ohne Echtzeitdaten',
-        label: 'Ohne Echtzeitdaten',
+        label: 'Keine Echtzeitdaten',
         filter: (mode) => [
             'all',
             sharingNoRealtimeData,
@@ -77,7 +76,6 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OUTDATED_REALTIME_DATA: {
-        // label: 'Station mit veralteten Echtzeitdaten',
          label: 'Veraltete Echtzeitdaten',
         filter: (mode) => [
             'all',
@@ -90,7 +88,6 @@ export const sharingStations = {
         ...layersSharingStations
     },
     FREE: {
-        // label: 'Station mit freien Fahrzeugen',
         label: 'Mit freien Fahrzeugen',
         filter: (mode) => [
             'all',
@@ -110,7 +107,6 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OCCUPIED: {
-        // label: 'Station ohne freie Fahrzeuge',
         label: 'Ohne freie Fahrzeuge',
         filter: (mode) => [
             'all',
