@@ -25,7 +25,7 @@ import { popupContent as popupContentCountBicycle } from '../../../count_bicycle
 import { popupContent as popupContentParkApi } from '../../../../src/js/layers/parkApi/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
-export let layersDatenspaziergang, layersIpl, scooter;
+export let layersDatenspaziergang, layersIpl;
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -64,21 +64,29 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersRoute,
             ...layersStations
         ];
-        layersDatenspaziergang.forEach(layer => addLayers(map, layer));   
-        
-        scooter = [
+        layersDatenspaziergang.forEach(layer => addLayers(map, layer));
+
+        const scooter = [
             ...layersScooterZones.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' })),
             ...layersSharingScooter.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' }))
         ];
 
-        console.log(scooter);
-
         layersIpl = [
             ...layersChargePointsDynamic.map(layer => ({ ...layer, group: 'Station 1: E-Ladesäulen' })),
-            ...scooter.filter(layer => layer.id != 'sharingScooter_VehiclesNoRealtimeData'),
+
+            ...scooter.filter(layer => layer.id == 'abstellverbotszonen'),
+            ...scooter.filter(layer => layer.id == 'abstellflaechen'),
+            ...scooter.filter(layer => layer.id == 'sharingScooter_StationsOccupied').map(layer => ({ ...layer, label: 'Station ohne verfügbare Fahrzeuge' })),
+            ...scooter.filter(layer => layer.id == 'sharingScooter_StationsFree').map(layer => ({ ...layer, label: 'Station mit verfügbaren Fahrzeugen' })),
+            ...scooter.filter(layer => layer.id == 'sharingScooter_VehiclesRealtimeData'),
+
             ...layersTransitStops.map(layer => ({ ...layer, group: 'Station 3: Haltestellen' })), ,
             ...layersCountBicycle.filter(layer => layer.id == 'countBicycle3').map(layer => ({ ...layer, label: 'Fahrradzählstellen', group: 'Station 4: Fahrradzählstellen' })),
-            ...layersSharingCar.filter(layer => layer.id != 'sharingCar_StationsOutdatedRealtimeData' && layer.id != 'sharingCar_Vehicles' && layer.id != 'sharingCar_VehiclesNoRealtimeData').map(layer => ({ ...layer, group: 'Station 5: Carsharing' })),
+
+            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsNoRealtimeData').map(layer => ({ ...layer, label: 'Station ohne Echtzeitdaten', group: 'Station 5: Carsharing' })),
+            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsOccupied').map(layer => ({ ...layer, label: 'Station ohne verfügbare Fahrzeuge', group: 'Station 5: Carsharing' })),
+            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsFree').map(layer => ({ ...layer, label: 'Station mit verfügbaren Fahrzeugen', group: 'Station 5: Carsharing' })),
+
             ...layersParkApiBicycleOccupancy.filter(layer => layer.id != 'parkApiBicycleOccupancy_OutdatedRealtimeInformation').map(layer => ({ ...layer, group: 'Station 6: Fahrradabstellanlagen' }))
         ];
         layersIpl.forEach(layer => {

@@ -15,7 +15,6 @@ const layersSharingVehicles = {
 
 export const sharingVehicles = {
     OUTDATED_REALTIME_DATA: {
-        // label: 'Veraltete Echzeitdaten',
         label: 'Echzeitdaten veraltet',
         filter: (mode) => [
             'all',
@@ -26,8 +25,7 @@ export const sharingVehicles = {
         ...layersSharingVehicles
     },
     REALTIME_DATA: {
-        // label: 'Freie Fahrzeuge',
-        label: 'Fahrzeuge verfügbar',
+        label: 'Fahrzeug verfügbar',
         filter: (mode) => [
             'all',
             ['==', ['get', 'form_factor'], mode],
@@ -68,7 +66,6 @@ const layersSharingStations = {
 
 export const sharingStations = {
     NO_REALTIME_DATA: {
-        // label: 'Keine Echtzeitdaten',
         label: 'Echtzeitdaten fehlen',
         filter: (mode) => [
             'all',
@@ -79,12 +76,11 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OUTDATED_REALTIME_DATA: {
-        // label: 'Veraltete Echtzeitdaten',
         label: 'Echtzeitdaten veraltet',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
-            ['!', ['has', 'num_scooters_standing_available']],
+            ['!=', ['literal', mode], 'scooters_standing'],
             ['==', ['get', 'realtime_data_outdated'], true],
             ['>=', ['get', `num_${mode}_available`], 0]
         ],
@@ -92,7 +88,6 @@ export const sharingStations = {
         ...layersSharingStations
     },
     FREE: {
-        // label: 'Mit freien Fahrzeugen',
         label: 'Fahrzeuge verfügbar',
         filter: (mode) => [
             'all',
@@ -100,10 +95,10 @@ export const sharingStations = {
             ['>', ['get', `num_${mode}_available`], 0],
             [
                 'any',
-                ['has', 'num_scooters_standing_available'],
+                ['==', ['literal', mode], 'scooters_standing'],
                 [
                     'all',
-                    ['!', ['has', 'num_scooters_standing_available']],
+                    ['!=', ['literal', mode], 'scooters_standing'],
                     ['==', ['get', 'realtime_data_outdated'], false]
                 ]
             ]
@@ -112,7 +107,6 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OCCUPIED: {
-        // label: 'Ohne freie Fahrzeuge',
         label: 'Keine Fahrzeuge',
         filter: (mode) => [
             'all',
@@ -120,10 +114,10 @@ export const sharingStations = {
             ['==', ['get', `num_${mode}_available`], 0],
             [
                 'any',
-                ['has', 'num_scooters_standing_available'],
+                ['==', ['literal', mode], 'scooters_standing'],
                 [
                     'all',
-                    ['!', ['has', 'num_scooters_standing_available']],
+                    ['!=', ['literal', mode], 'scooters_standing'],
                     ['==', ['get', 'realtime_data_outdated'], false]
                 ]
             ]

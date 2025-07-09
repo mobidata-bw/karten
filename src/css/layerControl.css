@@ -29,13 +29,17 @@ svg {
 	padding-right: 10px;
 }
 
+.mgl-layerControl .checkbox {		
+	margin: 3px;
+}
+
 @media (max-width: 575px) {
 	.mgl-layerControlDirectory {
-		max-height: 180px;
+		max-height: 175px;
 	}
 
 	.config2 {
-		max-height: 130px !important;
+		max-height: 125px !important;
 	}
 
 	input.slide-toggle {
@@ -53,6 +57,10 @@ svg {
 
 	.mgl-layerControlDirectory {		
 		padding-right: 6px;
+	}
+
+	.mgl-layerControl .checkbox {		
+		margin: 2px;
 	}
 }
 
@@ -72,7 +80,7 @@ svg {
 	}
 
 	.config2 {
-		max-height: 270px !important;
+		max-height: 285px !important;
 	}
 }
 
