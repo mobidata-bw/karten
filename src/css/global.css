@@ -14,7 +14,8 @@ body {
 #map {
 	position: absolute;
 	inset: 0;
-	visibility: hidden;  /* hide until map is initialized */
+	visibility: hidden;
+	/* hide until map is initialized */
 }
 
 :root {
@@ -137,6 +138,38 @@ body {
 
 .outDated {
 	color: red;
+}
+
+@media (max-width: 575px) {
+
+	.maplibregl-popup-content {
+		line-height: 15px;
+	}
+
+	.maplibregl-popup-content {
+		padding: 7px 6px;
+	}
+
+	.image {
+		--height: 25px;
+	}
+
+	.title {
+		font-size: 11.5px;
+	}
+
+	.title2 {
+		font-size: 11px;
+	}
+
+	.att,
+	.attContent {
+		font-size: 10px;
+	}
+
+	a {
+		font-size: 10px;
+	}
 }
 
 

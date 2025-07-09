@@ -35,15 +35,15 @@ svg {
 
 @media (max-width: 575px) {
 	.mgl-layerControlDirectory {
-		max-height: 175px;
+		max-height: 170px;
 	}
 
 	.config2 {
-		max-height: 125px !important;
+		max-height: 120px !important;
 	}
 
 	input.slide-toggle {
-		margin: 0 7px 0 0;
+		margin: 0 6px 0 0;
 		width: 18px;
 	}
 
@@ -60,7 +60,11 @@ svg {
 	}
 
 	.mgl-layerControl .checkbox {		
-		margin: 2px;
+		margin: 1.5px;
+	}
+
+	svg {
+		margin-right: 4px;
 	}
 }
 
@@ -163,7 +167,7 @@ input.slide-toggle:checked {
 	}
 
 	.mgl-layerControl .checkbox {
-		font-size: 10.5px;
+		font-size: 10px;
 	}
 
 	svg {
