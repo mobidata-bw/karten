@@ -69,12 +69,14 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersSharingScooter.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' }))
         ];
 
+        console.log(scooter);
+
         layersIpl = [
             ...layersChargePointsDynamic.map(layer => ({ ...layer, group: 'Station 1: E-Ladesäulen' })),
-            ...scooter,
+            ...scooter.filter(layer => layer.id != 'sharingScooter_VehiclesNoRealtimeData'),
             ...layersTransitStops.map(layer => ({ ...layer, group: 'Station 3: Haltestellen' })), ,
             ...layersCountBicycle.filter(layer => layer.id == 'countBicycle3').map(layer => ({ ...layer, label: 'Fahrradzählstellen', group: 'Station 4: Fahrradzählstellen' })),
-            ...layersSharingCar.filter(layer => layer.id != 'sharingCar_StationsOutdatedRealtimeData' && layer.id != 'sharingCar_Vehicles').map(layer => ({ ...layer, group: 'Station 5: Carsharing' })),
+            ...layersSharingCar.filter(layer => layer.id != 'sharingCar_StationsOutdatedRealtimeData' && layer.id != 'sharingCar_Vehicles' && layer.id != 'sharingCar_VehiclesNoRealtimeData').map(layer => ({ ...layer, group: 'Station 5: Carsharing' })),
             ...layersParkApiBicycleOccupancy.filter(layer => layer.id != 'parkApiBicycleOccupancy_OutdatedRealtimeInformation').map(layer => ({ ...layer, group: 'Station 6: Fahrradabstellanlagen' }))
         ];
         layersIpl.forEach(layer => {
