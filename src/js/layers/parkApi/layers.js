@@ -1,6 +1,7 @@
 export const occupancy = {
     NO_REALTIME_INFORMATION: {
-        label: 'Keine Echtzeitinformationen',
+        // label: 'Keine Echtzeitinformationen',
+        label: 'Echtzeitdaten fehlen',
         subGroup: 'Belegung',
         filter:
             [
@@ -25,7 +26,8 @@ export const occupancy = {
         color: '#615fdf'
     },
     OUTDATED_REALTIME_INFORMATION: {
-        label: 'Veraltete Echtzeitinformationen',
+        // label: 'Veraltete Echtzeitinformationen',
+        label: 'Echtzeitdaten veraltet',
         subGroup: 'Belegung',
         filter:
             [
@@ -36,7 +38,8 @@ export const occupancy = {
         color: '#cacaca'
     },
     VERY_LOW_AVAILABILITY_OR_CLOSED: {
-        label: 'Sehr geringe Verfügbarkeit / Geschlossen',
+        // label: 'Sehr geringe Verfügbarkeit / Geschlossen',
+        label: 'Kaum Plätze / geschlossen',
         subGroup: 'Belegung',
         filter:
             [
@@ -87,7 +90,8 @@ export const occupancy = {
         color: '#ed0000'
     },
     LOW_AVAILABILITY: {
-        label: 'Geringe Verfügbarkeit',
+        // label: 'Geringe Verfügbarkeit',
+        label: 'Wenig Plätze',
         subGroup: 'Belegung',
         filter:
             [
@@ -131,7 +135,8 @@ export const occupancy = {
         color: '#dfab27'
     },
     HIGH_AVAILABILITY: {
-        label: 'Hohe Verfügbarkeit',
+        // label: 'Hohe Verfügbarkeit',
+        label: 'Viele Plätze',
         subGroup: 'Belegung',
         filter:
             [

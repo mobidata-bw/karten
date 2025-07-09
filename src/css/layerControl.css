@@ -37,6 +37,23 @@ svg {
 	.config2 {
 		max-height: 130px !important;
 	}
+
+	input.slide-toggle {
+		margin: 0 7px 0 0;
+		width: 18px;
+	}
+
+	input.slide-toggle:checked:after {
+		left: 9px;
+	}
+
+	.mgl-layerControlDirectory>div:not(.directory) {
+		margin-left: 6px !important;
+	}
+
+	.mgl-layerControlDirectory {		
+		padding-right: 6px;
+	}
 }
 
 @media (min-width: 576px) and (max-width: 991px) {

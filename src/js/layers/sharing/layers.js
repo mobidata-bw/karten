@@ -15,7 +15,8 @@ const layersSharingVehicles = {
 
 export const sharingVehicles = {
     OUTDATED_REALTIME_DATA: {
-        label: 'Veraltete Echzeitdaten',
+        // label: 'Veraltete Echzeitdaten',
+        label: 'Echzeitdaten veraltet',
         filter: (mode) => [
             'all',
             ['==', ['get', 'form_factor'], mode],
@@ -25,7 +26,8 @@ export const sharingVehicles = {
         ...layersSharingVehicles
     },
     REALTIME_DATA: {
-        label: 'Freie Fahrzeuge',
+        // label: 'Freie Fahrzeuge',
+        label: 'Fahrzeuge verfügbar',
         filter: (mode) => [
             'all',
             ['==', ['get', 'form_factor'], mode],
@@ -66,7 +68,8 @@ const layersSharingStations = {
 
 export const sharingStations = {
     NO_REALTIME_DATA: {
-        label: 'Keine Echtzeitdaten',
+        // label: 'Keine Echtzeitdaten',
+        label: 'Echtzeitdaten fehlen',
         filter: (mode) => [
             'all',
             sharingNoRealtimeData,
@@ -76,7 +79,8 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OUTDATED_REALTIME_DATA: {
-         label: 'Veraltete Echtzeitdaten',
+        // label: 'Veraltete Echtzeitdaten',
+        label: 'Echtzeitdaten veraltet',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
@@ -88,7 +92,8 @@ export const sharingStations = {
         ...layersSharingStations
     },
     FREE: {
-        label: 'Mit freien Fahrzeugen',
+        // label: 'Mit freien Fahrzeugen',
+        label: 'Fahrzeuge verfügbar',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
@@ -107,7 +112,8 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OCCUPIED: {
-        label: 'Ohne freie Fahrzeuge',
+        // label: 'Ohne freie Fahrzeuge',
+        label: 'Keine Fahrzeuge',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],

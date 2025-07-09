@@ -47,7 +47,7 @@ export const layersChargePointsPower = [
     },
     {
         id: 'chargePointsPower_Unknown',
-        label: 'Unbekannte Ladeleistung',
+        label: 'Ladeleistung unbekannt',
         subGroup: 'Ladeleistung',
         filter:
             [
@@ -61,7 +61,7 @@ export const layersChargePointsPower = [
 export const layersChargePointsDynamic = [
     {
         id: 'chargePointsDynamic_Static',
-        label: 'Ohne Echtzeitinformationen',
+        label: 'Echtzeitdaten fehlen',
         subGroup: 'Belegung',
         filter:
             [
@@ -73,7 +73,7 @@ export const layersChargePointsDynamic = [
     },
     {
         id: 'chargePointsDynamic_Realtime',
-        label: 'Mit Echtzeitinformationen',
+        label: 'Echtzeitdaten verfügbar',
         subGroup: 'Belegung',
         filter:
             [

@@ -1,3 +1,5 @@
+import '../css/styles.css';
+
 import {
     initializeMap,
     basemaps,
