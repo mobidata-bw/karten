@@ -1,1 +1,0 @@
-import{b as e}from"./popupContent-Cb9pKuyp.js";const r=[{id:"sharingMoped_VehiclesNoRealtimeData",group:"Mopedsharing",...e.OUTDATED_REALTIME_DATA,filter:e.OUTDATED_REALTIME_DATA.filter("moped")},{id:"sharingMoped_VehiclesRealtimeData",group:"Mopedsharing",...e.REALTIME_DATA,filter:e.REALTIME_DATA.filter("moped")}];export{r as l};
