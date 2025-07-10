@@ -76,16 +76,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
             ...scooter.filter(layer => layer.id == 'abstellverbotszonen'),
             ...scooter.filter(layer => layer.id == 'abstellflaechen'),
-            ...scooter.filter(layer => layer.id == 'sharingScooter_StationsOccupied').map(layer => ({ ...layer, label: 'Station ohne verfügbare Fahrzeuge' })),
-            ...scooter.filter(layer => layer.id == 'sharingScooter_StationsFree').map(layer => ({ ...layer, label: 'Station mit verfügbaren Fahrzeugen' })),
-            ...scooter.filter(layer => layer.id == 'sharingScooter_VehiclesRealtimeData'),
+            ...scooter.filter(layer => layer.id == 'sharingScooter_StationsOccupied').map(layer => ({ ...layer, label: 'Station: ohne verfügbare Fahrzeuge' })),
+            ...scooter.filter(layer => layer.id == 'sharingScooter_StationsFree').map(layer => ({ ...layer, label: 'Station: verfügbare Fahrzeuge' })),
+            ...scooter.filter(layer => layer.id == 'sharingScooter_VehiclesRealtimeData').map(layer => ({ ...layer, label: 'Fahrzeug: verfügbar' })),,
 
             ...layersTransitStops.map(layer => ({ ...layer, group: 'Station 3: Haltestellen' })), ,
             ...layersCountBicycle.filter(layer => layer.id == 'countBicycle3').map(layer => ({ ...layer, label: 'Fahrradzählstellen', group: 'Station 4: Fahrradzählstellen' })),
 
-            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsNoRealtimeData').map(layer => ({ ...layer, label: 'Station ohne Echtzeitdaten', group: 'Station 5: Carsharing' })),
-            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsOccupied').map(layer => ({ ...layer, label: 'Station ohne verfügbare Fahrzeuge', group: 'Station 5: Carsharing' })),
-            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsFree').map(layer => ({ ...layer, label: 'Station mit verfügbaren Fahrzeugen', group: 'Station 5: Carsharing' })),
+            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsNoRealtimeData').map(layer => ({ ...layer, label: 'Station: ohne Echtzeitdaten', group: 'Station 5: Carsharing' })),
+            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsOccupied').map(layer => ({ ...layer, label: 'Station: ohne verfügbare Fahrzeuge', group: 'Station 5: Carsharing' })),
+            ...layersSharingCar.filter(layer => layer.id == 'sharingCar_StationsFree').map(layer => ({ ...layer, label: 'Station: verfügbare Fahrzeuge', group: 'Station 5: Carsharing' })),
 
             ...layersParkApiBicycleOccupancy.filter(layer => layer.id != 'parkApiBicycleOccupancy_OutdatedRealtimeInformation').map(layer => ({ ...layer, group: 'Station 6: Fahrradabstellanlagen' }))
         ];

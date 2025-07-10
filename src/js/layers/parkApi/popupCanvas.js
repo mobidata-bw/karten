@@ -11,7 +11,7 @@ export function popupCanvas(features) {
 
         if (anchor) {
             // Erzeuge einen eindeutigen Canvas: ID "canvas-[feature.id]"
-            const canvasHtml = '<td rowspan="7"><canvas id="canvas-' + features.id + '" width="110" height="96"></canvas></td>';
+            const canvasHtml = '<td rowspan="7"><canvas class="canvasPie" id="canvas-' + features.id + '" width="110" height="96"></canvas></td>';
             anchor.outerHTML = canvasHtml;
 
             const canvas = document.getElementById("canvas-" + features.id);

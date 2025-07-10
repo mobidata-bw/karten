@@ -37,7 +37,7 @@ export function popupContent(feature) {
                 '</table>')) +
         '<table>\
                 <tr>\
-                    <td><canvas id="canvas-' + counterSideId + '" width="300" height="100" /></td>\
+                    <td><canvas class="canvasBar" id="canvas-' + counterSideId + '" width="300" height="100" /></td>\
                 <tr>\
             </table>\
             <table>\

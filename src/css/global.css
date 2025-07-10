@@ -163,13 +163,24 @@ body {
 	}
 
 	.att,
-	.attContent {
+	.attContent,
+	.att2,
+	.attContent2 {
 		font-size: 10px;
 	}
 
 	a {
 		font-size: 10px;
 	}
+
+	.canvasBar {
+		width: 200px;
+	}
+
+	.canvasPie {
+		width: 80px;
+	}
+
 }
 
 

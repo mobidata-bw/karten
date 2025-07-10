@@ -101,12 +101,12 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersParkApiCarOnStreetOccupancy,
             ...layersParkApiBicycleOccupancy,
 
-            ...layersSharing.filter(layer => layer.id.includes('StationsNoRealtimeData')).map(layer => ({ ...layer, label: 'Station ohne Echtzeitdaten' })),
-            ...layersSharing.filter(layer => layer.id.includes('StationsOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Station mit veralteten Echtzeitdaten' })),
-            ...layersSharing.filter(layer => layer.id.includes('StationsOccupied')).map(layer => ({ ...layer, label: 'Station ohne verfügbare Fahrzeuge' })),
-            ...layersSharing.filter(layer => layer.id.includes('StationsFree')).map(layer => ({ ...layer, label: 'Station mit verfügbaren Fahrzeugen' })),
-            ...layersSharing.filter(layer => layer.id.includes('VehiclesOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Fahrzeug mit veralteten Echtzeitdaten' })),
-            ...layersSharing.filter(layer => layer.id.includes('VehiclesRealtimeData')).map(layer => ({ ...layer, label: 'Fahrzeug verfügbar' })),
+            ...layersSharing.filter(layer => layer.id.includes('StationsNoRealtimeData')).map(layer => ({ ...layer, label: 'Station: ohne Echtzeitdaten' })),
+            ...layersSharing.filter(layer => layer.id.includes('StationsOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Station: veraltete Echtzeitdaten' })),
+            ...layersSharing.filter(layer => layer.id.includes('StationsOccupied')).map(layer => ({ ...layer, label: 'Station: ohne verfügbare Fahrzeuge' })),
+            ...layersSharing.filter(layer => layer.id.includes('StationsFree')).map(layer => ({ ...layer, label: 'Station: verfügbare Fahrzeuge' })),
+            ...layersSharing.filter(layer => layer.id.includes('VehiclesOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Fahrzeug: veraltete Echtzeitdaten' })),
+            ...layersSharing.filter(layer => layer.id.includes('VehiclesRealtimeData')).map(layer => ({ ...layer, label: 'Fahrzeug: verfügbar' })),
 
             ...layersChargePointsPower,
             ...layersRadvis,

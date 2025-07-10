@@ -4,6 +4,7 @@
 export const sourceCountBicycle = {
     type: 'geojson',
     data: '/karten_geojsons/maps/count_bicycle/fahrradzaehler_tageswerten_gesamt.geojson'
+    //  data: 'data/fahrradzaehler_tageswerten_gesamt.geojson'
 };
 
 

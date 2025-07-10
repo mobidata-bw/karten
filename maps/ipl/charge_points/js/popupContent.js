@@ -77,7 +77,7 @@ export function popupContent(features) {
             <br>\
             <table>\
                 <tr>\
-                    <td><canvas id="canvas-' + id + '" width="300" height="100" /></td>\
+                    <td><canvas class="canvasBar" id="canvas-' + id + '" width="300" height="100" /></td>\
                 </tr>\
             </table><table>\
                 <tr>\
