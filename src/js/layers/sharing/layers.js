@@ -29,7 +29,11 @@ export const sharingVehicles = {
         filter: (mode) => [
             'all',
             ['==', ['get', 'form_factor'], mode],
-            ['==', ['get', 'realtime_data_outdated'], false]
+            [
+                'any',
+                ['==', ['get', 'realtime_data_outdated'], false],
+                ['==', ['get', 'realtime_data_outdated'], null]
+            ]
         ],
         color: '#91FFFF',
         ...layersSharingVehicles
