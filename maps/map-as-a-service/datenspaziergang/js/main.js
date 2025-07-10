@@ -21,6 +21,7 @@ import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../../ip
 import { popupContent as popupContentStations } from './popupContent.js';
 import { popupContent as popupContentChargePoints } from '../../../ipl/charge_points/js/popupContent.js';
 import { popupContent as popupContentSharing } from '../../../../src/js/layers/sharing/popupContent.js';
+import { popupContentTransitStops } from '../../../ipl/gtfs/js/popupContent.js';
 import { popupContent as popupContentCountBicycle } from '../../../count_bicycle/js/popupContent.js';
 import { popupContent as popupContentParkApi } from '../../../../src/js/layers/parkApi/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -112,6 +113,7 @@ window.addEventListener('DOMContentLoaded', () => {
         popups(map, layersStations, popupContentStations);
         popups(map, layersChargePointsDynamic, popupContentChargePoints);
         popups(map, layersSharingScooter, popupContentSharing);
+        popups(map, layersTransitStops, popupContentTransitStops);
         popups(map, layersSharingCar, popupContentSharing);
         popups(map, layersCountBicycle, popupContentCountBicycle);
         popups(map, layersParkApiBicycleOccupancy, popupContentParkApi);
