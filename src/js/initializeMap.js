@@ -138,7 +138,6 @@ export function initializeMap({ center, zoom, minZoom, shape } = {}) {
     map.addControl(
         new MaplibreGeocoder(geocoderApi, {
             maplibregl,
-            // collapsed: true,
             language: 'de',
             showResultsWhileTyping: true,
             popup: true
@@ -150,7 +149,17 @@ export function initializeMap({ center, zoom, minZoom, shape } = {}) {
 
     // ==============================
     // MAP CONTROLS
-    // ==============================
+    // ============================== 
+    map.addControl(
+        new maplibregl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true
+        }),
+        'top-left'
+    );
+
     map.addControl(
         new MaplibreInspect({
             popup: new maplibregl.Popup({

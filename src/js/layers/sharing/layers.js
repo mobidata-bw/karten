@@ -10,7 +10,7 @@ export const sourceSharingVehicles = {
 const layersSharingVehicles = {
     subGroup: 'Free-Floating-Fahrzeuge',
     source: 'sourceSharingVehicles',
-    sourceLayer: 'sharing_vehicles'
+    sourceLayer: 'sharing_vehicles'    
 };
 
 export const sharingVehicles = {
