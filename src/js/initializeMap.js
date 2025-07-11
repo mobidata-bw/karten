@@ -29,24 +29,27 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, shape }
 
     const params = new URLSearchParams(window.location.search);
 
-    if (configZoom && configCenter) {
+    if (params.has('zoom') && params.has('lat') && params.has('lng')) {
+        lat = parseFloat(params.get('lat'));
+        lng = parseFloat(params.get('lng'));
+        zoom = parseFloat(params.get('zoom'));
+        // console.log("B: ", lat, lng, zoom);
+    }
+    else if (configZoom && configCenter) {
         lat = configCenter[0];
         lng = configCenter[1];
         zoom = configZoom;
-    }
-    else if (params.has('zoom') && params.has('lat') && params.has('lng')) {
-        lat = parseFloat(params.get('lat')) || 9.000;
-        lng = parseFloat(params.get('lng')) || 48.680;
-        zoom = parseFloat(params.get('zoom')) || window.innerWidth < 577 ? 6 : 7.1;
+        // console.log("A: ", lat, lng, zoom);
     } else {
         lat = 9.000;
         lng = 48.680;
         zoom = window.innerWidth < 577 ? 6 : 7.1;
-    };  
+        // console.log("C: ", lat, lng, zoom);
+    };
 
     map = new maplibregl.Map({
         container: 'map',
-        style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',       
+        style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
         center: [lat, lng],
         zoom: zoom,
         minZoom: configMinZoom || 4,
