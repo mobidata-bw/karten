@@ -31,6 +31,12 @@ window.addEventListener('DOMContentLoaded', () => {
             [9.286880, 47.780866]
         ]);
 
+        map.once('load', () => {
+            map.resize();
+            map.jumpTo({ center: [9.156810, 47.701872] });
+            map.getContainer().style.visibility = 'visible';
+        });
+
 
         // ==============================
         // SOURCES AND LAYERS

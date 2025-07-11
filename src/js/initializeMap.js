@@ -20,20 +20,36 @@ export let map;
 
 
 
-export function initializeMap({ center, zoom, minZoom, shape } = {}) {
+export function initializeMap({ configZoom, configCenter, configMinZoom, shape } = {}) {
 
     // ==============================
     // MAP
     // ==============================
-    const defaultCenter = [9.000, 48.680];
-    const defaultZoom = window.innerWidth < 577 ? 6 : 7.1;
+    let lat, lng, zoom;
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (configZoom && configCenter) {
+        lat = configCenter[0];
+        lng = configCenter[1];
+        zoom = configZoom;
+    }
+    else if (params.has('zoom') && params.has('lat') && params.has('lng')) {
+        lat = parseFloat(params.get('lat')) || 9.000;
+        lng = parseFloat(params.get('lng')) || 48.680;
+        zoom = parseFloat(params.get('zoom')) || window.innerWidth < 577 ? 6 : 7.1;
+    } else {
+        lat = 9.000;
+        lng = 48.680;
+        zoom = window.innerWidth < 577 ? 6 : 7.1;
+    };  
 
     map = new maplibregl.Map({
         container: 'map',
-        style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
-        center: center || defaultCenter,
-        zoom: zoom || defaultZoom,
-        minZoom: minZoom || 4,
+        style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',       
+        center: [lat, lng],
+        zoom: zoom,
+        minZoom: configMinZoom || 4,
         maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
         attributionControl: false,
         pixelRatio: 1
@@ -42,8 +58,8 @@ export function initializeMap({ center, zoom, minZoom, shape } = {}) {
     map.once('load', () => {
         map.resize();
         map.jumpTo({
-            center: center || defaultCenter,
-            zoom: zoom || defaultZoom
+            center: [lat, lng],
+            zoom: zoom
         });
         map.getContainer().style.visibility = 'visible';
     });
