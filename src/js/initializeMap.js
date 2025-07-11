@@ -83,9 +83,9 @@ export function initializeMap({ center, zoom, minZoom, shape } = {}) {
 
 
     // ==============================
-    // GEOCODER
-    // ==============================
-    const geocoderApi = {
+    // MAP CONTROLS
+    // ============================== 
+    const maplibreGeocoder = {
         forwardGeocode: async (config) => {
             const features = [];
             try {
@@ -135,40 +135,42 @@ export function initializeMap({ center, zoom, minZoom, shape } = {}) {
         },
     };
 
-    map.addControl(
-        new MaplibreGeocoder(geocoderApi, {
-            maplibregl,
-            language: 'de',
-            showResultsWhileTyping: true,
-            popup: true
-        }),
-        'top-left',
+    const geolocateControl = new maplibregl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true
+    });
 
-    );
+    const maplibreInspect = new MaplibreInspect({
+        popup: new maplibregl.Popup({
+            closeButton: false,
+            closeOnClick: false
+        })
+    });
 
+    // check if smartphone/tablet or desktop
+    if (window.innerWidth <= 768) {
 
-    // ==============================
-    // MAP CONTROLS
-    // ============================== 
-    map.addControl(
-        new maplibregl.GeolocateControl({
-            positionOptions: {
-                enableHighAccuracy: true
-            },
-            trackUserLocation: true
-        }),
-        'top-left'
-    );
+        map.addControl(geolocateControl, 'top-left');
 
-    map.addControl(
-        new MaplibreInspect({
-            popup: new maplibregl.Popup({
-                closeButton: false,
-                closeOnClick: false
-            })
-        }),
-        'top-left'
-    );
+    } else {
+
+        map.addControl(
+            new MaplibreGeocoder(maplibreGeocoder, {
+                maplibregl,
+                language: 'de',
+                showResultsWhileTyping: true,
+                popup: true
+            }),
+            'top-left',
+
+        );
+
+        map.addControl(maplibreInspect, 'top-left');
+
+    };
+
     map.addControl(
         new maplibregl.NavigationControl({
             showZoom: window.innerWidth < 577 ? false : true,

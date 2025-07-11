@@ -39,14 +39,6 @@
 	}
 }
 
-@media (max-width: 472px) {
-
-	.maplibregl-ctrl-geocoder {
-		display: none;
-	}
-
-}
-
 @media (min-width: 473px) and (max-width: 575px) {
 
 	.maplibregl-ctrl-geocoder {

@@ -185,16 +185,6 @@ body {
 
 
 /* ============================== */
-/* MAP CONTROLS		              */
-/* ============================== */
-@media (min-width: 472px) {
-	.maplibregl-ctrl-geolocate {
-		display: none !important;
-	}
-}
-
-
-/* ============================== */
 /* POPUP CANVAS		              */
 /* ============================== */
 #divParkingSites {
