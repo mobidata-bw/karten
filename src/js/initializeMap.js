@@ -169,7 +169,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, shape }
     });
 
     // check if smartphone/tablet or desktop
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth < 473) {
 
         map.addControl(geolocateControl, 'top-left');
 
