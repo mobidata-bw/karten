@@ -98,7 +98,8 @@ export function popupContent(features) {
         "54": "Stadt Ulm",
         "55": "Stadt Mannheim",
         "56": "Stadt Freiburg im Breisgau",
-        "57": "Stadt Freiburg im Breisgau"
+        "57": "Stadt Freiburg im Breisgau",
+        "58": "B+B Parkhaus GmbH & Co. KG"
     };
 
 
@@ -137,7 +138,7 @@ export function popupContent(features) {
         ((!type) ? '' : (
             '<tr>\
             <td class="att">Typ</td>' +
-            ((type == 'ON_STREET') ? ('<td class="attContent">Straßenparkplatz</td>') : '') +
+            ((type == 'ON_STREET') ? ('<td class="attContent">Straßen-Parkplatz</td>') : '') +
             ((type == 'OFF_STREET_PARKING_GROUND') ? ('<td class="attContent">Parkplatz abseits der Straße</td>') : '') +
             ((type == 'CAR_PARK') ? ('<td class="attContent">Parkhaus</td>') : '') +
             ((type == 'UNDERGROUND') ? ('<td class="attContent">Tiefgarage</td>') : '') +

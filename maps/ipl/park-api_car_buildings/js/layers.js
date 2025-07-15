@@ -78,9 +78,10 @@ export const layersParkApiCarBuildingsTypes = [
 
 export const layersParkApiCarBuildingsObjects = [
     {
-        id: 'parkApiCarBuildingsObjects_Site',
+        id: 'parkApiCarBuildingsObjects_Site',       
         visibility: 'none',
         ...objects.PARKING_SITE,
+        label: 'Parkbau',
         ...layers
     },
     {
