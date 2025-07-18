@@ -20,7 +20,7 @@ export let map;
 
 
 
-export function initializeMap({ configZoom, configCenter, configMinZoom, shape } = {}) {
+export function initializeMap({ configZoom, configCenter, configMinZoom, configShape } = {}) {
 
     // ==============================
     // MAP
@@ -73,9 +73,11 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, shape }
     // ==============================
     map.on('load', () => {
 
+        const shape = configShape ? `/karten_geojsons/boundaries/${configShape}` : (window.innerWidth < 473 ? '/karten_geojsons/boundaries/shapesBadenWuerttembergSimplified.geojson' : '/karten_geojsons/boundaries/shapesBadenWuerttemberg.geojson');
+
         map.addSource('shape', {
             'type': 'geojson',
-            'data': shape ? `/karten_geojsons/boundaries/${shape}` : '/karten_geojsons/boundaries/shapesBadenWuerttemberg.geojson'
+            'data': shape
         });
 
         map.addLayer({
