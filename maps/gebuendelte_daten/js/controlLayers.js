@@ -24,7 +24,7 @@ export function initializeControlLayers(map) {
     // ============================== 
     const config2 = {
         collapsed: false,
-        layers: addControlLayers(layersGeoJson, 'Weitere Datensätze', 'group')
+        layers: addControlLayers(layersGeoJson, 'Weitere Datenprofile', 'group')
     };
 
     control2 = new layerControlGrouped(config2);
@@ -32,7 +32,7 @@ export function initializeControlLayers(map) {
     map.addControl(control2, 'top-right');
 
     // add class to add different max-height for config2 
-    document.getElementById('Weitere_Datensätze').parentElement.classList.add('config2');
+    document.getElementById('Weitere_Datenprofile').parentElement.classList.add('config2');
 
 
 };
