@@ -37,36 +37,36 @@ export function initializeControlLayers(map) {
 
 
 
-    // const groupLabels = document.querySelectorAll('label.mgl-layerControlGroupHeading');
+    const groupLabels = document.querySelectorAll('label.mgl-layerControlGroupHeading');
 
-    // function updateGroup(label, toggle = false) {
+    function updateGroup(label, toggle = false) {
 
-    //     const group = label.parentElement;
-    //     const groupLayers = group.querySelectorAll('div.checkbox');
+        const group = label.parentElement;
+        const groupLayers = group.querySelectorAll('div.checkbox');
 
-    //     groupLayers.forEach(groupLayer => {
+        groupLayers.forEach(groupLayer => {
 
-    //         const groupLayerId = groupLayer.querySelector('input[type="checkbox"]').id;
-    //         const visibility = map.getLayoutProperty(groupLayerId, 'visibility');
+            const groupLayerId = groupLayer.querySelector('input[type="checkbox"]').id;
+            const visibility = map.getLayoutProperty(groupLayerId, 'visibility');
 
-    //         if (visibility === 'visible') {
-    //             toggle ? groupLayer.style.display = 'none' : groupLayer.style.display = 'block';
-    //             // label.style.fontWeight = 'unset';
-    //         } else {
-    //             toggle ? groupLayer.style.display = 'block' : groupLayer.style.display = 'none';
-    //             // label.style.fontWeight = 'unset';
-    //         }
+            if (visibility === 'visible') {
+                toggle ? groupLayer.style.display = 'none' : groupLayer.style.display = 'block';
+                // label.style.fontWeight = 'unset';
+            } else {
+                toggle ? groupLayer.style.display = 'block' : groupLayer.style.display = 'none';
+                // label.style.fontWeight = 'unset';
+            }
 
-    //     });
-    // };
+        });
+    };
 
-    // groupLabels.forEach(label => {
-    //     updateGroup(label, false);
+    groupLabels.forEach(label => {
+        updateGroup(label, false);
 
-    //     label.addEventListener('click', () => {
-    //         updateGroup(label, true);
-    //     });
-    // });
+        label.addEventListener('click', () => {
+            updateGroup(label, true);
+        });
+    });
 
 
 };

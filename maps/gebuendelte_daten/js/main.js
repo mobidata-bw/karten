@@ -1,3 +1,5 @@
+import '../css/styles.css';
+
 import {
     initializeMap, map,
     basemaps,
@@ -41,7 +43,6 @@ import { popupContent as popupContentCountBicycle } from '../../count_bicycle/js
 import { popupContent as popupContentPedestrianCrossings } from '../../pedestrian_crossings/js/popupContent.js';
 
 import { initializeControlLayers } from './controlLayers.js';
-import { config } from 'maplibre-gl';
 
 export let layers, layersIpl, layersGeoJson;
 
