@@ -51,10 +51,10 @@ export function initializeControlLayers(map) {
             const visibility = map.getLayoutProperty(groupLayerId, 'visibility');
 
             if (visibility === 'visible') {
-                toggle ? groupLayer.classList.add('hidden') : groupLayer.classList.remove('hidden');
+                toggle ? groupLayer.classList.add('hiddenGroupLayers') : groupLayer.classList.remove('hiddenGroupLayers');
                 // label.style.fontWeight = 'unset';
             } else {
-                toggle ? groupLayer.classList.remove('hidden') : groupLayer.classList.add('hidden');
+                toggle ? groupLayer.classList.remove('hiddenGroupLayers') : groupLayer.classList.add('hiddenGroupLayers');
                 // label.style.fontWeight = 'unset';            
             }
 
