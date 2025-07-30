@@ -30,11 +30,11 @@ export const sourceUncontrolled = {
 
 export const sourceZebra = {
     type: 'geojson',
-    // data: '/karten_geojsons/maps/pedestrian_crossings/zebra.geojson'
-    data: {
-        type: 'FeatureCollection',
-        features: []
-    }
+    data: '/karten_geojsons/maps/pedestrian_crossings/zebra.geojson'
+    // data: {
+    //     type: 'FeatureCollection',
+    //     features: []
+    // }
 };
 
 
@@ -80,6 +80,6 @@ export const layersPedestrianCrossings = [
         source: 'sourceZebra',
         color: '#366491',
         ...layers,
-        url: '/karten_geojsons/maps/pedestrian_crossings/zebra.geojson'
+        // url: '/karten_geojsons/maps/pedestrian_crossings/zebra.geojson'
     }
 ];
