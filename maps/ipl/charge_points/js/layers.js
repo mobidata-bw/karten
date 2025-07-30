@@ -65,7 +65,9 @@ export const layersChargePointsDynamic = [
         subGroup: 'Belegung',
         filter:
             [
-                '==', ['get', 'source'], 'bnetza_api'
+                'any',
+                ['==', ['get', 'source'], 'bnetza_api'],
+                ['==', ['get', 'source'], 'opendata_swiss']
             ],
         color: '#615fdf',
         visibility: 'none',
@@ -77,7 +79,9 @@ export const layersChargePointsDynamic = [
         subGroup: 'Belegung',
         filter:
             [
-                '!=', ['get', 'source'], 'bnetza_api'
+                'all',
+                ['!=', ['get', 'source'], 'bnetza_api'],
+                ['!=', ['get', 'source'], 'opendata_swiss']
             ],
         color: '#dfab27',
         visibility: 'none',

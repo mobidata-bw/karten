@@ -99,7 +99,13 @@ export function popupContent(features) {
         "55": "Stadt Mannheim",
         "56": "Stadt Freiburg im Breisgau",
         "57": "Stadt Freiburg im Breisgau",
-        "58": "B+B Parkhaus GmbH & Co. KG"
+        "58": "B+B Parkhaus GmbH & Co. KG",
+        "59": "Stadt Freiburg im Breisgau",
+        "60": "Stadt Heidelberg",
+        "61": "Stadt Esslingen",
+        "62": "Stadt Keltern",
+        "63": "Stadt Reutlingen",
+        "64": "Stadt Stuttgart"
     };
 
 
