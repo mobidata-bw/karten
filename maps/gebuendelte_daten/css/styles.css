@@ -15,3 +15,7 @@
         width: 278px !important;
     }
 }
+
+.hidden {
+    display: none;
+  }

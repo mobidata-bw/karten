@@ -35,8 +35,9 @@ export function initializeControlLayers(map) {
     document.getElementById('Weitere_Datenprofile').parentElement.classList.add('config2');
 
 
-
-
+    // ==============================
+    // GROUP LAYER VISIBILITY
+    // ============================== 
     const groupLabels = document.querySelectorAll('label.mgl-layerControlGroupHeading');
 
     function updateGroup(label, toggle = false) {
@@ -50,11 +51,11 @@ export function initializeControlLayers(map) {
             const visibility = map.getLayoutProperty(groupLayerId, 'visibility');
 
             if (visibility === 'visible') {
-                toggle ? groupLayer.style.display = 'none' : groupLayer.style.display = 'block';
+                toggle ? groupLayer.classList.add('hidden') : groupLayer.classList.remove('hidden');
                 // label.style.fontWeight = 'unset';
             } else {
-                toggle ? groupLayer.style.display = 'block' : groupLayer.style.display = 'none';
-                // label.style.fontWeight = 'unset';
+                toggle ? groupLayer.classList.remove('hidden') : groupLayer.classList.add('hidden');
+                // label.style.fontWeight = 'unset';            
             }
 
         });

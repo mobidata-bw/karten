@@ -194,14 +194,3 @@ body {
 #divTable {
 	width: 173px;
 }
-
-
-/* REVERSE CONTROL LAYERS */
-.mgl-layerControlDirectory>div:not(.directory) {
-	display: flex;
-	flex-direction: column-reverse;
-}
-
-.mgl-layerControlDirectory>div:not(.directory)>label.mgl-layerControlGroupHeading {
-	order: 1;
-}

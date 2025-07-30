@@ -187,7 +187,7 @@ export function popupContent(features) {
         )) +
         ((!realtime_data_updated_at) ? '' : (
             '<tr>\
-            <td class="att">Stand Echtzeitinformationen</td>' +
+            <td class="att">Stand Echtzeitdaten</td>' +
             (realtime_data_outdated ? '<td class="attContent outDated">' + date + ', ' + time + '</td>' : '<td class="attContent">' + date + ', ' + time + '</td>') +
             '</tr>'
         )) +
@@ -208,7 +208,7 @@ export function popupContent(features) {
                 ((realtime_status == 'AVAILABLE') ? ('<td class="attContent">1 / 1</td>') : '') +
                 ((realtime_status == 'TAKEN') ? ('<td class="attContent">0 / 1</td>') : '') +
                 ((realtime_status == 'UNKNOWN') ? ('<td class="attContent">- / 1</td>') : '') +
-                ((has_realtime_data == undefined) ? ('<td class="attContent">- / 1</td>') : '') +
+                ((!has_realtime_data || !realtime_status) ? ('<td class="attContent">- / 1</td>') : '') +
                 '</tr><tr>' +
                 ((!restriction_type) ? '' : (
                     '<tr>\

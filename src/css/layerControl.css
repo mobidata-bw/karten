@@ -80,7 +80,7 @@ svg {
 
 @media (min-width: 992px) {
 	.mgl-layerControlDirectory {
-		max-height: 490px;
+		max-height: 500px;
 	}
 
 	.config2 {
@@ -210,4 +210,14 @@ input.slide-toggle:checked {
 	svg {
 		margin-bottom: 2px;
 	}
+}
+
+/* REVERSE CONTROL LAYERS */
+.mgl-layerControlDirectory>div:not(.directory) {
+	display: flex;
+	flex-direction: column-reverse;
+}
+
+.mgl-layerControlDirectory>div:not(.directory)>label.mgl-layerControlGroupHeading {
+	order: 1;
 }
