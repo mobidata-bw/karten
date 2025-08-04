@@ -87,6 +87,7 @@ export function popupContent(features) {
         "43": "Verband Region Stuttgart",
         "44": "PARK SERVICE HÜFNER",
         "45": "Stadt Herrenberg",
+        "46": "Kienzler",
         "47": "Stadt Konstanz",
         "48": "Stadt Mannheim",
         "49": "VELOBRIX",
