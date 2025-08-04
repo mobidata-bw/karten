@@ -92,7 +92,6 @@ export function popupContent(features) {
         "49": "VELOBRIX",
         "50": "Verkehrsverbund Rhein-Neckar",
         "51": "Stadt Friedrichshafen",
-        "51": "Stadt Friedrichshafen",
         "52": "Stadt Freiburg im Breisgau",
         "53": "Stadt Freiburg im Breisgau",
         "54": "Stadt Ulm",
