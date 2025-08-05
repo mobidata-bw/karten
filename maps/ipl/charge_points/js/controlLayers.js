@@ -17,5 +17,6 @@ export function initializeControlLayers(map) {
     // layerControl._exclusiveGroupsList = ['Ladeleistung', 'Belegung'];
   
     map.addControl(layerControl, 'top-right');
+    
 
 };

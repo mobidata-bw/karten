@@ -29,7 +29,7 @@ svg {
 	padding-right: 10px;
 }
 
-.mgl-layerControl .checkbox {		
+.mgl-layerControl .checkbox {
 	margin: 3px;
 }
 
@@ -52,14 +52,14 @@ svg {
 	}
 
 	.mgl-layerControlDirectory>div:not(.directory) {
-		margin-left: 6px !important;	
+		margin-left: 6px !important;
 	}
 
-	.mgl-layerControlDirectory {		
+	.mgl-layerControlDirectory {
 		padding-right: 6px;
 	}
 
-	.mgl-layerControl .checkbox {		
+	.mgl-layerControl .checkbox {
 		margin: 1.5px;
 	}
 
