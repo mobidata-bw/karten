@@ -1,1 +1,0 @@
-import{b as e}from"./popupContent-CC51r12t.js";const i=[{id:"sharingMoped_VehiclesOutdatedRealtimeData",group:"E-Kleinkraftrad-Sharing",...e.OUTDATED_REALTIME_DATA,filter:e.OUTDATED_REALTIME_DATA.filter("moped")},{id:"sharingMoped_VehiclesRealtimeData",group:"E-Kleinkraftrad-Sharing",...e.REALTIME_DATA,filter:e.REALTIME_DATA.filter("moped")}];export{i as l};

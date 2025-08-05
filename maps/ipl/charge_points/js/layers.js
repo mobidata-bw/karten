@@ -66,9 +66,13 @@ export const layersChargePointsDynamic = [
         subGroup: 'Belegung',
         filter:
             [
-                'any',
-                ['==', ['get', 'source'], 'bnetza_api'],
-                ['==', ['get', 'source'], 'opendata_swiss']
+                'all',
+                ['>', ['get', 'chargepoint_static_count'], 0],
+                ['==', ['get', 'chargepoint_outoforder_count'], 0],
+                ['==', ['get', 'chargepoint_unknown_count'], 0],
+                ['==', ['get', 'chargepoint_inoperative_count'], 0],
+                ['==', ['get', 'chargepoint_available_count'], 0],
+                ['==', ['get', 'chargepoint_charging_count'], 0]
             ],
         color: '#615fdf',
         visibility: 'none',
@@ -81,8 +85,15 @@ export const layersChargePointsDynamic = [
         filter:
             [
                 'all',
-                ['!=', ['get', 'source'], 'bnetza_api'],
-                ['!=', ['get', 'source'], 'opendata_swiss']
+                ['==', ['get', 'chargepoint_static_count'], 0],
+                [
+                    'any',
+                    ['>', ['get', 'chargepoint_outoforder_count'], 0],
+                    ['>', ['get', 'chargepoint_unknown_count'], 0],
+                    ['>', ['get', 'chargepoint_inoperative_count'], 0],
+                    ['>', ['get', 'chargepoint_available_count'], 0],
+                    ['>', ['get', 'chargepoint_charging_count'], 0]
+                ]
             ],
         color: '#dfab27',
         visibility: 'none',
