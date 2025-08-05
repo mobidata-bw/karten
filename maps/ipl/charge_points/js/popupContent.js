@@ -25,7 +25,8 @@ export function popupContent(features) {
         "chargecloud_pforzheim": "Stadtwerke Pforzheim",
         "ochp_albwerk": "AlbWerk",
         "heilbronn_neckarbogen": "Stadtwerke Heilbronn",
-        "opendata_swiss": "Open-Data-Plattform Schweiz"
+        "opendata_swiss": "Open-Data-Plattform Schweiz",
+        "chargecloud_tuebingen": "Stadtwerke Tübingen"
     };
 
 
