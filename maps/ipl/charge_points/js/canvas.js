@@ -9,16 +9,16 @@ const canvas = document.querySelector('#canvas-' + features.id);
 
         const staticUnknownCount = features.chargepoint_static_count + features.chargepoint_unknown_count;
         const availableCount = features.chargepoint_available_count;
-        const chargingCount = features.chargepoint_charging_count;
+        const occupiedCount = features.chargepoint_charging_count + features.chargepoint_reserved_count;
         const inoperativeOutOfOrderCount = features.chargepoint_inoperative_count + features.chargepoint_outoforder_count;
 
-        const totalCount = staticUnknownCount + availableCount + chargingCount + inoperativeOutOfOrderCount;
+        const totalCount = staticUnknownCount + availableCount + occupiedCount + inoperativeOutOfOrderCount;
      
         const chargepoints = [
             totalCount,
             staticUnknownCount,
             availableCount,
-            chargingCount,
+            occupiedCount,
             inoperativeOutOfOrderCount
         ];
 
