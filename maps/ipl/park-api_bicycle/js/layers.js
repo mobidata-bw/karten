@@ -47,8 +47,13 @@ export const layersParkApiBicycleOccupancy = [
         ...layersBicycle
     },
     {
-        id: 'parkApiBicycleOccupancy_VeryLowAvailabilityOrClosed',
-        ...occupancy.VERY_LOW_AVAILABILITY_OR_CLOSED,
+        id: 'parkApiBicycleOccupancy_Closed',
+        ...occupancy.CLOSED,
+        ...layersBicycle
+    },
+    {
+        id: 'parkApiBicycleOccupancy_VeryLowAvailability',
+        ...occupancy.VERY_LOW_AVAILABILITY,
         ...layersBicycle
     },
     {
@@ -142,8 +147,15 @@ export const layersParkApiItemOccupancy = [
         ...layersItem
     },
     {
-        id: 'parkApiItemOccupancy_VeryLowAvailabilityOrClosed',
-        ...occupancy.VERY_LOW_AVAILABILITY_OR_CLOSED,
+        id: 'parkApiItemOccupancy_Closed',
+        ...occupancy.CLOSED,
+        subGroup: 'Belegung ', // overwrite layers.js
+        visibility: 'none',
+        ...layersItem
+    },
+    {
+        id: 'parkApiItemOccupancy_VeryLowAvailability',
+        ...occupancy.VERY_LOW_AVAILABILITY,
         subGroup: 'Belegung ', // overwrite layers.js
         visibility: 'none',
         ...layersItem

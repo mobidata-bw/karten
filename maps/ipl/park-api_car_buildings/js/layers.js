@@ -33,8 +33,13 @@ export const layersParkApiCarBuildingsOccupancy = [
         ...layers
     },
     {
-        id: 'parkApiCarBuildingsOccupancy_VeryLowAvailabilityOrClosed',
-        ...occupancy.VERY_LOW_AVAILABILITY_OR_CLOSED,
+        id: 'parkApiCarBuildingsOccupancy_Closed',
+        ...occupancy.CLOSED,
+        ...layers
+    },
+    {
+        id: 'parkApiCarBuildingsOccupancy_VeryLowAvailability',
+        ...occupancy.VERY_LOW_AVAILABILITY,
         ...layers
     },
     {

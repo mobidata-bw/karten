@@ -9,7 +9,7 @@ export const occupancy = {
                 [
                     'all',
                     ['==', ['get', 'parking_object'], 'site'],
-                    ['==', ['get', 'realtime_free_capacity'], null]
+                    ['==', ['get', 'has_realtime_data'], false]
                 ],
                 /* PARKING SPOT */
                 [
@@ -31,12 +31,21 @@ export const occupancy = {
             [
                 'all',
                 ['==', ['get', 'realtime_data_outdated'], true],
-                ['!=', ['get', 'source_id'], 55] // Mannheim exception                
+                ['!=', ['get', 'source_id'], 55] // exception since Mannheim only pushes when new event occurs                
             ],
         color: '#cacaca'
     },
-    VERY_LOW_AVAILABILITY_OR_CLOSED: {
-        label: 'Kaum Plätze / geschlossen',
+    CLOSED: {
+        label: 'Geschlossen',
+        subGroup: 'Belegung',
+        filter:
+            [
+                '==', ['get', 'realtime_opening_status'], 'CLOSED'
+            ],
+        color: '#880000'
+    },
+    VERY_LOW_AVAILABILITY: {
+        label: 'Kaum Plätze (unter 2%)',
         subGroup: 'Belegung',
         filter:
             [
@@ -46,30 +55,26 @@ export const occupancy = {
                     'all',
                     ['==', ['get', 'parking_object'], 'site'],
                     [
-                        'any',
-                        ['==', ['get', 'realtime_opening_status'], 'CLOSED'],
-                        [
-                            'all',
-                            ['>=', ['get', 'realtime_free_capacity'], 0],
-                            ['<=',
-                                ['/',
-                                    ['*', 1.0, ['get', 'realtime_free_capacity']],
-                                    [
-                                        'case',
-                                        ['has', 'realtime_capacity'],
-                                        ['get', 'realtime_capacity'],
-                                        ['get', 'capacity']
-                                    ]
-                                ],
-                                0.02
+                        'all',
+                        ['>=', ['get', 'realtime_free_capacity'], 0],
+                        ['<',
+                            ['/',
+                                ['*', 1.0, ['get', 'realtime_free_capacity']],
+                                [
+                                    'case',
+                                    ['has', 'realtime_capacity'],
+                                    ['get', 'realtime_capacity'],
+                                    ['get', 'capacity']
+                                ]
                             ],
-                            ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
-                        ]
+                            0.02
+                        ],
+                        ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
                     ],
                     [
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
-                        ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                        ['==', ['get', 'source_id'], 55]
                     ]
                 ],
                 /* PARKING SPOT */
@@ -80,14 +85,14 @@ export const occupancy = {
                     [
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
-                        ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                        ['==', ['get', 'source_id'], 55]
                     ]
                 ]
             ],
         color: '#ed0000'
     },
     LOW_AVAILABILITY: {
-        label: 'Wenig Plätze',
+        label: 'Wenig Plätze (2 bis 20%)',
         subGroup: 'Belegung',
         filter:
             [
@@ -125,13 +130,13 @@ export const occupancy = {
                 [
                     'any',
                     ['==', ['get', 'realtime_data_outdated'], false],
-                    ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                    ['==', ['get', 'source_id'], 55]
                 ]
             ],
         color: '#dfab27'
     },
     HIGH_AVAILABILITY: {
-        label: 'Viele Plätze',
+        label: 'Viele Plätze (über 20%)',
         subGroup: 'Belegung',
         filter:
             [
@@ -140,7 +145,7 @@ export const occupancy = {
                 [
                     'all',
                     ['==', ['get', 'parking_object'], 'site'],
-                    ['>=',
+                    ['>',
                         ['/',
                             ['*', 1.0, ['get', 'realtime_free_capacity']],
                             [
@@ -156,7 +161,7 @@ export const occupancy = {
                     [
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
-                        ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                        ['==', ['get', 'source_id'], 55]
                     ]
                 ],
                 /* PARKING SPOT */
@@ -167,7 +172,7 @@ export const occupancy = {
                     [
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
-                        ['==', ['get', 'source_id'], 55] // Mannheim exception    
+                        ['==', ['get', 'source_id'], 55]
                     ]
                 ],
             ],

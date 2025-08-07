@@ -236,7 +236,7 @@ export function popupContent(features) {
             (
                 ((!capacity && !realtime_capacity) ? '' : ('<td class="att2">alle (frei/gesamt)</td>')) +
                 ('<td class="attContent2">' +
-                    (((!realtime_free_capacity) ? '-' : realtime_free_capacity)
+                    (((realtime_free_capacity == undefined) ? '-' : realtime_free_capacity)
                         + ' / ' +
                         ((!realtime_capacity && !capacity) ? '-' : ((realtime_capacity) ? realtime_capacity : capacity))) +
                     '</td>') +
