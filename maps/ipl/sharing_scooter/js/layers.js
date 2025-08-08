@@ -19,6 +19,12 @@ export const layersSharingScooter = [
         filter: sharingVehicles.REALTIME_DATA.filter('scooter')
     },
     {
+        id: 'sharingScooter_StationsOutdatedRealtimeData',
+        group: 'E-Scooter-Sharing',
+        ...sharingStations.OUTDATED_REALTIME_DATA,
+        filter: sharingStations.OUTDATED_REALTIME_DATA.filter('scooters_standing')
+    },
+    {
         id: 'sharingScooter_StationsOccupied',
         group: 'E-Scooter-Sharing',
         ...sharingStations.OCCUPIED,

@@ -10,7 +10,7 @@ export const sourceSharingVehicles = {
 const layersSharingVehicles = {
     subGroup: 'Free-Floating-Fahrzeuge',
     source: 'sourceSharingVehicles',
-    sourceLayer: 'sharing_vehicles'    
+    sourceLayer: 'sharing_vehicles'
 };
 
 export const sharingVehicles = {
@@ -47,7 +47,8 @@ export const sharingVehicles = {
 export const sourceSharingStations = {
     layer: 'MobiData-BW:sharing_stations',
     style: 'MobiData-BW:mdbw_sharing_stations_default',
-    bounds: [4.0, 45.8, 13.5, 54.6]
+    bounds: [4.0, 45.8, 13.5, 54.6],
+    // server: 'test'
 };
 
 const sharingNoRealtimeData = [
@@ -84,9 +85,12 @@ export const sharingStations = {
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
-            ['!=', ['literal', mode], 'scooters_standing'],
-            ['==', ['get', 'realtime_data_outdated'], true],
-            ['>=', ['get', `num_${mode}_available`], 0]
+            ['>=', ['get', `num_${mode}_available`], 0],
+            [
+                'any',
+                ['==', ['get', 'is_virtual_station'], true],
+                ['==', ['get', 'realtime_data_outdated'], true]
+            ]
         ],
         color: '#cacaca',
         ...layersSharingStations
@@ -99,12 +103,8 @@ export const sharingStations = {
             ['>', ['get', `num_${mode}_available`], 0],
             [
                 'any',
-                ['==', ['literal', mode], 'scooters_standing'],
-                [
-                    'all',
-                    ['!=', ['literal', mode], 'scooters_standing'],
-                    ['==', ['get', 'realtime_data_outdated'], false]
-                ]
+                ['==', ['get', 'is_virtual_station'], true],
+                ['==', ['get', 'realtime_data_outdated'], false]
             ]
         ],
         color: '#fffb05',
@@ -118,12 +118,8 @@ export const sharingStations = {
             ['==', ['get', `num_${mode}_available`], 0],
             [
                 'any',
-                ['==', ['literal', mode], 'scooters_standing'],
-                [
-                    'all',
-                    ['!=', ['literal', mode], 'scooters_standing'],
-                    ['==', ['get', 'realtime_data_outdated'], false]
-                ]
+                ['==', ['get', 'is_virtual_station'], true],
+                ['==', ['get', 'realtime_data_outdated'], false]
             ]
         ],
         color: '#ffb805',
