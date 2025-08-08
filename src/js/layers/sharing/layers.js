@@ -88,9 +88,10 @@ export const sharingStations = {
             ['>=', ['get', `num_${mode}_available`], 0],
             [
                 'any',
-                ['==', ['get', 'is_virtual_station'], true],
-                ['==', ['get', 'realtime_data_outdated'], true]
-            ]
+                ['==', ['get', 'is_virtual_station'], false],
+                ['!', ['has', 'is_virtual_station']]
+            ],
+            ['==', ['get', 'realtime_data_outdated'], true]
         ],
         color: '#cacaca',
         ...layersSharingStations
@@ -101,11 +102,7 @@ export const sharingStations = {
             'all',
             ['!', sharingNoRealtimeData],
             ['>', ['get', `num_${mode}_available`], 0],
-            [
-                'any',
-                ['==', ['get', 'is_virtual_station'], true],
-                ['==', ['get', 'realtime_data_outdated'], false]
-            ]
+            ['==', ['get', 'realtime_data_outdated'], false]
         ],
         color: '#fffb05',
         ...layersSharingStations
@@ -116,11 +113,7 @@ export const sharingStations = {
             'all',
             ['!', sharingNoRealtimeData],
             ['==', ['get', `num_${mode}_available`], 0],
-            [
-                'any',
-                ['==', ['get', 'is_virtual_station'], true],
-                ['==', ['get', 'realtime_data_outdated'], false]
-            ]
+            ['==', ['get', 'realtime_data_outdated'], false]
         ],
         color: '#ffb805',
         ...layersSharingStations
