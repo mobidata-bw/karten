@@ -6,6 +6,7 @@ export default defineConfig(({ mode }) => {
 
   const env = loadEnv(mode, process.cwd(), '');
   const basePath = env.VITE_BASE_PATH;
+  const outDir = env.VITE_OUT_DIR;
 
   return {
     base: basePath,
@@ -23,7 +24,7 @@ export default defineConfig(({ mode }) => {
         //   parkApiCarOnStreet: resolve(__dirname, 'maps/ipl/park-api_car_on-street/index.html')
         // }       
       },
-      outDir: 'dist',
+      outDir: outDir,
       emptyOutDir: true
     },
     server: {

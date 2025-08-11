@@ -7,7 +7,7 @@
   karten-map-as-a-service-%
 
 karten:
-	cp -r dist karten
+	cp -r dist_prod karten
 	cd karten && mv maps/* .
 	rm -rf karten/maps	
 	sudo rm -rf /var/www/html/daten/public/karten	
@@ -16,14 +16,14 @@ karten:
 	sudo cp -r ../data_center /var/www/html/daten/public/karten/map-as-a-service
 
 karten-test:
-	cp -r dist karten_test
+	cp -r dist_test karten_test
 	cd karten_test && mv maps/* .
 	rm -rf karten_test/maps
 	sudo rm -rf /var/www/html/daten/public/karten_test
 	sudo mv karten_test /var/www/html/daten/public
 
 karten-dev:
-	cp -r dist karten_dev
+	cp -r dist_dev karten_dev
 	cd karten_dev && mv maps/* .
 	rm -rf karten_dev/maps	
 	sudo rm -rf /var/www/html/daten/public/karten_dev
@@ -31,16 +31,16 @@ karten-dev:
 
 karten-%:
 	sudo rm -rf /var/www/html/daten/public/karten_vite/$*
-	sudo cp -r dist/maps/$* /var/www/html/daten/public/karten_vite/$*
+	sudo cp -r dist_prod/maps/$* /var/www/html/daten/public/karten_vite/$*
 
 karten-ipl-%:
 	sudo rm -rf /var/www/html/daten/public/karten_vite/ipl/$*
-	sudo cp -r dist/maps/ipl/$* /var/www/html/daten/public/karten_vite/ipl/$*
+	sudo cp -r dist_prod/maps/ipl/$* /var/www/html/daten/public/karten_vite/ipl/$*
 
 karten-auswertungen-%:
 	sudo rm -rf /var/www/html/daten/public/karten_vite/auswertungen/$*
-	sudo cp -r dist/maps/auswertungen/$* /var/www/html/daten/public/karten_vite/auswertungen/$*
+	sudo cp -r dist_prod/maps/auswertungen/$* /var/www/html/daten/public/karten_vite/auswertungen/$*
 
 karten-map-as-a-service-%:
 	sudo rm -rf /var/www/html/daten/public/karten_vite/map-as-a-service/$*
-	sudo cp -r dist/maps/map-as-a-service/$* /var/www/html/daten/public/karten_vite/map-as-a-service/$*
+	sudo cp -r dist_prod/maps/map-as-a-service/$* /var/www/html/daten/public/karten_vite/map-as-a-service/$*

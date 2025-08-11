@@ -25,12 +25,13 @@ export const occupancy = {
         color: '#615fdf'
     },
     OUTDATED_REALTIME_INFORMATION: {
-        label: 'Echtzeitdaten veraltet',
+        label: 'Echtzeitdaten älter als 30 Minuten',
         subGroup: 'Belegung',
         filter:
             [
                 'all',
-                ['==', ['get', 'realtime_data_outdated'], true],
+                ['==', ['get', 'has_realtime_data'], true],
+                ['==', ['get', 'realtime_data_outdated'], true],   
                 ['!=', ['get', 'source_id'], 55] // exception since Mannheim only pushes when new event occurs                
             ],
         color: '#cacaca'
@@ -45,7 +46,7 @@ export const occupancy = {
         color: '#880000'
     },
     VERY_LOW_AVAILABILITY: {
-        label: 'Kaum Plätze (unter 2%)',
+        label: 'Kaum Plätze (unter 2 %)',
         subGroup: 'Belegung',
         filter:
             [
@@ -54,6 +55,7 @@ export const occupancy = {
                 [
                     'all',
                     ['==', ['get', 'parking_object'], 'site'],
+                    ['==', ['get', 'has_realtime_data'], true],
                     [
                         'all',
                         ['>=', ['get', 'realtime_free_capacity'], 0],
@@ -82,6 +84,7 @@ export const occupancy = {
                     'all',
                     ['==', ['get', 'parking_object'], 'spot'],
                     ['==', ['get', 'realtime_status'], 'TAKEN'],
+                    ['==', ['get', 'has_realtime_data'], true],
                     [
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
@@ -92,13 +95,14 @@ export const occupancy = {
         color: '#ed0000'
     },
     LOW_AVAILABILITY: {
-        label: 'Wenig Plätze (2 bis 20%)',
+        label: 'Wenig Plätze (2 bis 20 %)',
         subGroup: 'Belegung',
         filter:
             [
                 /* PARKING SITE */
                 'all',
                 ['==', ['get', 'parking_object'], 'site'],
+                ['==', ['get', 'has_realtime_data'], true],
                 [
                     'all',
                     ['>=',
@@ -136,7 +140,7 @@ export const occupancy = {
         color: '#dfab27'
     },
     HIGH_AVAILABILITY: {
-        label: 'Viele Plätze (über 20%)',
+        label: 'Viele Plätze (über 20 %)',
         subGroup: 'Belegung',
         filter:
             [
@@ -145,6 +149,7 @@ export const occupancy = {
                 [
                     'all',
                     ['==', ['get', 'parking_object'], 'site'],
+                    ['==', ['get', 'has_realtime_data'], true],
                     ['>',
                         ['/',
                             ['*', 1.0, ['get', 'realtime_free_capacity']],
@@ -169,6 +174,7 @@ export const occupancy = {
                     'all',
                     ['==', ['get', 'parking_object'], 'spot'],
                     ['==', ['get', 'realtime_status'], 'AVAILABLE'],
+                    ['==', ['get', 'has_realtime_data'], true],
                     [
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
