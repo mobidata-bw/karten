@@ -105,7 +105,9 @@ export function popupContent(features) {
         "61": "Stadt Esslingen",
         "62": "Stadt Keltern",
         "63": "Stadt Reutlingen",
-        "64": "Stadt Stuttgart"
+        "64": "Stadt Stuttgart",
+        "65": "Stadt Aalen",
+        "66": "Stadt Konstanz"
     };
 
 

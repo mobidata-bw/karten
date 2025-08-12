@@ -1,6 +1,6 @@
 export const occupancy = {
     NO_REALTIME_INFORMATION: {
-        label: 'Echtzeitdaten fehlen',
+        label: 'Echtzeitdaten nicht vorhanden',
         subGroup: 'Belegung',
         filter:
             [
@@ -25,7 +25,7 @@ export const occupancy = {
         color: '#615fdf'
     },
     OUTDATED_REALTIME_INFORMATION: {
-        label: 'Echtzeitdaten älter als 30 Minuten',
+        label: 'Echtzeitdaten älter 30 Minuten',
         subGroup: 'Belegung',
         filter:
             [
