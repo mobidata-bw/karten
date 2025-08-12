@@ -99,10 +99,9 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             }
         });
 
-        map.layerGroups = (layers) => {
-            const searchParams = new URLSearchParams(window.location.search);
-            return Object.entries(layers).flatMap(([key, arr]) =>
-                searchParams.get(key) === 'false' ? [] : (arr ?? [])
+        map.layerGroups = (groups) => {
+            return Object.entries(groups).flatMap(([name, array]) =>
+                params.get(name) === 'false' ? [] : array
             );
         };
 
