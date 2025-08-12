@@ -19,7 +19,6 @@ export { wms } from '../js/wms.js';
 export let map;
 
 
-
 export function initializeMap({ configZoom, configCenter, configMinZoom, configShape } = {}) {
 
     // ==============================
@@ -99,6 +98,13 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
                 'line-width': 2
             }
         });
+
+        map.layerGroups = (layers) => {
+            const searchParams = new URLSearchParams(window.location.search);
+            return Object.entries(layers).flatMap(([key, arr]) =>
+                searchParams.get(key) === 'false' ? [] : (arr ?? [])
+            );
+        };
 
     });
 

@@ -3,7 +3,7 @@ import { legendCircle, legendLine, legendRectangle } from './controlLayers.js';
 
 
 export function addControlLayers(layers, directory, groupOrGroups) {
-  
+
   return layers.map(layer => {
     const {
       id,

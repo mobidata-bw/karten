@@ -34,11 +34,13 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layersBicycle = [
-            ...layersParkApiBicycleOccupancy,
-            ...layersParkApiBicycleTypes
-        ];
-        layersItem = layersParkApiItemOccupancy;
+        layersBicycle = map.layerGroups({
+            'fahrradabstellanlagenBelegung': layersParkApiBicycleOccupancy,
+            'fahrradabstellanlagenTyp': layersParkApiBicycleTypes
+        });
+        layersItem = map.layerGroups({
+            'schliessfaecherBelegung': layersParkApiItemOccupancy
+        });
         layers = [
             ...layersBicycle,
             ...layersParkApiItemOccupancy
