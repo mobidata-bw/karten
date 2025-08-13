@@ -4,7 +4,7 @@ import {
     basemaps,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { sourceChargePoints, layersChargePointsPower, layersChargePointsDynamic } from './layers.js';
+import { sourceChargePoints, layersChargePointsPower, layersChargePointsOccupancy } from './layers.js';
 import { popupContent } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
@@ -30,10 +30,10 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layers = [
-            ...layersChargePointsPower,
-            ...layersChargePointsDynamic
-        ];
+        layers = map.layerGroups({
+            'power': layersChargePointsPower,
+            'occupancy': layersChargePointsOccupancy,
+        });       
         layers.forEach(layer => addLayers(map, layer));
 
 

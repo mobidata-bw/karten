@@ -1,0 +1,1 @@
+import{b as e}from"./popupContent-Fn1iS1HK.js";const a=[{id:"sharingMoped_VehiclesOutdatedRealtimeData",group:"E-Kleinkraftrad-Sharing",...e.OUTDATED_REALTIME_DATA,filter:e.OUTDATED_REALTIME_DATA.filter("moped")},{id:"sharingMoped_VehiclesRealtimeData",group:"E-Kleinkraftrad-Sharing",...e.REALTIME_DATA,filter:e.REALTIME_DATA.filter("moped")}];export{a as l};

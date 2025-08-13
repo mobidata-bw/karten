@@ -5,7 +5,7 @@ export { sourceSharingVehicles, sourceSharingStations } from '../../../../src/js
 // ==============================
 // LAYERS
 // ==============================
-export const layersSharingBicycle = [
+export const layersSharingBicycleVehicles = [
     {
         id: 'sharingBicycle_VehiclesOutdatedRealtimeData',
         group: 'Bikesharing',
@@ -17,7 +17,9 @@ export const layersSharingBicycle = [
         group: 'Bikesharing',
         ...sharingVehicles.REALTIME_DATA,
         filter: sharingVehicles.REALTIME_DATA.filter('bicycle')
-    },
+    }  
+];
+export const layersSharingBicycleStations = [   
     {
         id: 'sharingBicycle_StationsOutdatedRealtimeData',
         group: 'Bikesharing',
@@ -42,7 +44,7 @@ export const layersSharingBicycle = [
 ];
 
 
-export const layersSharingCargoBicycle = [
+export const layersSharingCargoBicycleVehicles = [
     {
         id: 'sharingCargoBicycle_VehiclesOutdatedRealtimeData',
         group: 'Lastenrad-Sharing',
@@ -58,8 +60,10 @@ export const layersSharingCargoBicycle = [
         filter: sharingVehicles.REALTIME_DATA.filter('cargo_bicycle'),
         subGroup: 'Free-Floating-Fahrzeuge ',
         visibility: 'none'
-    },
-    {
+    }    
+];
+export const layersSharingCargoBicycleStations = [
+        {
         id: 'sharingCargoBicycle_StationsNoRealtimeData',
         group: 'Lastenrad-Sharing',
         ...sharingStations.NO_REALTIME_DATA,       

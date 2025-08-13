@@ -5,7 +5,7 @@ export { sourceSharingVehicles, sourceSharingStations } from '../../../../src/js
 // ==============================
 // LAYERS
 // ==============================
-export const layersSharingCar = [
+export const layersSharingCarVehicles = [
     {
         id: 'sharingCar_VehiclesOutdatedRealtimeData',
         group: 'Carsharing',
@@ -17,7 +17,10 @@ export const layersSharingCar = [
         group: 'Carsharing',
         ...sharingVehicles.REALTIME_DATA,
         filter: sharingVehicles.REALTIME_DATA.filter('car')
-    },
+    }  
+];
+
+export const layersSharingCarStations = [  
     {
         id: 'sharingCar_StationsNoRealtimeData',
         group: 'Carsharing',

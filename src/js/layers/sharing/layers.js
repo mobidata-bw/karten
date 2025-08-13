@@ -108,7 +108,7 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OCCUPIED: {
-        label: 'Keine Fahrzeuge',
+        label: 'Fahrzeuge nicht verfügbar',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],

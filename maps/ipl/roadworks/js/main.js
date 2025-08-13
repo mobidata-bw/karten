@@ -30,7 +30,9 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layers = layersRoadworks;
+        layers = map.layerGroups({
+            'roadworks': layersRoadworks
+        });
         layers.forEach(layer => addLayers(map, layer));
 
 

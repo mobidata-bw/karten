@@ -5,10 +5,8 @@ import {
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
-    sourceSharingVehicles,
-    sourceSharingStations,
-    layersSharingBicycle,
-    layersSharingCargoBicycle
+    sourceSharingVehicles, layersSharingBicycleVehicles, layersSharingBicycleStations,
+    sourceSharingStations, layersSharingCargoBicycleVehicles, layersSharingCargoBicycleStations
 } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/sharing/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -36,12 +34,20 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layersBicycle = layersSharingBicycle;
-        layersCargoBicycle = layersSharingCargoBicycle;
-        layers = [
-            ...layersSharingBicycle,
-            ...layersSharingCargoBicycle
+        layersBicycle = [
+            ...layersSharingBicycleVehicles,
+            ...layersSharingBicycleStations
         ];
+        layersCargoBicycle = [
+            ...layersSharingCargoBicycleVehicles,
+            ...layersSharingCargoBicycleStations
+        ];
+        layers = map.layerGroups({
+            'bicycle_vehicles': layersSharingBicycleVehicles,
+            'bicycle_stations': layersSharingBicycleStations,
+            'cargo_bicycle_vehicles': layersSharingCargoBicycleVehicles,
+            'cargo_bicycle_stations': layersSharingCargoBicycleStations
+        });
         layers.forEach(layer => addLayers(map, layer));
 
 

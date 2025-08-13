@@ -12,10 +12,10 @@ import { sourceParkApiCarBuildings, layersParkApiCarBuildingsOccupancy } from '.
 import { sourceParkApiCarOnStreet, layersParkApiCarOnStreetOccupancy } from '../../ipl/park-api_car_on-street/js/layers.js';
 import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../ipl/park-api_bicycle/js/layers.js';
 import { sourceSharingVehicles, sourceSharingStations } from '../../../src/js/layers/sharing/layers.js';
-import { layersSharingCar } from '../../ipl/sharing_car/js/layers.js';
-import { layersSharingBicycle, layersSharingCargoBicycle } from '../../ipl/sharing_bicycle/js/layers.js';
-import { layersSharingScooter } from '../../ipl/sharing_scooter/js/layers.js';
-import { layersSharingMoped } from '../../ipl/sharing_moped/js/layers.js';
+import { layersSharingCarVehicles, layersSharingCarStations } from '../../ipl/sharing_car/js/layers.js';
+import { layersSharingBicycleVehicles, layersSharingBicycleStations, layersSharingCargoBicycleVehicles, layersSharingCargoBicycleStations } from '../../ipl/sharing_bicycle/js/layers.js';
+import { layersSharingScooterVehicles, layersSharingScooterStations } from '../../ipl/sharing_scooter/js/layers.js';
+import { layersSharingMopedVehicles } from '../../ipl/sharing_moped/js/layers.js';
 import { sourceChargePoints, layersChargePointsPower } from '../../ipl/charge_points/js/layers.js';
 import { sourceRadvis, layersRadvis } from '../../ipl/radvis_cycle_network/js/layers.js';
 import {
@@ -90,11 +90,15 @@ window.addEventListener('DOMContentLoaded', () => {
         sources.forEach(source => addSources(map, source));
 
         const layersSharing = [
-            ...layersSharingCar,
-            ...layersSharingBicycle,
-            ...layersSharingScooter,
-            ...layersSharingCargoBicycle,
-            ...layersSharingMoped
+            ...layersSharingCarVehicles,
+            ...layersSharingCarStations,
+            ...layersSharingBicycleVehicles,
+            ...layersSharingBicycleStations,
+            ...layersSharingScooterVehicles,
+            ...layersSharingScooterStations,
+            ...layersSharingCargoBicycleVehicles,
+            ...layersSharingCargoBicycleStations,
+            ...layersSharingMopedVehicles
         ];
 
         layersIpl = [
@@ -102,11 +106,11 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersParkApiCarOnStreetOccupancy,
             ...layersParkApiBicycleOccupancy,
 
-            ...layersSharing.filter(layer => layer.id.includes('StationsNoRealtimeData')).map(layer => ({ ...layer, label: 'Station: ohne Echtzeitdaten' })),
-            ...layersSharing.filter(layer => layer.id.includes('StationsOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Station: veraltete Echtzeitdaten' })),
-            ...layersSharing.filter(layer => layer.id.includes('StationsOccupied')).map(layer => ({ ...layer, label: 'Station: ohne verfügbare Fahrzeuge' })),
-            ...layersSharing.filter(layer => layer.id.includes('StationsFree')).map(layer => ({ ...layer, label: 'Station: verfügbare Fahrzeuge' })),
-            ...layersSharing.filter(layer => layer.id.includes('VehiclesOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Fahrzeug: veraltete Echtzeitdaten' })),
+            ...layersSharing.filter(layer => layer.id.includes('StationsNoRealtimeData')).map(layer => ({ ...layer, label: 'Station: Echtzeitdaten nicht vorhanden' })),
+            ...layersSharing.filter(layer => layer.id.includes('StationsOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Station: Echtzeitdaten älter 30 Minuten' })),
+            ...layersSharing.filter(layer => layer.id.includes('StationsOccupied')).map(layer => ({ ...layer, label: 'Station: Fahrzeuge nicht vorhanden' })),
+            ...layersSharing.filter(layer => layer.id.includes('StationsFree')).map(layer => ({ ...layer, label: 'Station: Fahrzeuge verfügbar' })),
+            ...layersSharing.filter(layer => layer.id.includes('VehiclesOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Fahrzeug: Echtzeitdaten älter 30 Minuten' })),
             ...layersSharing.filter(layer => layer.id.includes('VehiclesRealtimeData')).map(layer => ({ ...layer, label: 'Fahrzeug: verfügbar' })),
 
             ...layersChargePointsPower,
@@ -150,18 +154,11 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layersParkApiCarBuildingsOccupancy, popupContentParkApi);
-        popups(map, layersParkApiCarOnStreetOccupancy, popupContentParkApi);
-        popups(map, layersParkApiBicycleOccupancy, popupContentParkApi);
-        popups(map, layersSharingCar, popupContentSharing);
-        popups(map, layersSharingBicycle, popupContentSharing);
-        popups(map, layersSharingScooter, popupContentSharing);
-        popups(map, layersSharingCargoBicycle, popupContentSharing);
-        popups(map, layersSharingMoped, popupContentSharing);
+        popups(map, [...layersParkApiCarBuildingsOccupancy, ...layersParkApiCarOnStreetOccupancy, ...layersParkApiBicycleOccupancy], popupContentParkApi);
+        popups(map, layersSharing, popupContentSharing);
         popups(map, layersChargePointsPower, popupContentChargePoints);
         popups(map, layersRadvis, popupContentRadvis);
-        popups(map, layersTransitStops, popupContentTransitStops);
-        popups(map, layersTransitStations, popupContentTransitStations);
+        popups(map, [...layersTransitStops, ...layersTransitStations], popupContentTransitStops);
         popups(map, layersCountCar, popupContentCountCar);
         popups(map, layersCountBicycle, popupContentCountBicycle);
         popups(map, layersPedestrianCrossings, popupContentPedestrianCrossings);

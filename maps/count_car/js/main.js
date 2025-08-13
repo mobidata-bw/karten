@@ -32,7 +32,9 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layers = layersCountCar;
+        layers = map.layerGroups({
+            'count_car': layersCountCar
+        });
         layers.forEach(layer => addLayers(map, layer));
 
 

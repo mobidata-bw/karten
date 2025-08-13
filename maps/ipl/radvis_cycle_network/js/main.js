@@ -31,7 +31,9 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layers = layersRadvis;
+        layers = map.layerGroups({
+            'radvis': layersRadvis,
+        });
         layers.forEach(layer => addLayers(map, layer));
 
 

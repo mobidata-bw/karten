@@ -5,7 +5,7 @@ export { sourceSharingVehicles } from '../../../../src/js/layers/sharing/layers.
 // ==============================
 // LAYERS
 // ==============================
-export const layersSharingMoped = [
+export const layersSharingMopedVehicles = [
     {
         id: 'sharingMoped_VehiclesOutdatedRealtimeData',
         group: 'E-Kleinkraftrad-Sharing',

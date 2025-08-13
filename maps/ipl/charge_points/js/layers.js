@@ -59,9 +59,9 @@ export const layersChargePointsPower = [
     }
 ];
 
-export const layersChargePointsDynamic = [
+export const layersChargePointsOccupancy = [
     {
-        id: 'chargePointsDynamic_Static',
+        id: 'chargePointsOccupancy_Static',
         label: 'Echtzeitdaten fehlen',
         subGroup: 'Belegung',
         filter:
@@ -79,7 +79,7 @@ export const layersChargePointsDynamic = [
         ...layers
     },
     {
-        id: 'chargePointsDynamic_Realtime',
+        id: 'chargePointsOccupancy_Realtime',
         label: 'Echtzeitdaten verfügbar',
         subGroup: 'Belegung',
         filter:

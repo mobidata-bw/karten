@@ -31,10 +31,10 @@ window.addEventListener('DOMContentLoaded', () => {
         sources.forEach(source => addSources(map, source));
 
         layers = map.layerGroups({
-            'belegung': layersParkApiCarBuildingsOccupancy,
-            'typ': layersParkApiCarBuildingsTypes,
-            'parkobjekt': layersParkApiCarBuildingsObjects,
-            'sonderparkplaetze': layersParkApiCarBuildingsSpecialParking
+            'occupancy': layersParkApiCarBuildingsOccupancy,
+            'type': layersParkApiCarBuildingsTypes,
+            'parking_object': layersParkApiCarBuildingsObjects,
+            'special_parking': layersParkApiCarBuildingsSpecialParking
         });
         layers.forEach(layer => addLayers(map, layer));
 
