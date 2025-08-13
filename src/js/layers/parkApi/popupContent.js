@@ -187,7 +187,7 @@ export function popupContent(features) {
             ((realtime_opening_status == 'UNKNOWN') ? ('<td class="attContent">unbekannt</td>') : '') +
             '</tr>'
         )) +
-        ((!realtime_data_updated_at) ? '' : (
+        ((has_realtime_data == false) ? '' : (
             '<tr>\
             <td class="att">Stand Echtzeitdaten</td>' +
             (realtime_data_outdated ? '<td class="attContent outDated">' + date + ', ' + time + '</td>' : '<td class="attContent">' + date + ', ' + time + '</td>') +

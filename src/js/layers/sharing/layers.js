@@ -15,7 +15,7 @@ const layersSharingVehicles = {
 
 export const sharingVehicles = {
     OUTDATED_REALTIME_DATA: {
-        label: 'Echzeitdaten veraltet',
+        label: 'Echzeitdaten älter 30 Minuten',
         filter: (mode) => [
             'all',
             ['==', ['get', 'form_factor'], mode],
@@ -71,7 +71,7 @@ const layersSharingStations = {
 
 export const sharingStations = {
     NO_REALTIME_DATA: {
-        label: 'Echtzeitdaten fehlen',
+        label: 'Echtzeitdaten nicht vorhanden',
         filter: (mode) => [
             'all',
             sharingNoRealtimeData,
@@ -81,7 +81,7 @@ export const sharingStations = {
         ...layersSharingStations
     },
     OUTDATED_REALTIME_DATA: {
-        label: 'Echtzeitdaten veraltet',
+        label: 'Echtzeitdaten älter 30 Minuten',
         filter: (mode) => [
             'all',
             ['!', sharingNoRealtimeData],
