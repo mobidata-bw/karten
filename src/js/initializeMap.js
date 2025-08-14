@@ -99,10 +99,22 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             }
         });
 
+
         map.layerGroups = (groups) => {
-            return Object.entries(groups).flatMap(([name, array]) =>
-                params.get(name) === 'false' ? [] : array
-            );
+            return Object.entries(groups).flatMap(([name, layers]) => {
+                if (params.get(name) === 'false') return [];
+
+                if (params.get(name) === 'invisible') {
+                    requestAnimationFrame(() => {
+                        const element = document.getElementById(`layerGroup_${name}`).parentNode;
+                        if (element) {
+                            element.style.display = 'none';
+                        }
+                    });
+                }
+
+                return layers.filter(layer => params.get(layer.id) != 'false');
+            });
         };
 
     });
