@@ -1,4 +1,14 @@
-import { occupancy, types, objects, specialParking } from '../../../../src/js/layers/parkApi/layers.js';
+import { occupancy, types, disabled } from '../../../../src/js/layers/parkApi/layers.js';
+
+
+
+const params = new URLSearchParams(window.location.search);
+
+let visibility;
+
+if (params.get('disabled') != 'false' && visibility == 'true') {
+    visibility = ''
+};
 
 
 // ==============================
@@ -68,8 +78,8 @@ export const layersParkApiCarTypes = [
         ...layers
     },
     {
-        id: 'parkApiCarTypes_OffStreetParkingGround',
-        ...types.OFF_STREET_PARKING_GROUND,
+        id: 'parkApiCarTypes_OffStreet',
+        ...types.OFF_STREET,
         visibility: 'none',
         ...layers
     },
@@ -84,58 +94,14 @@ export const layersParkApiCarTypes = [
         ...types.CAR_PARK,
         visibility: 'none',
         ...layers
-    }   
-];
-
-export const layersParkApiCarObjects = [
-    {
-        id: 'parkApiCarObjects_Site',       
-        visibility: 'none',
-        ...objects.PARKING_SITE,
-        ...layers
-    },
-    {
-        id: 'parkApiCarObjects_Spot',
-        visibility: 'none',
-        ...objects.PARKING_SPOT,
-        ...layers
     }
 ];
 
-export const layersParkApiCarSpecialParking = [
+export const layersParkApiCarDisabled = [
     {
-        id: 'parkApiCarSpecialParking_Disabled',
-        visibility: 'none',
-        ...specialParking.DISABLED,
-        ...layers,
-        exclusiveWithinGroup: true
-    },
-    {
-        id: 'parkApiCarSpecialParking_Woman',
-        visibility: 'none',
-        ...specialParking.WOMAN,
-        ...layers,
-        exclusiveWithinGroup: true
-    },
-    {
-        id: 'parkApiCarSpecialParking_Family',
-        visibility: 'none',
-        ...specialParking.FAMILY,
-        ...layers,
-        exclusiveWithinGroup: true
-    },
-    {
-        id: 'parkApiCarSpecialParking_Charging',
-        visibility: 'none',
-        ...specialParking.CHARGING,
-        ...layers,
-        exclusiveWithinGroup: true
-    },
-    {
-        id: 'parkApiCarSpecialParking_Carsharing',
-        visibility: 'none',
-        ...specialParking.CARSHARING,
-        ...layers,
-        exclusiveWithinGroup: true
+        id: 'parkApiCar_Disabled',
+        visibility: visibility,
+        ...disabled,
+        ...layers
     }
 ];

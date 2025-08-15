@@ -1,27 +1,3 @@
-
-const params = new URLSearchParams(window.location.search);
-const parking = params.get('parking');
-
-let parkingFilter = true; // if not parameter is set, breaking of the map is prevented by assignment of true
-
-if (parking == 'buildings') {
-    parkingFilter =
-        [
-            'any',
-            ['!=', ['get', 'type'], 'ON_STREET'],
-            ['!', ['has', 'type']]
-        ]
-} else if (parking == 'on_street') {
-    parkingFilter =
-        [
-            'any',
-            ['==', ['get', 'type'], 'ON_STREET'],
-            ['!', ['has', 'type']]
-        ]
-};
-
-
-
 export const occupancy = {
     NO_REALTIME_INFORMATION: {
         label: 'Echtzeitdaten nicht vorhanden',
@@ -33,8 +9,7 @@ export const occupancy = {
                 [
                     'all',
                     ['==', ['get', 'parking_object'], 'site'],
-                    ['==', ['get', 'has_realtime_data'], false],
-                    parkingFilter
+                    ['==', ['get', 'has_realtime_data'], false]
                 ],
                 /* PARKING SPOT */
                 [
@@ -44,8 +19,7 @@ export const occupancy = {
                         'any',
                         ['==', ['get', 'realtime_status'], 'UNKNOWN'],
                         ['==', ['get', 'has_realtime_data'], false]
-                    ],
-                    parkingFilter
+                    ]
                 ]
             ],
         color: '#615fdf'
@@ -57,9 +31,8 @@ export const occupancy = {
             [
                 'all',
                 ['==', ['get', 'has_realtime_data'], true],
-                ['==', ['get', 'realtime_data_outdated'], true],
-                parkingFilter,
-                ['!=', ['get', 'source_id'], 55] // exception since Mannheim only pushes when new event occurs                    
+                ['==', ['get', 'realtime_data_outdated'], true],   
+                ['!=', ['get', 'source_id'], 55] // exception since Mannheim only pushes when new event occurs                
             ],
         color: '#cacaca'
     },
@@ -68,9 +41,7 @@ export const occupancy = {
         subGroup: 'Belegung',
         filter:
             [
-                'all',
-                ['==', ['get', 'realtime_opening_status'], 'CLOSED'],
-                parkingFilter
+                '==', ['get', 'realtime_opening_status'], 'CLOSED'
             ],
         color: '#880000'
     },
@@ -106,8 +77,7 @@ export const occupancy = {
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
-                    ],
-                    parkingFilter
+                    ]
                 ],
                 /* PARKING SPOT */
                 [
@@ -119,8 +89,7 @@ export const occupancy = {
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
-                    ],
-                    parkingFilter
+                    ]
                 ]
             ],
         color: '#ed0000'
@@ -166,8 +135,7 @@ export const occupancy = {
                     'any',
                     ['==', ['get', 'realtime_data_outdated'], false],
                     ['==', ['get', 'source_id'], 55]
-                ],
-                parkingFilter
+                ]
             ],
         color: '#dfab27'
     },
@@ -199,8 +167,7 @@ export const occupancy = {
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
-                    ],
-                    parkingFilter
+                    ]
                 ],
                 /* PARKING SPOT */
                 [
@@ -212,8 +179,7 @@ export const occupancy = {
                         'any',
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
-                    ],
-                    parkingFilter
+                    ]
                 ],
             ],
         color: '#059b02'
@@ -240,7 +206,7 @@ export const types = {
             ],
         color: '#BF91B6'
     },
-    OFF_STREET: {
+    OFF_STREET_PARKING_GROUND: {
         label: 'Parkplatz abseits der Straße',
         subGroup: 'Typ',
         filter:
@@ -351,14 +317,82 @@ export const types = {
     }
 };
 
-export const disabled = {
-    label: 'Behinderte',
-    subGroup: 'Sonderparkplätze',
-    filter:
-        [
-            'any',
-            ['>', 'capacity_disabled', 0],
-            ['==', 'restriction_type', 'DISABLED']
-        ],
-    color: '#005ea8'
+export const objects = {
+    PARKING_SPOT: {
+        label: 'Einzelparkplatz',
+        subGroup: 'Parkobjekt',
+        filter:
+            [
+                '==', ['get', 'parking_object'], 'spot'
+            ],
+        color: '#92474d'
+    },
+    PARKING_SITE: {
+        label: 'Parkbau oder Parkstreifen',
+        subGroup: 'Parkobjekt',
+        filter:
+            [
+                '==', ['get', 'parking_object'], 'site'
+            ],
+        color: '#25604c'
+    }
 };
+
+export const specialParking = {
+    DISABLED: {
+        label: 'Behinderte',
+        subGroup: 'Sonderparkplätze',
+        filter:
+            [
+                'any',
+                ['>', 'capacity_disabled', 0],
+                ['==', 'restriction_type', 'DISABLED']
+            ],
+        color: '#005ea8'
+    },
+    WOMAN: {
+        label: 'Frauen',
+        subGroup: 'Sonderparkplätze',
+        filter:
+            [
+                'any',
+                ['>', 'capacity_woman', 0],
+                ['==', 'restriction_type', 'WOMAN']
+            ],
+        color: '#cb3234'
+    },
+    FAMILY: {
+        label: 'Familien',
+        subGroup: 'Sonderparkplätze',
+        filter:
+            [
+                'any',
+                ['>', 'capacity_family', 0],
+                ['==', 'restriction_type', 'FAMILY']
+            ],
+        color: '#CC33FF'
+    },
+    CHARGING: {
+        label: 'Lademöglichkeit',
+        subGroup: 'Sonderparkplätze',
+        filter:
+            [
+                'any',
+                ['>', 'capacity_charging', 0],
+                ['==', 'restriction_type', 'CHARGING']
+            ],
+        color: '#95a819'
+    },
+    CARSHARING: {
+        label: 'Carsharing',
+        subGroup: 'Sonderparkplätze',
+        filter:
+            [
+                'any',
+                ['>', 'capacity_carsharing', 0],
+                ['==', 'restriction_type', 'CARSHARING']
+            ],
+        color: '#56c1d1'
+    }
+};
+
