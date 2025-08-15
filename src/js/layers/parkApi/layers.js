@@ -4,22 +4,35 @@ const parking = params.get('parking');
 
 let parkingFilter = true; // if not parameter is set, breaking of the map is prevented by assignment of true
 
-if (parking == 'buildings') {
-    parkingFilter =
-        [
-            'any',
-            ['!=', ['get', 'type'], 'ON_STREET'],
-            ['!', ['has', 'type']]
-        ]
-} else if (parking == 'on_street') {
-    parkingFilter =
-        [
-            'any',
-            ['==', ['get', 'type'], 'ON_STREET'],
-            ['!', ['has', 'type']]
-        ]
-};
+switch (parking) {
+    case 'disabled':
+        parkingFilter =
+            [
+                'any',
+                ['>', ['get', 'capacity_disabled'], 0],
+                ['==', ['get', 'restriction_type'], 'DISABLED']
+            ];
+        break;
+    case 'buildings':
+        parkingFilter =
+            [
+                'any',
+                ['!=', ['get', 'type'], 'ON_STREET'],
+                ['!', ['has', 'type']]
+            ];
+        break;
+    case 'on_street':
+        parkingFilter =
+            [
+                'any',
+                ['==', ['get', 'type'], 'ON_STREET'],
+                ['!', ['has', 'type']]
+            ];
+        break;
 
+    default:
+        break;
+};
 
 
 export const occupancy = {
@@ -349,16 +362,4 @@ export const types = {
             ],
         color: '#cacaca'
     }
-};
-
-export const disabled = {
-    label: 'Behinderte',
-    subGroup: 'Sonderparkplätze',
-    filter:
-        [
-            'any',
-            ['>', 'capacity_disabled', 0],
-            ['==', 'restriction_type', 'DISABLED']
-        ],
-    color: '#005ea8'
 };

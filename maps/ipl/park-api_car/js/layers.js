@@ -1,4 +1,4 @@
-import { occupancy, types, disabled } from '../../../../src/js/layers/parkApi/layers.js';
+import { occupancy, types } from '../../../../src/js/layers/parkApi/layers.js';
 
 
 
@@ -93,15 +93,6 @@ export const layersParkApiCarTypes = [
         id: 'parkApiCarTypes_CarPark',
         ...types.CAR_PARK,
         visibility: 'none',
-        ...layers
-    }
-];
-
-export const layersParkApiCarDisabled = [
-    {
-        id: 'parkApiCar_Disabled',
-        visibility: visibility,
-        ...disabled,
         ...layers
     }
 ];

@@ -4,7 +4,7 @@ import {
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { sourceParkApiCar, layersParkApiCarOccupancy, layersParkApiCarTypes, layersParkApiCarDisabled } from './layers.js';
+import { sourceParkApiCar, layersParkApiCarOccupancy, layersParkApiCarTypes } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/parkApi/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
@@ -32,8 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
         layers = map.layerGroups({
             'occupancy': layersParkApiCarOccupancy,
-            'type': layersParkApiCarTypes,
-            'disabled': layersParkApiCarDisabled
+            'type': layersParkApiCarTypes
         });
         layers.forEach(layer => addLayers(map, layer));
 

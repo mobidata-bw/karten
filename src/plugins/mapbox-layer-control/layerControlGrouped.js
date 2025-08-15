@@ -599,27 +599,27 @@ function isString(value) {
   return typeof value === 'string' || value instanceof String;
 }
 
-function lcSetActiveLayers(l, checked) {
-  let _layer = l;
-  let _visibility = checked;
-  let params = new URLSearchParams(window.location.search);
-  if (_visibility) {
-    params.set(_layer, true);
-    if (history.replaceState) {
-      let url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?" + params.toString() + window.location.hash;
-      window.history.replaceState({
-        path: url
-      }, '', url);
-    }
-  } else {
-    params.delete(_layer);
-    if (history.replaceState) {
-      let url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?" + params.toString() + window.location.hash;
-      window.history.replaceState({
-        path: url
-      }, '', url);
-    }
-  }
+function lcSetActiveLayers(/*l, checked*/) {
+  // let _layer = l;
+  // let _visibility = checked;
+  // let params = new URLSearchParams(window.location.search);
+  // if (_visibility) {
+  //   params.set(_layer, true);
+  //   if (history.replaceState) {
+  //     let url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?" + params.toString() + window.location.hash;
+  //     window.history.replaceState({
+  //       path: url
+  //     }, '', url);
+  //   }
+  // } else {
+  //   params.delete(_layer);
+  //   if (history.replaceState) {
+  //     let url = window.location.protocol + "//" + window.location.host + window.location.pathname + "?" + params.toString() + window.location.hash;
+  //     window.history.replaceState({
+  //       path: url
+  //     }, '', url);
+  //   }
+  // }
 }
 
 function lcSetLegendVisibility(e) {

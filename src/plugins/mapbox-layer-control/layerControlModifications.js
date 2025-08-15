@@ -60,12 +60,7 @@ export function exclusiveLayerGroup(e) {
             inp.click();
           }
         });
-      }
-      // 4) Strip query string if present, show active layers no more in url
-      setTimeout(() => {
-        const { pathname, hash } = window.location;
-        history.replaceState(null, "", pathname + hash);
-      }, 0);
+      }  
     }, 0);
     return;
   }
@@ -109,13 +104,7 @@ export function exclusiveLayerGroup(e) {
           inp.click();
         }
       });
-    }
-
-    // 4) Strip query string if present
-    setTimeout(() => {
-      const { pathname, hash } = window.location;
-      history.replaceState(null, "", pathname + hash);
-    }, 0);
+    }    
   }
 }
 
