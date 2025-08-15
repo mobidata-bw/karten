@@ -1,16 +1,6 @@
 import { occupancy, types } from '../../../../src/js/layers/parkApi/layers.js';
 
 
-
-const params = new URLSearchParams(window.location.search);
-
-let visibility;
-
-if (params.get('disabled') != 'false' && visibility == 'true') {
-    visibility = ''
-};
-
-
 // ==============================
 // SOURCES
 // ==============================

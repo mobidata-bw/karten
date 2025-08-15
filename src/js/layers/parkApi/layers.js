@@ -1,40 +1,11 @@
+import { urlParams } from './urlParams';
 
-const params = new URLSearchParams(window.location.search);
-const parking = params.get('parking');
-
-let parkingFilter = true; // if not parameter is set, breaking of the map is prevented by assignment of true
-
-switch (parking) {
-    case 'disabled':
-        parkingFilter =
-            [
-                'any',
-                ['>', ['get', 'capacity_disabled'], 0],
-                ['==', ['get', 'restriction_type'], 'DISABLED']
-            ];
-        break;
-    case 'buildings':
-        parkingFilter =
-            [
-                'any',
-                ['!=', ['get', 'type'], 'ON_STREET'],
-                ['!', ['has', 'type']]
-            ];
-        break;
-    case 'on_street':
-        parkingFilter =
-            [
-                'any',
-                ['==', ['get', 'type'], 'ON_STREET'],
-                ['!', ['has', 'type']]
-            ];
-        break;
-
-    default:
-        break;
-};
+const { layerFilter } = urlParams();
 
 
+// ==============================
+// LAYERS
+// ==============================
 export const occupancy = {
     NO_REALTIME_INFORMATION: {
         label: 'Echtzeitdaten nicht vorhanden',
@@ -47,7 +18,7 @@ export const occupancy = {
                     'all',
                     ['==', ['get', 'parking_object'], 'site'],
                     ['==', ['get', 'has_realtime_data'], false],
-                    parkingFilter
+                    layerFilter
                 ],
                 /* PARKING SPOT */
                 [
@@ -58,7 +29,7 @@ export const occupancy = {
                         ['==', ['get', 'realtime_status'], 'UNKNOWN'],
                         ['==', ['get', 'has_realtime_data'], false]
                     ],
-                    parkingFilter
+                    layerFilter
                 ]
             ],
         color: '#615fdf'
@@ -71,7 +42,7 @@ export const occupancy = {
                 'all',
                 ['==', ['get', 'has_realtime_data'], true],
                 ['==', ['get', 'realtime_data_outdated'], true],
-                parkingFilter,
+                layerFilter,
                 ['!=', ['get', 'source_id'], 55] // exception since Mannheim only pushes when new event occurs                    
             ],
         color: '#cacaca'
@@ -83,7 +54,7 @@ export const occupancy = {
             [
                 'all',
                 ['==', ['get', 'realtime_opening_status'], 'CLOSED'],
-                parkingFilter
+                layerFilter
             ],
         color: '#880000'
     },
@@ -120,7 +91,7 @@ export const occupancy = {
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
                     ],
-                    parkingFilter
+                    layerFilter
                 ],
                 /* PARKING SPOT */
                 [
@@ -133,7 +104,7 @@ export const occupancy = {
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
                     ],
-                    parkingFilter
+                    layerFilter
                 ]
             ],
         color: '#ed0000'
@@ -180,7 +151,7 @@ export const occupancy = {
                     ['==', ['get', 'realtime_data_outdated'], false],
                     ['==', ['get', 'source_id'], 55]
                 ],
-                parkingFilter
+                layerFilter
             ],
         color: '#dfab27'
     },
@@ -213,7 +184,7 @@ export const occupancy = {
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
                     ],
-                    parkingFilter
+                    layerFilter
                 ],
                 /* PARKING SPOT */
                 [
@@ -226,7 +197,7 @@ export const occupancy = {
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
                     ],
-                    parkingFilter
+                    layerFilter
                 ],
             ],
         color: '#059b02'
@@ -240,7 +211,9 @@ export const types = {
         subGroup: 'Typ',
         filter:
             [
-                '==', ['get', 'type'], 'CAR_PARK'
+                'all',
+                ['==', ['get', 'type'], 'CAR_PARK'],
+                layerFilter
             ],
         color: '#5587eb'
     },
@@ -249,7 +222,9 @@ export const types = {
         subGroup: 'Typ',
         filter:
             [
-                '==', ['get', 'type'], 'UNDERGROUND'
+                'all',
+                ['==', ['get', 'type'], 'UNDERGROUND'],
+                layerFilter
             ],
         color: '#BF91B6'
     },
@@ -258,7 +233,9 @@ export const types = {
         subGroup: 'Typ',
         filter:
             [
-                '==', ['get', 'type'], 'OFF_STREET_PARKING_GROUND'
+                'all',
+                ['==', ['get', 'type'], 'OFF_STREET_PARKING_GROUND'],
+                layerFilter
             ],
         color: '#009688'
     },
@@ -267,7 +244,9 @@ export const types = {
         subGroup: 'Typ',
         filter:
             [
-                '==', ['get', 'type'], 'ON_STREET'
+                'all',
+                ['==', ['get', 'type'], 'ON_STREET'],
+                layerFilter
             ],
         color: 'yellow'
     },
