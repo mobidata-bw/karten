@@ -215,6 +215,15 @@ export const types = {
             ],
         color: '#009688'
     },
+    ON_STREET: {
+        label: 'Straßen-Parkplatz',
+        subGroup: 'Typ',
+        filter:
+            [
+                '==', ['get', 'type'], 'ON_STREET'
+            ],
+        color: 'yellow'
+    },
     /* BIKE */
     FLOOR: {
         label: 'Abstellfläche',
@@ -319,7 +328,7 @@ export const objects = {
         color: '#92474d'
     },
     PARKING_SITE: {
-        label: 'Parkstreifen',
+        label: 'Parkbau oder Parkstreifen',
         subGroup: 'Parkobjekt',
         filter:
             [
