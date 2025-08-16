@@ -1,46 +1,74 @@
 export function urlParams() {
 
     const params = new URLSearchParams(window.location.search);
-    const parking = params.get('parking');
+    const purpose = params.get('purpose');
+    const map = params.get('map');
 
-    let layerFilter = true; // if not parameter is set, breaking of the map is prevented by assignment of true
-    let controlLayersTitle;
+    let layers, id, id1, id2, layerFilter = true, controlLayersTitle, controlLayersTitle1, controlLayersTitle2;
 
-    switch (parking) {
-        case 'disabled':
-            layerFilter =
-                [
-                    'any',
-                    ['>', ['get', 'capacity_disabled'], 0],
-                    ['==', ['get', 'restriction_type'], 'DISABLED']
-                ];
-            controlLayersTitle = 'Gebündelte Behindertenparkplätze';
+
+    switch (purpose) {
+        case 'car':
+            layers = {
+                source: 'sourceParkApiCar',
+                sourceLayer: 'park-api_car'
+            };
+            id = 'Car';
+            switch (map) {
+                case 'disabled':
+                    layers.group = 'Behindertenparkplätze';
+                    layerFilter =
+                        [
+                            'any',
+                            ['>', ['get', 'capacity_disabled'], 0],
+                            ['==', ['get', 'restriction_type'], 'DISABLED']
+                        ];
+                    controlLayersTitle = 'Gebündelte Behindertenparkplätze';
+                    break;
+                case 'buildings':
+                    layers.group = 'Parkplätze und Parkbauten';
+                    layerFilter =
+                        [
+                            'any',
+                            ['!=', ['get', 'type'], 'ON_STREET'],
+                            ['!', ['has', 'type']]
+                        ];
+                    controlLayersTitle = 'Gebündelte Parkplätze und Parkbauten';
+                    break;
+                case 'on_street':
+                    layers.group = 'Straßen-Parkplätze';
+                    layerFilter =
+                        [
+                            'any',
+                            ['==', ['get', 'type'], 'ON_STREET'],
+                            ['!', ['has', 'type']]
+                        ];
+                    controlLayersTitle = 'Gebündelte Straßen-Parkplätze';
+                    break;
+            }
             break;
-        case 'buildings':
-            layerFilter =
-                [
-                    'any',
-                    ['!=', ['get', 'type'], 'ON_STREET'],
-                    ['!', ['has', 'type']]
-                ];
-            controlLayersTitle = 'Gebündelte Parkplätze und Parkbauten';
-            break;
-        case 'on_street':
-            layerFilter =
-                [
-                    'any',
-                    ['==', ['get', 'type'], 'ON_STREET'],
-                    ['!', ['has', 'type']]
-                ];
-            controlLayersTitle = 'Gebündelte Straßen-Parkplätze';
-            break;
-        default:
+        case 'bicycle':
+            console.log(['==', ['get', 'purpose']])
+            layers = {
+                source: 'sourceParkApiBicycle',
+                sourceLayer: 'park-api_bicycle',
+                group: 'Fahrradabstellanlagen'
+            };
+            id1 = 'Bicycle';
+            id2 = 'Item';
+            controlLayersTitle1 = 'Gebündelte Fahrradabstellanlagen';
+            controlLayersTitle2 = 'Schließfächer an Fahrradabstellanlagen';
             break;
     };
+
 
     return {
+        purpose,
+        layers,
+        id, id1, id2,
         layerFilter,
-        controlLayersTitle
+        controlLayersTitle, controlLayersTitle1, controlLayersTitle2
     };
+
 
 };

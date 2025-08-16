@@ -11,6 +11,20 @@ export const sourceParkApiCar = {
     server: 'test'
 };
 
+export const sourceParkApiBicycle = {
+    layer: 'MobiData-BW:park-api_bicycle',
+    style: 'MobiData-BW:mdbw_park-api_parking-object',
+    bounds: [5.9, 45.8, 17.0, 54.8],
+    server: 'test'
+};
+
+export const sourceParkApiItem = {
+    layer: 'MobiData-BW:park-api_item',
+    style: 'MobiData-BW:mdbw_park-api_parking-object',
+    bounds: [5.9, 45.8, 17.0, 54.8],
+    server: 'test'
+};
+
 
 // ==============================
 // LAYERS
