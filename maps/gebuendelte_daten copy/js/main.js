@@ -8,7 +8,9 @@ import {
     addSources, addLayers
 } from '../../../src/js/initializeMap.js';
 
-import { sourceParkApiCar, sourceParkApiBicycle, layersParkApiOccupancy } from '../../ipl/park-api/js/layers.js';
+import { sourceParkApiCarBuildings, layersParkApiCarBuildingsOccupancy } from '../../ipl/park-api_car_buildings/js/layers.js';
+import { sourceParkApiCarOnStreet, layersParkApiCarOnStreetOccupancy } from '../../ipl/park-api_car_on-street/js/layers.js';
+import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../ipl/park-api_bicycle/js/layers.js';
 import { sourceSharingVehicles, sourceSharingStations } from '../../../src/js/layers/sharing/layers.js';
 import { layersSharingCarVehicles, layersSharingCarStations } from '../../ipl/sharing_car/js/layers.js';
 import { layersSharingBicycleVehicles, layersSharingBicycleStations, layersSharingCargoBicycleVehicles, layersSharingCargoBicycleStations } from '../../ipl/sharing_bicycle/js/layers.js';
@@ -42,8 +44,6 @@ import { popupContent as popupContentPedestrianCrossings } from '../../pedestria
 
 import { initializeControlLayers } from './controlLayers.js';
 
-import { urlParams } from '../../../src/js/layers/parkApi/urlParams.js';
-
 export let layers, layersIpl, layersGeoJson;
 
 export { map };
@@ -64,7 +64,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // SOURCES AND LAYERS
         // ==============================
         const sources = [
-            { id: 'sourceParkApiCar', source: sourceParkApiCar },
+            { id: 'sourceParkApiCarBuildings', source: sourceParkApiCarBuildings },
+            { id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet },
             { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
             { id: 'sourceSharingStations', source: sourceSharingStations },
@@ -101,14 +102,9 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
 
         layersIpl = [
-            ...layersParkApiOccupancy.map(layer => ({
-                ...layer,
-                ...urlParams({ purpose: 'car' }).layerGroup
-            })),
-            ...layersParkApiOccupancy.map(layer => ({
-                ...layer,
-                ...urlParams({ purpose: 'bicycle' }).layerGroup
-            })),
+            ...layersParkApiCarBuildingsOccupancy,
+            ...layersParkApiCarOnStreetOccupancy,
+            ...layersParkApiBicycleOccupancy,
 
             ...layersSharing.filter(layer => layer.id.includes('StationsNoRealtimeData')).map(layer => ({ ...layer, label: 'Station: Echtzeitdaten nicht vorhanden' })),
             ...layersSharing.filter(layer => layer.id.includes('StationsOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Station: Echtzeitdaten älter 30 Minuten' })),
@@ -135,7 +131,7 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
 
         layers.forEach(layer => {
-            if (layer.source != 'sourceParkApiCar') {
+            if (layer.source != 'sourceParkApiCarBuildings') {
                 layer.visibility = 'none';
             }
             else {
@@ -158,17 +154,14 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layersParkApiOccupancy, popupContentParkApi);
+        popups(map, [...layersParkApiCarBuildingsOccupancy, ...layersParkApiCarOnStreetOccupancy, ...layersParkApiBicycleOccupancy], popupContentParkApi);
         popups(map, layersSharing, popupContentSharing);
         popups(map, layersChargePointsPower, popupContentChargePoints);
         popups(map, layersRadvis, popupContentRadvis);
-        popups(map, layersTransitStops, popupContentTransitStops);
-        popups(map, layersTransitStations, popupContentTransitStations);
+        popups(map, [...layersTransitStops, ...layersTransitStations], popupContentTransitStops);
         popups(map, layersCountCar, popupContentCountCar);
         popups(map, layersCountBicycle, popupContentCountBicycle);
         popups(map, layersPedestrianCrossings, popupContentPedestrianCrossings);
-
-        console.log(layersIpl)
 
 
         // ==============================

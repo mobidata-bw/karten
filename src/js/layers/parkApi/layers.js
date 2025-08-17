@@ -342,3 +342,24 @@ export const types = {
         color: '#cacaca'
     }
 };
+
+export const objects = {
+    PARKING_SPOT: {
+        label: 'Einzelparkplatz',
+        subGroup: 'Parkobjekt',
+        filter:
+            [
+                '==', ['get', 'parking_object'], 'spot'
+            ],
+        color: '#92474d'
+    },
+    PARKING_SITE: {
+        label: 'Parkbau oder Parkstreifen',
+        subGroup: 'Parkobjekt',
+        filter:
+            [
+                '==', ['get', 'parking_object'], 'site'
+            ],
+        color: '#25604c'
+    }
+};

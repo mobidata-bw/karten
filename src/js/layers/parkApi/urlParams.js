@@ -1,22 +1,24 @@
-export function urlParams() {
+export function urlParams(options = {}) {
 
     const params = new URLSearchParams(window.location.search);
-    const purpose = params.get('purpose');
-    const map = params.get('map');
+    const purpose = options.purpose ?? params.get('purpose');
+    const parking = options.parking ?? params.get('parking');
 
-    let layers, id, id1, id2, layerFilter = true, controlLayersTitle, controlLayersTitle1, controlLayersTitle2;
+    let layerGroup, id, layerFilter = true, controlLayersTitle;
 
 
     switch (purpose) {
         case 'car':
-            layers = {
+            layerGroup = {
                 source: 'sourceParkApiCar',
-                sourceLayer: 'park-api_car'
+                sourceLayer: 'park-api_car',
+                group: 'Parkplätze'
             };
+            controlLayersTitle = 'Gebündelte Parkplätze';
             id = 'Car';
-            switch (map) {
+            switch (parking) {
                 case 'disabled':
-                    layers.group = 'Behindertenparkplätze';
+                    layerGroup.group = 'Behindertenparkplätze';
                     layerFilter =
                         [
                             'any',
@@ -26,7 +28,7 @@ export function urlParams() {
                     controlLayersTitle = 'Gebündelte Behindertenparkplätze';
                     break;
                 case 'buildings':
-                    layers.group = 'Parkplätze und Parkbauten';
+                    layerGroup.group = 'Parkplätze und Parkbauten';
                     layerFilter =
                         [
                             'any',
@@ -36,7 +38,7 @@ export function urlParams() {
                     controlLayersTitle = 'Gebündelte Parkplätze und Parkbauten';
                     break;
                 case 'on_street':
-                    layers.group = 'Straßen-Parkplätze';
+                    layerGroup.group = 'Straßen-Parkplätze';
                     layerFilter =
                         [
                             'any',
@@ -48,26 +50,32 @@ export function urlParams() {
             }
             break;
         case 'bicycle':
-            console.log(['==', ['get', 'purpose']])
-            layers = {
+            layerGroup = {
                 source: 'sourceParkApiBicycle',
                 sourceLayer: 'park-api_bicycle',
                 group: 'Fahrradabstellanlagen'
             };
-            id1 = 'Bicycle';
-            id2 = 'Item';
-            controlLayersTitle1 = 'Gebündelte Fahrradabstellanlagen';
-            controlLayersTitle2 = 'Schließfächer an Fahrradabstellanlagen';
+            id = 'Bicycle';           
+            controlLayersTitle = 'Gebündelte Fahrradabstellanlagen';
+            break;
+        case 'item':
+            layerGroup = {
+                source: 'sourceParkApiItem',
+                sourceLayer: 'park-api_item',
+                group: 'Schließfächer an Fahrradabstellanlagen'
+            };
+            id = 'Item';
+            controlLayersTitle = 'Schließfächer an Fahrradabstellanlagen';
             break;
     };
 
 
     return {
         purpose,
-        layers,
-        id, id1, id2,
+        layerGroup,
+        id,
         layerFilter,
-        controlLayersTitle, controlLayersTitle1, controlLayersTitle2
+        controlLayersTitle
     };
 
 

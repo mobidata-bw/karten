@@ -5,8 +5,8 @@ import {
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
-    sourceParkApiCar, sourceParkApiBicycle,
-    layersParkApiOccupancy, layersParkApiCarTypes, layersParkApiBicycleTypes
+    sourceParkApiCar, sourceParkApiBicycle, sourceParkApiItem,
+    layersParkApiOccupancy, layersParkApiTypes
 } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/parkApi/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -30,14 +30,14 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         const sources = [
             { id: 'sourceParkApiCar', source: sourceParkApiCar },
-            { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle }
+            { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
+            { id: 'sourceParkApiItem', source: sourceParkApiItem }
         ];
         sources.forEach(source => addSources(map, source));
 
         layers = map.layerGroups({
             'occupancy': layersParkApiOccupancy,
-            'car_types': layersParkApiCarTypes,
-            'bicycle_types': layersParkApiBicycleTypes
+            'types': layersParkApiTypes
         });
         layers.forEach(layer => addLayers(map, layer));
 
@@ -53,6 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================       
         popups(map, layers, popupContent);
 
+     
 
     });
 
