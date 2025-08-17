@@ -8,7 +8,11 @@ import {
     addSources, addLayers
 } from '../../../src/js/initializeMap.js';
 
-import { sourceParkApiCar, sourceParkApiBicycle, layersParkApiOccupancy } from '../../ipl/park-api/js/layers.js';
+import {
+    // sourceParkApiCar, layersParkApiCarOccupancy as layersParkApiCar,
+    // sourceParkApiBicycle, layersParkApiBicycleOccupancy as layersParkApiBicycle
+    sourceParkApiCar, sourceParkApiBicycle, layersParkApiOccupancy as layersParkApi,
+} from '../../ipl/park-api/js/layers.js';
 import { sourceSharingVehicles, sourceSharingStations } from '../../../src/js/layers/sharing/layers.js';
 import { layersSharingCarVehicles, layersSharingCarStations } from '../../ipl/sharing_car/js/layers.js';
 import { layersSharingBicycleVehicles, layersSharingBicycleStations, layersSharingCargoBicycleVehicles, layersSharingCargoBicycleStations } from '../../ipl/sharing_bicycle/js/layers.js';
@@ -100,16 +104,12 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersSharingMopedVehicles
         ];
 
-        layersIpl = [
-            ...layersParkApiOccupancy.map(layer => ({
-                ...layer,
-                ...urlParams({ purpose: 'car' }).layerGroup
-            })),
-            ...layersParkApiOccupancy.map(layer => ({
-                ...layer,
-                ...urlParams({ purpose: 'bicycle' }).layerGroup
-            })),
+        const layersParkApiCar = layersParkApi(urlParams({ purpose: 'car' }));
+        const layersParkApiBicycle = layersParkApi(urlParams({ purpose: 'bicycle' }));
 
+        layersIpl = [
+            ...layersParkApiCar,
+            ...layersParkApiBicycle,
             ...layersSharing.filter(layer => layer.id.includes('StationsNoRealtimeData')).map(layer => ({ ...layer, label: 'Station: Echtzeitdaten nicht vorhanden' })),
             ...layersSharing.filter(layer => layer.id.includes('StationsOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Station: Echtzeitdaten älter 30 Minuten' })),
             ...layersSharing.filter(layer => layer.id.includes('StationsOccupied')).map(layer => ({ ...layer, label: 'Station: Fahrzeuge nicht vorhanden' })),
@@ -158,7 +158,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layersParkApiOccupancy, popupContentParkApi);
+        popups(map, [...layersParkApiCar, ...layersParkApiBicycle], popupContentParkApi);
         popups(map, layersSharing, popupContentSharing);
         popups(map, layersChargePointsPower, popupContentChargePoints);
         popups(map, layersRadvis, popupContentRadvis);

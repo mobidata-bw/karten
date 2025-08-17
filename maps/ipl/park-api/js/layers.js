@@ -37,38 +37,73 @@ export const sourceParkApiItem = {
 // ==============================
 // LAYERS: OCCUPANCY
 // ==============================
-export const layersParkApiOccupancy = [
-    {
-        id: `parkApi${id}Occupancy_NoRealtimeInformation`,
-        ...occupancy.NO_REALTIME_INFORMATION,
-        ...layerGroup
-    },
-    {
-        id: `parkApi${id}Occupancy_OutdatedRealtimeInformation`,
-        ...occupancy.OUTDATED_REALTIME_INFORMATION,
-        ...layerGroup
-    },
-    {
-        id: `parkApi${id}Occupancy_Closed`,
-        ...occupancy.CLOSED,
-        ...layerGroup
-    },
-    {
-        id: `parkApi${id}Occupancy_VeryLowAvailability`,
-        ...occupancy.VERY_LOW_AVAILABILITY,
-        ...layerGroup
-    },
-    {
-        id: `parkApi${id}Occupancy_LowAvailability`,
-        ...occupancy.LOW_AVAILABILITY,
-        ...layerGroup
-    },
-    {
-        id: `parkApi${id}Occupancy_HighAvailability`,
-        ...occupancy.HIGH_AVAILABILITY,
-        ...layerGroup
-    }
-];
+// export const layersParkApiOccupancy = [
+//     {
+//         id: `parkApi${id}Occupancy_NoRealtimeInformation`,
+//         ...occupancy.NO_REALTIME_INFORMATION,
+//         ...layerGroup
+//     },
+//     {
+//         id: `parkApi${id}Occupancy_OutdatedRealtimeInformation`,
+//         ...occupancy.OUTDATED_REALTIME_INFORMATION,
+//         ...layerGroup
+//     },
+//     {
+//         id: `parkApi${id}Occupancy_Closed`,
+//         ...occupancy.CLOSED,
+//         ...layerGroup
+//     },
+//     {
+//         id: `parkApi${id}Occupancy_VeryLowAvailability`,
+//         ...occupancy.VERY_LOW_AVAILABILITY,
+//         ...layerGroup
+//     },
+//     {
+//         id: `parkApi${id}Occupancy_LowAvailability`,
+//         ...occupancy.LOW_AVAILABILITY,
+//         ...layerGroup
+//     },
+//     {
+//         id: `parkApi${id}Occupancy_HighAvailability`,
+//         ...occupancy.HIGH_AVAILABILITY,
+//         ...layerGroup
+//     }
+// ];
+
+export function layersParkApiOccupancy({ id, layerGroup }) {
+    return [
+        {
+            id: `parkApi${id}Occupancy_NoRealtimeInformation`,
+            ...occupancy.NO_REALTIME_INFORMATION,
+            ...layerGroup
+        },
+        {
+            id: `parkApi${id}Occupancy_OutdatedRealtimeInformation`,
+            ...occupancy.OUTDATED_REALTIME_INFORMATION,
+            ...layerGroup
+        },
+        {
+            id: `parkApi${id}Occupancy_Closed`,
+            ...occupancy.CLOSED,
+            ...layerGroup
+        },
+        {
+            id: `parkApi${id}Occupancy_VeryLowAvailability`,
+            ...occupancy.VERY_LOW_AVAILABILITY,
+            ...layerGroup
+        },
+        {
+            id: `parkApi${id}Occupancy_LowAvailability`,
+            ...occupancy.LOW_AVAILABILITY,
+            ...layerGroup
+        },
+        {
+            id: `parkApi${id}Occupancy_HighAvailability`,
+            ...occupancy.HIGH_AVAILABILITY,
+            ...layerGroup
+        }
+    ];
+};
 
 
 // ==============================
@@ -130,6 +165,7 @@ const parkApiTypes = [
         visibility: 'none',
         ...layerGroup,
         scope: ['bicycle', 'item']
+
     },
     {
         id: `parkApi${id}Types_Shed`,
