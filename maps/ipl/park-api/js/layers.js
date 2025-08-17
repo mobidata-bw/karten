@@ -5,7 +5,7 @@ import { urlParams } from '../../../../src/js/layers/parkApi/urlParams.js';
 // ==============================
 // URL PARAMS
 // ==============================
-const { purpose, layerGroup, id } = urlParams();
+const { purpose } = urlParams();
 
 
 // ==============================
@@ -33,44 +33,10 @@ export const sourceParkApiItem = {
 };
 
 
-
 // ==============================
 // LAYERS: OCCUPANCY
 // ==============================
-// export const layersParkApiOccupancy = [
-//     {
-//         id: `parkApi${id}Occupancy_NoRealtimeInformation`,
-//         ...occupancy.NO_REALTIME_INFORMATION,
-//         ...layerGroup
-//     },
-//     {
-//         id: `parkApi${id}Occupancy_OutdatedRealtimeInformation`,
-//         ...occupancy.OUTDATED_REALTIME_INFORMATION,
-//         ...layerGroup
-//     },
-//     {
-//         id: `parkApi${id}Occupancy_Closed`,
-//         ...occupancy.CLOSED,
-//         ...layerGroup
-//     },
-//     {
-//         id: `parkApi${id}Occupancy_VeryLowAvailability`,
-//         ...occupancy.VERY_LOW_AVAILABILITY,
-//         ...layerGroup
-//     },
-//     {
-//         id: `parkApi${id}Occupancy_LowAvailability`,
-//         ...occupancy.LOW_AVAILABILITY,
-//         ...layerGroup
-//     },
-//     {
-//         id: `parkApi${id}Occupancy_HighAvailability`,
-//         ...occupancy.HIGH_AVAILABILITY,
-//         ...layerGroup
-//     }
-// ];
-
-export function layersParkApiOccupancy({ id, layerGroup }) {
+function parkApiOccupancy({ id, layerGroup }) {
     return [
         {
             id: `parkApi${id}Occupancy_NoRealtimeInformation`,
@@ -105,110 +71,117 @@ export function layersParkApiOccupancy({ id, layerGroup }) {
     ];
 };
 
+export const layersParkApiOccupancy = parkApiOccupancy(urlParams());
+export const layersParkApiCarOccupancy = parkApiOccupancy(urlParams({ purpose: 'car' }));
+export const layersParkApiBicycleOccupancy = parkApiOccupancy(urlParams({ purpose: 'bicycle' }));
+export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 'item' }));
+
 
 // ==============================
 // LAYERS: TYPE
 // ==============================
-const parkApiTypes = [
-    {
-        id: `parkApi${id}Types_Other`,
-        ...types.OTHER,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['car', 'bicycle']
-    },
-    {
-        id: `parkApi${id}Types_OnStreet`,
-        ...types.ON_STREET,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['car']
-    },
-    {
-        id: `parkApi${id}Types_OffStreet`,
-        ...types.OFF_STREET,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['car']
-    },
-    {
-        id: `parkApi${id}Types_Underground`,
-        ...types.UNDERGROUND,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['car']
-    },
-    {
-        id: `parkApi${id}Types_CarPark`,
-        ...types.CAR_PARK,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['car']
-    },
-    {
-        id: `parkApi${id}Types_WallLoops`,
-        ...types.WALL_LOOPS,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle']
-    },
-    {
-        id: `parkApi${id}Types_Stands`,
-        ...types.STANDS,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle']
-    },
-    {
-        id: `parkApi${id}Types_Lockers`,
-        ...types.LOCKERS,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle', 'item']
+function parkApiType({ id, layerGroup }) {
+    return [
+        {
+            id: `parkApi${id}Types_Other`,
+            ...types.OTHER,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['car', 'bicycle']
+        },
+        {
+            id: `parkApi${id}Types_OnStreet`,
+            ...types.ON_STREET,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['car']
+        },
+        {
+            id: `parkApi${id}Types_OffStreet`,
+            ...types.OFF_STREET,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['car']
+        },
+        {
+            id: `parkApi${id}Types_Underground`,
+            ...types.UNDERGROUND,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['car']
+        },
+        {
+            id: `parkApi${id}Types_CarPark`,
+            ...types.CAR_PARK,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['car']
+        },
+        {
+            id: `parkApi${id}Types_WallLoops`,
+            ...types.WALL_LOOPS,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle']
+        },
+        {
+            id: `parkApi${id}Types_Stands`,
+            ...types.STANDS,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle']
+        },
+        {
+            id: `parkApi${id}Types_Lockers`,
+            ...types.LOCKERS,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle', 'item']
 
-    },
-    {
-        id: `parkApi${id}Types_Shed`,
-        ...types.SHED,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle']
-    },
-    {
-        id: `parkApi${id}Types_TwoTier`,
-        ...types.TWO_TIER,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle']
-    },
-    {
-        id: `parkApi${id}Types_Lockbox`,
-        ...types.LOCKBOX,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle', 'item']
-    },
-    {
-        id: `parkApi${id}Types_SafeWallLoops`,
-        ...types.SAFE_WALL_LOOPS,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle']
-    },
-    {
-        id: `parkApi${id}Types_Building`,
-        ...types.BUILDING,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle']
-    },
-    {
-        id: `parkApi${id}Types_Floor`,
-        ...types.FLOOR,
-        visibility: 'none',
-        ...layerGroup,
-        scope: ['bicycle']
-    }
-];
+        },
+        {
+            id: `parkApi${id}Types_Shed`,
+            ...types.SHED,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle']
+        },
+        {
+            id: `parkApi${id}Types_TwoTier`,
+            ...types.TWO_TIER,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle']
+        },
+        {
+            id: `parkApi${id}Types_Lockbox`,
+            ...types.LOCKBOX,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle', 'item']
+        },
+        {
+            id: `parkApi${id}Types_SafeWallLoops`,
+            ...types.SAFE_WALL_LOOPS,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle']
+        },
+        {
+            id: `parkApi${id}Types_Building`,
+            ...types.BUILDING,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle']
+        },
+        {
+            id: `parkApi${id}Types_Floor`,
+            ...types.FLOOR,
+            visibility: 'none',
+            ...layerGroup,
+            scope: ['bicycle']
+        }
+    ];
+};
 
-export const layersParkApiTypes = parkApiTypes.filter(parkApiTypes => parkApiTypes.scope.includes(purpose));
+export const layersParkApiType = parkApiType(urlParams()).filter(layer => layer.scope.includes(purpose));

@@ -7,11 +7,9 @@ import {
     wms,
     addSources, addLayers
 } from '../../../src/js/initializeMap.js';
-
 import {
-    // sourceParkApiCar, layersParkApiCarOccupancy as layersParkApiCar,
-    // sourceParkApiBicycle, layersParkApiBicycleOccupancy as layersParkApiBicycle
-    sourceParkApiCar, sourceParkApiBicycle, layersParkApiOccupancy as layersParkApi,
+    sourceParkApiCar, sourceParkApiBicycle,
+    layersParkApiCarOccupancy as layersParkApiCar, layersParkApiBicycleOccupancy as layersParkApiBicycle
 } from '../../ipl/park-api/js/layers.js';
 import { sourceSharingVehicles, sourceSharingStations } from '../../../src/js/layers/sharing/layers.js';
 import { layersSharingCarVehicles, layersSharingCarStations } from '../../ipl/sharing_car/js/layers.js';
@@ -103,9 +101,6 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersSharingCargoBicycleStations,
             ...layersSharingMopedVehicles
         ];
-
-        const layersParkApiCar = layersParkApi(urlParams({ purpose: 'car' }));
-        const layersParkApiBicycle = layersParkApi(urlParams({ purpose: 'bicycle' }));
 
         layersIpl = [
             ...layersParkApiCar,

@@ -6,8 +6,7 @@ import {
 } from '../../../../src/js/initializeMap.js';
 import {
     sourceParkApiCar, sourceParkApiBicycle, sourceParkApiItem,
-    // layersParkApiCarOccupancy, layersParkApiCarTypes
-    layersParkApiOccupancy, layersParkApiTypes
+    layersParkApiOccupancy, layersParkApiType
 } from './layers.js';
 import { popupContent } from '../../../../src/js/layers/parkApi/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -37,16 +36,12 @@ window.addEventListener('DOMContentLoaded', () => {
         sources.forEach(source => addSources(map, source));
 
         layers = map.layerGroups({
-            // 'occupancy': layersParkApiCarOccupancy,
-            // 'types': layersParkApiCarTypes
             'occupancy': layersParkApiOccupancy,
-            'types': layersParkApiTypes
+            'type': layersParkApiType        
         });
         layers.forEach(layer => addLayers(map, layer));
 
-        console.log(layers[0]);
-
-
+    
         // ==============================
         // LAYER CONTROL
         // ============================== 
@@ -58,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================       
         popups(map, layers, popupContent);
 
-     
+
 
     });
 
