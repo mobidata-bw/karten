@@ -2,7 +2,7 @@ import { layerControlGrouped } from '../../../../src/plugins/mapbox-layer-contro
 import '../../../../src/plugins/mapbox-layer-control/layerControl-patch.js';
 import { layers } from './main.js';
 import { addControlLayers } from '../../../../src/js/addControlLayers.js';
-import { urlParams } from '../../../../src/js/layers/parkApi/urlParams.js';
+import { urlParams } from '../../../../src/js/urlParams.js';
 
 
 // ==============================

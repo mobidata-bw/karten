@@ -9,13 +9,17 @@ import {
 } from '../../../src/js/initializeMap.js';
 import {
     sourceParkApiCar, sourceParkApiBicycle,
-    layersParkApiCarOccupancy as layersParkApiCar, layersParkApiBicycleOccupancy as layersParkApiBicycle
+    layersParkApiCarOccupancy as layersParkApiCar,
+    layersParkApiBicycleOccupancy as layersParkApiBicycle
 } from '../../ipl/park-api/js/layers.js';
-import { sourceSharingVehicles, sourceSharingStations } from '../../../src/js/layers/sharing/layers.js';
-import { layersSharingCarVehicles, layersSharingCarStations } from '../../ipl/sharing_car/js/layers.js';
-import { layersSharingBicycleVehicles, layersSharingBicycleStations, layersSharingCargoBicycleVehicles, layersSharingCargoBicycleStations } from '../../ipl/sharing_bicycle/js/layers.js';
-import { layersSharingScooterVehicles, layersSharingScooterStations } from '../../ipl/sharing_scooter/js/layers.js';
-import { layersSharingMopedVehicles } from '../../ipl/sharing_moped/js/layers.js';
+import {
+    sourceSharingVehicles, sourceSharingStations,
+    layersSharingCarVehicles, layersSharingCarStations,
+    layersSharingBicycleVehicles, layersSharingBicycleStations,
+    layersSharingScooterVehicles, layersSharingScooterStations,
+    layersSharingCargoBicycleVehicles, layersSharingCargoBicycleStations,
+    layersSharingMopedVehicles, layersSharingMopedStations
+} from '../../ipl/sharing/js/layers.js';
 import { sourceChargePoints, layersChargePointsPower } from '../../ipl/charge_points/js/layers.js';
 import { sourceRadvis, layersRadvis } from '../../ipl/radvis_cycle_network/js/layers.js';
 import {
@@ -28,8 +32,8 @@ import { sourceCountCar, layersCountCar } from '../../count_car/js/layers.js';
 import { sourceCountBicycle, layersCountBicycle } from '../../count_bicycle/js/layers.js';
 import { sourceFootway, sourceMarked, sourceUncontrolled, sourceZebra, layersPedestrianCrossings } from '../../pedestrian_crossings/js/layers.js';
 
-import { popupContent as popupContentParkApi } from '../../../src/js/layers/parkApi/popupContent.js';
-import { popupContent as popupContentSharing } from '../../../src/js/layers/sharing/popupContent.js';
+import { popupContent as popupContentParkApi } from '../../ipl/park-api/js/popupContent.js';
+import { popupContent as popupContentSharing } from '../../ipl/sharing/js/popupContent.js';
 import { popupContent as popupContentChargePoints } from '../../ipl/charge_points/js/popupContent.js';
 import { popupContent as popupContentRadvis } from '../../ipl/radvis_cycle_network/js/popupContent.js';
 import {
@@ -43,8 +47,6 @@ import { popupContent as popupContentCountBicycle } from '../../count_bicycle/js
 import { popupContent as popupContentPedestrianCrossings } from '../../pedestrian_crossings/js/popupContent.js';
 
 import { initializeControlLayers } from './controlLayers.js';
-
-import { urlParams } from '../../../src/js/layers/parkApi/urlParams.js';
 
 export let layers, layersIpl, layersGeoJson;
 
@@ -99,7 +101,8 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersSharingScooterStations,
             ...layersSharingCargoBicycleVehicles,
             ...layersSharingCargoBicycleStations,
-            ...layersSharingMopedVehicles
+            ...layersSharingMopedVehicles,
+            ...layersSharingMopedStations
         ];
 
         layersIpl = [
@@ -162,8 +165,6 @@ window.addEventListener('DOMContentLoaded', () => {
         popups(map, layersCountCar, popupContentCountCar);
         popups(map, layersCountBicycle, popupContentCountBicycle);
         popups(map, layersPedestrianCrossings, popupContentPedestrianCrossings);
-
-        console.log(layersIpl)
 
 
         // ==============================

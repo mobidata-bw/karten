@@ -12,18 +12,20 @@ import {
     sourceAbstellzonen, layersScooterZones
 } from './layers.js';
 import { sourceChargePoints, layersChargePointsOccupancy } from '../../../ipl/charge_points/js/layers.js';
-import { sourceSharingVehicles, sourceSharingStations } from '../../../../src/js/layers/sharing/layers.js';
-import { layersSharingScooterVehicles, layersSharingScooterStations } from '../../../ipl/sharing_scooter/js/layers.js';
+import {
+    sourceSharingVehicles, sourceSharingStations,
+    layersSharingCarVehicles, layersSharingCarStations,
+    layersSharingScooterVehicles, layersSharingScooterStations
+} from '../../../ipl/sharing/js/layers.js';
 import { sourceTransitStops, layersTransitStops } from '../../../ipl/gtfs/js/layers.js';
-import { layersSharingCarVehicles, layersSharingCarStations } from '../../../ipl/sharing_car/js/layers.js';
 import { sourceCountBicycle, layersCountBicycle } from '../../../count_bicycle/js/layers.js';
-import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../../ipl/park-api_bicycle/js/layers.js';
+import { sourceParkApiBicycle, layersParkApiBicycleOccupancy } from '../../../ipl/park-api/js/layers.js';
 import { popupContent as popupContentStations } from './popupContent.js';
 import { popupContent as popupContentChargePoints } from '../../../ipl/charge_points/js/popupContent.js';
-import { popupContent as popupContentSharing } from '../../../../src/js/layers/sharing/popupContent.js';
+import { popupContent as popupContentSharing } from '../../../ipl/sharing/js/popupContent.js';
 import { popupContentTransitStops } from '../../../ipl/gtfs/js/popupContent.js';
 import { popupContent as popupContentCountBicycle } from '../../../count_bicycle/js/popupContent.js';
-import { popupContent as popupContentParkApi } from '../../../../src/js/layers/parkApi/popupContent.js';
+import { popupContent as popupContentParkApi } from '../../../ipl/park-api/js/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
 export let layersDatenspaziergang, layersIpl;

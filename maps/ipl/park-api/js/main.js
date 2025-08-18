@@ -5,10 +5,10 @@ import {
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
-    sourceParkApiCar, sourceParkApiBicycle, sourceParkApiItem,
+    sourceParkApiCar, sourceParkApiBicycle,
     layersParkApiOccupancy, layersParkApiType
 } from './layers.js';
-import { popupContent } from '../../../../src/js/layers/parkApi/popupContent.js';
+import { popupContent } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
 export let layers;
@@ -30,8 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         const sources = [
             { id: 'sourceParkApiCar', source: sourceParkApiCar },
-            { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
-            { id: 'sourceParkApiItem', source: sourceParkApiItem }
+            { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle }
         ];
         sources.forEach(source => addSources(map, source));
 

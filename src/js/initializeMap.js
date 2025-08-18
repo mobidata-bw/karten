@@ -11,7 +11,7 @@ import maplibregl from 'maplibre-gl';
 import MaplibreInspect from '@maplibre/maplibre-gl-inspect';
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
 
-export { addSources, addLayers } from '../js/layers/configSourcesLayers.js';
+export { addSources, addLayers } from './configSourcesLayers.js';
 export { basemaps } from '../js/layerSwitcherControl.js';
 export { popups } from '../js/popups.js';
 export { wms } from '../js/wms.js';

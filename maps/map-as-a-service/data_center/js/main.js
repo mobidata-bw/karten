@@ -7,11 +7,11 @@ import {
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
 import { NotificationsControl } from '../../../../src/plugins/maplibre-notifications-master/maplibre-notifications.js';
 import {
-    sourceParkApiCarOnStreet,
-    layersParkApiCarOnStreetObjects as layersIpl
-} from '../../../ipl/park-api_car_on-street/js/layers.js';
+    sourceParkApiCar,
+    layersParkApiCarOccupancy as layersIpl
+} from '../../../ipl/park-api/js/layers.js';
 import { initializeControlLayers } from './controlLayers.js';
-import { popupContent as popupContentIpl } from '../../../../src/js/layers/parkApi/popupContent.js';
+import { popupContent as popupContentIpl } from '../../../ipl/park-api/js/popupContent.js';
 import { popupContent as popupContentDataCenter } from './popupContent.js';
 
 import '@geoman-io/maplibre-geoman-free/dist/maplibre-geoman.css';
@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // SOURCES AND LAYERS
         // ==============================
-        sourcesIpl = [{ id: 'sourceParkApiCarOnStreet', source: sourceParkApiCarOnStreet }];
+        sourcesIpl = [{ id: 'sourceParkApiCar', source: sourceParkApiCar }];
         sourcesIpl.forEach(src => addSources(map, src));
 
 
