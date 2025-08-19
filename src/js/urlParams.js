@@ -3,6 +3,7 @@ export function urlParams(options = {}) {
     const params = new URLSearchParams(window.location.search);
     const purpose = options.purpose ?? params.get('purpose');
     const parking = options.parking ?? params.get('parking');
+    const parkingObject = options.parkingObject ?? params.get('parking_object');
     const formFactor = options.formFactor ?? params.get('form_factor');
 
     let layerGroup = {}, id, layerFilter = true, controlLayersTitle;
@@ -12,6 +13,7 @@ export function urlParams(options = {}) {
     // LAYERS: PARKAPI
     // ==============================
     switch (purpose) {
+        // ==============================
         case 'car':
             layerGroup = {
                 source: 'sourceParkApiCar',
@@ -50,6 +52,24 @@ export function urlParams(options = {}) {
                             ['!', ['has', 'type']]
                         ];
                     controlLayersTitle = 'Gebündelte Straßen-Parkplätze';
+                    break;
+            }
+            switch (parkingObject) {
+                case 'site':
+                    layerGroup.group = 'Parksteifen oder Parkbau';
+                    layerFilter =
+                        [
+                            '==', ['get', 'parking_object'], 'site'
+                        ];
+                    controlLayersTitle = 'Parkstreifen und Parkbauten';
+                    break;
+                case 'spot':
+                    layerGroup.group = 'Einzelparkplatz';
+                    layerFilter =
+                        [
+                            '==', ['get', 'parking_object'], 'spot'
+                        ];
+                    controlLayersTitle = 'Einzelparkplatz';
                     break;
             }
             break;
