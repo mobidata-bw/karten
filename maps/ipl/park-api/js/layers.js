@@ -4,7 +4,7 @@ import { urlParams } from '../../../../src/js/urlParams.js';
 // ==============================
 // URL PARAMS
 // ==============================
-const { purpose, type, parking, geometry, layerFilter } = urlParams();
+const { purpose, type, parking, geometry, layerFilter, layerGroup, id } = urlParams();
 
 
 // ==============================
@@ -13,7 +13,8 @@ const { purpose, type, parking, geometry, layerFilter } = urlParams();
 export const sourceParkApiCar = {
     layer: 'MobiData-BW:park-api_car',
     style: 'MobiData-BW:mdbw_park-api_parking-object',
-    bounds: [5.9, 45.8, 17.0, 54.8]
+    bounds: [5.9, 45.8, 17.0, 54.8],
+    server: 'test'
 };
 
 export const sourceParkApiCarPolygons = {
@@ -254,10 +255,10 @@ export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 
 // ==============================
 // LAYERS: TYPE
 // ==============================
-function parkApiType({ id, layerGroup, layerFilter }) {
+function parkApiType({ id, layerGroup: { }, layerFilter }) {
     return [
         {
-            id: `parkApi${id}Types_Other`,
+            id: `parkApi${id}Type_Other`,
             label: 'Sonstige',
             subGroup: 'Typ',
             filter:
@@ -272,7 +273,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_OnStreet`,
+            id: `parkApi${id}Type_OnStreet`,
             label: 'Straßen-Parkplatz',
             subGroup: 'Typ',
             filter:
@@ -287,7 +288,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             visibility: 'none'
         },
         {
-            id: `parkApi${id}Types_OffStreet`,
+            id: `parkApi${id}Type_OffStreet`,
             label: 'Parkplatz abseits der Straße',
             subGroup: 'Typ',
             filter:
@@ -302,7 +303,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_Underground`,
+            id: `parkApi${id}Type_Underground`,
             label: 'Tiefgarage',
             subGroup: 'Typ',
             filter:
@@ -317,7 +318,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_CarPark`,
+            id: `parkApi${id}Type_CarPark`,
             label: 'Parkhaus',
             subGroup: 'Typ',
             filter:
@@ -332,7 +333,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_WallLoops`,
+            id: `parkApi${id}Type_WallLoops`,
             label: 'Vorderradhalter',
             subGroup: 'Typ',
             filter:
@@ -345,7 +346,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_Stands`,
+            id: `parkApi${id}Type_Stands`,
             label: 'Anlehnbügel',
             subGroup: 'Typ',
             filter:
@@ -358,7 +359,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_Lockers`,
+            id: `parkApi${id}Type_Lockers`,
             label: 'Fahrradschrank',
             subGroup: 'Typ',
             filter:
@@ -371,7 +372,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_Shed`,
+            id: `parkApi${id}Type_Shed`,
             label: 'Sammelanlage',
             subGroup: 'Typ',
             filter:
@@ -384,7 +385,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup,
         },
         {
-            id: `parkApi${id}Types_TwoTier`,
+            id: `parkApi${id}Type_TwoTier`,
             label: 'Zweistock-Abstellanlage',
             subGroup: 'Typ',
             filter:
@@ -397,7 +398,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_Lockbox`,
+            id: `parkApi${id}Type_Lockbox`,
             label: 'Schließfach',
             subGroup: 'Typ',
             filter:
@@ -410,7 +411,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             visibility: 'none'
         },
         {
-            id: `parkApi${id}Types_SafeWallLoops`,
+            id: `parkApi${id}Type_SafeWallLoops`,
             label: 'Vorderradhalter mit Sicherung',
             subGroup: 'Typ',
             filter:
@@ -423,7 +424,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_Building`,
+            id: `parkApi${id}Type_Building`,
             label: 'Parkhaus',
             subGroup: 'Typ',
             filter:
@@ -436,7 +437,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Types_Floor`,
+            id: `parkApi${id}Type_Floor`,
             label: 'Abstellfläche',
             subGroup: 'Typ',
             filter:
@@ -451,13 +452,46 @@ function parkApiType({ id, layerGroup, layerFilter }) {
     ];
 };
 
+const functionParkApiType = parkApiType({ id, layerGroup, layerFilter });
+
+if (geometry == 'polygon') {
+
+    const layerConfiguration = {
+        id: `parkApi${id}Type_Other_Circle`,
+        label: 'Zusatz-Layer',
+        subGroup: 'Typ',
+        color: 'red',
+        visibility: 'none',
+        filter:
+            [
+                'has', 'geojson'
+            ],
+        scope: ['car', 'polygon'],
+        source: 'sourceParkApiCar',
+        sourceLayer: 'park-api_car',
+        type: 'circle'
+    };
+
+
+    functionParkApiType.push(layerConfiguration);
+
+}
+else {
+    functionParkApiType.pop()
+}
+
+console.log(functionParkApiType);
+
+
+
 export let layersParkApiType;
 
-layersParkApiType = parkApiType(urlParams())
+layersParkApiType = functionParkApiType
     .filter(layer => layer.scope.includes(purpose));
 
 if ((type != 'null' && type != null) || (parking != 'null' && parking != null) || (geometry != 'null' && geometry != null)) {
-    layersParkApiType = parkApiType(urlParams())
+    layersParkApiType = functionParkApiType
         .filter(layer => layer.scope.includes(purpose))
         .filter(layer => layer.scope.includes(type) || layer.scope.includes(parking) || layer.scope.includes(geometry));
 };
+

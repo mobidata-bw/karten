@@ -41,6 +41,14 @@ window.addEventListener('DOMContentLoaded', () => {
         });
         layers.forEach(layer => addLayers(map, layer));
 
+        // console.log(layers);
+        console.log({
+            vis: map.getLayoutProperty('parkApiCarOccupancy_NoRealtimeInformation', 'visibility'),
+            minzoom: map.getLayer('parkApiCarOccupancy_NoRealtimeInformation')?.minzoom,
+            maxzoom: map.getLayer('parkApiCarOccupancy_NoRealtimeInformation')?.maxzoom,
+            src: map.getLayer('parkApiCarOccupancy_NoRealtimeInformation')?.source,
+            srcMin: map.getSource(map.getLayer('parkApiCarOccupancy_NoRealtimeInformation')?.source)?.minzoom
+          });
     
         // ==============================
         // LAYER CONTROL
