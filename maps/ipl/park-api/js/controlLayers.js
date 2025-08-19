@@ -5,11 +5,7 @@ import { addControlLayers } from '../../../../src/js/addControlLayers.js';
 import { urlParams } from '../../../../src/js/urlParams.js';
 
 
-// ==============================
-// CONTROL LAYERS
-// ==============================
 const { controlLayersTitle } = urlParams();
-
 
 export function initializeControlLayers(map) {
    

@@ -4,7 +4,7 @@ import { urlParams } from '../../../../src/js/urlParams.js';
 // ==============================
 // URL PARAMS
 // ==============================
-const { purpose, layerFilter } = urlParams();
+const { purpose, parking, layerFilter } = urlParams();
 
 
 // ==============================
@@ -14,14 +14,14 @@ export const sourceParkApiCar = {
     layer: 'MobiData-BW:park-api_car',
     style: 'MobiData-BW:mdbw_park-api_parking-object',
     bounds: [5.9, 45.8, 17.0, 54.8],
-    server: 'test'
+    // server: 'test'
 };
 
 export const sourceParkApiBicycle = {
     layer: 'MobiData-BW:park-api_bicycle',
     style: 'MobiData-BW:mdbw_park-api_parking-object',
     bounds: [7.1, 47.5, 13.5, 53.8],
-    server: 'test'
+    // server: 'test'
 };
 
 
@@ -261,7 +261,8 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#cacaca',
             visibility: 'none',
-            scope: ['car', 'bicycle'],
+            scopePurpose: ['car', 'bicycle'],
+            scopeParking: ['buildings', 'on_street', 'disabled'],
             ...layerGroup
         },
         {
@@ -276,7 +277,8 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: 'yellow',
             ...layerGroup,
-            scope: ['car'],
+            scopePurpose: ['car'],
+            scopeParking: ['on_street'],
             visibility: 'none'
         },
         {
@@ -291,7 +293,8 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#009688',
             visibility: 'none',
-            scope: ['car'],
+            scopePurpose: ['car'],
+            scopeParking: ['buildings', 'disabled'],
             ...layerGroup
         },
         {
@@ -306,7 +309,8 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#BF91B6',
             visibility: 'none',
-            scope: ['car'],
+            scopePurpose: ['car'],
+            scopeParking: ['buildings', 'disabled'],
             ...layerGroup
         },
         {
@@ -321,7 +325,8 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#5587eb',
             visibility: 'none',
-            scope: ['car'],
+            scopePurpose: ['car'],
+            scopeParking: ['buildings', 'disabled'],
             ...layerGroup
         },
         {
@@ -334,7 +339,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#5587eb',
             visibility: 'none',
-            scope: ['bicycle'],
+            scopePurpose: ['bicycle'],
             ...layerGroup
         },
         {
@@ -347,7 +352,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#bf91b6',
             visibility: 'none',
-            scope: ['bicycle'],
+            scopePurpose: ['bicycle'],
             ...layerGroup
         },
         {
@@ -360,7 +365,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#ff9933',
             visibility: 'none',
-            scope: ['bicycle', 'item'],
+            scopePurpose: ['bicycle', 'item'],
             ...layerGroup
         },
         {
@@ -373,7 +378,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#ee5959',
             visibility: 'none',
-            scope: ['bicycle'],
+            scopePurpose: ['bicycle'],
             ...layerGroup,
         },
         {
@@ -386,7 +391,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#009688',
             visibility: 'none',
-            scope: ['bicycle'],
+            scopePurpose: ['bicycle'],
             ...layerGroup
         },
         {
@@ -399,7 +404,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: 'white',
             ...layerGroup,
-            scope: ['bicycle', 'item'],
+            scopePurpose: ['bicycle', 'item'],
             visibility: 'none'
         },
         {
@@ -412,7 +417,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#30D5C8',
             visibility: 'none',
-            scope: ['bicycle'],
+            scopePurpose: ['bicycle'],
             ...layerGroup
         },
         {
@@ -425,7 +430,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#c2e72a',
             visibility: 'none',
-            scope: ['bicycle'],
+            scopePurpose: ['bicycle'],
             ...layerGroup
         },
         {
@@ -438,10 +443,19 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: 'black',
             visibility: 'none',
-            scope: ['bicycle'],
+            scopePurpose: ['bicycle'],
             ...layerGroup
         }
     ];
 };
 
-export const layersParkApiType = parkApiType(urlParams()).filter(layer => layer.scope.includes(purpose));
+export let layersParkApiType;
+
+layersParkApiType = parkApiType(urlParams())
+    .filter(layer => layer.scopePurpose.includes(purpose));
+
+if (parking != 'null' && parking != null) {
+    layersParkApiType = parkApiType(urlParams())
+        .filter(layer => layer.scopePurpose.includes(purpose))
+        .filter(layer => layer.scopeParking.includes(parking));
+};

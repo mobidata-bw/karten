@@ -21,6 +21,7 @@ export function urlParams(options = {}) {
                 group: 'Parkplätze'
             };
             controlLayersTitle = 'Gebündelte Parkplätze';
+            document.title = `MobiData BW® - ${controlLayersTitle}`;
             id = 'Car';
             switch (parking) {
                 case 'disabled':
@@ -32,6 +33,7 @@ export function urlParams(options = {}) {
                             ['==', ['get', 'restriction_type'], 'DISABLED']
                         ];
                     controlLayersTitle = 'Gebündelte Behindertenparkplätze';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
                 case 'buildings':
                     layerGroup.group = 'Parkplätze und Parkbauten';
@@ -42,6 +44,7 @@ export function urlParams(options = {}) {
                             ['!', ['has', 'type']]
                         ];
                     controlLayersTitle = 'Gebündelte Parkplätze und Parkbauten';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
                 case 'on_street':
                     layerGroup.group = 'Straßen-Parkplätze';
@@ -52,16 +55,18 @@ export function urlParams(options = {}) {
                             ['!', ['has', 'type']]
                         ];
                     controlLayersTitle = 'Gebündelte Straßen-Parkplätze';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
             }
             switch (parkingObject) {
                 case 'site':
-                    layerGroup.group = 'Parksteifen oder Parkbau';
+                    layerGroup.group = 'Parkbau oder Parkstreifen';
                     layerFilter =
                         [
                             '==', ['get', 'parking_object'], 'site'
                         ];
-                    controlLayersTitle = 'Parkstreifen und Parkbauten';
+                    controlLayersTitle = 'Gebündelte Parkbauten und Parkstreifen';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
                 case 'spot':
                     layerGroup.group = 'Einzelparkplatz';
@@ -69,7 +74,8 @@ export function urlParams(options = {}) {
                         [
                             '==', ['get', 'parking_object'], 'spot'
                         ];
-                    controlLayersTitle = 'Einzelparkplatz';
+                    controlLayersTitle = 'Gebündelte Einzelparkplätze';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
             }
             break;
@@ -85,6 +91,7 @@ export function urlParams(options = {}) {
                 ];
             id = 'Bicycle';
             controlLayersTitle = 'Gebündelte Fahrradabstellanlagen';
+            document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'item':
             layerGroup = {
@@ -98,6 +105,7 @@ export function urlParams(options = {}) {
                 ];
             id = 'Item';
             controlLayersTitle = 'Schließfächer an Fahrradabstellanlagen';
+            document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
     };
 
@@ -109,38 +117,44 @@ export function urlParams(options = {}) {
         case 'car':
             layerGroup.group = 'Carsharing';
             layerFilter = 'car';
-            controlLayersTitle = 'Legende';
             id = 'Car';
+            controlLayersTitle = 'Gebündelte Daten Carsharing';
+            document.title = `MobiData BW® - ${controlLayersTitle}`;          
             break;
         case 'bicycle':
             layerGroup.group = 'Bikesharing';
             layerFilter = 'bicycle';
             id = 'Bicycle';
-            controlLayersTitle = 'Legende';
+            controlLayersTitle = 'Gebündelte Daten Bikesharing';
+            document.title = `MobiData BW® - ${controlLayersTitle}`;       
             break;
         case 'cargo_bicycle':
             layerGroup.group = 'Lastenrad-Sharing';
             layerFilter = 'cargo_bicycle';
             id = 'CargoBicycle';
-            controlLayersTitle = 'Legende';
+            controlLayersTitle = 'Gebündelte Daten Lastenrad-Sharing';
+            document.title = `MobiData BW® - ${controlLayersTitle}`;      
             break;
         case 'scooter':
             layerGroup.group = 'E-Scooter-Sharing';
             layerFilter = 'scooter';
             id = 'Scooter';
-            controlLayersTitle = 'Legende';
+            controlLayersTitle = 'Gebündelte Daten E-Scooter-Sharing';
+            document.title = `MobiData BW® - ${controlLayersTitle}`;      
             break;
         case 'moped':
             layerGroup.group = 'E-Kleinkraftrad-Sharing';
             layerFilter = 'moped';
             id = 'Moped';
-            controlLayersTitle = 'Legende';
+            controlLayersTitle = 'Gebündelte Daten E-Kleinkraftrad-Sharing';
+            document.title = `MobiData BW® - ${controlLayersTitle}`;      
             break;
     };
 
 
     return {
         purpose,
+        parking,
         formFactor,
         layerGroup,
         id,
