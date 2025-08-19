@@ -51,7 +51,7 @@ export function addSources(map, sourceConfig) {
         if (source.tolerance) {
             source.tolerance = sourceConfig.source.tolerance
         };
-      
+
         // source.cluster = true;             
         // source.clusterMaxZoom = 14;
         // source.clusterRadius = 2
@@ -85,6 +85,15 @@ export function addLayers(map, layerConfig) {
             'fill-opacity': layerConfig.fillOpacity || 0.9,
             'fill-outline-color': layerConfig.fillOutlineColor || 'black'
         },
+        ['fill-extrusion']: {
+            'fill-extrusion-color': '#4a90e2',
+            'fill-extrusion-height': [
+                'interpolate', ['linear'], ['zoom'],
+                10, 100,
+                14, 20
+            ],
+            'fill-extrusion-opacity': 0.8
+        },
         raster: {
             'raster-resampling': 'nearest'
         }
@@ -97,8 +106,8 @@ export function addLayers(map, layerConfig) {
     };
     // change stroke color if black
     if (layerConfig.color == 'black') {
-       paint.circle['circle-stroke-color'] = 'white'
-    }  
+        paint.circle['circle-stroke-color'] = 'white'
+    }
 
     const layer = {
         'id': layerConfig.id,

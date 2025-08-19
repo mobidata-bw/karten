@@ -5,7 +5,7 @@ import {
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
-    sourceParkApiCar, sourceParkApiBicycle,
+    sourceParkApiCar, sourceParkApiCarPolygons, sourceParkApiBicycle,
     layersParkApiOccupancy, layersParkApiType
 } from './layers.js';
 import { popupContent } from './popupContent.js';
@@ -30,6 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         const sources = [
             { id: 'sourceParkApiCar', source: sourceParkApiCar },
+            { id: 'sourceParkApiCarPolygons', source: sourceParkApiCarPolygons },
             { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle }
         ];
         sources.forEach(source => addSources(map, source));

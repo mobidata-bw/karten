@@ -4,7 +4,8 @@ export function urlParams(options = {}) {
     const purpose = options.purpose ?? params.get('purpose');
     const type = options.type ?? params.get('type');
     const parking = options.parking ?? params.get('parking');
-    const parkingObject = options.parkingObject ?? params.get('parking_object');
+    const object = options.object ?? params.get('object');
+    const geometry = options.geometry ?? params.get('geometry');
     const formFactor = options.formFactor ?? params.get('form_factor');
 
     let layerGroup = {}, id, layerFilter = true, controlLayersTitle;
@@ -60,14 +61,14 @@ export function urlParams(options = {}) {
                     controlLayersTitle = 'Gebündelte Behindertenparkplätze';
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
             }
-            switch (parkingObject) {
+            switch (object) {
                 case 'site':
                     layerGroup.group = 'Parkbau oder Parkstreifen';
                     layerFilter =
                         [
                             '==', ['get', 'parking_object'], 'site'
                         ];
-                    controlLayersTitle = 'Gebündelte Parkbauten und Parkstreifen';
+                    controlLayersTitle = 'Parkbauten und Parkstreifen';
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
                 case 'spot':
@@ -76,7 +77,17 @@ export function urlParams(options = {}) {
                         [
                             '==', ['get', 'parking_object'], 'spot'
                         ];
-                    controlLayersTitle = 'Gebündelte Einzelparkplätze';
+                    controlLayersTitle = 'Einzelparkplätze';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
+                    break;
+            }
+            switch (geometry) {
+                case 'polygon':
+                    layerGroup.group = 'Einzelparkplatz (Polygone)';
+                    layerGroup.source = 'sourceParkApiCarPolygons';
+                    layerGroup.sourceLayer = 'park-api_car_polygons';
+                    layerGroup.type = 'fill';
+                    controlLayersTitle = 'Einzelparkplätze (Polygone)';
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
             }
@@ -158,6 +169,7 @@ export function urlParams(options = {}) {
         purpose,
         type,
         parking,
+        geometry,
         formFactor,
         layerGroup,
         id,
