@@ -4,7 +4,7 @@ import { urlParams } from '../../../../src/js/urlParams.js';
 // ==============================
 // URL PARAMS
 // ==============================
-const { purpose, parking, layerFilter } = urlParams();
+const { purpose, type, parking, layerFilter } = urlParams();
 
 
 // ==============================
@@ -454,8 +454,8 @@ export let layersParkApiType;
 layersParkApiType = parkApiType(urlParams())
     .filter(layer => layer.scopePurpose.includes(purpose));
 
-if (parking != 'null' && parking != null) {
+if ((type != 'null' && type != null) || (parking != 'null' && parking != null)) {
     layersParkApiType = parkApiType(urlParams())
         .filter(layer => layer.scopePurpose.includes(purpose))
-        .filter(layer => layer.scopeParking.includes(parking));
+        .filter(layer => layer.scopeParking.includes(type) || layer.scopeParking.includes(parking));
 };
