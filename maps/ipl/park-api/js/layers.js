@@ -254,7 +254,7 @@ export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 
 // ==============================
 // LAYERS: TYPE
 // ==============================
-function parkApiType({ id, layerGroup: { }, layerFilter }) {
+function parkApiType({ id, layerGroup, layerFilter }) {
     return [
         {
             id: `parkApi${id}Type_Other`,
@@ -270,7 +270,7 @@ function parkApiType({ id, layerGroup: { }, layerFilter }) {
             visibility: 'none',
             scope: ['car', 'bicycle', 'buildings', 'on_street', 'disabled'],
             ...layerGroup
-        },        
+        },
         {
             id: `parkApi${id}Type_OnStreet`,
             label: 'Straßen-Parkplatz',
