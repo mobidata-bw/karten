@@ -5,7 +5,7 @@ import {
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
-    sourceParkApiCar, sourceParkApiCarPolygons, sourceParkApiBicycle,
+    sourceParkApiCar, sourceParkApiCarLines, sourceParkApiBicycle,
     layersParkApiOccupancy, layersParkApiType
 } from './layers.js';
 import { popupContent } from './popupContent.js';
@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================  
     const map = initializeMap();
     basemaps(map);
-
+ 
 
     map.on('load', () => {
 
@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         const sources = [
             { id: 'sourceParkApiCar', source: sourceParkApiCar },
-            { id: 'sourceParkApiCarPolygons', source: sourceParkApiCarPolygons },
+            { id: 'sourceParkApiCarLines', source: sourceParkApiCarLines },
             { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle }
         ];
         sources.forEach(source => addSources(map, source));
@@ -41,14 +41,6 @@ window.addEventListener('DOMContentLoaded', () => {
         });
         layers.forEach(layer => addLayers(map, layer));
 
-        // console.log(layers);
-        console.log({
-            vis: map.getLayoutProperty('parkApiCarOccupancy_NoRealtimeInformation', 'visibility'),
-            minzoom: map.getLayer('parkApiCarOccupancy_NoRealtimeInformation')?.minzoom,
-            maxzoom: map.getLayer('parkApiCarOccupancy_NoRealtimeInformation')?.maxzoom,
-            src: map.getLayer('parkApiCarOccupancy_NoRealtimeInformation')?.source,
-            srcMin: map.getSource(map.getLayer('parkApiCarOccupancy_NoRealtimeInformation')?.source)?.minzoom
-          });
     
         // ==============================
         // LAYER CONTROL
@@ -60,7 +52,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // POPUPS
         // ==============================       
         popups(map, layers, popupContent);
-
 
 
     });

@@ -13,13 +13,12 @@ const { purpose, type, parking, geometry, layerFilter, layerGroup, id } = urlPar
 export const sourceParkApiCar = {
     layer: 'MobiData-BW:park-api_car',
     style: 'MobiData-BW:mdbw_park-api_parking-object',
-    bounds: [5.9, 45.8, 17.0, 54.8],
-    server: 'test'
+    bounds: [5.9, 45.8, 17.0, 54.8]
 };
 
-export const sourceParkApiCarPolygons = {
-    layer: 'MobiData-BW:park-api_car_polygons',
-    style: 'polygon',
+export const sourceParkApiCarLines = {
+    layer: 'MobiData-BW:park-api_car_lines',
+    style: 'line',
     bounds: [5.9, 45.8, 17.0, 54.8],
     server: 'test'
 };
@@ -269,9 +268,9 @@ function parkApiType({ id, layerGroup: { }, layerFilter }) {
                 ],
             color: '#cacaca',
             visibility: 'none',
-            scope: ['car', 'bicycle', 'buildings', 'on_street', 'disabled', 'polygon'],
+            scope: ['car', 'bicycle', 'buildings', 'on_street', 'disabled'],
             ...layerGroup
-        },
+        },        
         {
             id: `parkApi${id}Type_OnStreet`,
             label: 'Straßen-Parkplatz',
@@ -282,9 +281,9 @@ function parkApiType({ id, layerGroup: { }, layerFilter }) {
                     ['==', ['get', 'type'], 'ON_STREET'],
                     layerFilter
                 ],
-            color: 'yellow',
+            color: 'black',
             ...layerGroup,
-            scope: ['car', 'on_street'],
+            scope: ['car', 'on_street', 'line'],
             visibility: 'none'
         },
         {
@@ -454,34 +453,28 @@ function parkApiType({ id, layerGroup: { }, layerFilter }) {
 
 const functionParkApiType = parkApiType({ id, layerGroup, layerFilter });
 
-if (geometry == 'polygon') {
+// if (geometry == 'line') {
 
-    const layerConfiguration = {
-        id: `parkApi${id}Type_Other_Circle`,
-        label: 'Zusatz-Layer',
-        subGroup: 'Typ',
-        color: 'red',
-        visibility: 'none',
-        filter:
-            [
-                'has', 'geojson'
-            ],
-        scope: ['car', 'polygon'],
-        source: 'sourceParkApiCar',
-        sourceLayer: 'park-api_car',
-        type: 'circle'
-    };
+//     const layerConfiguration = {
+//         id: `parkApi${id}Type_Other_Circle`,
+//         label: 'Zusatz-Layer',
+//         subGroup: 'Typ',
+//         color: 'red',
+//         visibility: 'none',
+//         filter:
+//             [
+//                 'has', 'geojson'
+//             ],
+//         scope: ['car', 'line'],
+//         source: 'sourceParkApiCar',
+//         sourceLayer: 'park-api_car',
+//         type: 'circle'
+//     };
 
 
-    functionParkApiType.push(layerConfiguration);
+//     functionParkApiType.push(layerConfiguration);
 
-}
-else {
-    functionParkApiType.pop()
-}
-
-console.log(functionParkApiType);
-
+// }
 
 
 export let layersParkApiType;
@@ -494,4 +487,3 @@ if ((type != 'null' && type != null) || (parking != 'null' && parking != null) |
         .filter(layer => layer.scope.includes(purpose))
         .filter(layer => layer.scope.includes(type) || layer.scope.includes(parking) || layer.scope.includes(geometry));
 };
-
