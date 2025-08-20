@@ -83,12 +83,12 @@ export function urlParams(options = {}) {
             }
             switch (geometry) {
                 case 'line':
-                    layerGroup.group = 'Einzelparkplatz (Linien)';
+                    layerGroup.group = 'Parkplätze (Linien)';
                     layerGroup.source = 'sourceParkApiCarLines';
                     layerGroup.sourceLayer = 'park-api_car_lines';
                     layerGroup.type = 'line';
                     layerGroup.lineWidth = 3;
-                    controlLayersTitle = 'Einzelparkplätze (Linien)';
+                    controlLayersTitle = 'Parkplätze (Linien)';
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
             }
