@@ -91,6 +91,19 @@ export function urlParams(options = {}) {
                     controlLayersTitle = 'Parkplätze (Linien)';
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
+                case 'polygon':
+                    layerGroup.group = 'Parkplätze (Polygone)';
+                    layerGroup.source = 'sourceParkApiCarPolygons';
+                    layerGroup.sourceLayer = 'park-api_car_polygons';
+                    layerGroup.type = 'fill';
+                    layerGroup.visibility = 'visible';
+                    layerFilter =
+                        [
+                            '>=', ['zoom'], 13
+                        ];
+                    controlLayersTitle = 'Parkplätze (Polygone)';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
+                    break;
             }
             break;
         case 'bicycle':

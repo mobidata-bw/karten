@@ -5,20 +5,69 @@ import { addControlLayers } from '../../../../src/js/addControlLayers.js';
 import { urlParams } from '../../../../src/js/urlParams.js';
 
 
-const { controlLayersTitle } = urlParams();
+let layerControl = null;
+
+const { geometry, controlLayersTitle } = urlParams();
 
 export function initializeControlLayers(map) {
-   
-    const config = {
-        collapsed: false,
-        layers: addControlLayers(layers, controlLayersTitle)
-    };
 
-    const layerControl = new layerControlGrouped(config);
+    if (geometry == 'polygon') {
 
-    layerControl._exclusiveAllGroups = true;
-    // layerControl._exclusiveGroupsList = ['Ladeleistung', 'Belegung'];
+        map.on('zoomend', function () {
 
-    map.addControl(layerControl, 'top-right');
+            const currentZoom = map.getZoom();
+            let filteredLayers;
+
+            if (currentZoom < 13) {
+                filteredLayers = layers.filter(layer => layer.id.includes('Circle'));
+                map.setLayoutProperty('parkApiCarType_Other_Circle', 'visibility', 'visible');
+                map.setLayoutProperty('parkApiCarType_OnStreet_Circle', 'visibility', 'visible');
+                map.setLayoutProperty('parkApiCarType_OffStreet_Circle', 'visibility', 'visible');
+                map.setLayoutProperty('parkApiCarType_Underground_Circle', 'visibility', 'visible');
+                map.setLayoutProperty('parkApiCarType_CarPark_Circle', 'visibility', 'visible');;
+            } else {
+                filteredLayers = layers.filter(layer => !layer.id.includes('Circle'));
+                map.setLayoutProperty('parkApiCarType_Other_Circle', 'visibility', 'none');
+                map.setLayoutProperty('parkApiCarType_OnStreet_Circle', 'visibility', 'none');
+                map.setLayoutProperty('parkApiCarType_OffStreet_Circle', 'visibility', 'none');
+                map.setLayoutProperty('parkApiCarType_Underground_Circle', 'visibility', 'none');
+                map.setLayoutProperty('parkApiCarType_CarPark_Circle', 'visibility', 'none');
+            };
+
+            const config = {
+                collapsed: false,
+                layers: addControlLayers(filteredLayers, controlLayersTitle)
+            };
+
+            if (layerControl != null) {
+                map.removeControl(layerControl);
+            };
+
+            layerControl = new layerControlGrouped(config), 'top-right';
+
+            layerControl._exclusiveAllGroups = true;
+            // layerControl._exclusiveGroupsList = ['Ladeleistung', 'Belegung'];
+
+            map.addControl(layerControl);
+
+        });
+
+        map.fire('zoomend');
+
+    } else {
+
+        const config = {
+            collapsed: false,
+            layers: addControlLayers(layers, controlLayersTitle)
+        };
+
+        const layerControl = new layerControlGrouped(config);
+
+        layerControl._exclusiveAllGroups = true;
+        // layerControl._exclusiveGroupsList = ['Ladeleistung', 'Belegung'];
+
+        map.addControl(layerControl, 'top-right');
+
+    }
 
 };
