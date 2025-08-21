@@ -19,14 +19,14 @@ export const sourceParkApiCar = {
 
 export const sourceParkApiCarLines = {
     layer: 'MobiData-BW:park-api_car_lines',
-    style: 'line',
+    style: 'MobiData-BW:mdbw_lines',
     bounds: [7, 46, 10, 50],
     server: 'test'
 };
 
 export const sourceParkApiCarPolygons = {
     layer: 'MobiData-BW:park-api_car_polygons',
-    style: 'polygon',
+    style: 'MobiData-BW:mdbw_polygons',
     bounds: [7, 46, 10, 50],
     server: 'test'
 };
