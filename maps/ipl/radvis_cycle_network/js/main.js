@@ -42,10 +42,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         initializeControlLayers(map);
 
-        map.on('zoom', () => {
-            initializeControlLayers(map);
-        });
-
 
         // ==============================
         // POPUPS

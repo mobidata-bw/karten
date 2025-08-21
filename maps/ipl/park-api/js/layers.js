@@ -4,7 +4,7 @@ import { urlParams } from '../../../../src/js/urlParams.js';
 // ==============================
 // URL PARAMS
 // ==============================
-const { purpose, type, parking, geometry, layerFilter, layerGroup, id } = urlParams();
+const { purpose, type, parking, geometry, object, layerFilter, layerGroup, id } = urlParams();
 
 
 // ==============================
@@ -70,6 +70,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     ]
                 ],
             color: '#615fdf',
+            scope: ['car', 'bicycle', 'line', 'polygon', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -85,6 +86,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     ['!=', ['get', 'source_id'], 55] // exception since Mannheim only pushes when new event occurs                    
                 ],
             color: '#cacaca',
+            scope: ['car', 'bicycle', 'item'],
             ...layerGroup
         },
         {
@@ -98,6 +100,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     layerFilter
                 ],
             color: '#880000',
+            scope: ['car', 'bicycle', 'item', 'site'],
             ...layerGroup
         },
         {
@@ -151,6 +154,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     ]
                 ],
             color: '#ed0000',
+            scope: ['car', 'bicycle', 'item', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -199,6 +203,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     layerFilter
                 ],
             color: '#dfab27',
+            scope: ['car', 'bicycle', 'item', 'site'],
             ...layerGroup
         },
         {
@@ -248,12 +253,27 @@ function parkApiOccupancy({ id, layerGroup }) {
                     ],
                 ],
             color: '#059b02',
+            scope: ['car', 'bicycle', 'item', 'site', 'spot'],
             ...layerGroup
         }
     ];
 };
 
-export const layersParkApiOccupancy = parkApiOccupancy(urlParams());
+
+const functionParkApiOccupation = parkApiOccupancy(urlParams());
+
+export let layersParkApiOccupancy;
+
+if (purpose == 'car') {
+    layersParkApiOccupancy = functionParkApiOccupation.filter
+        (layer =>
+            layer.scope.includes(geometry) ||
+            layer.scope.includes(object)
+        );
+} else {
+    layersParkApiOccupancy = functionParkApiOccupation;
+};
+
 export const layersParkApiCarOccupancy = parkApiOccupancy(urlParams({ purpose: 'car' }));
 export const layersParkApiBicycleOccupancy = parkApiOccupancy(urlParams({ purpose: 'bicycle' }));
 export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 'item' }));
@@ -276,7 +296,7 @@ function parkApiType({ id, layerGroup/*: {}*/, layerFilter }) {
                 ],
             color: '#cacaca',
             visibility: 'none',
-            scope: ['car', 'bicycle', 'buildings', 'on_street', 'disabled', 'polygon'],
+            scope: ['car', 'bicycle', 'buildings', 'on_street', 'disabled', 'polygon', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -290,7 +310,7 @@ function parkApiType({ id, layerGroup/*: {}*/, layerFilter }) {
                     layerFilter
                 ],
             color: 'black',
-            scope: ['car', 'on_street', 'line', 'polygon'],
+            scope: ['car', 'on_street', 'line', 'polygon', 'site', 'spot'],
             visibility: 'none',
             ...layerGroup
         },
@@ -306,7 +326,7 @@ function parkApiType({ id, layerGroup/*: {}*/, layerFilter }) {
                 ],
             color: '#009688',
             visibility: 'none',
-            scope: ['car', 'buildings', 'disabled', 'polygon'],
+            scope: ['car', 'buildings', 'disabled', 'polygon', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -321,7 +341,7 @@ function parkApiType({ id, layerGroup/*: {}*/, layerFilter }) {
                 ],
             color: '#BF91B6',
             visibility: 'none',
-            scope: ['car', 'buildings', 'disabled'],
+            scope: ['car', 'buildings', 'disabled', 'site'],
             ...layerGroup
         },
         {
@@ -336,7 +356,7 @@ function parkApiType({ id, layerGroup/*: {}*/, layerFilter }) {
                 ],
             color: '#5587eb',
             visibility: 'none',
-            scope: ['car', 'buildings', 'disabled', 'polygon'],
+            scope: ['car', 'buildings', 'disabled', 'polygon', 'site'],
             ...layerGroup
         },
         {
@@ -525,19 +545,6 @@ if (geometry == 'polygon') {
                 ...properties
             },
             {
-                id: `parkApi${id}Type_Underground_Circle`,
-                label: 'Tiefgarage',
-                filter:
-                    [
-                        'all',
-                        ['==', ['get', 'type'], 'UNDERGROUND'],
-                        ['<', ['zoom'], zoom],
-                        ['==', ['get', 'geojson'], 'POLYGON']
-                    ],
-                color: '#BF91B6',
-                ...properties
-            },
-            {
                 id: `parkApi${id}Type_CarPark_Circle`,
                 label: 'Parkhaus',
                 filter:
@@ -564,8 +571,12 @@ export let layersParkApiType;
 layersParkApiType = functionParkApiType
     .filter(layer => layer.scope.includes(purpose));
 
-if ((type != 'null' && type != null) || (parking != 'null' && parking != null) || (geometry != 'null' && geometry != null)) {
-    layersParkApiType = functionParkApiType
-        .filter(layer => layer.scope.includes(purpose))
-        .filter(layer => layer.scope.includes(type) || layer.scope.includes(parking) || layer.scope.includes(geometry));
+if (purpose == 'car') {
+    layersParkApiType = functionParkApiType.filter(
+        layer =>
+            layer.scope.includes(type) ||
+            layer.scope.includes(parking) ||
+            layer.scope.includes(geometry) ||
+            layer.scope.includes(object)
+    );
 };

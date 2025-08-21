@@ -61,6 +61,31 @@ export function urlParams(options = {}) {
                     controlLayersTitle = 'Gebündelte Behindertenparkplätze';
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
             }
+            switch (geometry) {
+                case 'line':
+                    layerGroup.group = 'Parkplätze (Linien)';
+                    layerGroup.source = 'sourceParkApiCarLines';
+                    layerGroup.sourceLayer = 'park-api_car_lines';
+                    layerGroup.type = 'line';
+                    layerGroup.lineWidth = 3;
+                    layerGroup.visibility = 'visible';
+                    controlLayersTitle = 'Parkplätze (Linien)';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
+                    break;
+                case 'polygon':
+                    layerGroup.group = 'Parkplätze (Polygone)';
+                    layerGroup.source = 'sourceParkApiCarPolygons';
+                    layerGroup.sourceLayer = 'park-api_car_polygons';
+                    layerGroup.type = 'fill';
+                    layerGroup.visibility = 'visible';
+                    layerFilter =
+                        [
+                            '>=', ['zoom'], 13
+                        ];
+                    controlLayersTitle = 'Parkplätze (Polygone)';
+                    document.title = `MobiData BW® - ${controlLayersTitle}`;
+                    break;
+            }
             switch (object) {
                 case 'site':
                     layerGroup.group = 'Parkbau oder Parkstreifen';
@@ -78,30 +103,6 @@ export function urlParams(options = {}) {
                             '==', ['get', 'parking_object'], 'spot'
                         ];
                     controlLayersTitle = 'Einzelparkplätze';
-                    document.title = `MobiData BW® - ${controlLayersTitle}`;
-                    break;
-            }
-            switch (geometry) {
-                case 'line':
-                    layerGroup.group = 'Parkplätze (Linien)';
-                    layerGroup.source = 'sourceParkApiCarLines';
-                    layerGroup.sourceLayer = 'park-api_car_lines';
-                    layerGroup.type = 'line';
-                    layerGroup.lineWidth = 3;
-                    controlLayersTitle = 'Parkplätze (Linien)';
-                    document.title = `MobiData BW® - ${controlLayersTitle}`;
-                    break;
-                case 'polygon':
-                    layerGroup.group = 'Parkplätze (Polygone)';
-                    layerGroup.source = 'sourceParkApiCarPolygons';
-                    layerGroup.sourceLayer = 'park-api_car_polygons';
-                    layerGroup.type = 'fill';
-                    layerGroup.visibility = 'visible';
-                    layerFilter =
-                        [
-                            '>=', ['zoom'], 13
-                        ];
-                    controlLayersTitle = 'Parkplätze (Polygone)';
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
             }
@@ -184,6 +185,7 @@ export function urlParams(options = {}) {
         type,
         parking,
         geometry,
+        object,
         formFactor,
         layerGroup,
         id,

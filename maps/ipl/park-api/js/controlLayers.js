@@ -19,18 +19,16 @@ export function initializeControlLayers(map) {
             let filteredLayers;
 
             if (currentZoom < 13) {
-                filteredLayers = layers.filter(layer => layer.id.includes('Circle'));
+                filteredLayers = layers.filter(layer => layer.id.includes('Circle'));                
                 map.setLayoutProperty('parkApiCarType_Other_Circle', 'visibility', 'visible');
                 map.setLayoutProperty('parkApiCarType_OnStreet_Circle', 'visibility', 'visible');
                 map.setLayoutProperty('parkApiCarType_OffStreet_Circle', 'visibility', 'visible');
-                map.setLayoutProperty('parkApiCarType_Underground_Circle', 'visibility', 'visible');
                 map.setLayoutProperty('parkApiCarType_CarPark_Circle', 'visibility', 'visible');;
             } else {
-                filteredLayers = layers.filter(layer => !layer.id.includes('Circle'));
+                filteredLayers = layers.filter(layer => !layer.id.includes('Circle'));             
                 map.setLayoutProperty('parkApiCarType_Other_Circle', 'visibility', 'none');
                 map.setLayoutProperty('parkApiCarType_OnStreet_Circle', 'visibility', 'none');
                 map.setLayoutProperty('parkApiCarType_OffStreet_Circle', 'visibility', 'none');
-                map.setLayoutProperty('parkApiCarType_Underground_Circle', 'visibility', 'none');
                 map.setLayoutProperty('parkApiCarType_CarPark_Circle', 'visibility', 'none');
             };
 

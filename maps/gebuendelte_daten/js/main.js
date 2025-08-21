@@ -105,6 +105,8 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersSharingMopedStations
         ];
 
+        console.log(layersSharingCarVehicles, layersSharingCarStations);
+
         layersIpl = [
             ...layersParkApiCar,
             ...layersParkApiBicycle,

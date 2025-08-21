@@ -79,19 +79,13 @@ export const layersSharingMopedVehicles = sharingVehicles(urlParams({ formFactor
 // ==============================
 // LAYERS: STATIONS
 // ==============================
-if (layerFilter == 'scooter') {
-    layerFilter = 'scooters_standing';
-} else {
-    layerFilter = `${layerFilter}s`;
-};
-
 const layerGroupSharingStations = {
     subGroup: 'Stationen',
     source: 'sourceSharingStations',
     sourceLayer: 'sharing_stations'
 };
 
-function sharingStations({ id, layerGroup }) {
+function sharingStations({ id, layerGroup, layerFilter }) {
     return [
         {
             id: `sharing${id}_StationsNoRealtimeData`,
@@ -100,7 +94,7 @@ function sharingStations({ id, layerGroup }) {
                 [
                     'all',
                     sharingStationsNoRealtimeDataLayers,
-                    ['>=', ['get', `num_${layerFilter}_available`], 0]
+                    ['>=', ['get', `num_${layerFilter}s_available`], 0]
                 ],
             color: '#615fdf',
             ...layerGroupSharingStations,
@@ -113,7 +107,7 @@ function sharingStations({ id, layerGroup }) {
                 [
                     'all',
                     ['!', sharingStationsNoRealtimeDataLayers],
-                    ['>=', ['get', `num_${layerFilter}_available`], 0],
+                    ['>=', ['get', `num_${layerFilter}s_available`], 0],
                     [
                         'any',
                         ['==', ['get', 'is_virtual_station'], false],
@@ -132,7 +126,7 @@ function sharingStations({ id, layerGroup }) {
                 [
                     'all',
                     ['!', sharingStationsNoRealtimeDataLayers],
-                    ['>', ['get', `num_${layerFilter}_available`], 0],
+                    ['>', ['get', `num_${layerFilter}s_available`], 0],
                     ['==', ['get', 'realtime_data_outdated'], false]
                 ],
             color: '#fffb05',
@@ -146,7 +140,7 @@ function sharingStations({ id, layerGroup }) {
                 [
                     'all',
                     ['!', sharingStationsNoRealtimeDataLayers],
-                    ['==', ['get', `num_${layerFilter}_available`], 0],
+                    ['==', ['get', `num_${layerFilter}s_available`], 0],
                     ['==', ['get', 'realtime_data_outdated'], false]
                 ],
             color: '#ffb805',
