@@ -23,11 +23,11 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    const map = initializeMap({
-        center: [9.479215, 47.655577],
-        zoom: window.innerWidth < 577 ? 12.5 : 14.5,
-        minZoom: 12,
-        shape: 'shapesFriedrichshafen.geojson'
+    const map = initializeMap({        
+        configZoom: window.innerWidth < 577 ? 12.5 : 14.5,
+        configCenter: [9.479215, 47.655577],
+        configMinZoom: 12,
+        configShape: 'shapesFriedrichshafen.geojson'
     });
     basemaps(map);
 

@@ -36,11 +36,11 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    const map = initializeMap({
-        configCenter: [9.1798, 48.7759],
+    const map = initializeMap({      
         configZoom: window.innerWidth < 577 ? 12.5 : 14.5,
+        configCenter: [9.1798, 48.7759],
         configMinZoom: 12,
-        shape: 'shapesStuttgart.geojson'
+        configShape: 'shapesStuttgart.geojson'
     });
     basemaps(map);
 

@@ -27,7 +27,6 @@ export const layersNvbw = [
     }
 ];
 
-
 const touren = {
     type: 'line',
     source: 'sourceTouren',

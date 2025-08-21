@@ -19,11 +19,11 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    const map = initializeMap({
-        center: [9.193717, 48.795933],
-        zoom: window.innerWidth < 577 ? 12.5 : 14.5,
-        minZoom: 12,
-        shape: 'shapesStuttgart.geojson'
+    const map = initializeMap({       
+        configZoom: window.innerWidth < 577 ? 12.5 : 14.5,
+        configCenter: [9.193717, 48.795933],
+        configMinZoom: 12,
+        configShape: 'shapesStuttgart.geojson'
     });
     basemaps(map);
 

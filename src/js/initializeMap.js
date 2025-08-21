@@ -27,7 +27,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     let lat, lng, zoom;
 
     const params = new URLSearchParams(window.location.search);
-
+  
     if (params.has('zoom') && params.has('lat') && params.has('lng')) {
         lat = parseFloat(params.get('lat'));
         lng = parseFloat(params.get('lng'));
@@ -188,7 +188,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     });
 
     // check if smartphone/tablet or desktop
-    if (window.innerWidth < 473) {
+    if (window.innerWidth < 503) {
 
         map.addControl(geolocateControl, 'top-left');
 

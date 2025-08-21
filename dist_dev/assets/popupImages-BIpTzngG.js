@@ -1,4 +1,4 @@
-import{n as t}from"./addControlLayers-DPvUbLjD.js";function o(i){const s=`${t}img/popup/${i}`;return`
+import{n as t}from"./addControlLayers-t1LLjNLf.js";function o(i){const s=`${t}img/popup/${i}`;return`
     <th>
       <img
         src="${s}.svg"
