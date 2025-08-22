@@ -2,7 +2,7 @@
   "name": "karten",
   "version": "1.0.0",
   "private": true,
-  "description": "MobiData BW® Karten mit Vite und MapLibre",
+  "description": "MobiData BW® Karten",
   "packageManager": "npm@9.6.7",
   "scripts": {
     "liveserver": "vite --port 5173 --mode liveserver",
@@ -14,6 +14,8 @@
     "@geoman-io/maplibre-geoman-free": "^0.3.0",
     "@maplibre/maplibre-gl-geocoder": "^1.8.0",
     "@maplibre/maplibre-gl-inspect": "^1.7.1",
+    "file-saver": "^2.0.5",
+    "jsoneditor": "^10.3.0",
     "maplibre-gl": "^5.5.0"
   },
   "devDependencies": {

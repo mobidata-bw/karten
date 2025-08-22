@@ -14,21 +14,21 @@ export const sourceParkApiCar = {
     layer: 'MobiData-BW:park-api_car',
     style: 'MobiData-BW:mdbw_park-api_parking-object',
     bounds: [5.9, 45.8, 17.0, 54.8],
-    server: 'test'
+    // server: 'test'
 };
 
 export const sourceParkApiCarLines = {
     layer: 'MobiData-BW:park-api_car_lines',
     style: 'MobiData-BW:mdbw_lines',
     bounds: [7, 46, 10, 50],
-    server: 'test'
+    //     server: 'test'
 };
 
 export const sourceParkApiCarPolygons = {
     layer: 'MobiData-BW:park-api_car_polygons',
     style: 'MobiData-BW:mdbw_polygons',
     bounds: [7, 46, 10, 50],
-    server: 'test'
+    // server: 'test'
 };
 
 export const sourceParkApiBicycle = {
@@ -70,7 +70,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     ]
                 ],
             color: '#615fdf',
-            scope: ['car', 'bicycle', 'line', 'polygon', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'buildings', 'on_street', 'line', 'polygon', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -100,7 +100,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     layerFilter
                 ],
             color: '#880000',
-            scope: ['car', 'bicycle', 'item', 'site'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'site'],
             ...layerGroup
         },
         {
@@ -154,7 +154,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     ]
                 ],
             color: '#ed0000',
-            scope: ['car', 'bicycle', 'item', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -203,7 +203,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     layerFilter
                 ],
             color: '#dfab27',
-            scope: ['car', 'bicycle', 'item', 'site'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'site'],
             ...layerGroup
         },
         {
@@ -253,7 +253,7 @@ function parkApiOccupancy({ id, layerGroup }) {
                     ],
                 ],
             color: '#059b02',
-            scope: ['car', 'bicycle', 'item', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'site', 'spot'],
             ...layerGroup
         }
     ];
@@ -267,6 +267,8 @@ export let layersParkApiOccupancy;
 if (purpose == 'car') {
     layersParkApiOccupancy = functionParkApiOccupation.filter
         (layer =>
+            layer.scope.includes(purpose) ||
+            layer.scope.includes(type) ||
             layer.scope.includes(geometry) ||
             layer.scope.includes(object)
         );
@@ -574,6 +576,7 @@ layersParkApiType = functionParkApiType
 if (purpose == 'car') {
     layersParkApiType = functionParkApiType.filter(
         layer =>
+            layer.scope.includes(purpose) ||
             layer.scope.includes(type) ||
             layer.scope.includes(parking) ||
             layer.scope.includes(geometry) ||
