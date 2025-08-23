@@ -41,14 +41,18 @@ window.addEventListener('DOMContentLoaded', () => {
                     },
                     properties: {
                         ...Object.fromEntries(
-                            Object.entries(item).filter(([key]) =>
-                                key != 'static_data_updated_at' &&
-                                key != 'realtime_data_updated_at' &&
-                                key != 'realtime_capacity' &&
-                                key != 'realtime_free_capacity' &&
-                                key != 'created_at' &&
-                                key != 'modified_at'
-                            )
+                            Object.entries(item)
+                                .filter(([key]) =>
+                                    key != 'static_data_updated_at' &&
+                                    key != 'realtime_data_updated_at' &&
+                                    key != 'realtime_capacity' &&
+                                    key != 'realtime_free_capacity' &&
+                                    key != 'created_at' &&
+                                    key != 'modified_at'
+                                )
+                                .map(([key, value]) => [
+                                    key == 'type' || key == 'lat' || key == 'lon' ? key.replace(key, `${key}_default`) : key, value
+                                ])
                         ),
                         'type': '',
                         'address': '',
@@ -74,8 +78,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let geojson;
 
-        fetch('data/parking-sites.json')
-            // fetch('/daten/json_editor/parking-sites.json')
+        // fetch('data/parking-sites.json')
+            fetch('/daten/json_editor/parking-sites.json')
             .then(response => response.json())
             .then(data => {
                 geojson = toGeoJSON(data.items);
@@ -129,8 +133,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 const updatedJson = editor.get().geojson.features;
 
                 const now = new Date();
-                const date = String(now.getDate()).padStart(2, "0");        
-                const month = String(now.getMonth() + 1).padStart(2, "0"); 
+                const date = String(now.getDate()).padStart(2, "0");
+                const month = String(now.getMonth() + 1).padStart(2, "0");
                 const year = String(now.getFullYear()).slice(-2);
                 const time = year + month + date;
 
