@@ -8,11 +8,13 @@ export function initializeControlLayers(map) {
 
     const config = {
         collapsed: false,
-        layers: addControlLayers(layers, 'Legende')
+        layers: addControlLayers(layers, 'Legende', 'group')
     };
 
     const layerControl = new layerControlGrouped(config);
 
     map.addControl(layerControl, 'top-right');
+
+    map.moveLayer('geoJson');
 
 };

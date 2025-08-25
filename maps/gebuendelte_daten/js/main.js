@@ -55,6 +55,8 @@ export { map };
 
 window.addEventListener('DOMContentLoaded', () => {
 
+    document.title = 'MobiData BW® - Gebündelte Daten';
+
     // ==============================
     // MAP CONTROLS
     // ==============================  

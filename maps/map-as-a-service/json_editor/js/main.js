@@ -10,13 +10,22 @@ import {
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { popupContent } from '../../../ipl/park-api/js/popupContent.js';
+import {
+    sourceParkApiCar, sourceParkApiBicycle,
+    layersParkApiCarOccupancy as layersParkApiCar,
+    layersParkApiBicycleOccupancy as layersParkApiBicycle
+} from '../../../ipl/park-api/js/layers.js';
+import { sourceTransitStops, layersTransitStops } from '../../../ipl/gtfs/js/layers.js';
+import { popupContent as popupContentParkApi } from '../../../ipl/park-api/js/popupContent.js';
+import { popupContentTransitStops } from '../../../ipl/gtfs/js/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
 export let layers;
 
 
 window.addEventListener('DOMContentLoaded', () => {
+
+    document.title = 'MobiData BW® - JSON-Editor';
 
     // ==============================
     // INITIALIZE MAP
@@ -51,21 +60,21 @@ window.addEventListener('DOMContentLoaded', () => {
                                     key != 'modified_at'
                                 )
                                 .map(([key, value]) => [
-                                    key == 'type' || key == 'lat' || key == 'lon' ? key.replace(key, `${key}_default`) : key, value
+                                    key == 'original_uid' ? key.replace(key, 'uid') : key, value
                                 ])
                         ),
-                        'type': '',
-                        'address': '',
-                        'max_height': 0,
-                        'max_width': 0,
-                        'description': '',
-                        'fee_description': '',
-                        'park_and_ride_type': [
+                        'type_new': '',
+                        'address_new': '',
+                        'max_height_new': 0,
+                        'max_width_new': 0,
+                        'description_new': '',
+                        'fee_description_new': '',
+                        'park_and_ride_type_new': [
                             ''
                         ],
-                        'lat': '',
-                        'lon': '',
-                        'external_identifiers': [
+                        'lat_new': '',
+                        'lon_new': '',
+                        'external_identifiers_new': [
                             {
                                 'type': 'DHID',
                                 'value': 'de:xx'
@@ -78,8 +87,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let geojson;
 
-        // fetch('data/parking-sites.json')
-            fetch('/daten/json_editor/parking-sites.json')
+        fetch('data/parking-sites.json')
+            // fetch('/daten/json_editor/parking-sites.json')
             .then(response => response.json())
             .then(data => {
                 geojson = toGeoJSON(data.items);
@@ -97,18 +106,27 @@ window.addEventListener('DOMContentLoaded', () => {
                 {
                     id: 'geoJson',
                     label: 'Parkobjekte',
-                    color: '#7D97DD',
+                    color: 'black',
+                    circleRadius: 6,
                     source: 'sourceGeoJson',
                     group: 'JSON-Editor'
                 }
             ];
 
             const sources = [
-                { id: 'sourceGeoJson', source: sourceGeoJson }
+                { id: 'sourceGeoJson', source: sourceGeoJson },
+                { id: 'sourceParkApiCar', source: sourceParkApiCar },
+                { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
+                { id: 'sourceTransitStops', source: sourceTransitStops }
             ];
             sources.forEach(source => addSources(map, source));
 
-            layers = layersGeoJson;
+            layers = [
+                ...layersGeoJson,
+                ...layersParkApiCar.map(layer => ({ ...layer, visibility: 'none' })),
+                ...layersParkApiBicycle.map(layer => ({ ...layer, visibility: 'none' })),
+                ...layersTransitStops.map(layer => ({ ...layer, visibility: 'none' }))
+            ];
             layers.forEach(layer => addLayers(map, layer));
 
 
@@ -121,8 +139,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
             const initialJson = {
                 geojson
-            }
-            editor.set(initialJson)
+            };
+            editor.set(initialJson);
 
 
             // ==============================
@@ -131,13 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('saveJson').addEventListener('click', function () {
 
                 const updatedJson = editor.get().geojson.features;
-
-                const now = new Date();
-                const date = String(now.getDate()).padStart(2, "0");
-                const month = String(now.getMonth() + 1).padStart(2, "0");
-                const year = String(now.getFullYear()).slice(-2);
-                const time = year + month + date;
-
+               
                 function toJson() {
                     return {
                         items: updatedJson.map(feature => feature.properties)
@@ -145,10 +157,31 @@ window.addEventListener('DOMContentLoaded', () => {
                 };
                 const json = toJson();
 
-                const blob = new Blob([JSON.stringify(json, null, 2)], {
+                const filteredJson = json.items.map(item =>
+                    Object.fromEntries(
+                        Object.entries(item)
+                            .filter(([key]) =>
+                                ![
+                                    'name',
+                                    'id',
+                                    'source_id',
+                                    'purpose',
+                                    'public_url',
+                                    'has_fee',
+                                    'has_realtime_data',
+                                    'opening_hours',
+                                    'capacity',
+                                ].includes(key))
+                            .map(([key, value]) =>
+                                key.includes('_new') ? [key.split('_new')[0], value] : [key, value]
+                            )
+                    )
+                );
+
+                const blob = new Blob([JSON.stringify(filteredJson, null, 2)], {
                     type: 'application/json;charset=utf-8'
                 });
-                saveAs(blob, `${time}_parking-sites.json`);
+                saveAs(blob, 'export_parking-sites.json');
 
             });
 
@@ -162,7 +195,8 @@ window.addEventListener('DOMContentLoaded', () => {
             // ==============================
             // POPUPS
             // ============================== 
-            popups(map, layers, popupContent);
+            popups(map, [...layersGeoJson, ...layersParkApiCar, ...layersParkApiCar], popupContentParkApi);
+            popups(map, layersTransitStops, popupContentTransitStops);
 
         };
 
