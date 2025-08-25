@@ -1,6 +1,8 @@
 import '../css/styles.css';
 import 'jsoneditor/dist/jsoneditor.min.css';
 
+import maplibregl from 'maplibre-gl';
+
 import JSONEditor from 'jsoneditor/dist/jsoneditor.min.js';
 import { saveAs } from 'file-saver';
 
@@ -144,12 +146,59 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
             // ==============================
+            // GET COORDINATES
+            // ==============================           
+            const buttonGetCoordinates = document.getElementById('getCoordinates');
+            let clickHandler = null;
+
+            buttonGetCoordinates.addEventListener('click', () => {
+
+                const clicked = buttonGetCoordinates.classList.toggle('clicked');
+
+                if (clicked) {
+
+                    clickHandler = (e) => {
+                        const { lng, lat } = e.lngLat;
+                        const html = `
+                        <table>
+                          <tr><th class="title">Koordinaten</th></tr>
+                        </table><br>
+                        <table>
+                          <tr><td class="att">Längengrad</td><td class="attContent">${lng.toFixed(6)}</td></tr>
+                          <tr><td class="att">Breitengrad</td><td class="attContent">${lat.toFixed(6)}</td></tr>
+                        </table>`;
+
+                        new maplibregl.Popup()
+                            .setLngLat([lng, lat])
+                            .setHTML(html)
+                            .addTo(map);
+                    };
+
+                    map.on('click', clickHandler);
+
+                } else {
+
+                    if (clickHandler) {
+                        map.off('click', clickHandler);
+                        clickHandler = null;
+                    }
+
+                }
+            });
+
+
+            // ==============================
             // FILE SAVER
-            // ==============================                    
-            document.getElementById('saveJson').addEventListener('click', function () {
+            // ==============================     
+            const saveJson = document.getElementById('saveJson');
+
+            saveJson.addEventListener('click', function () {
+
+                saveJson.classList.add('clicked');
+                setTimeout(() => saveJson.classList.remove("clicked"), 1000);
 
                 const updatedJson = editor.get().geojson.features;
-               
+
                 function toJson() {
                     return {
                         items: updatedJson.map(feature => feature.properties)
