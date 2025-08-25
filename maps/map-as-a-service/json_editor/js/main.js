@@ -89,8 +89,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let geojson;
 
-        fetch('data/parking-sites.json')
-            // fetch('/daten/json_editor/parking-sites.json')
+        // fetch('data/parking-sites.json')
+            fetch('/daten/json_editor/parking-sites.json')
             .then(response => response.json())
             .then(data => {
                 geojson = toGeoJSON(data.items);
