@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const map = initializeMap();
     basemaps(map);
 
-
+    
     map.on('load', () => {
 
         // ==============================
@@ -139,7 +139,7 @@ window.addEventListener('DOMContentLoaded', () => {
                                 'type': 'DHID',
                                 'value': 'de:xx'
                             }
-                        ],                       
+                        ],
                         'capacity_charging_new': '',
                         'capacity_cargobike_new': '',
                         'has_lighting_new': '',
@@ -152,10 +152,10 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         };
 
+        const source_id = new URLSearchParams(window.location.search).get('source_id');
         let geojson;
 
-        // fetch('data/parking-sites.json')
-        fetch('/daten/json_editor/parking-sites.json')
+        fetch(`https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`)
             .then(response => response.json())
             .then(data => {
                 geojson = toGeoJSON(data.items);
