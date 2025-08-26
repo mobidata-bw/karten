@@ -36,6 +36,6 @@
 }
 
 .clicked {
-    background: var(--secondaryColor);
+    background-color: var(--secondaryColor);
     font-size: 12px;
 }

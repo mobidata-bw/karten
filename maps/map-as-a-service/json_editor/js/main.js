@@ -2,7 +2,6 @@ import '../css/styles.css';
 import 'jsoneditor/dist/jsoneditor.min.css';
 
 import maplibregl from 'maplibre-gl';
-
 import JSONEditor from 'jsoneditor/dist/jsoneditor.min.js';
 import { saveAs } from 'file-saver';
 
@@ -22,16 +21,15 @@ import { popupContent as popupContentParkApi } from '../../../ipl/park-api/js/po
 import { popupContentTransitStops } from '../../../ipl/gtfs/js/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
-export let layers;
+export let layersGeoJson, layersIpl;
 
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    document.title = 'MobiData BW® - JSON-Editor';
-
     // ==============================
     // INITIALIZE MAP
     // ==============================  
+    document.title = 'MobiData BW® - JSON-Editor';
     const map = initializeMap();
     basemaps(map);
 
@@ -50,17 +48,77 @@ window.addEventListener('DOMContentLoaded', () => {
                         type: 'Point',
                         coordinates: [parseFloat(item.lon), parseFloat(item.lat)]
                     },
+                    // json (input):
+                    // [
+                    //     {},
+                    //     {}
+                    // ]
+                    // Object.entries (transform object into an array so that filter() and map() work):
+                    // [
+                    //     [
+                    //         "0",
+                    //         {
+                    //             "source_id": 34,
+                    //             "original_uid": "unit555",
+                    //             "name": "Sinsheim, Bahnhof, Anlage rechts",
+                    //             "public_url": "https://www.rad-safe.de/order/booking/?preselect_unit_uid=555",
+                    //             "type": "LOCKERS",
+                    //             "purpose": "BIKE",
+                    //             "has_fee": true,
+                    //             "has_realtime_data": true,
+                    //             "static_data_updated_at": "2025-08-19T06:40:40Z",
+                    //             "realtime_data_updated_at": "2025-08-19T07:17:00Z",
+                    //             "lat": "49.2506290",
+                    //             "lon": "8.8745540",
+                    //             "capacity": 24,
+                    //             "realtime_capacity": 24,
+                    //             "realtime_free_capacity": 22,
+                    //             "opening_hours": "24/7",
+                    //             "id": 10011,
+                    //             "created_at": "2024-08-20T11:33:52Z",
+                    //             "modified_at": "2025-08-19T07:17:00Z"
+                    //         }
+                    //     ],
+                    //     [
+                    //         "1",
+                    //      ...
+                    // Object.fromEntries (transform array back to an object after filter() and map() were applied)
+                    // {
+                    //     "0": {
+                    //         "source_id": 34,
+                    //         "original_uid": "unit555",
+                    //         "name": "Sinsheim, Bahnhof, Anlage rechts",
+                    //         "public_url": "https://www.rad-safe.de/order/booking/?preselect_unit_uid=555",
+                    //         "type": "LOCKERS",
+                    //         "purpose": "BIKE",
+                    //         "has_fee": true,
+                    //         "has_realtime_data": true,
+                    //         "static_data_updated_at": "2025-08-19T06:40:40Z",
+                    //         "realtime_data_updated_at": "2025-08-19T07:17:00Z",
+                    //         "lat": "49.2506290",
+                    //         "lon": "8.8745540",
+                    //         "capacity": 24,
+                    //         "realtime_capacity": 24,
+                    //         "realtime_free_capacity": 22,
+                    //         "opening_hours": "24/7",
+                    //         "id": 10011,
+                    //         "created_at": "2024-08-20T11:33:52Z",
+                    //         "modified_at": "2025-08-19T07:17:00Z"
+                    //     },
+                    //     "1": {
+                    //         ...
                     properties: {
                         ...Object.fromEntries(
                             Object.entries(item)
                                 .filter(([key]) =>
-                                    key != 'static_data_updated_at' &&
-                                    key != 'realtime_data_updated_at' &&
-                                    key != 'realtime_capacity' &&
-                                    key != 'realtime_free_capacity' &&
-                                    key != 'created_at' &&
-                                    key != 'modified_at'
-                                )
+                                    ![
+                                        'static_data_updated_at',
+                                        'realtime_data_updated_at',
+                                        'realtime_capacity',
+                                        'realtime_free_capacity',
+                                        'created_at',
+                                        'modified_at'
+                                    ].includes(key))
                                 .map(([key, value]) => [
                                     key == 'original_uid' ? key.replace(key, 'uid') : key, value
                                 ])
@@ -89,11 +147,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let geojson;
 
-        // fetch('data/parking-sites.json')
-            fetch('/daten/json_editor/parking-sites.json')
+        fetch('data/parking-sites.json')
+        // fetch('/daten/json_editor/parking-sites.json')
             .then(response => response.json())
             .then(data => {
                 geojson = toGeoJSON(data.items);
+                // console.log(Object.fromEntries(Object.entries(data.items)));
                 buildLayers(geojson)
             });
 
@@ -104,7 +163,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 data: geojson
             };
 
-            const layersGeoJson = [
+            layersGeoJson = [
                 {
                     id: 'geoJson',
                     label: 'Parkobjekte',
@@ -123,11 +182,14 @@ window.addEventListener('DOMContentLoaded', () => {
             ];
             sources.forEach(source => addSources(map, source));
 
-            layers = [
-                ...layersGeoJson,
+            layersIpl = [
                 ...layersParkApiCar.map(layer => ({ ...layer, visibility: 'none' })),
                 ...layersParkApiBicycle.map(layer => ({ ...layer, visibility: 'none' })),
                 ...layersTransitStops.map(layer => ({ ...layer, visibility: 'none' }))
+            ];
+            const layers = [
+                ...layersGeoJson,
+                ...layersIpl
             ];
             layers.forEach(layer => addLayers(map, layer));
 
@@ -159,13 +221,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
                     clickHandler = (e) => {
                         const { lng, lat } = e.lngLat;
-                        const html = `
+                        const html = `                      
                         <table>
-                          <tr><th class="title">Koordinaten</th></tr>
-                        </table><br>
-                        <table>
-                          <tr><td class="att">Längengrad</td><td class="attContent">${lng.toFixed(6)}</td></tr>
-                          <tr><td class="att">Breitengrad</td><td class="attContent">${lat.toFixed(6)}</td></tr>
+                            <tr>
+                                <td class="att">Längengrad</td><td class="attContent">${lng.toFixed(6)}</td>
+                            </tr><tr>
+                                <td class="att">Breitengrad</td><td class="attContent">${lat.toFixed(6)}</td>
+                            </tr>
                         </table>`;
 
                         new maplibregl.Popup()
@@ -244,7 +306,7 @@ window.addEventListener('DOMContentLoaded', () => {
             // ==============================
             // POPUPS
             // ============================== 
-            popups(map, [...layersGeoJson, ...layersParkApiCar, ...layersParkApiCar], popupContentParkApi);
+            popups(map, [...layersGeoJson, ...layersParkApiCar, ...layersParkApiBicycle], popupContentParkApi);
             popups(map, layersTransitStops, popupContentTransitStops);
 
         };

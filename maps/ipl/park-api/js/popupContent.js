@@ -48,10 +48,7 @@ export function popupContent(features) {
     };
 
     /* MAPPING */
-    let datengeberMapping = new Map();
-
-    /* PROD */
-    datengeberMapping = {
+    const datengeberMapping = {
         "2": "Stadt Freiburg im Breisgau",
         "3": "Stadt Heidelberg",
         "6": "DB BahnPark",
