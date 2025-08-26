@@ -139,7 +139,14 @@ window.addEventListener('DOMContentLoaded', () => {
                                 'type': 'DHID',
                                 'value': 'de:xx'
                             }
-                        ]
+                        ],                       
+                        'capacity_charging_new': '',
+                        'capacity_cargobike_new': '',
+                        'has_lighting_new': '',
+                        'is_covered_new': '',
+                        'has_fee_new': '',
+                        'public_url_new': '',
+                        'photo_url_new': ''
                     }
                 }))
             }
@@ -147,8 +154,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         let geojson;
 
-        fetch('data/parking-sites.json')
-        // fetch('/daten/json_editor/parking-sites.json')
+        // fetch('data/parking-sites.json')
+        fetch('/daten/json_editor/parking-sites.json')
             .then(response => response.json())
             .then(data => {
                 geojson = toGeoJSON(data.items);
