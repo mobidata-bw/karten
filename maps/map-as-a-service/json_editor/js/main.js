@@ -112,6 +112,7 @@ window.addEventListener('DOMContentLoaded', () => {
                             Object.entries(item)
                                 .filter(([key]) =>
                                     ![
+                                        'source_id',
                                         'static_data_updated_at',
                                         'realtime_data_updated_at',
                                         'realtime_capacity',
@@ -152,14 +153,16 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const source_id = new URLSearchParams(window.location.search).get('source_id');
+        const params = new URLSearchParams(window.location.search);
+        const source_id = params.get('source_id');
+        const source = source_id == null ? '/daten/json_editor/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;  
+        // const source = source_id == null ? 'data/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;  
         let geojson;
 
-        fetch(`https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`)
+        fetch(source)
             .then(response => response.json())
             .then(data => {
                 geojson = toGeoJSON(data.items);
-                // console.log(Object.fromEntries(Object.entries(data.items)));
                 buildLayers(geojson)
             });
 

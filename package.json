@@ -20,6 +20,6 @@
   },
   "devDependencies": {
     "fast-glob": "^3.3.3",
-    "vite": "^6.3.5"
+    "vite": "^7.1.3"
   }
 }
