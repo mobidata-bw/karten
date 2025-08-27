@@ -136,6 +136,8 @@ export function urlParams(options = {}) {
             controlLayersTitle = 'Schließfächer an Fahrradabstellanlagen';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
+        default:
+            document.title = '';
     };
 
 
