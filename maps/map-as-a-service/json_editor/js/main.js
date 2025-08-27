@@ -153,8 +153,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const params = new URLSearchParams(window.location.search);
-        const source_id = params.get('source_id');
+        const source_id = new URLSearchParams(window.location.search).get('source_id');
         const source = source_id == null ? '/daten/json_editor/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;  
         // const source = source_id == null ? 'data/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;  
         let geojson;
