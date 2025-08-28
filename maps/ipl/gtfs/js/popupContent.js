@@ -20,32 +20,35 @@ export function popupContentTransitStops(features) {
         'itdLPxx_depLineICS=false&itdLPxx_depStopICS=false&itdLPxx_hint=false&itdLPxx_useRealtime=true&itdDateTimeDepArr=arr';
 
     /* POPUP CONTENT */
-    return '<table>\
-                <tr>' +
-        popupImages('Piktogramm_Haltestelle') +
-        '<th class="title">' + stop_name + '</th>\
-                </tr>\
-            </table><br><table>\
-                <tr>\
-                    <td class="att">Haltesteig-ID</td>\
-                    <td class="attContent">' + stop_id + '</td>\
-                </tr>'+
-        ((wheelchair_boarding == 'accessible') ? (
-            '<tr>\
-                <td class="att" > Barrierefreiheit</td >\
-                <td class="attContent">Rollstuhl-Einstiegsmöglichkeit</td>\
-            </tr>'
-        ) : '') +
-        '<tr>\
-            </table><table>\
-                <tr>\
-                    <td colspan="2" class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/gtfs/stops?stop_id=eq.' + stop_id + '" target="_blank">&#10149 Haltestelle/Station<a></td>\
-                </tr><tr>' +
-        ((location_type == 'station') ?
-            ('<td class="attContentLink"><a href="' + urlDepartures + '&name_dm=' + stopIdStation + '" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="' + urlArrivals + '&name_dm=' + stopIdStation + '" target="_blank">&#10149 Ankunftsmonitor<a></td>') :
-            ('<td class="attContentLink"><a href="' + urlDepartures + '&name_dm=' + stop_id + '" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="' + urlArrivals + '&name_dm=' + stop_id + '" target="_blank">&#10149 Ankunftsmonitor<a></td>')) +
-        '</tr>\
-            </table>';
+    return `
+        <table>
+            <tr>
+                ${popupImages('Piktogramm_Haltestelle')}
+                <th class="title">${stop_name}</th>
+            </tr>
+        </table><br><table>
+            <tr>
+                <td class="att">Haltesteig-ID</td>
+                <td class="attContent">${stop_id}</td>
+            </tr>
+            ${wheelchair_boarding == 'accessible' ? `
+            <tr>
+                <td class="att"> Barrierefreiheit</td>
+                <td class="attContent">Rollstuhl-Einstiegsmöglichkeit</td>
+            </tr>
+            ` : ''}
+            <tr>
+        </table><table>
+            <tr>
+                <td colspan="2" class="attContentLink"><a href="https://${iplPath}.mobidata-bw.de/gtfs/stops?stop_id=eq.${stop_id}" target="_blank">&#10149 Haltestelle/Station<a></td>
+            </tr><tr>
+                ${location_type == 'station' ? `
+                <td class="attContentLink"><a href="${urlDepartures}&name_dm=${stopIdStation}" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="${urlArrivals}&name_dm=${stopIdStation}" target="_blank">&#10149 Ankunftsmonitor<a></td>` :
+                `<td class="attContentLink"><a href="${urlDepartures}&name_dm=${stop_id}" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="${urlArrivals}&name_dm=${stop_id}" target="_blank">&#10149 Ankunftsmonitor<a></td>
+                `}   
+             </tr>
+        </table>
+    `;
 
 };
 
@@ -59,19 +62,22 @@ export function popupContentTransitStations(features) {
     } = features;
 
     /* POPUP CONTENT */
-    return '<table>\
-                <tr>' +
-        ((prio_route_type == '0') ? popupImages('Piktogramm_U_Bahn') : '') +
-        ((prio_route_type == '2') ? popupImages('Piktogramm_Bahn') : '') +
-        ((prio_route_type == '3') ? popupImages('Piktogramm_Bus') : '') +
-        '<th class="title">' + station_name + '</th>\
-                </tr>\
-            </table><br><table>\
-                <tr>\
-                    <td class="att">Haltestellen-ID</td>\
-                    <td class="attContent">' + station_id + '</td>\
-               </tr>\
-            </table>';
+    return `
+        <table>
+            <tr>
+                ${prio_route_type == '0' ? popupImages('Piktogramm_U_Bahn') : ''}
+                ${prio_route_type == '2' ? popupImages('Piktogramm_Bahn') : ''}
+                ${prio_route_type == '3' ? popupImages('Piktogramm_Bus') : ''}
+                <th class="title">${station_name}</th>
+            </tr>
+        </table><br><table>
+            <tr>
+                <td class="att">Haltestellen-ID</td>
+                <td class="attContent">${station_id}</td>
+            </tr>
+        </table>
+    `;
+
 };
 
 export function popupContentTransitShapes(features) {
@@ -155,73 +161,75 @@ export function popupContentTransitShapes(features) {
 
 
     /* POPUP CONTENT */
-    return '<table>\
-                <tr>' +
-        ((teilnetze == 'Verschiedene Eisenbahngesellschaften' || teilnetze == '') ? '' : (((teilnetze == 'Move (TUTicket)' || teilnetze == 'Move (VSB)') || teilnetze == 'Move (VVR)') ? popupImages("MOVE") : popupImages(teilnetze))) +
-        '<th class="title">' + route_names + '</th>\
-                </tr>\
-            </table>\
-        <br><table>\
-                <tr>\
-                    <td class="att">Linien-ID</td>\
-                    <td class="attContent">' + route_ids + '</td>\
-                </tr><tr>\
-                    <td class="att">Betreiber-ID</td>\
-                    <td class="attContent">' + agency_id + '</td>\
-                </tr><tr>\
-                    <td class="att">Betreibername</td>\
-                    <td class="attContent">' + agency_name + '</td>\
-                </tr><tr>\
-                    <td class="att">Betreiber-Webseite</td>\
-                    <td class="attContent"><a href="' + agency_url + '" target="_blank">Link</a></td>\
-                </tr>\
-            </table>' +
-        ((teilnetze == '') ? '' : (
-            '<br><table>\
-            <div class="title title2">Teilnetz</div>' +
-            ((teilnetze == datengeber) ? (
-                '<tr>\
-                <td class="att">Name/Datengeber</td>\
-                <td class="attContent">' + teilnetze + '</td>\
+    return `
+        <table>
+            <tr>
+                ${(teilnetze == 'Verschiedene Eisenbahngesellschaften' || teilnetze == '') ? '' : (((teilnetze == 'Move (TUTicket)' || teilnetze == 'Move (VSB)') || teilnetze == 'Move (VVR)') ? popupImages("MOVE") : popupImages(teilnetze))}
+                <th class="title">${route_names}</th>
+            </tr>
+        </table><br><table>
+            <tr>
+                <td class="att">Linien-ID</td>
+                <td class="attContent">${route_ids}</td>
+            </tr><tr>
+                <td class="att">Betreiber-ID</td>
+                <td class="attContent">${agency_id}</td>
+            </tr><tr>
+                <td class="att">Betreibername</td>
+                <td class="attContent">${agency_name}</td>
+            </tr><tr>
+                <td class="att">Betreiber-Webseite</td>
+                <td class="attContent"><a href="${agency_url}" target="_blank">Link</a></td>
+            </tr>
+        </table>' +
+        ${teilnetze == '' ? '' : (`
+        <br><table>
+        <div class="title title2">Teilnetz</div>
+            ${teilnetze == datengeber ? `
+            <tr>
+                <td class="att">Name/Datengeber</td>
+                <td class="attContent">${teilnetze}</td>
+            </tr>
+            ` : '' }
+            ${teilnetze != datengeber ? `
+            <tr>
+                <td class="att">Name</td>
+                <td class="attContent">${teilnetze}</td>
+            </tr><tr>
+                <td class="att">Datengeber</td>
+                <td class="attContent">${datengeber}</td>
             </tr>'
-            ) : '') +
-            ((teilnetze != datengeber) ? (
-                '<tr>\
-                <td class="att">Name</td>\
-                <td class="attContent">' + teilnetze + '</td>\
-            </tr><tr>\
-                <td class="att">Datengeber</td>\
-                <td class="attContent">' + datengeber + '</td>\
-            </tr>'
-            ) : '') +
-            ((teilnetzeBeschreibung == '') ? '' : (
-                '<tr>\
-                <td class="att">Beschreibung</td>\
-                <td class="attContent">' + teilnetzeBeschreibung + '</td>\
-            </tr>'
-            )) +
-            '<tr>\
-        <td class="att">Bus</td>' +
-            ((verkehrsmittel.match("Bus")) ? ('<td class="tdDatengeber">&#10003;</td>') : ('<td class="tdDatengeber">&#x2717;</td>')) +
-            '</tr><tr>' +
-            '<td class="att">Regionalverkehr</td>' +
-            ((verkehrsmittel.match("Regionalverkehr")) ? ('<td class="tdDatengeber">&#10003;</td>') : ('<td class="tdDatengeber">&#x2717;</td>')) +
-            '</tr><tr>' +
-            '<td class="att">Straßen-, S- oder U-Bahn</td>' +
-            ((verkehrsmittel.match("Straßen-/S-/U-Bahn")) ? ('<td class="tdDatengeber">&#10003;</td>') : ('<td class="tdDatengeber">&#x2717;</td>')) +
-            '</tr><tr>' +
-            '<td class="att">Fähre</td>' +
-            ((verkehrsmittel.match("Fähre")) ? ('<td class="tdDatengeber">&#10003;</td>') : ('<td class="tdDatengeber">&#x2717;</td>')) +
-            '</tr><tr>' +
-            '<td class="att">Seilbahn</td>' +
-            ((verkehrsmittel.match("Seilbahn")) ? ('<td class="tdDatengeber">&#10003;</td>') : ('<td class="tdDatengeber">&#x2717;</td>')) +
-            '</tr>\
-    </table>'
-        )) +
-        '<table>\
-                <tr>\
-                    <td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/gtfs/routes?route_id=eq.' + route_ids + '" target="_blank">&#10149 Linie<a></td>\
-                    <td class="attContentLink"><a href="https://' + iplPath + '.mobidata-bw.de/gtfs/trips?route_id=eq.' + route_ids + '" class="photoMargin" target="_blank">&#10149 Fahrten<a></td>\
-                </tr>\
-            </table>';
-}
+            ` : '' }
+            ${teilnetzeBeschreibung == '' ? '' : `
+            <tr>
+                <td class="att">Beschreibung</td>
+                <td class="attContent">${teilnetzeBeschreibung}</td>
+            </tr>
+            `}
+            '<tr>
+                <td class="att">Bus</td>
+                ${verkehrsmittel.match("Bus") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+            </tr><tr>
+                <td class="att">Regionalverkehr</td>
+                ${verkehrsmittel.match("Regionalverkehr") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+            </tr><tr>
+                <td class="att">Straßen-, S- oder U-Bahn</td>
+                ${verkehrsmittel.match("Straßen-/S-/U-Bahn") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+            </tr><tr>
+                <td class="att">Fähre</td>
+                ${verkehrsmittel.match("Fähre") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+            </tr><tr>
+                <td class="att">Seilbahn</td>
+                ${verkehrsmittel.match("Seilbahn") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+            </tr>
+        </table>`
+        )}
+        <table>
+            <tr>
+                <td class="attContentLink"><a href="https://${iplPath}.mobidata-bw.de/gtfs/routes?route_id=eq.${route_ids}" target="_blank">&#10149 Linie<a></td>
+                <td class="attContentLink"><a href="https://${iplPath}.mobidata-bw.de/gtfs/trips?route_id=eq.${route_ids}" class="photoMargin" target="_blank">&#10149 Fahrten<a></td>
+            </tr>
+        </table>
+    `;
+
+};
