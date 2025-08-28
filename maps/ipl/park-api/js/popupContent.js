@@ -46,8 +46,66 @@ export function popupContent(features) {
         ({ date, time } = timeStamps(realtime_data_updated_at));
     };
 
-
     /* POPUP CONTENT */
+    const spots = `
+            <tr>
+            <td class="att">alle (frei/gesamt)</td>
+            ${realtime_status === 'AVAILABLE' ? '<td class="attContent">1 / 1</td>' : ''}
+            ${realtime_status === 'TAKEN' ? '<td class="attContent">0 / 1</td>' : ''}
+            ${realtime_status === 'UNKNOWN' ? '<td class="attContent">- / 1</td>' : ''}
+            ${(!has_realtime_data || !realtime_status) ? '<td class="attContent">- / 1</td>' : ''}
+            </tr>
+            ${!restriction_type ? '' : `
+            <tr>
+                <td class="att">Parkberechtigte</td>
+                ${restriction_type === '' ? '<td class="attContent">alle</td>' : ''}
+                ${restriction_type.match('DISABLED') ? '<td class="attContent">Behinderte</td>' : ''}
+                ${restriction_type.match('CHARGING') ? '<td class="attContent">zum Laden</td>' : ''}
+                ${restriction_type.match('FAMILY') ? '<td class="attContent">Familien</td>' : ''}
+            </tr>
+            `}
+            ${!restriction_hours ? '' : `
+            <tr>
+                <td class="att">Parkzeiten</td>
+                <td class="attContent">${restriction_hours}</td>
+            </tr>
+            `}
+            ${!restriction_max_stay ? '' : `
+            <tr>
+                <td class="att">Max. Parkdauer</td>
+                <td class="attContent">${restriction_max_stay}</td>
+            </tr>
+            `}
+    `;
+
+    const sites = `
+            ${(!capacity && !realtime_capacity) ? '' : `
+            <tr>
+                <td class="att2">alle (frei/gesamt)</td>
+                <td class="attContent2">
+                ${(has_realtime_data === false || !realtime_free_capacity) ? '-' : realtime_free_capacity}
+                / 
+                ${(!realtime_capacity && capacity === undefined) ? '-' : (realtime_capacity ? realtime_capacity : capacity)}
+                </td>
+            </tr>
+            `}
+            ${(!capacity_disabled || capacity_disabled === '0') ? '' : `
+            <tr><td class="att2">für Behinderte</td><td class="attContent2">${capacity_disabled}</td></tr>
+            `}
+            ${(!capacity_woman || capacity_woman === '0') ? '' : `
+            <tr><td class="att2">für Frauen</td><td class="attContent2">${capacity_woman}</td></tr>
+            `}
+            ${(!capacity_family || capacity_family === '0') ? '' : `
+            <tr><td class="att2">für Familien</td><td class="attContent2">${capacity_family}</td></tr>
+            `}
+            ${(!capacity_charging || capacity_charging === '0') ? '' : `
+            <tr><td class="att2">mit Lademöglichkeit</td><td class="attContent2">${capacity_charging}</td></tr>
+            `}
+            ${(!capacity_carsharing || capacity_carsharing === '0') ? '' : `
+            <tr><td class="att2">für Carsharing</td><td class="attContent2">${capacity_carsharing}</td></tr>
+            `}
+            `;
+
     const htmlContent = `
         <table>
             <tr>
@@ -120,81 +178,21 @@ export function popupContent(features) {
         <br>
         <div class="title title2">Parkplätze</div>
         <div id="divParkingSites">
-            <div><div id="anchor-${id}"></div></div>
-            <div id="divTable">
-            <table>
-                ${parking_object === 'spot'
-            ? `
-                    <tr>
-                    <td class="att">alle (frei/gesamt)</td>
-                    ${realtime_status === 'AVAILABLE' ? '<td class="attContent">1 / 1</td>' : ''}
-                    ${realtime_status === 'TAKEN' ? '<td class="attContent">0 / 1</td>' : ''}
-                    ${realtime_status === 'UNKNOWN' ? '<td class="attContent">- / 1</td>' : ''}
-                    ${(!has_realtime_data || !realtime_status) ? '<td class="attContent">- / 1</td>' : ''}
-                    </tr>
-                    ${!restriction_type ? '' : `
-                    <tr>
-                        <td class="att">Parkberechtigte</td>
-                        ${restriction_type === '' ? '<td class="attContent">alle</td>' : ''}
-                        ${restriction_type.match('DISABLED') ? '<td class="attContent">Behinderte</td>' : ''}
-                        ${restriction_type.match('CHARGING') ? '<td class="attContent">zum Laden</td>' : ''}
-                        ${restriction_type.match('FAMILY') ? '<td class="attContent">Familien</td>' : ''}
-                    </tr>
-                    `}
-                    ${!restriction_hours ? '' : `
-                    <tr>
-                        <td class="att">Parkzeiten</td>
-                        <td class="attContent">${restriction_hours}</td>
-                    </tr>
-                    `}
-                    ${!restriction_max_stay ? '' : `
-                    <tr>
-                        <td class="att">Max. Parkdauer</td>
-                        <td class="attContent">${restriction_max_stay}</td>
-                    </tr>
-                    `}
-                `
-            : `
-                    ${(!capacity && !realtime_capacity) ? '' : `
-                    <tr>
-                        <td class="att2">alle (frei/gesamt)</td>
-                        <td class="attContent2">
-                        ${(has_realtime_data === false || !realtime_free_capacity) ? '-' : realtime_free_capacity}
-                        / 
-                        ${(!realtime_capacity && capacity === undefined) ? '-' : (realtime_capacity ? realtime_capacity : capacity)}
-                        </td>
-                    </tr>
-                    `}
-                    ${(!capacity_disabled || capacity_disabled === '0') ? '' : `
-                    <tr><td class="att2">für Behinderte</td><td class="attContent2">${capacity_disabled}</td></tr>
-                    `}
-                    ${(!capacity_woman || capacity_woman === '0') ? '' : `
-                    <tr><td class="att2">für Frauen</td><td class="attContent2">${capacity_woman}</td></tr>
-                    `}
-                    ${(!capacity_family || capacity_family === '0') ? '' : `
-                    <tr><td class="att2">für Familien</td><td class="attContent2">${capacity_family}</td></tr>
-                    `}
-                    ${(!capacity_charging || capacity_charging === '0') ? '' : `
-                    <tr><td class="att2">mit Lademöglichkeit</td><td class="attContent2">${capacity_charging}</td></tr>
-                    `}
-                    ${(!capacity_carsharing || capacity_carsharing === '0') ? '' : `
-                    <tr><td class="att2">für Carsharing</td><td class="attContent2">${capacity_carsharing}</td></tr>
-                    `}
-                `}
-            </table>
+        <div><div id="anchor-${id}"></div></div>
+        <div id="divTable">
+        <table>
+            ${parking_object === 'spot' ? spots : sites}
+        </table>
             </div>
         </div>
         <table id="divURLs">
             <tr>
-            ${public_url ? `<td class="attContentLink"><a href="${public_url}" target="_blank">&#10149 Datengeber</a></td>` : ''}
-            <td class="attContentLink">
-                <a href="https://${iplPath}.mobidata-bw.de/park-api/api/public/v3/parking-${parking_object}s/${id}" target="_blank">&#10149 ParkAPI</a>
-            </td>
-            ${photo_url ? `<td class="attContentLink"><a href="${photo_url}" class="photoMargin" target="_blank">&#10149 Foto</a></td>` : ''}
+                ${public_url ? `<td class="attContentLink"><a href="${public_url}" target="_blank">&#10149 Datengeber</a></td>` : ''}
+                <td class="attContentLink"><a href="https://${iplPath}.mobidata-bw.de/park-api/api/public/v3/parking-${parking_object}s/${id}" target="_blank">&#10149 ParkAPI</a></td>
+                ${photo_url ? `<td class="attContentLink"><a href="${photo_url}" class="photoMargin" target="_blank">&#10149 Foto</a></td>` : ''}
             </tr>
         </table>
-        `;
-
+    `;
 
     /* PARK API SOURCES */
     setTimeout(() => {
@@ -203,7 +201,7 @@ export function popupContent(features) {
             .then(response => response.json())
             .then(data => {
 
-                let logo = '', datengeber = '';
+                let htmlLogo = '', htmlDatengeber = '';
 
                 data.items.forEach(item => {
 
@@ -244,20 +242,20 @@ export function popupContent(features) {
 
                     for (let key in mapDatengeber) {
                         if (item.uid.match(key) && source_id == item.id) {
-                            logo += popupImages(mapDatengeber[key]);
-                            datengeber += `<td class="attContent">${mapDatengeber[key]}</td>`;
+                            htmlLogo += popupImages(mapDatengeber[key]);
+                            htmlDatengeber += `<td class="attContent">${mapDatengeber[key]}</td>`;
                         }
-                    };
+                    };                 
 
                 });
 
                 const thLogo = document.getElementById('logos-' + id);
-                if (thLogo && logo) thLogo.innerHTML = logo;
+                if (thLogo && htmlLogo) thLogo.innerHTML = htmlLogo;
 
                 const trDatengeber = document.getElementById('datengeber-' + id);
-                if (trDatengeber && datengeber) trDatengeber.innerHTML = `
+                if (trDatengeber && htmlDatengeber) trDatengeber.innerHTML = `
                     <td class="att">Datengeber</td>
-                    <td class="attContent"${datengeber}</td>`;
+                    <td class="attContent"${htmlDatengeber}</td>`;
 
             });
 
@@ -266,8 +264,6 @@ export function popupContent(features) {
 
     }, 0);
 
-
     return htmlContent;
-
 
 };

@@ -40,8 +40,6 @@ window.addEventListener('DOMContentLoaded', () => {
         });
         layers.forEach(layer => addLayers(map, layer));
 
-        console.log(layers)
-
 
         // ==============================
         // LAYER CONTROL
