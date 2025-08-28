@@ -17,7 +17,7 @@ export function popupContent(features) {
     } = features;
 
     /* MAPPING */   
-    const datengeberMapping = {
+    const datengeberMap = {
         "bnetza": "Bundesnetzagentur",
         "bnetza_api": "Bundesnetzagentur",
         "chargecloud_stuttgart": "Stadtwerke Stuttgart",
@@ -32,16 +32,16 @@ export function popupContent(features) {
     let logo = '';
     let datengeber = '';
 
-    for (let key in datengeberMapping) {
+    for (let key in datengeberMap) {
         if (source == key) {
-            logo += popupImages(datengeberMapping[key]);
-            datengeber += `<td class="attContent">${datengeberMapping[key]}</td>`;
+            logo += popupImages(datengeberMap[key]);
+            datengeber += `<td class="attContent">${datengeberMap[key]}</td>`;
         }
     };
 
     /* POPUP CONTENT */
-    const htmlContent =
-        `<table>
+    const htmlContent = `
+        <table>
             <tr>
                 ${logo}
                 <th class="title">${address}</th>
@@ -81,7 +81,8 @@ export function popupContent(features) {
             <tr>
                 <td class="attContentLink"><a href="https://${iplPath}.mobidata-bw.de/ocpdb/api/public/v1/locations/${id}" target="_blank">&#10149 Open ChargePoint DataBase<a></td>
             </tr>
-        </table>`;
+        </table>
+    `;
 
 
     setTimeout(() => {

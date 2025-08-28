@@ -54,7 +54,7 @@ export const layersCountBicycle = [
     },
     {
         id: 'countBicycle4',
-        label: '1-2 Mio.',
+        label: '1 - 2 Mio.',
         filter:
             [
                 'all',
