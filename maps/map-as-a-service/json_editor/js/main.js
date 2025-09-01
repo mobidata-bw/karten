@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const map = initializeMap();
     basemaps(map);
 
-    
+
     map.on('load', () => {
 
         // ==============================
@@ -154,7 +154,7 @@ window.addEventListener('DOMContentLoaded', () => {
         };
 
         const source_id = new URLSearchParams(window.location.search).get('source_id');
-        const source = source_id == null ? '/daten/json_editor/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;  
+        const source = source_id == null ? '/daten/json_editor/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;
         // const source = source_id == null ? 'data/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;  
         let geojson;
 
@@ -273,6 +273,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 function toJson() {
                     return {
                         items: updatedJson.map(feature => feature.properties)
+
                     }
                 };
                 const json = toJson();
@@ -298,7 +299,9 @@ window.addEventListener('DOMContentLoaded', () => {
                     )
                 );
 
-                const blob = new Blob([JSON.stringify(filteredJson, null, 2)], {
+                const exportJson = { items: filteredJson };
+
+                const blob = new Blob([JSON.stringify(exportJson, null, 2)], {
                     type: 'application/json;charset=utf-8'
                 });
                 saveAs(blob, 'export_parking-sites.json');

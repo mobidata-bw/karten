@@ -1,5 +1,8 @@
 export function urlParams(options = {}) {
 
+    // ==============================
+    // DEFINE PARAMS
+    // ==============================
     const params = new URLSearchParams(window.location.search);
     const purpose = options.purpose ?? params.get('purpose');
     const type = options.type ?? params.get('type');
@@ -183,6 +186,9 @@ export function urlParams(options = {}) {
     };
 
 
+    // ==============================
+    // RETURN PARAMS
+    // ==============================
     return {
         purpose,
         type,
