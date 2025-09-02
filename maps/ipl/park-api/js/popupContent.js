@@ -50,15 +50,15 @@ export function popupContent(features) {
     const spots = `
             <tr>
             <td class="att">alle (frei/gesamt)</td>
-            ${realtime_status === 'AVAILABLE' ? '<td class="attContent">1 / 1</td>' : ''}
-            ${realtime_status === 'TAKEN' ? '<td class="attContent">0 / 1</td>' : ''}
-            ${realtime_status === 'UNKNOWN' ? '<td class="attContent">- / 1</td>' : ''}
+            ${realtime_status == 'AVAILABLE' ? '<td class="attContent">1 / 1</td>' : ''}
+            ${realtime_status == 'TAKEN' ? '<td class="attContent">0 / 1</td>' : ''}
+            ${realtime_status == 'UNKNOWN' ? '<td class="attContent">- / 1</td>' : ''}
             ${(!has_realtime_data || !realtime_status) ? '<td class="attContent">- / 1</td>' : ''}
             </tr>
             ${!restriction_type ? '' : `
             <tr>
                 <td class="att">Parkberechtigte</td>
-                ${restriction_type === '' ? '<td class="attContent">alle</td>' : ''}
+                ${restriction_type == '' ? '<td class="attContent">alle</td>' : ''}
                 ${restriction_type.match('DISABLED') ? '<td class="attContent">Behinderte</td>' : ''}
                 ${restriction_type.match('CHARGING') ? '<td class="attContent">zum Laden</td>' : ''}
                 ${restriction_type.match('FAMILY') ? '<td class="attContent">Familien</td>' : ''}
@@ -83,25 +83,25 @@ export function popupContent(features) {
             <tr>
                 <td class="att2">alle (frei/gesamt)</td>
                 <td class="attContent2">
-                ${(has_realtime_data === false || !realtime_free_capacity) ? '-' : realtime_free_capacity}
+                ${(has_realtime_data == false || !realtime_free_capacity) ? '-' : realtime_free_capacity}
                 / 
-                ${(!realtime_capacity && capacity === undefined) ? '-' : (realtime_capacity ? realtime_capacity : capacity)}
+                ${(!realtime_capacity && capacity == undefined) ? '-' : (realtime_capacity ? realtime_capacity : capacity)}
                 </td>
             </tr>
             `}
-            ${(!capacity_disabled || capacity_disabled === '0') ? '' : `
+            ${(!capacity_disabled || capacity_disabled == '0') ? '' : `
             <tr><td class="att2">für Behinderte</td><td class="attContent2">${capacity_disabled}</td></tr>
             `}
-            ${(!capacity_woman || capacity_woman === '0') ? '' : `
+            ${(!capacity_woman || capacity_woman == '0') ? '' : `
             <tr><td class="att2">für Frauen</td><td class="attContent2">${capacity_woman}</td></tr>
             `}
-            ${(!capacity_family || capacity_family === '0') ? '' : `
+            ${(!capacity_family || capacity_family == '0') ? '' : `
             <tr><td class="att2">für Familien</td><td class="attContent2">${capacity_family}</td></tr>
             `}
-            ${(!capacity_charging || capacity_charging === '0') ? '' : `
+            ${(!capacity_charging || capacity_charging == '0') ? '' : `
             <tr><td class="att2">mit Lademöglichkeit</td><td class="attContent2">${capacity_charging}</td></tr>
             `}
-            ${(!capacity_carsharing || capacity_carsharing === '0') ? '' : `
+            ${(!capacity_carsharing || capacity_carsharing == '0') ? '' : `
             <tr><td class="att2">für Carsharing</td><td class="attContent2">${capacity_carsharing}</td></tr>
             `}
             `;
@@ -116,31 +116,30 @@ export function popupContent(features) {
         <br>
         <table>
             <tr id="datengeber-${id}"></tr>
-            ${(!operator_name || operator_name === '-' || operator_name === '') ? '' : `
+            ${(!operator_name || operator_name == '-' || operator_name == '') ? '' : `
             <tr>
                 <td class="att">Betreiber</td>
                 <td class="attContent">${operator_name}</td>
             </tr>
             `}
-            ${!type ? '' : `
             <tr>
                 <td class="att">Typ</td>
-                ${type === 'ON_STREET' ? '<td class="attContent">Straßen-Parkplatz</td>' : ''}
-                ${type === 'OFF_STREET_PARKING_GROUND' ? '<td class="attContent">Parkplatz abseits der Straße</td>' : ''}
-                ${type === 'CAR_PARK' ? '<td class="attContent">Parkhaus</td>' : ''}
-                ${type === 'UNDERGROUND' ? '<td class="attContent">Tiefgarage</td>' : ''}
-                ${type === 'WALL_LOOPS' ? '<td class="attContent">Vorderradhalter</td>' : ''}
-                ${type === 'SAFE_WALL_LOOPS' ? '<td class="attContent">Vorderradhalter mit Sicherung</td>' : ''}
-                ${type === 'STANDS' ? '<td class="attContent">Anlehnbügel</td>' : ''}
-                ${(type === 'LOCKERS' && purpose === 'BIKE') ? '<td class="attContent">Fahrradschrank</td>' : ''}
-                ${((type === 'LOCKERS' && purpose === 'ITEM') || type === 'LOCKBOX') ? '<td class="attContent">Schließfach</td>' : ''}
-                ${type === 'SHED' ? '<td class="attContent">Sammelanlage</td>' : ''}
-                ${type === 'TWO_TIER' ? '<td class="attContent">Zweistock-Abstellanlage</td>' : ''}
-                ${type === 'BUILDING' ? '<td class="attContent">Parkhaus</td>' : ''}
-                ${type === 'FLOOR' ? '<td class="attContent">Abstellfläche</td>' : ''}
-                ${type === 'OTHER' ? '<td class="attContent">Sonstige</td>' : ''}
+                ${type == 'ON_STREET' ? '<td class="attContent">Straßen-Parkplatz</td>' : ''}
+                ${type == 'OFF_STREET_PARKING_GROUND' ? '<td class="attContent">Parkplatz abseits der Straße</td>' : ''}
+                ${type == 'CAR_PARK' ? '<td class="attContent">Parkhaus</td>' : ''}
+                ${type == 'UNDERGROUND' ? '<td class="attContent">Tiefgarage</td>' : ''}
+                ${type == 'WALL_LOOPS' ? '<td class="attContent">Vorderradhalter</td>' : ''}
+                ${type == 'SAFE_WALL_LOOPS' ? '<td class="attContent">Vorderradhalter mit Sicherung</td>' : ''}
+                ${type == 'STANDS' ? '<td class="attContent">Anlehnbügel</td>' : ''}
+                ${(type == 'LOCKERS' && purpose == 'BIKE') ? '<td class="attContent">Fahrradschrank</td>' : ''}
+                ${((type == 'LOCKERS' && purpose == 'ITEM') || type == 'LOCKBOX') ? '<td class="attContent">Schließfach</td>' : ''}
+                ${type == 'SHED' ? '<td class="attContent">Sammelanlage</td>' : ''}
+                ${type == 'TWO_TIER' ? '<td class="attContent">Zweistock-Abstellanlage</td>' : ''}
+                ${type == 'BUILDING' ? '<td class="attContent">Parkhaus</td>' : ''}
+                ${type == 'FLOOR' ? '<td class="attContent">Abstellfläche</td>' : ''}
+                ${type == 'OTHER' ? '<td class="attContent">Sonstige</td>' : ''}
+                ${!type ? '<td class="attContent">unbekannt</td>' : ''}
             </tr>
-            `}
             ${!address ? '' : `
             <tr>
                 <td class="att">Adresse</td>
@@ -150,23 +149,23 @@ export function popupContent(features) {
             ${!park_and_ride_type ? '' : `
             <tr>
                 <td class="att">P+R-Typ</td>
-                ${park_and_ride_type === 'CARPOOL' ? '<td class="attContent">Fahrgemeinschaft</td>' : ''}
-                ${park_and_ride_type === 'TRAIN' ? '<td class="attContent">Bahn</td>' : ''}
-                ${park_and_ride_type === 'BUS' ? '<td class="attContent">Bus</td>' : ''}
-                ${park_and_ride_type === 'TRAM' ? '<td class="attContent">Straßenbahn</td>' : ''}
-                ${park_and_ride_type === 'YES' ? '<td class="attContent">ja</td>' : ''}
-                ${park_and_ride_type === 'NO' ? '<td class="attContent">nein</td>' : ''}
+                ${park_and_ride_type == 'CARPOOL' ? '<td class="attContent">Fahrgemeinschaft</td>' : ''}
+                ${park_and_ride_type == 'TRAIN' ? '<td class="attContent">Bahn</td>' : ''}
+                ${park_and_ride_type == 'BUS' ? '<td class="attContent">Bus</td>' : ''}
+                ${park_and_ride_type == 'TRAM' ? '<td class="attContent">Straßenbahn</td>' : ''}
+                ${park_and_ride_type == 'YES' ? '<td class="attContent">ja</td>' : ''}
+                ${park_and_ride_type == 'NO' ? '<td class="attContent">nein</td>' : ''}
             </tr>
             `}
             ${!realtime_opening_status ? '' : `
             <tr>
                 <td class="att">Status</td>
-                ${realtime_opening_status === 'OPEN' ? '<td class="attContent">geöffnet</td>' : ''}
-                ${realtime_opening_status === 'CLOSED' ? '<td class="attContent">geschlossen</td>' : ''}
-                ${realtime_opening_status === 'UNKNOWN' ? '<td class="attContent">unbekannt</td>' : ''}
+                ${realtime_opening_status == 'OPEN' ? '<td class="attContent">geöffnet</td>' : ''}
+                ${realtime_opening_status == 'CLOSED' ? '<td class="attContent">geschlossen</td>' : ''}
+                ${realtime_opening_status == 'UNKNOWN' ? '<td class="attContent">unbekannt</td>' : ''}
             </tr>
             `}
-            ${has_realtime_data === false ? '' : `
+            ${has_realtime_data == false ? '' : `
             <tr>
                 <td class="att">Stand Echtzeitdaten</td>
                 ${realtime_data_outdated
@@ -181,7 +180,7 @@ export function popupContent(features) {
         <div><div id="anchor-${id}"></div></div>
         <div id="divTable">
         <table>
-            ${parking_object === 'spot' ? spots : sites}
+            ${parking_object == 'spot' ? spots : sites}
         </table>
             </div>
         </div>
@@ -245,7 +244,7 @@ export function popupContent(features) {
                             htmlLogo += popupImages(mapDatengeber[key]);
                             htmlDatengeber += `<td class="attContent">${mapDatengeber[key]}</td>`;
                         }
-                    };                 
+                    };
 
                 });
 

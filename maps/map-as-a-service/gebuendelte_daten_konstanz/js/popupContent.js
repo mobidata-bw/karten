@@ -166,7 +166,7 @@ export function popKonstanzBehindertenparken(feature) {
                 <th class="title">${Name}</th>
             </tr>
         </table><br><table>
-            ${max_cap == ' ' ? '' : `
+            ${Informatio == ' ' ? '' : `
             <tr>
                 <td class="att">Information</td>
                 <td class="attContent">${Informatio}</td>

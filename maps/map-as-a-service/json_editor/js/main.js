@@ -137,8 +137,8 @@ window.addEventListener('DOMContentLoaded', () => {
                         'lon_new': '',
                         'external_identifiers_new': [
                             {
-                                'type': 'DHID',
-                                'value': 'de:xx'
+                                'type': '',
+                                'value': ''
                             }
                         ],
                         'capacity_charging_new': '',
@@ -281,18 +281,27 @@ window.addEventListener('DOMContentLoaded', () => {
                 const filteredJson = json.items.map(item =>
                     Object.fromEntries(
                         Object.entries(item)
-                            .filter(([key]) =>
-                                ![
-                                    'name',
-                                    'id',
-                                    'source_id',
-                                    'purpose',
-                                    'public_url',
-                                    'has_fee',
-                                    'has_realtime_data',
-                                    'opening_hours',
-                                    'capacity',
-                                ].includes(key))
+                            .filter(([key, value]) => {
+                                let filter;
+                                if (key == 'external_identifiers_new' && value[0].type == '' && value[0].value == '') {
+                                    filter = (key.includes('_new') || key == 'uid') && (value != '' || value != 0) && key != 'external_identifiers_new'
+                                } else {
+                                    filter = (key.includes('_new') || key == 'uid') && (value != '' || value != 0)
+                                }
+                                return filter;
+                            }
+                                // ![
+                                //     'name',
+                                //     'id',
+                                //     'source_id',
+                                //     'purpose',
+                                //     'public_url',
+                                //     'has_fee',
+                                //     'has_realtime_data',
+                                //     'opening_hours',
+                                //     'capacity',
+                                // ].includes(key)
+                            )
                             .map(([key, value]) =>
                                 key.includes('_new') ? [key.split('_new')[0], value] : [key, value]
                             )
