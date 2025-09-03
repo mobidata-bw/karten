@@ -278,35 +278,28 @@ window.addEventListener('DOMContentLoaded', () => {
                 };
                 const json = toJson();
 
-                const filteredJson = json.items.map(item =>
-                    Object.fromEntries(
-                        Object.entries(item)
-                            .filter(([key, value]) => {
-                                let filter;
-                                if (key == 'external_identifiers_new' && value[0].type == '' && value[0].value == '') {
-                                    filter = (key.includes('_new') || key == 'uid') && (value != '' || value != 0) && key != 'external_identifiers_new'
-                                } else {
-                                    filter = (key.includes('_new') || key == 'uid') && (value != '' || value != 0)
-                                }
-                                return filter;
-                            }
-                                // ![
-                                //     'name',
-                                //     'id',
-                                //     'source_id',
-                                //     'purpose',
-                                //     'public_url',
-                                //     'has_fee',
-                                //     'has_realtime_data',
-                                //     'opening_hours',
-                                //     'capacity',
-                                // ].includes(key)
-                            )
-                            .map(([key, value]) =>
-                                key.includes('_new') ? [key.split('_new')[0], value] : [key, value]
-                            )
-                    )
-                );
+                const filteredJson = json.items
+                    .map(item => {
+                        const obj = Object.fromEntries(
+                            Object.entries(item)
+                                .filter(([key, value]) => {
+                                    let filter;
+                                    if (key == 'external_identifiers_new' && value[0].type == '' && value[0].value == '') {
+                                        filter = key.includes('_new') && (value != '' || value != 0) && key != 'external_identifiers_new'
+                                    } else {
+                                        filter = key.includes('_new') && (value != '' || value != 0)
+                                    }
+                                    return filter;
+                                })
+                                .map(([key, value]) =>
+                                    key.includes('_new') ? [key.split('_new')[0], value] : [key, value]
+                                )
+                        )
+                        if (Object.keys(obj).length > 0) return { uid: item.uid, ...obj };
+
+                        return obj;
+                    })
+                    .filter(item => Object.keys(item).length > 0);
 
                 const exportJson = { items: filteredJson };
 

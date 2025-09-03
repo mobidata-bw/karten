@@ -12,8 +12,6 @@ export function initializeControlLayers(map) {
     };
 
     const layerControl = new layerControlGrouped(config);
-
-    layerControl._exclusiveAllGroups = true;
   
     map.addControl(layerControl, 'top-right');
 
