@@ -32,11 +32,11 @@ export function popupContent(features) {
             </tr>
         </table><br><table>       
             <tr>
-                <td class="att">Name</td>
-                <td class="attContent">${NAME}</td>
-            </tr><tr>
                 <td class="att">ID</td>
                 <td class="attContent">${ID}</td>
+            </tr><tr>             
+                <td class="att">Name</td>
+                <td class="attContent">${NAME}</td>
             </tr><tr>
                 <td class="att">Kraftfahrzeug</td>
                 <td class="attContent">${KFZ.toLocaleString()}</td>

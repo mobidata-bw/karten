@@ -1,8 +1,11 @@
 import { iplPath } from '../../../../src/utils/paths.js';
 import { timeStamps } from '../../../../src/js/timeStamps.js';
 import { popupImages } from '../../../../src/js/popupImages.js';
+import { popupSources } from './popupSources.js';
 import { popupCanvas } from './popupCanvas.js';
 
+
+const sources = popupSources();
 
 export function popupContent(features) {
     // console.log(features);
@@ -193,76 +196,82 @@ export function popupContent(features) {
         </table>
     `;
 
-    /* PARK API SOURCES */
+
     setTimeout(() => {
 
-        fetch(`https://${iplPath}.mobidata-bw.de/park-api/api/public/v3/sources`)
-            .then(response => response.json())
-            .then(data => {
 
-                let htmlLogo = '', htmlDatengeber = '';
+        /* PARK API SOURCES */
+        let htmlLogo = '', htmlDatengeber = '';
 
-                data.items.forEach(item => {
+        sources.then(items => {
 
-                    const mapDatengeber = {
-                        'aalen': 'Stadt Aalen',
-                        'apcoa': 'APCOA PARKING',
-                        'bahn_v2': 'DB BahnPark',
-                        'bb_parkhaus': 'B+B Parkhaus GmbH & Co. KG',
-                        'bfrk': 'NVBW',
-                        'bietigheim_bissingen': 'Stadt Bietigheim-Bissingen',
-                        'buchen': 'Stadt Buchen',
-                        'ellwangen': 'Stadt Ellwangen',
-                        'esslingen': 'Stadt Esslingen',
-                        'freiburg': 'Stadt Freiburg im Breisgau',
-                        'friedrichshafen': 'Stadt Friedrichshafen',
-                        'goldbeck': 'Goldbeck',
-                        'heidelberg': 'Stadt Heidelberg',
-                        'herrenberg': 'Stadt Herrenberg',
-                        'huefner': 'PARK SERVICE HÜFNER GmbH + Co. KG',
-                        'karlsruhe': 'Stadt Karlsruhe',
-                        'keltern': 'Stadt Keltern',
-                        'kienzler': 'Kienzler',
-                        'konstanz': 'Stadt Konstanz',
-                        'mannheim': 'Stadt Mannheim',
-                        'm_bw': 'Verkehrsministerium Baden-Württemberg',
-                        'neckarsulm': 'Stadt Neckarsulm',
-                        'opendata_swiss': 'Open-Data-Plattform Schweiz',
-                        'pbw': 'Parkraumgesellschaft Baden-Württemberg mbH',
-                        'pforzheim': 'Stadt Pforzheim',
-                        'radvis_bw': 'RadVIS',
-                        'reutlingen': 'Stadt Reutlingen',
-                        'stuttgart_': 'Stadt Stuttgart',
-                        'ulm_': 'Stadt Ulm',
-                        'velobrix': 'Velobrix',
-                        'vrn_': 'Verkehrsverbund Rhein-Neckar',
-                        'vrs': 'Verband Region Stuttgart'
-                    };
+            items.forEach(item => {
 
-                    for (let key in mapDatengeber) {
-                        if (item.uid.match(key) && source_id == item.id) {
-                            htmlLogo += popupImages(mapDatengeber[key]);
-                            htmlDatengeber += `<td class="attContent">${mapDatengeber[key]}</td>`;
-                        }
-                    };
+                const mapDatengeber = {
+                    'aalen': 'Stadt Aalen',
+                    'apcoa': 'APCOA PARKING',
+                    'bahn_v2': 'DB BahnPark',
+                    'bb_parkhaus': 'B+B Parkhaus GmbH & Co. KG',
+                    'bfrk': 'NVBW',
+                    'bietigheim_bissingen': 'Stadt Bietigheim-Bissingen',
+                    'buchen': 'Stadt Buchen',
+                    'ellwangen': 'Stadt Ellwangen',
+                    'esslingen': 'Stadt Esslingen',
+                    'freiburg': 'Stadt Freiburg im Breisgau',
+                    'friedrichshafen': 'Stadt Friedrichshafen',
+                    'goldbeck': 'Goldbeck',
+                    'heidelberg': 'Stadt Heidelberg',
+                    'herrenberg': 'Stadt Herrenberg',
+                    'huefner': 'PARK SERVICE HÜFNER GmbH + Co. KG',
+                    'karlsruhe': 'Stadt Karlsruhe',
+                    'keltern': 'Stadt Keltern',
+                    'kienzler': 'Kienzler',
+                    'konstanz': 'Stadt Konstanz',
+                    'ladenburg': 'Stadt Ladenburg',
+                    'mannheim': 'Stadt Mannheim',
+                    'm_bw': 'Verkehrsministerium Baden-Württemberg',
+                    'neckarsulm': 'Stadt Neckarsulm',
+                    'opendata_swiss': 'Open-Data-Plattform Schweiz',
+                    'pbw': 'Parkraumgesellschaft Baden-Württemberg mbH',
+                    'pforzheim': 'Stadt Pforzheim',
+                    'radvis_bw': 'RadVIS',
+                    'radolfzell': 'Stadt Radolfzell',
+                    'reutlingen': 'Stadt Reutlingen',
+                    'stuttgart_': 'Stadt Stuttgart',
+                    'ulm_': 'Stadt Ulm',
+                    'velobrix': 'Velobrix',
+                    'vrn_': 'Verkehrsverbund Rhein-Neckar',
+                    'vrs': 'Verband Region Stuttgart'
+                };
 
-                });
+                for (let key in mapDatengeber) {
+                    if (item.uid.match(key) && source_id == item.id) {
+                        htmlLogo += popupImages(mapDatengeber[key]);
+                        htmlDatengeber += `<td class="attContent">${mapDatengeber[key]}</td>`;
+                    }
+                };
 
-                const thLogo = document.getElementById('logos-' + id);
-                if (thLogo && htmlLogo) thLogo.innerHTML = htmlLogo;
+            });
 
-                const trDatengeber = document.getElementById('datengeber-' + id);
-                if (trDatengeber && htmlDatengeber) trDatengeber.innerHTML = `
+            const thLogo = document.getElementById('logos-' + id);
+            if (thLogo && htmlLogo) thLogo.innerHTML = htmlLogo;
+
+            const trDatengeber = document.getElementById('datengeber-' + id);
+            if (trDatengeber && htmlDatengeber) trDatengeber.innerHTML = `
                     <td class="att">Datengeber</td>
                     <td class="attContent"${htmlDatengeber}</td>`;
 
-            });
+        });
+
 
         /* INITIALIZE POPUP CANVAS */
         popupCanvas(features);
 
+
     }, 0);
 
+
     return htmlContent;
+
 
 };

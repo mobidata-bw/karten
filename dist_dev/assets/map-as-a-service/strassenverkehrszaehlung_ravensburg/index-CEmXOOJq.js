@@ -5,11 +5,11 @@ import{a as U,l as k,i as K,b as T,c as N,d as y}from"../../addControlLayers-DdH
             </tr>
         </table><br><table>       
             <tr>
-                <td class="att">Name</td>
-                <td class="attContent">${e}</td>
-            </tr><tr>
                 <td class="att">ID</td>
                 <td class="attContent">${r}</td>
+            </tr><tr>             
+                <td class="att">Name</td>
+                <td class="attContent">${e}</td>
             </tr><tr>
                 <td class="att">Kraftfahrzeug</td>
                 <td class="attContent">${n.toLocaleString()}</td>

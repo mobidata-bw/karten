@@ -55,7 +55,6 @@ export function urlParams(options = {}) {
             switch (parking) {
                 case 'disabled':
                     layerGroup.group = 'Behindertenparkplätze';
-                    layerGroup.visibility = 'visible';
                     layerFilter =
                         [
                             'any',
