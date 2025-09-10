@@ -307,9 +307,13 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             subGroup: 'Typ',
             filter:
                 [
-                    'any',
-                    ['==', ['get', 'type'], 'OTHER'],
-                    ['!', ['has', 'type']]
+                    'all',
+                    [
+                        'any',
+                        ['==', ['get', 'type'], 'OTHER'],
+                        ['!', ['has', 'type']]
+                    ],
+                    layerFilter
                 ],
             color: '#cacaca',
             visibility: 'none',
@@ -317,7 +321,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_OnStreet`,
+            id: `parkApiCarType_OnStreet`,
             label: 'Straßen-Parkplatz',
             subGroup: 'Typ',
             filter:
@@ -332,7 +336,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_OffStreet`,
+            id: `parkApiCarType_OffStreet`,
             label: 'Parkplatz abseits der Straße',
             subGroup: 'Typ',
             filter:
@@ -347,7 +351,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_Underground`,
+            id: `parkApiCarType_Underground`,
             label: 'Tiefgarage',
             subGroup: 'Typ',
             filter:
@@ -362,7 +366,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_CarPark`,
+            id: `parkApiCarType_CarPark`,
             label: 'Parkhaus',
             subGroup: 'Typ',
             filter:
@@ -377,7 +381,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_WallLoops`,
+            id: `parkApiBicycleType_WallLoops`,
             label: 'Vorderradhalter',
             subGroup: 'Typ',
             filter:
@@ -390,7 +394,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_Stands`,
+            id: `parkApiBicycleType_Stands`,
             label: 'Anlehnbügel',
             subGroup: 'Typ',
             filter:
@@ -403,23 +407,48 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_Lockers`,
-            label: 'Fahrradschrank',
+            id: `parkApiBicycleType_LockersLockbox`,
+            label: 'Fahrradbox',
             subGroup: 'Typ',
             filter:
                 [
                     'all',
-                    ['==', ['get', 'type'], 'LOCKERS'],
-                    layerFilter
+                    [
+                        'any',
+                        ['==', ['get', 'type'], 'LOCKERS'],
+                        ['==', ['get', 'type'], 'LOCKBOX']
+
+                    ],
+                    ['==', ['get', 'purpose'], 'BIKE']
                 ],
             color: '#ff9933',
             visibility: 'none',
-            scope: ['bicycle', 'item'],
+            scope: ['bicycle'],
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_Shed`,
-            label: 'Sammelanlage',
+            id: `parkApiItemType_LockersLockbox`,
+            label: 'Schließfach',
+            subGroup: 'Typ',
+            filter:
+                [
+                    'all',
+                    [
+                        'any',
+                        ['==', ['get', 'type'], 'LOCKERS'],
+                        ['==', ['get', 'type'], 'LOCKBOX']
+
+                    ],
+                    ['==', ['get', 'purpose'], 'ITEM']
+                ],
+            color: '#ff9933',
+            visibility: 'none',
+            scope: ['item'],
+            ...layerGroup
+        },
+        {
+            id: `parkApiBicycleType_Shed`,
+            label: 'Fahrrad-Sammelanlage',
             subGroup: 'Typ',
             filter:
                 [
@@ -431,8 +460,8 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup,
         },
         {
-            id: `parkApi${id}Type_TwoTier`,
-            label: 'Zweistock-Abstellanlage',
+            id: `parkApiBicycleType_TwoTier`,
+            label: 'Offene Zweistock-Abstellanlage',
             subGroup: 'Typ',
             filter:
                 [
@@ -444,22 +473,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_Lockbox`,
-            label: 'Schließfach',
-            subGroup: 'Typ',
-            filter:
-                [
-                    'all',
-                    ['==', ['get', 'type'], 'LOCKBOX'],
-                    layerFilter
-                ],
-            color: 'white',
-            ...layerGroup,
-            scope: ['bicycle', 'item'],
-            visibility: 'none'
-        },
-        {
-            id: `parkApi${id}Type_SafeWallLoops`,
+            id: `parkApiBicycleType_SafeWallLoops`,
             label: 'Vorderradhalter mit Sicherung',
             subGroup: 'Typ',
             filter:
@@ -472,7 +486,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_Building`,
+            id: `parkApiBicycleType_Building`,
             label: 'Parkhaus',
             subGroup: 'Typ',
             filter:
@@ -485,7 +499,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             ...layerGroup
         },
         {
-            id: `parkApi${id}Type_Floor`,
+            id: `parkApiBicycleType_Floor`,
             label: 'Abstellfläche',
             subGroup: 'Typ',
             filter:

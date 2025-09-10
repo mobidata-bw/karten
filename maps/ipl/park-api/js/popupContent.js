@@ -128,17 +128,16 @@ export function popupContent(features) {
             <tr>
                 <td class="att">Typ</td>
                 ${type == 'ON_STREET' ? '<td class="attContent">Straßen-Parkplatz</td>' : ''}
-                ${type == 'OFF_STREET_PARKING_GROUND' ? '<td class="attContent">Parkplatz abseits der Straße</td>' : ''}
-                ${type == 'CAR_PARK' ? '<td class="attContent">Parkhaus</td>' : ''}
+                ${type == 'OFF_STREET_PARKING_GROUND' ? '<td class="attContent">Parkplatz abseits der Straße</td>' : ''}              
                 ${type == 'UNDERGROUND' ? '<td class="attContent">Tiefgarage</td>' : ''}
+                ${type == 'CAR_PARK' || type == 'BUILDING' ? '<td class="attContent">Parkhaus</td>' : ''}
                 ${type == 'WALL_LOOPS' ? '<td class="attContent">Vorderradhalter</td>' : ''}
                 ${type == 'SAFE_WALL_LOOPS' ? '<td class="attContent">Vorderradhalter mit Sicherung</td>' : ''}
                 ${type == 'STANDS' ? '<td class="attContent">Anlehnbügel</td>' : ''}
-                ${(type == 'LOCKERS' && purpose == 'BIKE') ? '<td class="attContent">Fahrradschrank</td>' : ''}
-                ${((type == 'LOCKERS' && purpose == 'ITEM') || type == 'LOCKBOX') ? '<td class="attContent">Schließfach</td>' : ''}
-                ${type == 'SHED' ? '<td class="attContent">Sammelanlage</td>' : ''}
-                ${type == 'TWO_TIER' ? '<td class="attContent">Zweistock-Abstellanlage</td>' : ''}
-                ${type == 'BUILDING' ? '<td class="attContent">Parkhaus</td>' : ''}
+                ${((type == 'LOCKERS' || type == 'LOCKBOX') && purpose == 'BIKE') ? '<td class="attContent">Fahrradbox</td>' : ''}
+                ${((type == 'LOCKERS' || type == 'LOCKBOX') && purpose == 'ITEM') ? '<td class="attContent">Schließfach</td>' : ''}
+                ${type == 'SHED' ? '<td class="attContent">Fahrrad-Sammelanlage</td>' : ''}
+                ${type == 'TWO_TIER' ? '<td class="attContent">Offene Zweistock-Abstellanlage</td>' : ''}             
                 ${type == 'FLOOR' ? '<td class="attContent">Abstellfläche</td>' : ''}
                 ${type == 'OTHER' ? '<td class="attContent">Sonstige</td>' : ''}
                 ${!type ? '<td class="attContent">unbekannt</td>' : ''}
