@@ -38,7 +38,7 @@ export const sourceParkApiBicycle = {
 // ==============================
 // LAYERS: OCCUPANCY
 // ==============================
-function parkApiOccupancy({ id, layerGroup, layerFilter}) {
+function parkApiOccupancy({ id, layerGroup, layerFilter }) {
     return [
         {
             id: `parkApi${id}Occupancy_NoRealtimeInformation`,
@@ -67,7 +67,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter}) {
                     ]
                 ],
             color: '#615fdf',
-            scope: ['car', 'bicycle', 'buildings', 'on_street', 'disabled', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'disabled', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -257,6 +257,9 @@ function parkApiOccupancy({ id, layerGroup, layerFilter}) {
 };
 
 
+// ==============================
+// URL PARAMS: OCCUPANCY
+// ==============================
 const functionParkApiOccupation = parkApiOccupancy(urlParams());
 
 export let layersParkApiOccupancy;
@@ -284,9 +287,13 @@ if (purpose == 'car') {
     layersParkApiOccupancy = functionParkApiOccupation;
 };
 
-export const layersParkApiCarOccupancy = parkApiOccupancy(urlParams({ purpose: 'car' }));
-export const layersParkApiBicycleOccupancy = parkApiOccupancy(urlParams({ purpose: 'bicycle' }));
-export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 'item' }));
+
+// ==============================
+// PRESETS: OCCUPANCY
+// ==============================
+export const layersParkApiCarOccupancy = parkApiOccupancy(urlParams({ purpose: 'car' })).filter(layer => layer.scope.includes('car'));
+export const layersParkApiBicycleOccupancy = parkApiOccupancy(urlParams({ purpose: 'bicycle' })).filter(layer => layer.scope.includes('bicycle'));
+export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 'item' })).filter(layer => layer.scope.includes('item'));
 
 
 // ==============================
@@ -493,6 +500,10 @@ function parkApiType({ id, layerGroup, layerFilter }) {
     ];
 };
 
+
+// ==============================
+// URL PARAMS: TYPE
+// ==============================
 const functionParkApiType = parkApiType({ id, layerGroup, layerFilter });
 
 if (geometry == 'polygon') {
@@ -604,4 +615,9 @@ if (purpose == 'car') {
     }
 };
 
-export const layersParkApiBicycleType = parkApiType(urlParams({ purpose: 'bicycle' }));
+
+// ==============================
+// PRESETS: TYPE
+// ==============================
+export const layersParkApiBicycleType = parkApiType(urlParams({ purpose: 'bicycle' }))
+    .filter(layer => layer.scope.includes('bicycle'));
