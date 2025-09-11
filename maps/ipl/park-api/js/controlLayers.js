@@ -1,6 +1,6 @@
 import { layerControlGrouped } from '../../../../src/plugins/mapbox-layer-control/layerControlGrouped.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl-patch.js';
-import { layers } from './main.js';
+import { layersDisabled, layersNotDisabled } from './main.js';
 import { addControlLayers } from '../../../../src/js/addControlLayers.js';
 import { urlParams } from '../../../../src/js/urlParams.js';
 
@@ -54,17 +54,26 @@ export function initializeControlLayers(map) {
 
     } else {
 
-        const config = {
+        const config1 = {
             collapsed: false,
-            layers: addControlLayers(layers, controlLayersTitle)
+            layers: addControlLayers(layersNotDisabled, controlLayersTitle)
         };
 
-        const layerControl = new layerControlGrouped(config);
+        const layerControl1 = new layerControlGrouped(config1);
 
-        layerControl._exclusiveAllGroups = true;
-        // layerControl._exclusiveGroupsList = ['Ladeleistung', 'Belegung'];
+        layerControl1._exclusiveAllGroups = true;
 
-        map.addControl(layerControl, 'top-right');
+        map.addControl(layerControl1, 'top-right');
+
+
+        const config2 = {
+            collapsed: false,
+            layers: addControlLayers(layersDisabled, 'Gebündelte Behindertenparkplätze')
+        };
+
+        const layerControl2 = new layerControlGrouped(config2);
+
+        map.addControl(layerControl2, 'top-right');
 
     }
 

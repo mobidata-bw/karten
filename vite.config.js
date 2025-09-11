@@ -4,6 +4,11 @@ import fg from 'fast-glob';
 
 export default defineConfig(({ mode }) => {
 
+  process.on('uncaughtException', (err) => {
+    if (err?.code === 'ENOENT') console.warn('[dev] Ignored ENOENT', err.path);
+    else throw err;
+  });
+
   const env = loadEnv(mode, process.cwd(), '');
   const basePath = env.VITE_BASE_PATH;
   const outDir = env.VITE_OUT_DIR;
@@ -11,7 +16,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: basePath,
     resolve: {
-      alias: { '@assets': resolve(__dirname, 'assets') }
+      alias: { '@assets': resolve(__dirname, 'assets') },
     },
     build: {
       rollupOptions: {
@@ -28,8 +33,8 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: true
     },
     server: {
-      port: 5173,
-      open: '/maps/'
+      port: 8080,
+      open: '/maps/' 
     }
   };
 });

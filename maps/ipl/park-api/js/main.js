@@ -6,12 +6,12 @@ import {
 } from '../../../../src/js/initializeMap.js';
 import {
     sourceParkApiCar, sourceParkApiCarLines, sourceParkApiCarPolygons, sourceParkApiBicycle,
-    layersParkApiOccupancy, layersParkApiType
+    layersParkApiOccupancy, layersParkApiType, layersParkApiOccupancyDisabled
 } from './layers.js';
 import { popupContent } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
-export let layers;
+export let layers, layersDisabled, layersNotDisabled;
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -36,8 +36,15 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
+        layersDisabled = layersParkApiOccupancyDisabled;
+        layersNotDisabled = [
+            ...layersParkApiOccupancy,
+           ...layersParkApiType        
+        ]
+
         layers = map.layerGroups({
             'occupancy': layersParkApiOccupancy,
+            'occupancy_disabled': layersParkApiOccupancyDisabled,
             'type': layersParkApiType        
         });
         layers.forEach(layer => addLayers(map, layer));

@@ -170,7 +170,7 @@ export function popupContent(features) {
             ${has_realtime_data == false ? '' : `
             <tr>
                 <td class="att">Stand Echtzeitdaten</td>
-                ${realtime_data_outdated
+                ${(realtime_data_outdated && source_id != 55)
                 ? `<td class="attContent outDated">${date}, ${time}</td>`
                 : `<td class="attContent">${date}, ${time}</td>`}
             </tr>

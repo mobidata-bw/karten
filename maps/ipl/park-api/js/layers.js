@@ -4,7 +4,7 @@ import { urlParams } from '../../../../src/js/urlParams.js';
 // ==============================
 // URL PARAMS
 // ==============================
-const { purpose, type, parking, geometry, object, layerFilter, layerGroup, id } = urlParams();
+const { purpose, type, geometry, object, layerFilter, layerGroup, id } = urlParams();
 
 
 // ==============================
@@ -67,7 +67,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                     ]
                 ],
             color: '#615fdf',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'disabled', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -97,7 +97,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                     layerFilter
                 ],
             color: '#880000',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'disabled', 'site'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'site'],
             ...layerGroup
         },
         {
@@ -151,7 +151,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                     ]
                 ],
             color: '#ed0000',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'disabled', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -200,7 +200,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                     layerFilter
                 ],
             color: '#dfab27',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'disabled', 'site'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'site'],
             ...layerGroup
         },
         {
@@ -250,7 +250,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                     ],
                 ],
             color: '#059b02',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'disabled', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'site', 'spot'],
             ...layerGroup
         }
     ];
@@ -260,12 +260,20 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
 // ==============================
 // URL PARAMS: OCCUPANCY
 // ==============================
+const filterDisabled =    [
+        'any',
+        ['>', ['get', 'capacity_disabled'], 0],
+        ['==', ['get', 'restriction_type'], 'DISABLED']
+    ];
+
 const functionParkApiOccupation = parkApiOccupancy(urlParams());
+export const layersParkApiOccupancyDisabled = parkApiOccupancy((urlParams({ purpose: 'car', id: 'CarDisabled', layerFilter: filterDisabled })))/*.map(layer => ({ ...layer, id: 'CarDisabled' }))*/;
+console.log(layersParkApiOccupancyDisabled)
 
 export let layersParkApiOccupancy;
 
 if (purpose == 'car') {
-    if (type == null && parking == null && geometry == null && object == null) {
+    if (type == null && geometry == null && object == null) {
 
         layersParkApiOccupancy = functionParkApiOccupation.filter
             (layer =>
@@ -277,7 +285,6 @@ if (purpose == 'car') {
                 layer.scope.includes(purpose) &&
                 (
                     layer.scope.includes(type) ||
-                    layer.scope.includes(parking) ||
                     layer.scope.includes(geometry) ||
                     layer.scope.includes(object)
                 )
@@ -317,7 +324,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#cacaca',
             visibility: 'none',
-            scope: ['car', 'bicycle', 'buildings', 'on_street', 'disabled', 'polygon', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'buildings', 'on_street', 'polygon', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -331,7 +338,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                     layerFilter
                 ],
             color: 'black',
-            scope: ['car', 'on_street', 'disabled', 'line', 'polygon', 'site', 'spot'],
+            scope: ['car', 'on_street', 'line', 'polygon', 'site', 'spot'],
             visibility: 'none',
             ...layerGroup
         },
@@ -347,7 +354,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#009688',
             visibility: 'none',
-            scope: ['car', 'buildings', 'disabled', 'polygon', 'site', 'spot'],
+            scope: ['car', 'buildings', 'polygon', 'site', 'spot'],
             ...layerGroup
         },
         {
@@ -362,7 +369,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#BF91B6',
             visibility: 'none',
-            scope: ['car', 'buildings', 'disabled', 'site'],
+            scope: ['car', 'buildings', 'site'],
             ...layerGroup
         },
         {
@@ -377,7 +384,7 @@ function parkApiType({ id, layerGroup, layerFilter }) {
                 ],
             color: '#5587eb',
             visibility: 'none',
-            scope: ['car', 'buildings', 'disabled', 'polygon', 'site'],
+            scope: ['car', 'buildings', 'polygon', 'site'],
             ...layerGroup
         },
         {
@@ -611,7 +618,7 @@ layersParkApiType = functionParkApiType
     .filter(layer => layer.scope.includes(purpose));
 
 if (purpose == 'car') {
-    if (type == null && parking == null && geometry == null && object == null) {
+    if (type == null && geometry == null && object == null) {
         layersParkApiType = functionParkApiType.filter(
             layer => layer.scope.includes(purpose)
         );
@@ -621,7 +628,6 @@ if (purpose == 'car') {
                 layer.scope.includes(purpose) &&
                 (
                     layer.scope.includes(type) ||
-                    layer.scope.includes(parking) ||
                     layer.scope.includes(geometry) ||
                     layer.scope.includes(object)
                 )

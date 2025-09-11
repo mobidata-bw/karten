@@ -6,12 +6,14 @@ export function urlParams(options = {}) {
     const params = new URLSearchParams(window.location.search);
     const purpose = options.purpose ?? params.get('purpose');
     const type = options.type ?? params.get('type');
-    const parking = options.parking ?? params.get('parking');
     const object = options.object ?? params.get('object');
     const geometry = options.geometry ?? params.get('geometry');
     const formFactor = options.formFactor ?? params.get('form_factor');
 
-    let layerGroup = {}, id, layerFilter = true, controlLayersTitle;
+    let layerGroup = {}, setId, setLayerFilter = true, controlLayersTitle;
+
+    const id = options.id ?? setId;
+    const layerFilter = options.layerFilter ?? setLayerFilter;
 
 
     // ==============================
@@ -25,13 +27,13 @@ export function urlParams(options = {}) {
                 sourceLayer: 'park-api_car',
                 group: 'Parkplätze'
             };
-            controlLayersTitle = 'Gebündelte Parkplätze';
+            controlLayersTitle = 'Gebündelte Parkdaten';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
-            id = 'Car';
+            setId = 'Car';
             switch (type) {
                 case 'buildings':
                     layerGroup.group = 'Parkplätze und Parkbauten';
-                    layerFilter =
+                    setLayerFilter =
                         [
                             'any',
                             ['!=', ['get', 'type'], 'ON_STREET'],
@@ -42,7 +44,7 @@ export function urlParams(options = {}) {
                     break;
                 case 'on_street':
                     layerGroup.group = 'Straßen-Parkplätze';
-                    layerFilter =
+                    setLayerFilter =
                         [
                             'any',
                             ['==', ['get', 'type'], 'ON_STREET'],
@@ -52,18 +54,14 @@ export function urlParams(options = {}) {
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
             }
-            switch (parking) {
-                case 'disabled':
-                    layerGroup.group = 'Behindertenparkplätze';
-                    layerFilter =
-                        [
-                            'any',
-                            ['>', ['get', 'capacity_disabled'], 0],
-                            ['==', ['get', 'restriction_type'], 'DISABLED']
-                        ];
-                    controlLayersTitle = 'Gebündelte Behindertenparkplätze';
-                    document.title = `MobiData BW® - ${controlLayersTitle}`;
-            }
+         
+                        // [
+                        //     'any',
+                        //     ['>', ['get', 'capacity_disabled'], 0],
+                        //     ['==', ['get', 'restriction_type'], 'DISABLED']
+                        // ];
+               
+            
             switch (geometry) {
                 case 'line':
                     layerGroup.group = 'Parkplätze (Linien)';
@@ -81,7 +79,7 @@ export function urlParams(options = {}) {
                     layerGroup.sourceLayer = 'park-api_car_polygons';
                     layerGroup.type = 'fill';
                     layerGroup.visibility = 'visible';
-                    layerFilter =
+                    setLayerFilter =
                         [
                             '>=', ['zoom'], 13
                         ];
@@ -92,7 +90,7 @@ export function urlParams(options = {}) {
             switch (object) {
                 case 'site':
                     layerGroup.group = 'Parkbau oder Parkstreifen';
-                    layerFilter =
+                    setLayerFilter =
                         [
                             '==', ['get', 'parking_object'], 'site'
                         ];
@@ -101,7 +99,7 @@ export function urlParams(options = {}) {
                     break;
                 case 'spot':
                     layerGroup.group = 'Einzelparkplatz';
-                    layerFilter =
+                    setLayerFilter =
                         [
                             '==', ['get', 'parking_object'], 'spot'
                         ];
@@ -116,11 +114,11 @@ export function urlParams(options = {}) {
                 sourceLayer: 'park-api_bicycle',
                 group: 'Fahrradabstellanlagen'
             };
-            layerFilter =
+            setLayerFilter =
                 [
                     '==', ['get', 'purpose'], 'BIKE'
                 ];
-            id = 'Bicycle';
+            setId = 'Bicycle';
             controlLayersTitle = 'Gebündelte Fahrradabstellanlagen';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
@@ -130,11 +128,11 @@ export function urlParams(options = {}) {
                 sourceLayer: 'park-api_bicycle',
                 group: 'Schließfächer an Fahrradabstellanlagen'
             };
-            layerFilter =
+            setLayerFilter =
                 [
                     '==', ['get', 'purpose'], 'ITEM'
                 ];
-            id = 'Item';
+                setId = 'Item';
             controlLayersTitle = 'Schließfächer an Fahrradabstellanlagen';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
@@ -149,35 +147,35 @@ export function urlParams(options = {}) {
     switch (formFactor) {
         case 'car':
             layerGroup.group = 'Carsharing';
-            layerFilter = 'car';
+            setLayerFilter = 'car';
             id = 'Car';
             controlLayersTitle = 'Gebündelte Daten Carsharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'bicycle':
             layerGroup.group = 'Bikesharing';
-            layerFilter = 'bicycle';
+            setLayerFilter = 'bicycle';
             id = 'Bicycle';
             controlLayersTitle = 'Gebündelte Daten Bikesharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'cargo_bicycle':
             layerGroup.group = 'Lastenrad-Sharing';
-            layerFilter = 'cargo_bicycle';
+            setLayerFilter = 'cargo_bicycle';
             id = 'CargoBicycle';
             controlLayersTitle = 'Gebündelte Daten Lastenrad-Sharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'scooter':
             layerGroup.group = 'E-Scooter-Sharing';
-            layerFilter = 'scooter';
+            setLayerFilter = 'scooter';
             id = 'Scooter';
             controlLayersTitle = 'Gebündelte Daten E-Scooter-Sharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'moped':
             layerGroup.group = 'E-Kleinkraftrad-Sharing';
-            layerFilter = 'moped';
+            setLayerFilter = 'moped';
             id = 'Moped';
             controlLayersTitle = 'Gebündelte Daten E-Kleinkraftrad-Sharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
@@ -191,7 +189,6 @@ export function urlParams(options = {}) {
     return {
         purpose,
         type,
-        parking,
         geometry,
         object,
         formFactor,
