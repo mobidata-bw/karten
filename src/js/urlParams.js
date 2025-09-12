@@ -1,7 +1,7 @@
 export function urlParams(options = {}) {
 
     // ==============================
-    // DEFINE PARAMS
+    // URL PARAMS
     // ==============================
     const params = new URLSearchParams(window.location.search);
     const purpose = options.purpose ?? params.get('purpose');
@@ -11,10 +11,7 @@ export function urlParams(options = {}) {
     const formFactor = options.formFactor ?? params.get('form_factor');
 
     let layerGroup = {}, setId, setLayerFilter = true, controlLayersTitle;
-
-    const id = options.id ?? setId;
-    const layerFilter = options.layerFilter ?? setLayerFilter;
-
+  
 
     // ==============================
     // LAYERS: PARKAPI
@@ -54,14 +51,6 @@ export function urlParams(options = {}) {
                     document.title = `MobiData BW® - ${controlLayersTitle}`;
                     break;
             }
-         
-                        // [
-                        //     'any',
-                        //     ['>', ['get', 'capacity_disabled'], 0],
-                        //     ['==', ['get', 'restriction_type'], 'DISABLED']
-                        // ];
-               
-            
             switch (geometry) {
                 case 'line':
                     layerGroup.group = 'Parkplätze (Linien)';
@@ -121,21 +110,7 @@ export function urlParams(options = {}) {
             setId = 'Bicycle';
             controlLayersTitle = 'Gebündelte Fahrradabstellanlagen';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
-            break;
-        case 'item':
-            layerGroup = {
-                source: 'sourceParkApiBicycle',
-                sourceLayer: 'park-api_bicycle',
-                group: 'Schließfächer an Fahrradabstellanlagen'
-            };
-            setLayerFilter =
-                [
-                    '==', ['get', 'purpose'], 'ITEM'
-                ];
-                setId = 'Item';
-            controlLayersTitle = 'Schließfächer an Fahrradabstellanlagen';
-            document.title = `MobiData BW® - ${controlLayersTitle}`;
-            break;
+            break;       
         default:
             document.title = '';
     };
@@ -148,39 +123,46 @@ export function urlParams(options = {}) {
         case 'car':
             layerGroup.group = 'Carsharing';
             setLayerFilter = 'car';
-            id = 'Car';
+            setId = 'Car';
             controlLayersTitle = 'Gebündelte Daten Carsharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'bicycle':
             layerGroup.group = 'Bikesharing';
             setLayerFilter = 'bicycle';
-            id = 'Bicycle';
+            setId = 'Bicycle';
             controlLayersTitle = 'Gebündelte Daten Bikesharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'cargo_bicycle':
             layerGroup.group = 'Lastenrad-Sharing';
             setLayerFilter = 'cargo_bicycle';
-            id = 'CargoBicycle';
+            setId = 'CargoBicycle';
             controlLayersTitle = 'Gebündelte Daten Lastenrad-Sharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'scooter':
             layerGroup.group = 'E-Scooter-Sharing';
             setLayerFilter = 'scooter';
-            id = 'Scooter';
+            setId = 'Scooter';
             controlLayersTitle = 'Gebündelte Daten E-Scooter-Sharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
         case 'moped':
             layerGroup.group = 'E-Kleinkraftrad-Sharing';
             setLayerFilter = 'moped';
-            id = 'Moped';
+            setId = 'Moped';
             controlLayersTitle = 'Gebündelte Daten E-Kleinkraftrad-Sharing';
             document.title = `MobiData BW® - ${controlLayersTitle}`;
             break;
     };
+
+
+    // ==============================
+    // PRESETS
+    // ==============================
+    const id = options.id ?? setId;
+    const layerFilter = options.layerFilter ?? setLayerFilter;
 
 
     // ==============================

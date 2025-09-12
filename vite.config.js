@@ -4,10 +4,10 @@ import fg from 'fast-glob';
 
 export default defineConfig(({ mode }) => {
 
-  process.on('uncaughtException', (err) => {
-    if (err?.code === 'ENOENT') console.warn('[dev] Ignored ENOENT', err.path);
-    else throw err;
-  });
+  // process.on('uncaughtException', (err) => {
+  //   if (err?.code === 'ENOENT') console.warn('[dev] Ignored ENOENT', err.path);
+  //   else throw err;
+  // });
 
   const env = loadEnv(mode, process.cwd(), '');
   const basePath = env.VITE_BASE_PATH;

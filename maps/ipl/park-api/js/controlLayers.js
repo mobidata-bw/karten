@@ -1,15 +1,16 @@
 import { layerControlGrouped } from '../../../../src/plugins/mapbox-layer-control/layerControlGrouped.js';
 import '../../../../src/plugins/mapbox-layer-control/layerControl-patch.js';
-import { layersDisabled, layersNotDisabled } from './main.js';
+import { layers, layersGeneral, layersDisabled, layersItem } from './main.js';
 import { addControlLayers } from '../../../../src/js/addControlLayers.js';
 import { urlParams } from '../../../../src/js/urlParams.js';
 
 
-let layerControl = null;
+let layerControlDefault = null;
 
-const { geometry, controlLayersTitle } = urlParams();
+const { purpose, object, geometry, controlLayersTitle } = urlParams();
 
 export function initializeControlLayers(map) {
+
 
     if (geometry == 'polygon') {
 
@@ -19,13 +20,13 @@ export function initializeControlLayers(map) {
             let filteredLayers;
 
             if (currentZoom < 13) {
-                filteredLayers = layers.filter(layer => layer.id.includes('Circle'));                
+                filteredLayers = layers.filter(layer => layer.id.includes('Circle'));
                 map.setLayoutProperty('parkApiCarType_Other_Circle', 'visibility', 'visible');
                 map.setLayoutProperty('parkApiCarType_OnStreet_Circle', 'visibility', 'visible');
                 map.setLayoutProperty('parkApiCarType_OffStreet_Circle', 'visibility', 'visible');
                 map.setLayoutProperty('parkApiCarType_CarPark_Circle', 'visibility', 'visible');;
             } else {
-                filteredLayers = layers.filter(layer => !layer.id.includes('Circle'));             
+                filteredLayers = layers.filter(layer => !layer.id.includes('Circle'));
                 map.setLayoutProperty('parkApiCarType_Other_Circle', 'visibility', 'none');
                 map.setLayoutProperty('parkApiCarType_OnStreet_Circle', 'visibility', 'none');
                 map.setLayoutProperty('parkApiCarType_OffStreet_Circle', 'visibility', 'none');
@@ -37,44 +38,54 @@ export function initializeControlLayers(map) {
                 layers: addControlLayers(filteredLayers, controlLayersTitle)
             };
 
-            if (layerControl != null) {
-                map.removeControl(layerControl);
+            if (layerControlDefault != null) {
+                map.removeControl(layerControlDefault);
             };
 
-            layerControl = new layerControlGrouped(config), 'top-right';
-
-            layerControl._exclusiveAllGroups = true;
-            // layerControl._exclusiveGroupsList = ['Ladeleistung', 'Belegung'];
-
-            map.addControl(layerControl);
+            layerControlDefault = new layerControlGrouped(config), 'top-right';
+            layerControlDefault._exclusiveAllGroups = true;
+            map.addControl(layerControlDefault);
 
         });
 
         map.fire('zoomend');
 
+    } else if (geometry == null && object == null) {
+
+        let layersExtra, controlLayersTitleExtra;
+        if (purpose == 'car') {
+            layersExtra = layersDisabled;
+            controlLayersTitleExtra = 'Gebündelte Behindertenparkplätze';
+        } else if (purpose == 'bicycle') {
+            layersExtra = layersItem;
+            controlLayersTitleExtra = 'Schließfächer an Fahrradabstellanlagen';
+        };
+
+        const configDefault = {
+            collapsed: false,
+            layers: addControlLayers(layersGeneral, controlLayersTitle)
+        };
+        const layerControlDefault = new layerControlGrouped(configDefault);
+        layerControlDefault._exclusiveAllGroups = true;
+        map.addControl(layerControlDefault, 'top-right');
+
+        const configExtra = {
+            collapsed: false,
+            layers: addControlLayers(layersExtra, controlLayersTitleExtra)
+        };
+        const layerControlExtra = new layerControlGrouped(configExtra);
+        map.addControl(layerControlExtra, 'top-right');
+
     } else {
 
-        const config1 = {
+        const configDefault = {
             collapsed: false,
-            layers: addControlLayers(layersNotDisabled, controlLayersTitle)
+            layers: addControlLayers(layers, controlLayersTitle)
         };
+        const layerControlDefault = new layerControlGrouped(configDefault);
+        layerControlDefault._exclusiveAllGroups = true;
+        map.addControl(layerControlDefault, 'top-right');
 
-        const layerControl1 = new layerControlGrouped(config1);
-
-        layerControl1._exclusiveAllGroups = true;
-
-        map.addControl(layerControl1, 'top-right');
-
-
-        const config2 = {
-            collapsed: false,
-            layers: addControlLayers(layersDisabled, 'Gebündelte Behindertenparkplätze')
-        };
-
-        const layerControl2 = new layerControlGrouped(config2);
-
-        map.addControl(layerControl2, 'top-right');
-
-    }
+    };
 
 };

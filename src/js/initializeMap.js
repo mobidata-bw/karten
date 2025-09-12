@@ -72,32 +72,32 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     // ==============================
     map.on('load', () => {
 
-        // const shape = configShape ? `/karten_geojsons/boundaries/${configShape}` : (window.innerWidth < 473 ? '/karten_geojsons/boundaries/shapesBadenWuerttembergSimplified.geojson' : '/karten_geojsons/boundaries/shapesBadenWuerttemberg.geojson');
+        const shape = configShape ? `/karten_geojsons/boundaries/${configShape}` : (window.innerWidth < 473 ? '/karten_geojsons/boundaries/shapesBadenWuerttembergSimplified.geojson' : '/karten_geojsons/boundaries/shapesBadenWuerttemberg.geojson');
 
-        // map.addSource('shape', {
-        //     'type': 'geojson',
-        //     'data': shape
-        // });
+        map.addSource('shape', {
+            'type': 'geojson',
+            'data': shape
+        });
 
-        // map.addLayer({
-        //     'id': 'fillShape',
-        //     'type': 'fill',
-        //     'source': 'shape',
-        //     'paint': {
-        //         'fill-color': 'black',
-        //         'fill-opacity': 0.1,
-        //     }
-        // });
+        map.addLayer({
+            'id': 'fillShape',
+            'type': 'fill',
+            'source': 'shape',
+            'paint': {
+                'fill-color': 'black',
+                'fill-opacity': 0.1,
+            }
+        });
 
-        // map.addLayer({
-        //     'id': 'lineShape',
-        //     'type': 'line',
-        //     'source': 'shape',
-        //     'paint': {
-        //         'line-color': 'black',
-        //         'line-width': 2
-        //     }
-        // });
+        map.addLayer({
+            'id': 'lineShape',
+            'type': 'line',
+            'source': 'shape',
+            'paint': {
+                'line-color': 'black',
+                'line-width': 2
+            }
+        });
 
 
         map.layerGroups = (groups) => {

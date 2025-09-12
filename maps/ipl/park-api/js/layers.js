@@ -4,7 +4,7 @@ import { urlParams } from '../../../../src/js/urlParams.js';
 // ==============================
 // URL PARAMS
 // ==============================
-const { purpose, type, geometry, object, layerFilter, layerGroup, id } = urlParams();
+const { purpose, type, geometry, object, id, layerFilter, layerGroup } = urlParams();
 
 
 // ==============================
@@ -44,129 +44,74 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             id: `parkApi${id}Occupancy_NoRealtimeInformation`,
             label: 'Echtzeitdaten nicht vorhanden',
             subGroup: 'Belegung',
-            filter:
+            filter: [
+                'any',
+                /* PARKING SITE */
                 [
-                    'any',
-                    /* PARKING SITE */
-                    [
-                        'all',
-                        ['==', ['get', 'parking_object'], 'site'],
-                        ['==', ['get', 'has_realtime_data'], false],
-                        layerFilter
-                    ],
-                    /* PARKING SPOT */
-                    [
-                        'all',
-                        ['==', ['get', 'parking_object'], 'spot'],
-                        [
-                            'any',
-                            ['==', ['get', 'realtime_status'], 'UNKNOWN'],
-                            ['==', ['get', 'has_realtime_data'], false]
-                        ],
-                        layerFilter
-                    ]
+                    'all',
+                    ['==', ['get', 'parking_object'], 'site'],
+                    ['==', ['get', 'has_realtime_data'], false],
+                    layerFilter
                 ],
+                /* PARKING SPOT */
+                [
+                    'all',
+                    ['==', ['get', 'parking_object'], 'spot'],
+                    [
+                        'any',
+                        ['==', ['get', 'realtime_status'], 'UNKNOWN'],
+                        ['==', ['get', 'has_realtime_data'], false]
+                    ],
+                    layerFilter
+                ]
+            ],
             color: '#615fdf',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
             ...layerGroup
         },
         {
             id: `parkApi${id}Occupancy_OutdatedRealtimeInformation`,
             label: 'Echtzeitdaten älter 30 Minuten',
             subGroup: 'Belegung',
-            filter:
-                [
-                    'all',
-                    ['==', ['get', 'has_realtime_data'], true],
-                    ['==', ['get', 'realtime_data_outdated'], true],
-                    layerFilter,
-                    ['!=', ['get', 'source_id'], 55] // exception since Mannheim only pushes when new event occurs                    
-                ],
+            filter: [
+                'all',
+                ['==', ['get', 'has_realtime_data'], true],
+                ['==', ['get', 'realtime_data_outdated'], true],
+                layerFilter,
+                ['!=', ['get', 'source_id'], 55] // exception since Mannheim only pushes when new event occurs                    
+            ],
             color: '#cacaca',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'disabled'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
             ...layerGroup
         },
         {
             id: `parkApi${id}Occupancy_Closed`,
             label: 'Geschlossen',
             subGroup: 'Belegung',
-            filter:
-                [
-                    'all',
-                    ['==', ['get', 'realtime_opening_status'], 'CLOSED'],
-                    layerFilter
-                ],
+            filter: [
+                'all',
+                ['==', ['get', 'realtime_opening_status'], 'CLOSED'],
+                layerFilter
+            ],
             color: '#880000',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'site'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'site'],
             ...layerGroup
         },
         {
             id: `parkApi${id}Occupancy_VeryLowAvailability`,
             label: 'Kaum Plätze (unter 2 %)',
             subGroup: 'Belegung',
-            filter:
+            filter: [
+                'any',
+                /* PARKING SITE */
                 [
-                    'any',
-                    /* PARKING SITE */
-                    [
-                        'all',
-                        ['==', ['get', 'parking_object'], 'site'],
-                        ['==', ['get', 'has_realtime_data'], true],
-                        [
-                            'all',
-                            ['>=', ['get', 'realtime_free_capacity'], 0],
-                            ['<',
-                                ['/',
-                                    ['*', 1.0, ['get', 'realtime_free_capacity']],
-                                    [
-                                        'case',
-                                        ['has', 'realtime_capacity'],
-                                        ['get', 'realtime_capacity'],
-                                        ['get', 'capacity']
-                                    ]
-                                ],
-                                0.02
-                            ],
-                            ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
-                        ],
-                        [
-                            'any',
-                            ['==', ['get', 'realtime_data_outdated'], false],
-                            ['==', ['get', 'source_id'], 55]
-                        ],
-                        layerFilter
-                    ],
-                    /* PARKING SPOT */
-                    [
-                        'all',
-                        ['==', ['get', 'parking_object'], 'spot'],
-                        ['==', ['get', 'realtime_status'], 'TAKEN'],
-                        ['==', ['get', 'has_realtime_data'], true],
-                        [
-                            'any',
-                            ['==', ['get', 'realtime_data_outdated'], false],
-                            ['==', ['get', 'source_id'], 55]
-                        ],
-                        layerFilter
-                    ]
-                ],
-            color: '#ed0000',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'site', 'spot'],
-            ...layerGroup
-        },
-        {
-            id: `parkApi${id}Occupancy_LowAvailability`,
-            label: 'Wenig Plätze (2 bis 20 %)',
-            subGroup: 'Belegung',
-            filter:
-                [
-                    /* PARKING SITE */
                     'all',
                     ['==', ['get', 'parking_object'], 'site'],
                     ['==', ['get', 'has_realtime_data'], true],
                     [
                         'all',
-                        ['>=',
+                        ['>=', ['get', 'realtime_free_capacity'], 0],
+                        ['<',
                             ['/',
                                 ['*', 1.0, ['get', 'realtime_free_capacity']],
                                 [
@@ -178,18 +123,103 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                             ],
                             0.02
                         ],
-                        ['<=',
-                            ['/',
-                                ['*', 1.0, ['get', 'realtime_free_capacity']],
-                                [
-                                    'case',
-                                    ['has', 'realtime_capacity'],
-                                    ['get', 'realtime_capacity'],
-                                    ['get', 'capacity']
-                                ]
-                            ],
-                            0.2
-                        ]
+                        ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
+                    ],
+                    [
+                        'any',
+                        ['==', ['get', 'realtime_data_outdated'], false],
+                        ['==', ['get', 'source_id'], 55]
+                    ],
+                    layerFilter
+                ],
+                /* PARKING SPOT */
+                [
+                    'all',
+                    ['==', ['get', 'parking_object'], 'spot'],
+                    ['==', ['get', 'realtime_status'], 'TAKEN'],
+                    ['==', ['get', 'has_realtime_data'], true],
+                    [
+                        'any',
+                        ['==', ['get', 'realtime_data_outdated'], false],
+                        ['==', ['get', 'source_id'], 55]
+                    ],
+                    layerFilter
+                ]
+            ],
+            color: '#ed0000',
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
+            ...layerGroup
+        },
+        {
+            id: `parkApi${id}Occupancy_LowAvailability`,
+            label: 'Wenig Plätze (2 bis 20 %)',
+            subGroup: 'Belegung',
+            filter: [
+                /* PARKING SITE */
+                'all',
+                ['==', ['get', 'parking_object'], 'site'],
+                ['==', ['get', 'has_realtime_data'], true],
+                [
+                    'all',
+                    ['>=',
+                        ['/',
+                            ['*', 1.0, ['get', 'realtime_free_capacity']],
+                            [
+                                'case',
+                                ['has', 'realtime_capacity'],
+                                ['get', 'realtime_capacity'],
+                                ['get', 'capacity']
+                            ]
+                        ],
+                        0.02
+                    ],
+                    ['<=',
+                        ['/',
+                            ['*', 1.0, ['get', 'realtime_free_capacity']],
+                            [
+                                'case',
+                                ['has', 'realtime_capacity'],
+                                ['get', 'realtime_capacity'],
+                                ['get', 'capacity']
+                            ]
+                        ],
+                        0.2
+                    ]
+                ],
+                ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
+                [
+                    'any',
+                    ['==', ['get', 'realtime_data_outdated'], false],
+                    ['==', ['get', 'source_id'], 55]
+                ],
+                layerFilter
+            ],
+            color: '#dfab27',
+            scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'on_street_disabled', 'site'],
+            ...layerGroup
+        },
+        {
+            id: `parkApi${id}Occupancy_HighAvailability`,
+            label: 'Viele Plätze (über 20 %)',
+            subGroup: 'Belegung',
+            filter: [
+                'any',
+                /* PARKING SITE */
+                [
+                    'all',
+                    ['==', ['get', 'parking_object'], 'site'],
+                    ['==', ['get', 'has_realtime_data'], true],
+                    ['>',
+                        ['/',
+                            ['*', 1.0, ['get', 'realtime_free_capacity']],
+                            [
+                                'case',
+                                ['has', 'realtime_capacity'],
+                                ['get', 'realtime_capacity'],
+                                ['get', 'capacity']
+                            ]
+                        ],
+                        0.2
                     ],
                     ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
                     [
@@ -199,58 +229,22 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                     ],
                     layerFilter
                 ],
-            color: '#dfab27',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'site'],
-            ...layerGroup
-        },
-        {
-            id: `parkApi${id}Occupancy_HighAvailability`,
-            label: 'Viele Plätze (über 20 %)',
-            subGroup: 'Belegung',
-            filter:
+                /* PARKING SPOT */
                 [
-                    'any',
-                    /* PARKING SITE */
+                    'all',
+                    ['==', ['get', 'parking_object'], 'spot'],
+                    ['==', ['get', 'realtime_status'], 'AVAILABLE'],
+                    ['==', ['get', 'has_realtime_data'], true],
                     [
-                        'all',
-                        ['==', ['get', 'parking_object'], 'site'],
-                        ['==', ['get', 'has_realtime_data'], true],
-                        ['>',
-                            ['/',
-                                ['*', 1.0, ['get', 'realtime_free_capacity']],
-                                [
-                                    'case',
-                                    ['has', 'realtime_capacity'],
-                                    ['get', 'realtime_capacity'],
-                                    ['get', 'capacity']
-                                ]
-                            ],
-                            0.2
-                        ],
-                        ['!=', ['get', 'realtime_opening_status'], 'CLOSED'],
-                        [
-                            'any',
-                            ['==', ['get', 'realtime_data_outdated'], false],
-                            ['==', ['get', 'source_id'], 55]
-                        ],
-                        layerFilter
+                        'any',
+                        ['==', ['get', 'realtime_data_outdated'], false],
+                        ['==', ['get', 'source_id'], 55]
                     ],
-                    /* PARKING SPOT */
-                    [
-                        'all',
-                        ['==', ['get', 'parking_object'], 'spot'],
-                        ['==', ['get', 'realtime_status'], 'AVAILABLE'],
-                        ['==', ['get', 'has_realtime_data'], true],
-                        [
-                            'any',
-                            ['==', ['get', 'realtime_data_outdated'], false],
-                            ['==', ['get', 'source_id'], 55]
-                        ],
-                        layerFilter
-                    ],
+                    layerFilter
                 ],
+            ],
             color: '#059b02',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'site', 'spot'],
+            scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
             ...layerGroup
         }
     ];
@@ -260,15 +254,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
 // ==============================
 // URL PARAMS: OCCUPANCY
 // ==============================
-const filterDisabled =    [
-        'any',
-        ['>', ['get', 'capacity_disabled'], 0],
-        ['==', ['get', 'restriction_type'], 'DISABLED']
-    ];
-
 const functionParkApiOccupation = parkApiOccupancy(urlParams());
-export const layersParkApiOccupancyDisabled = parkApiOccupancy((urlParams({ purpose: 'car', id: 'CarDisabled', layerFilter: filterDisabled })))/*.map(layer => ({ ...layer, id: 'CarDisabled' }))*/;
-console.log(layersParkApiOccupancyDisabled)
 
 export let layersParkApiOccupancy;
 
@@ -300,7 +286,63 @@ if (purpose == 'car') {
 // ==============================
 export const layersParkApiCarOccupancy = parkApiOccupancy(urlParams({ purpose: 'car' })).filter(layer => layer.scope.includes('car'));
 export const layersParkApiBicycleOccupancy = parkApiOccupancy(urlParams({ purpose: 'bicycle' })).filter(layer => layer.scope.includes('bicycle'));
-export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 'item' })).filter(layer => layer.scope.includes('item'));
+// export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 'item' })).filter(layer => layer.scope.includes('item'));
+
+
+// ==============================
+// PRESETS: OCCUPANCY DISABLED
+// ==============================
+const filterDisabled = [
+    'any',
+    [
+        'all',
+        ['has', 'capacity_disabled'],
+        ['>', ['get', 'capacity_disabled'], 0]
+    ],
+    [
+        'all',
+        ['has', 'restriction_type'],
+        ['==', ['get', 'restriction_type'], 'DISABLED']
+    ]
+];
+const filterDisabledBuildings = [
+    'all',
+    filterDisabled,
+    [
+        'any',
+        ['!=', ['get', 'type'], 'ON_STREET'],
+        ['!', ['has', 'type']]
+    ]
+];
+const filterDisabledOnStreet = [
+    'all',
+    filterDisabled,
+    [
+        'any',
+        ['==', ['get', 'type'], 'ON_STREET'],
+        ['!', ['has', 'type']]
+    ]
+];
+
+export const layersParkApiOccupancyDisabled = parkApiOccupancy((urlParams({ purpose: 'car', id: 'CarDisabled', layerFilter: filterDisabled })))
+    .map(layer => ({ ...layer, subGroup: `${layer.subGroup} `, visibility: 'none' }));
+export const layersParkApiOccupancyDisabledBuildings = parkApiOccupancy((urlParams({ purpose: 'car', id: 'CarDisabledBuildings', layerFilter: filterDisabledBuildings })))
+    .map(layer => ({ ...layer, subGroup: `${layer.subGroup} `, visibility: 'none' }))
+    .filter(layer => layer.scope.includes('buildings_disabled'));;
+export const layersParkApiOccupancyDisabledOnStreet = parkApiOccupancy((urlParams({ purpose: 'car', id: 'CarDisabledOnStreet', layerFilter: filterDisabledOnStreet })))
+    .map(layer => ({ ...layer, subGroup: `${layer.subGroup} `, visibility: 'none' }))
+    .filter(layer => layer.scope.includes('on_street_disabled'));
+
+
+// ==============================
+// PRESETS: OCCUPANCY ITEM
+// ==============================
+const filterItem = [
+    '==', ['get', 'purpose'], 'ITEM'
+];
+
+export const layersParkApiItemOccupancy = parkApiOccupancy((urlParams({ purpose: 'bicycle', id: 'Item', layerFilter: filterItem })))
+    .map(layer => ({ ...layer, subGroup: `${layer.subGroup} `, visibility: 'none' }));
 
 
 // ==============================
@@ -312,16 +354,15 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApi${id}Type_Other`,
             label: 'Sonstige',
             subGroup: 'Typ',
-            filter:
+            filter: [
+                'all',
                 [
-                    'all',
-                    [
-                        'any',
-                        ['==', ['get', 'type'], 'OTHER'],
-                        ['!', ['has', 'type']]
-                    ],
-                    layerFilter
+                    'any',
+                    ['==', ['get', 'type'], 'OTHER'],
+                    ['!', ['has', 'type']]
                 ],
+                layerFilter
+            ],
             color: '#cacaca',
             visibility: 'none',
             scope: ['car', 'bicycle', 'buildings', 'on_street', 'polygon', 'site', 'spot'],
@@ -331,12 +372,11 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiCarType_OnStreet`,
             label: 'Straßen-Parkplatz',
             subGroup: 'Typ',
-            filter:
-                [
-                    'all',
-                    ['==', ['get', 'type'], 'ON_STREET'],
-                    layerFilter
-                ],
+            filter: [
+                'all',
+                ['==', ['get', 'type'], 'ON_STREET'],
+                layerFilter
+            ],
             color: 'black',
             scope: ['car', 'on_street', 'line', 'polygon', 'site', 'spot'],
             visibility: 'none',
@@ -346,12 +386,11 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiCarType_OffStreet`,
             label: 'Parkplatz abseits der Straße',
             subGroup: 'Typ',
-            filter:
-                [
-                    'all',
-                    ['==', ['get', 'type'], 'OFF_STREET_PARKING_GROUND'],
-                    layerFilter
-                ],
+            filter: [
+                'all',
+                ['==', ['get', 'type'], 'OFF_STREET_PARKING_GROUND'],
+                layerFilter
+            ],
             color: '#009688',
             visibility: 'none',
             scope: ['car', 'buildings', 'polygon', 'site', 'spot'],
@@ -361,12 +400,11 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiCarType_Underground`,
             label: 'Tiefgarage',
             subGroup: 'Typ',
-            filter:
-                [
-                    'all',
-                    ['==', ['get', 'type'], 'UNDERGROUND'],
-                    layerFilter
-                ],
+            filter: [
+                'all',
+                ['==', ['get', 'type'], 'UNDERGROUND'],
+                layerFilter
+            ],
             color: '#BF91B6',
             visibility: 'none',
             scope: ['car', 'buildings', 'site'],
@@ -376,12 +414,11 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiCarType_CarPark`,
             label: 'Parkhaus',
             subGroup: 'Typ',
-            filter:
-                [
-                    'all',
-                    ['==', ['get', 'type'], 'CAR_PARK'],
-                    layerFilter
-                ],
+            filter: [
+                'all',
+                ['==', ['get', 'type'], 'CAR_PARK'],
+                layerFilter
+            ],
             color: '#5587eb',
             visibility: 'none',
             scope: ['car', 'buildings', 'polygon', 'site'],
@@ -391,10 +428,9 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiBicycleType_WallLoops`,
             label: 'Vorderradhalter',
             subGroup: 'Typ',
-            filter:
-                [
-                    '==', ['get', 'type'], 'WALL_LOOPS'
-                ],
+            filter: [
+                '==', ['get', 'type'], 'WALL_LOOPS'
+            ],
             color: '#5587eb',
             visibility: 'none',
             scope: ['bicycle'],
@@ -404,10 +440,9 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiBicycleType_Stands`,
             label: 'Anlehnbügel',
             subGroup: 'Typ',
-            filter:
-                [
-                    '==', ['get', 'type'], 'STANDS'
-                ],
+            filter: [
+                '==', ['get', 'type'], 'STANDS'
+            ],
             color: '#bf91b6',
             visibility: 'none',
             scope: ['bicycle'],
@@ -417,17 +452,15 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiBicycleType_LockersLockbox`,
             label: 'Fahrradbox',
             subGroup: 'Typ',
-            filter:
-                [
-                    'all',
-                    [
-                        'any',
-                        ['==', ['get', 'type'], 'LOCKERS'],
-                        ['==', ['get', 'type'], 'LOCKBOX']
+            filter: [
+                'all',
+                ['any',
+                    ['==', ['get', 'type'], 'LOCKERS'],
+                    ['==', ['get', 'type'], 'LOCKBOX']
 
-                    ],
-                    ['==', ['get', 'purpose'], 'BIKE']
                 ],
+                ['==', ['get', 'purpose'], 'BIKE']
+            ],
             color: '#ff9933',
             visibility: 'none',
             scope: ['bicycle'],
@@ -437,17 +470,16 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiItemType_LockersLockbox`,
             label: 'Schließfach',
             subGroup: 'Typ',
-            filter:
+            filter: [
+                'all',
                 [
-                    'all',
-                    [
-                        'any',
-                        ['==', ['get', 'type'], 'LOCKERS'],
-                        ['==', ['get', 'type'], 'LOCKBOX']
+                    'any',
+                    ['==', ['get', 'type'], 'LOCKERS'],
+                    ['==', ['get', 'type'], 'LOCKBOX']
 
-                    ],
-                    ['==', ['get', 'purpose'], 'ITEM']
                 ],
+                ['==', ['get', 'purpose'], 'ITEM']
+            ],
             color: '#ff9933',
             visibility: 'none',
             scope: ['item'],
@@ -457,10 +489,9 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiBicycleType_Shed`,
             label: 'Fahrrad-Sammelanlage',
             subGroup: 'Typ',
-            filter:
-                [
-                    '==', ['get', 'type'], 'SHED'
-                ],
+            filter: [
+                '==', ['get', 'type'], 'SHED'
+            ],
             color: '#ee5959',
             visibility: 'none',
             scope: ['bicycle'],
@@ -470,10 +501,9 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiBicycleType_TwoTier`,
             label: 'Offene Zweistock-Abstellanlage',
             subGroup: 'Typ',
-            filter:
-                [
-                    '==', ['get', 'type'], 'TWO_TIER'
-                ],
+            filter: [
+                '==', ['get', 'type'], 'TWO_TIER'
+            ],
             color: '#009688',
             visibility: 'none',
             scope: ['bicycle'],
@@ -483,10 +513,9 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiBicycleType_SafeWallLoops`,
             label: 'Vorderradhalter mit Sicherung',
             subGroup: 'Typ',
-            filter:
-                [
-                    '==', ['get', 'type'], 'SAFE_WALL_LOOPS'
-                ],
+            filter: [
+                '==', ['get', 'type'], 'SAFE_WALL_LOOPS'
+            ],
             color: '#30D5C8',
             visibility: 'none',
             scope: ['bicycle'],
@@ -496,10 +525,9 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiBicycleType_Building`,
             label: 'Parkhaus',
             subGroup: 'Typ',
-            filter:
-                [
-                    '==', ['get', 'type'], 'BUILDING'
-                ],
+            filter: [
+                '==', ['get', 'type'], 'BUILDING'
+            ],
             color: '#c2e72a',
             visibility: 'none',
             scope: ['bicycle'],
@@ -509,10 +537,9 @@ function parkApiType({ id, layerGroup, layerFilter }) {
             id: `parkApiBicycleType_Floor`,
             label: 'Abstellfläche',
             subGroup: 'Typ',
-            filter:
-                [
-                    '==', ['get', 'type'], 'FLOOR'
-                ],
+            filter: [
+                '==', ['get', 'type'], 'FLOOR'
+            ],
             color: 'black',
             visibility: 'none',
             scope: ['bicycle'],
