@@ -48,65 +48,6 @@ window.addEventListener('DOMContentLoaded', () => {
                         type: 'Point',
                         coordinates: [parseFloat(item.lon), parseFloat(item.lat)]
                     },
-                    // json (input):
-                    // [
-                    //     {},
-                    //     {}
-                    // ]
-                    // Object.entries (transform object into an array so that filter() and map() work):
-                    // [
-                    //     [
-                    //         "0",
-                    //         {
-                    //             "source_id": 34,
-                    //             "original_uid": "unit555",
-                    //             "name": "Sinsheim, Bahnhof, Anlage rechts",
-                    //             "public_url": "https://www.rad-safe.de/order/booking/?preselect_unit_uid=555",
-                    //             "type": "LOCKERS",
-                    //             "purpose": "BIKE",
-                    //             "has_fee": true,
-                    //             "has_realtime_data": true,
-                    //             "static_data_updated_at": "2025-08-19T06:40:40Z",
-                    //             "realtime_data_updated_at": "2025-08-19T07:17:00Z",
-                    //             "lat": "49.2506290",
-                    //             "lon": "8.8745540",
-                    //             "capacity": 24,
-                    //             "realtime_capacity": 24,
-                    //             "realtime_free_capacity": 22,
-                    //             "opening_hours": "24/7",
-                    //             "id": 10011,
-                    //             "created_at": "2024-08-20T11:33:52Z",
-                    //             "modified_at": "2025-08-19T07:17:00Z"
-                    //         }
-                    //     ],
-                    //     [
-                    //         "1",
-                    //      ...
-                    // Object.fromEntries (transform array back to an object after filter() and map() were applied)
-                    // {
-                    //     "0": {
-                    //         "source_id": 34,
-                    //         "original_uid": "unit555",
-                    //         "name": "Sinsheim, Bahnhof, Anlage rechts",
-                    //         "public_url": "https://www.rad-safe.de/order/booking/?preselect_unit_uid=555",
-                    //         "type": "LOCKERS",
-                    //         "purpose": "BIKE",
-                    //         "has_fee": true,
-                    //         "has_realtime_data": true,
-                    //         "static_data_updated_at": "2025-08-19T06:40:40Z",
-                    //         "realtime_data_updated_at": "2025-08-19T07:17:00Z",
-                    //         "lat": "49.2506290",
-                    //         "lon": "8.8745540",
-                    //         "capacity": 24,
-                    //         "realtime_capacity": 24,
-                    //         "realtime_free_capacity": 22,
-                    //         "opening_hours": "24/7",
-                    //         "id": 10011,
-                    //         "created_at": "2024-08-20T11:33:52Z",
-                    //         "modified_at": "2025-08-19T07:17:00Z"
-                    //     },
-                    //     "1": {
-                    //         ...
                     properties: {
                         ...Object.fromEntries(
                             Object.entries(item)
@@ -153,12 +94,10 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const source_id = new URLSearchParams(window.location.search).get('source_id');
-        const source = source_id == null ? '/daten/json_editor/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;
-        // const source = source_id == null ? 'data/parking-sites.json' : `https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`;  
+        const source_id = new URLSearchParams(window.location.search).get('source_id');       
         let geojson;
 
-        fetch(source)
+        fetch(`https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`)
             .then(response => response.json())
             .then(data => {
                 geojson = toGeoJSON(data.items);
@@ -294,6 +233,9 @@ window.addEventListener('DOMContentLoaded', () => {
                                 .map(([key, value]) =>
                                     key.includes('_new') ? [key.split('_new')[0], value] : [key, value]
                                 )
+                                .map(([key, value]) =>
+                                    (key == 'lat' || key == 'lon') ? [key, value.toString()] : [key, value]
+                                )
                         )
                         if (Object.keys(obj).length > 0) return { uid: item.uid, ...obj };
 
@@ -306,7 +248,26 @@ window.addEventListener('DOMContentLoaded', () => {
                 const blob = new Blob([JSON.stringify(exportJson, null, 2)], {
                     type: 'application/json;charset=utf-8'
                 });
-                saveAs(blob, 'export_parking-sites.json');
+
+
+                // ==============================
+                // PARK API SOURCES
+                // ==============================    
+                fetch('https://api.mobidata-bw.de/park-api/api/public/v3/sources')
+                    .then(response => response.json())
+                    .then(data => {
+                        const items = data.items;
+                        saveAsJson(items);
+                        return items;
+                    });
+
+                function saveAsJson(items) {
+                    items.forEach(item => {
+                        if (item.id == source_id) {
+                            saveAs(blob, `${item.uid}.json`);
+                        }
+                    })
+                };
 
             });
 

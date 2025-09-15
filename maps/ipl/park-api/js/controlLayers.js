@@ -5,9 +5,9 @@ import { addControlLayers } from '../../../../src/js/addControlLayers.js';
 import { urlParams } from '../../../../src/js/urlParams.js';
 
 
-let layerControlDefault = null;
-
 const { purpose, object, geometry, controlLayersTitle } = urlParams();
+
+let layerControlDefault = null;
 
 export function initializeControlLayers(map) {
 
@@ -55,7 +55,7 @@ export function initializeControlLayers(map) {
         let layersExtra, controlLayersTitleExtra;
         if (purpose == 'car') {
             layersExtra = layersDisabled;
-            controlLayersTitleExtra = 'Gebündelte Behindertenparkplätze';
+            controlLayersTitleExtra = 'Behindertenparkplätze';
         } else if (purpose == 'bicycle') {
             layersExtra = layersItem;
             controlLayersTitleExtra = 'Schließfächer an Fahrradabstellanlagen';
@@ -74,7 +74,7 @@ export function initializeControlLayers(map) {
             layers: addControlLayers(layersExtra, controlLayersTitleExtra)
         };
         const layerControlExtra = new layerControlGrouped(configExtra);
-        map.addControl(layerControlExtra, 'top-right');
+        map.addControl(layerControlExtra, 'top-right');      
 
     } else {
 
