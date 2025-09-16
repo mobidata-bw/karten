@@ -188,11 +188,11 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     });
 
     // check if smartphone/tablet or desktop
-    if (window.innerWidth < 503) {
+    if (window.innerWidth < 502) {
 
         map.addControl(geolocateControl, 'top-left');
 
-    } else {
+    } else if (window.innerWidth >= 502){
 
         map.addControl(
             new MaplibreGeocoder(maplibreGeocoder, {
@@ -211,13 +211,12 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
 
     map.addControl(
         new maplibregl.NavigationControl({
-            showZoom: window.innerWidth < 577 ? false : true,
+            showZoom: window.innerWidth < 502 ? false : true,
             showCompass: true,
             visualizePitch: true,
         }),
         'top-left'
-    );
-
+    ) 
 
 
     return map;

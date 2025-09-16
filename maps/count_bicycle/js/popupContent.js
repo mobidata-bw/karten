@@ -20,11 +20,11 @@ export function popupContent(feature) {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric'
-    }); 
+    });
 
     /* SET UNIT */
     let unit;
-    if (countEndYear >= 100000) {
+    if (countEndYear >= 1000000) {
         unit = 'Mio.'
     } else {
         unit = 'Tsd.'
@@ -49,7 +49,7 @@ export function popupContent(feature) {
                 <td class="attContent">${date}</td>
             </tr>            
         </table>
-        ${!ALL ? '' : (`
+        ${(!ALL || countEndYear < 1000) ? '' : (`
         <br><table>
             <tr>
                 <td class="title title2">Jährliche Zähldaten seit 2013 (in ${unit})</td>
@@ -58,7 +58,7 @@ export function popupContent(feature) {
             <tr>
                 ${ALL == 0 ? '<td><i class="attContent">keine Zähldaten</i></td>' : ''}
         </table>
-        `)}
+        
         <table>
             <tr>
                 <td><canvas class="canvasBar" id="canvas-${counter_site_id}" width="300" height="100" /></td>
@@ -68,12 +68,14 @@ export function popupContent(feature) {
                 <td class="attContentLink"><a href="https://www.mobidata-bw.de/dataset/eco-counter-fahrradzahler#daten&ressourcen" target="_blank">&#10149 zu den Daten<a></td>
             <tr>
         </table>
+        `)}
     `;
 
-
-    setTimeout(() => {
-        popupCanvas(feature);
-    }, 0);
+    if (countEndYear >= 1000) {
+        setTimeout(() => {
+            popupCanvas(feature);
+        }, 0)
+    };
 
 
     return htmlContent;

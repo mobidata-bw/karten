@@ -41,10 +41,10 @@ export function popupCanvas(feature) {
             const counts = feature[countsAttributYear];
             const countsEndYear = feature[`${endYear}_ALL`];
             let intcountsAttributeValue;
-            if (countsEndYear >= 100000) {
-                intcountsAttributeValue = (counts / 1000000).toFixed(2);
+            if (countsEndYear >= 1000000) {
+                intcountsAttributeValue = (counts / 1000000).toFixed(1);
             }  else {
-                intcountsAttributeValue = (counts / 1000).toFixed(2);
+                intcountsAttributeValue = (counts / 1000).toFixed(0);
             }
             const strcountsAttributeValue = intcountsAttributeValue.toString().replace('.', ',');
 
@@ -82,7 +82,7 @@ export function popupCanvas(feature) {
                 ctx.font = '11px, Arial';
             ctx.fillStyle = 'black';
             if (counts != 0) {
-                ctx.fillText(strcountsAttributeValue, 5 + (i * 1) + (i * barWidth), (diagramHeight - labellingCountsMargin) - (feature[countsAttributYear] * scaleFactor));
+                ctx.fillText(strcountsAttributeValue, 8 + (i * 1) + (i * barWidth), (diagramHeight - labellingCountsMargin) - (feature[countsAttributYear] * scaleFactor));
             }
             ctx.fillText(strYearExtractShortForm, 8 + (i * 1) + (i * barWidth), canvasHeight);
 
