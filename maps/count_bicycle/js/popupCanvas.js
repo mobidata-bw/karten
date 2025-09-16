@@ -39,12 +39,19 @@ export function popupCanvas(feature) {
 
             const countsAttributYear = `${year}_ALL`;
             const counts = feature[countsAttributYear];
-            const intcountsAttributeValue = (counts / 1000000).toFixed(2);
+            const countsEndYear = feature[`${endYear}_ALL`];
+            let intcountsAttributeValue;
+            if (countsEndYear >= 100000) {
+                intcountsAttributeValue = (counts / 1000000).toFixed(2);
+            }  else {
+                intcountsAttributeValue = (counts / 1000).toFixed(2);
+            }
             const strcountsAttributeValue = intcountsAttributeValue.toString().replace('.', ',');
 
             const intYearExtract = `${year}`;
             const strYearExtract = intYearExtract.toString();
             const strYearExtractShortForm = "'" + strYearExtract.substring(2, 5);
+
 
             /* BAR COLORS */
             let barColor;

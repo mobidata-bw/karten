@@ -9,8 +9,26 @@ export function popupContent(feature) {
         domain_name,
         counter_site,
         counter_site_id,
+        iso_timestamp,
+        ['2024_ALL']: countEndYear,
         ALL
     } = feature;
+
+    /* CONVERT TIMESTAMP */
+    const dateField = new Date(iso_timestamp);
+    const date = dateField.toLocaleDateString('de-DE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    }); 
+
+    /* SET UNIT */
+    let unit;
+    if (countEndYear >= 100000) {
+        unit = 'Mio.'
+    } else {
+        unit = 'Tsd.'
+    };
 
     /* POPUP CONTENT */
     const htmlContent = `
@@ -26,12 +44,15 @@ export function popupContent(feature) {
             </tr><tr>
                 <td class="att">Zählstellen-ID</td>
                 <td class="attContent">${counter_site_id}</td>
-            </tr>
+            </tr><tr>
+                <td class="att">Erstzählung</td>
+                <td class="attContent">${date}</td>
+            </tr>            
         </table>
         ${!ALL ? '' : (`
         <br><table>
             <tr>
-                <td class="title title2">Jährliche Zähldaten seit 2013 (in Mio.)</td>
+                <td class="title title2">Jährliche Zähldaten seit 2013 (in ${unit})</td>
             </tr>
         </table><table>
             <tr>

@@ -33,7 +33,7 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: true
     },
     server: {
-      port: 8080,
+      port: 5173,
       open: '/maps/' 
     }
   };

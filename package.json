@@ -6,7 +6,7 @@
   "packageManager": "npm@9.6.7",
   "scripts": {
     "liveserver": "vite --port 5173 --mode liveserver",
-    "start": "vite --port 8080 --mode liveserver",
+    "start": "vite --port 5173 --mode liveserver",
     "build": "vite build",
     "build:test": "vite build --mode test",
     "build:dev": "vite build --mode development"

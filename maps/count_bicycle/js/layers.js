@@ -18,7 +18,7 @@ const layers = {
 
 
 export const layersCountBicycle = [
-      {
+    {
         id: 'countBicycle1',
         label: 'bis 100 Tsd.',
         filter:
@@ -27,7 +27,7 @@ export const layersCountBicycle = [
             ],
         color: '#ffe600',
         ...layers
-    },  
+    },
     {
         id: 'countBicycle2',
         label: '100 - 500 Tsd.',
@@ -63,7 +63,7 @@ export const layersCountBicycle = [
             ],
         color: '#d25000',
         ...layers
-    },  
+    },
     {
         id: 'countBicycle5',
         label: 'über 2 Mio.',
