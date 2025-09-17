@@ -192,7 +192,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
 
         map.addControl(geolocateControl, 'top-left');
 
-    } else if (window.innerWidth >= 502){
+    } else if (window.innerWidth > 502){
 
         map.addControl(
             new MaplibreGeocoder(maplibreGeocoder, {

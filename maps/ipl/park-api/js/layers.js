@@ -286,7 +286,6 @@ if (purpose == 'car') {
 // ==============================
 export const layersParkApiCarOccupancy = parkApiOccupancy(urlParams({ purpose: 'car' })).filter(layer => layer.scope.includes('car'));
 export const layersParkApiBicycleOccupancy = parkApiOccupancy(urlParams({ purpose: 'bicycle' })).filter(layer => layer.scope.includes('bicycle'));
-// export const layersParkApiItemOccupancy = parkApiOccupancy(urlParams({ purpose: 'item' })).filter(layer => layer.scope.includes('item'));
 
 
 // ==============================
