@@ -28,8 +28,10 @@ export default defineConfig(({ mode }) => {
       emptyOutDir: true
     },
     server: {
-      port: 5173,
-      open: '/maps/' 
+      host: true,
+      port: 8080,
+      strictPort: true,
+      open: '/maps/'
     }
   };
 });

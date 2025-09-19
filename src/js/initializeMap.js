@@ -25,27 +25,23 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
 
     // ==============================
     // MAP
-    // ==============================
-    let lat, lng, zoom;
-
+    // ==============================   
     const params = new URLSearchParams(window.location.search);
+    let lat, lng, zoom;
 
     if (params.has('zoom') && params.has('lat') && params.has('lng')) {
         lat = parseFloat(params.get('lat'));
         lng = parseFloat(params.get('lng'));
         zoom = parseFloat(params.get('zoom'));
-        // console.log("B: ", lat, lng, zoom);
     }
     else if (configZoom && configCenter) {
         lat = configCenter[0];
         lng = configCenter[1];
         zoom = configZoom;
-        // console.log("A: ", lat, lng, zoom);
     } else {
         lat = 9.000;
         lng = 48.680;
         zoom = window.innerWidth < 577 ? 6 : 7.1;
-        // console.log("C: ", lat, lng, zoom);
     };
 
     map = new maplibregl.Map({
@@ -55,8 +51,8 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
         zoom: zoom,
         minZoom: configMinZoom || 4,
         maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
-        attributionControl: false,
-        pixelRatio: 1
+        attributionControl: false
+        // pixelRatio: 1
     });
 
     map.once('load', () => {
@@ -66,6 +62,15 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             zoom: zoom
         });
         map.getContainer().style.visibility = 'visible';
+    });
+
+    map.on('moveend', () => {
+        const { lat, lng } = map.getCenter();
+        const url = new URL(window.location);
+        url.searchParams.set('lat', lat.toFixed(6));
+        url.searchParams.set('lng', lng.toFixed(6));
+        url.searchParams.set('zoom', map.getZoom().toFixed(1));
+        history.replaceState(null, '', url);
     });
 
 
@@ -81,7 +86,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
                     window.innerWidth < 473 ?
                         setGeoJsonPath('shapes', 'shapeBadenWuerttembergSimplified') :
                         setGeoJsonPath('shapes', 'shapeBadenWuerttemberg')
-                );  
+                );
 
         map.addSource('shape', shape);
 

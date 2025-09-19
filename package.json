@@ -5,8 +5,7 @@
   "description": "MobiData BW® Karten",
   "packageManager": "npm@9.6.7",
   "scripts": {
-    "liveserver": "vite --port 5173 --mode liveserver",
-    "start": "vite --port 5173 --mode liveserver",
+    "liveserver": "vite --mode liveserver",
     "build": "vite build",
     "build:test": "vite build --mode test",
     "build:dev": "vite build --mode development"
