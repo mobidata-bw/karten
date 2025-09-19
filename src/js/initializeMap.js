@@ -27,27 +27,27 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     // MAP
     // ==============================   
     const params = new URLSearchParams(window.location.search);
-    let lat, lng, zoom;
+    let lng, lat, zoom;
 
-    if (params.has('zoom') && params.has('lat') && params.has('lng')) {
-        lat = parseFloat(params.get('lat'));
+    if (params.has('zoom') && params.has('lng') && params.has('lat')) {
         lng = parseFloat(params.get('lng'));
+        lat = parseFloat(params.get('lat'));
         zoom = parseFloat(params.get('zoom'));
     }
     else if (configZoom && configCenter) {
-        lat = configCenter[0];
-        lng = configCenter[1];
+        lng = configCenter[0];
+        lat = configCenter[1];
         zoom = configZoom;
     } else {
-        lat = 9.000;
-        lng = 48.680;
+        lng = 9.000;
+        lat = 48.680;
         zoom = window.innerWidth < 577 ? 6 : 7.1;
     };
 
     map = new maplibregl.Map({
         container: 'map',
         style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
-        center: [lat, lng],
+        center: [lng, lat],
         zoom: zoom,
         minZoom: configMinZoom || 4,
         maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
@@ -58,17 +58,17 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     map.once('load', () => {
         map.resize();
         map.jumpTo({
-            center: [lat, lng],
+            center: [lng, lat],
             zoom: zoom
         });
         map.getContainer().style.visibility = 'visible';
     });
 
     map.on('moveend', () => {
-        const { lat, lng } = map.getCenter();
-        const url = new URL(window.location);
-        url.searchParams.set('lat', lat.toFixed(6));
+        const { lng, lat } = map.getCenter();
+        const url = new URL(window.location);       
         url.searchParams.set('lng', lng.toFixed(6));
+        url.searchParams.set('lat', lat.toFixed(6));
         url.searchParams.set('zoom', map.getZoom().toFixed(1));
         history.replaceState(null, '', url);
     });

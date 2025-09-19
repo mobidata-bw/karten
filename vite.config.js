@@ -31,7 +31,7 @@ export default defineConfig(({ mode }) => {
       host: true,
       port: 8080,
       strictPort: true,
-      open: '/maps/'
+      // open: '/maps/'
     }
   };
 });
