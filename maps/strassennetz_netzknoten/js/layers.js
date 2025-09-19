@@ -1,11 +1,10 @@
+import { setGeoJsonPath } from '../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
-export const sourceStrassennetz = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/strassennetz_netzknoten/BLK_Strassennetz_250130.geojson'
-};
-
+export const sourceStrassennetz = setGeoJsonPath('maps/strassennetz_netzknoten', 'BLK_Strassennetz_250130');
 export const sourceNetzknoten = {
     type: 'geojson',
     data: {

@@ -1,7 +1,7 @@
-export const shapeKonstanz = {
-    'type': 'geojson',
-    data: '/karten_geojsons/boundaries/shapesKonstanz.geojson'
-};
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+
+
+export const shapeKonstanz = setGeoJsonPath('boundaries', 'shapeKonstanz');
 
 export const fillShapeKonstanz = {
     'id': 'fillShapeKonstanz',

@@ -1,11 +1,10 @@
+import { setGeoJsonPath } from '../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
-export const sourceCountBicycle = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/count_bicycle/fahrradzaehler_tageswerten_gesamt.geojson'
-    //  data: 'data/fahrradzaehler_tageswerten_gesamt.geojson'
-};
+export const sourceCountBicycle = setGeoJsonPath('maps/count_bicycle', 'fahrradzaehler_tageswerten_gesamt');
 
 
 // ==============================

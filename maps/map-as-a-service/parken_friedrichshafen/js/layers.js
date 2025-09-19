@@ -1,15 +1,11 @@
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
-export const sourceParking = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/friedrichshafen_inventory.geojson'   
-};
-
-export const sourceTaxi = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/parken_friedrichshafen/taxistaende.geojson'   
-};
+export const sourceParking = setGeoJsonPath('maps/map-as-a-service/parken_friedrichshafen', 'friedrichshafen_inventory');
+export const sourceTaxi = setGeoJsonPath('maps/map-as-a-service/parken_friedrichshafen', 'taxistaende');
 
 
 // ==============================

@@ -4,7 +4,6 @@ import {
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { shape } from './initializeMap.js';
 import {
     sourceParking, layersParkingOnStreet, layersParkingOther,
     sourceTaxi, layersTaxi
@@ -27,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
         configZoom: window.innerWidth < 577 ? 12.5 : 14.5,
         configCenter: [9.479215, 47.655577],
         configMinZoom: 12,
-        configShape: 'shapesFriedrichshafen.geojson'
+        configShape: 'shapeFriedrichshafen'
     });
     basemaps(map);
 

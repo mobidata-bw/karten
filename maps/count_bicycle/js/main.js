@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
     // INITIALIZE MAP
-    // ==============================  
+    // ==============================   
     const map = initializeMap();
     basemaps(map);
 

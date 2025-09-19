@@ -11,6 +11,8 @@ import maplibregl from 'maplibre-gl';
 import MaplibreInspect from '@maplibre/maplibre-gl-inspect';
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
 
+import { setGeoJsonPath } from './setGeoJsonPath.js';
+
 export { addSources, addLayers } from './configSourcesLayers.js';
 export { basemaps } from '../js/layerSwitcherControl.js';
 export { popups } from '../js/popups.js';
@@ -27,7 +29,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     let lat, lng, zoom;
 
     const params = new URLSearchParams(window.location.search);
-  
+
     if (params.has('zoom') && params.has('lat') && params.has('lng')) {
         lat = parseFloat(params.get('lat'));
         lng = parseFloat(params.get('lng'));
@@ -72,12 +74,16 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     // ==============================
     map.on('load', () => {
 
-        const shape = configShape ? `/karten_geojsons/boundaries/${configShape}` : (window.innerWidth < 473 ? '/karten_geojsons/boundaries/shapesBadenWuerttembergSimplified.geojson' : '/karten_geojsons/boundaries/shapesBadenWuerttemberg.geojson');
+        const shape =
+            configShape ?
+                setGeoJsonPath('shapes', configShape) :
+                (
+                    window.innerWidth < 473 ?
+                        setGeoJsonPath('shapes', 'shapeBadenWuerttembergSimplified') :
+                        setGeoJsonPath('shapes', 'shapeBadenWuerttemberg')
+                );  
 
-        map.addSource('shape', {
-            'type': 'geojson',
-            'data': shape
-        });
+        map.addSource('shape', shape);
 
         map.addLayer({
             'id': 'fillShape',
@@ -192,7 +198,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
 
         map.addControl(geolocateControl, 'top-left');
 
-    } else if (window.innerWidth > 502){
+    } else if (window.innerWidth > 502) {
 
         map.addControl(
             new MaplibreGeocoder(maplibreGeocoder, {
@@ -216,7 +222,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             visualizePitch: true,
         }),
         'top-left'
-    ) 
+    )
 
 
     return map;

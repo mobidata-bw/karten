@@ -2,20 +2,15 @@ export function popupContent(features) {
 
     /* INITIALIZE VARIABLES */ 
     const {
-        Name,
-        Location
+        Station
     } = features;
 
     /* POPUP CONTENT */   
     return `
         <table>
             <tr>
-                <th class="title">${Name}</th>
-            </tr>
-        </table><br><table>
-            <tr>
-                <td class="attContent">${Location}</td>
-            </tr>
+                <th class="title">${Station}</th>
+            </tr>        
         </table>
     `;
 };

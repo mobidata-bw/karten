@@ -1,15 +1,12 @@
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
-export const sourceKonstanzPls = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/gebuendelte_daten_konstanz/konstanz_pls.geojson'
-};
+export const sourceKonstanzPls = setGeoJsonPath('maps/map-as-a-service/gebuendelte_daten_konstanz', 'konstanz_pls');
+export const sourceKonstanzBehindertenparken = setGeoJsonPath('maps/map-as-a-service/gebuendelte_daten_konstanz', 'konstanz_behindertenparken');
 
-export const sourceKonstanzBehindertenparken = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/gebuendelte_daten_konstanz/konstanz_behindertenparken.geojson'
-};
 
 // ==============================
 // LAYERS

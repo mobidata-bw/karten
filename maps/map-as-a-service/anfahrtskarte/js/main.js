@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
         configZoom: window.innerWidth < 577 ? 12.5 : 14.5,
         configCenter: [9.193717, 48.795933],
         configMinZoom: 12,
-        configShape: 'shapesStuttgart.geojson'
+        configShape: 'shapeStuttgart'
     });
     basemaps(map);
 

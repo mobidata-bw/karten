@@ -1,3 +1,4 @@
+import { basePath } from '../../../../src/utils/paths.js';
 import { popupImages } from "../../../../src/js/popupImages.js";
 
 
@@ -22,6 +23,14 @@ export function popupContent(features) {
         KFZ = KFZ_3; RAD = RAD_3; FUSSGAENGER = FUSSGAENGER_3; SV = SV_3; DATUM = DATUM_3;
     } else {
         KFZ = KFZ_4; RAD = RAD_4; FUSSGAENGER = FUSSGAENGER_4; SV = SV_4; DATUM = DATUM_4;
+    };
+
+    /* PATHS */
+    let filePath;
+    if (basePath == '/') {
+        filePath = 'data/';
+    } else {
+        filePath = '/karten_geojsons/maps/map-as-a-service/strassenverkehrszaehlung_ravensburg/data/';
     };
 
     /* POPUP CONTENT */
@@ -55,8 +64,8 @@ export function popupContent(features) {
             </tr>       
         </table><table>    
             <tr>
-                ${`<td class="attContentLink"><a href="/karten_geojsons/maps/map-as-a-service/strassenverkehrszaehlung_ravensburg/Files/${ID}/${DATUM}/${NAME}.pdf" target="_blank">&#10149 PDF</a></td>`}  
-                ${`<td class="attContentLink"><a href="/karten_geojsons/maps/map-as-a-service/strassenverkehrszaehlung_ravensburg/Files/${ID}/${DATUM}/${NAME}.xlsx" target="_blank">&#10149 XLSX</a></td>`}                  
+                ${`<td class="attContentLink"><a href="${filePath}/files/${ID}/${DATUM}/${NAME}.pdf" target="_blank">&#10149 PDF</a></td>`}  
+                ${`<td class="attContentLink"><a href="${filePath}/files/${ID}/${DATUM}/${NAME}.xlsx" target="_blank">&#10149 XLSX</a></td>`}                  
             </tr>
         </table>
     `;

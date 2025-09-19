@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
         configZoom: window.innerWidth < 577 ? 10 : 12,
         configCenter: [9.609503, 47.780424],
         configMinZoom: 10,
-        configShape: 'shapesRavensburg.geojson'
+        configShape: 'shapeRavensburg'
     });
     basemaps(map);
 

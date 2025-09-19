@@ -1,17 +1,11 @@
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
-export const sourceNvbw = {
-    type: 'geojson',
-    // data: 'data/nvbw.geojson'
-    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/nvbw.geojson'
-};
-
-export const sourceTouren = {
-    type: 'geojson',
-    // data: 'data/touren.geojson',
-    data: '/karten_geojsons/maps/map-as-a-service/anfahrtskarte/touren.geojson'
-};
+export const sourceNvbw = setGeoJsonPath('maps/map-as-a-service/anfahrtskarte', 'nvbw');
+export const sourceTouren = setGeoJsonPath('maps/map-as-a-service/anfahrtskarte', 'touren');
 
 
 // ==============================

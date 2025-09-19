@@ -1,9 +1,11 @@
+import { setGeoJsonPath } from '../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
 export const sourceFootway = {
     type: 'geojson',
-    // data: '/karten_geojsons/maps/pedestrian_crossings/footway.geojson'
     data: {
         type: 'FeatureCollection',
         features: []
@@ -12,7 +14,6 @@ export const sourceFootway = {
 
 export const sourceMarked = {
     type: 'geojson',
-    // data: '/karten_geojsons/maps/pedestrian_crossings/marked.geojson'
     data: {
         type: 'FeatureCollection',
         features: []
@@ -21,21 +22,13 @@ export const sourceMarked = {
 
 export const sourceUncontrolled = {
     type: 'geojson',
-    // data: '/karten_geojsons/maps/pedestrian_crossings/uncontrolled.geojson'
     data: {
         type: 'FeatureCollection',
         features: []
     }
 };
 
-export const sourceZebra = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/pedestrian_crossings/zebra.geojson'
-    // data: {
-    //     type: 'FeatureCollection',
-    //     features: []
-    // }
-};
+export const sourceZebra = setGeoJsonPath('maps/pedestrian_crossings', 'zebra');
 
 
 // ==============================
@@ -53,7 +46,7 @@ export const layersPedestrianCrossings = [
         source: 'sourceUncontrolled',
         color: '#C4001F',
         ...layers,
-        url: '/karten_geojsons/maps/pedestrian_crossings/uncontrolled.geojson',
+        url: setGeoJsonPath('maps/pedestrian_crossings', 'uncontrolled').data,
         visibility: 'none'
     },
     {
@@ -62,7 +55,7 @@ export const layersPedestrianCrossings = [
         source: 'sourceFootway',
         color: '#75b9a2',
         ...layers,
-        url: '/karten_geojsons/maps/pedestrian_crossings/footway.geojson',
+        url: setGeoJsonPath('maps/pedestrian_crossings', 'footway').data,
         visibility: 'none'
     },
     {
@@ -71,7 +64,7 @@ export const layersPedestrianCrossings = [
         source: 'sourceMarked',
         color: '#ffe280',
         ...layers,
-        url: '/karten_geojsons/maps/pedestrian_crossings/marked.geojson',
+        url: setGeoJsonPath('maps/pedestrian_crossings', 'marked').data,
         visibility: 'none'
     },
     {
@@ -79,7 +72,6 @@ export const layersPedestrianCrossings = [
         label: 'Zebra',
         source: 'sourceZebra',
         color: '#366491',
-        ...layers,
-        // url: '/karten_geojsons/maps/pedestrian_crossings/zebra.geojson'
+        ...layers
     }
 ];
