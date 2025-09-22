@@ -62,16 +62,21 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             zoom: zoom
         });
         map.getContainer().style.visibility = 'visible';
+
+        // initialize moveend event after initial resize
+        setUrlParams();
     });
 
-    map.on('moveend', () => {
-        const { lng, lat } = map.getCenter();
-        const url = new URL(window.location);       
-        url.searchParams.set('lng', lng.toFixed(6));
-        url.searchParams.set('lat', lat.toFixed(6));
-        url.searchParams.set('zoom', map.getZoom().toFixed(1));
-        history.replaceState(null, '', url);
-    });
+    function setUrlParams() {
+        map.on('moveend', () => {
+            const { lng, lat } = map.getCenter();
+            const url = new URL(window.location.href);
+            url.searchParams.set('lng', lng.toFixed(6));
+            url.searchParams.set('lat', lat.toFixed(6));
+            url.searchParams.set('zoom', map.getZoom().toFixed(2));
+            history.replaceState(history.state, '', url.href);
+        })
+    };
 
 
     // ==============================
