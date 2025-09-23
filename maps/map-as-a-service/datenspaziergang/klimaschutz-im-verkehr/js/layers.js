@@ -6,7 +6,8 @@ import { setGeoJsonPath } from '../../../../../src/js/setGeoJsonPath.js';
 // ==============================
 export const sourceRoute = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'route');
 export const sourceStations = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'stations');
-export const sourceAbstellzonen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellzonen');
+export const sourceAbstellverbotszonen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellverbotszonen');
+export const sourceAbstellflaechen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellflaechen');
 
 
 // ==============================
@@ -42,25 +43,17 @@ export const layersScooterZones = [
         id: 'abstellverbotszonen',
         label: 'Abstellverbotszonen',
         type: 'fill',
-        source: 'sourceAbstellzonen',
+        source: 'sourceAbstellverbotszonen',
         color: 'yellow',
-        fillOpacity: 0.5,
-        filter:
-            [
-                '==', ['get', 'layer'], 'Abstellverbotszonen'
-            ]
+        fillOpacity: 0.5       
     },
     {
         id: 'abstellflaechen',
         label: 'Abstellflächen',
         type: 'fill',
-        source: 'sourceAbstellzonen',
+        source: 'sourceAbstellflaechen',
         color: 'lightgreen',
-        fillOpacity: 0.5,
-        filter:
-            [
-                '==', ['get', 'layer'], 'E-Scooter-Abstellflächen'
-            ]
+        fillOpacity: 0.5       
     }
 ];
 

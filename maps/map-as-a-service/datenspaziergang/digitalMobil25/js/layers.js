@@ -5,7 +5,8 @@ import { setGeoJsonPath } from '../../../../../src/js/setGeoJsonPath.js';
 // SOURCES
 // ==============================
 export const sourceRoute = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'map');
-export const sourceAbstellzonen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellzonen');
+export const sourceAbstellverbotszonen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellverbotszonen');
+export const sourceAbstellflaechen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellflaechen');
 
 
 // ==============================
@@ -40,29 +41,21 @@ export const layersRoute = [
     }
 ];
 
-export const layersAbstellzonen = [
+export const layersScooterZones = [
     {
         id: 'abstellverbotszonen',
         label: 'Abstellverbotszonen',
         type: 'fill',
-        source: 'sourceAbstellzonen',
+        source: 'sourceAbstellverbotszonen',
         color: 'yellow',
-        fillOpacity: 0.5,
-        filter:
-            [
-                '==', ['get', 'layer'], 'Abstellverbotszonen'
-            ]
+        fillOpacity: 0.5      
     },
     {
         id: 'abstellflaechen',
         label: 'Abstellflächen',
         type: 'fill',
-        source: 'sourceAbstellzonen',
+        source: 'sourceAbstellflaechen',
         color: 'lightgreen',
-        fillOpacity: 0.5,
-        filter:
-            [
-                '==', ['get', 'layer'], 'E-Scooter-Abstellflächen'
-            ]
+        fillOpacity: 0.5        
     }
 ];

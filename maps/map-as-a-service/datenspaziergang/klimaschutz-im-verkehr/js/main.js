@@ -9,7 +9,7 @@ import {
 import {
     sourceRoute, layersRoute,
     sourceStations, layersStations,
-    sourceAbstellzonen, layersScooterZones
+    sourceAbstellverbotszonen, sourceAbstellflaechen, layersScooterZones
 } from './layers.js';
 import { sourceChargePoints, layersChargePointsOccupancy } from '../../../../ipl/charge_points/js/layers.js';
 import {
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
         configZoom: window.innerWidth < 577 ? 12.5 : 14.5,
         configCenter: [9.1798, 48.7759],
         configMinZoom: 12,
-        configShape: 'shapeStuttgart.geojson'
+        configShape: 'shapeStuttgart'
     });
     basemaps(map);
 
@@ -53,7 +53,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const sources = [
             { id: 'sourceRoute', source: sourceRoute },
             { id: 'sourceStations', source: sourceStations },
-            { id: 'sourceAbstellzonen', source: sourceAbstellzonen },
+            { id: 'sourceAbstellverbotszonen', source: sourceAbstellverbotszonen },
+            { id: 'sourceAbstellflaechen', source: sourceAbstellflaechen },
             { id: 'sourceChargePoints', source: sourceChargePoints },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
             { id: 'sourceSharingStations', source: sourceSharingStations },

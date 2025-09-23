@@ -94,7 +94,7 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        const source_id = new URLSearchParams(window.location.search).get('source_id');       
+        const source_id = new URLSearchParams(window.location.search).get('source_id');
         let geojson;
 
         fetch(`https://api.mobidata-bw.de/park-api/api/public/v3/parking-sites?source_id=${source_id}`)
@@ -230,12 +230,14 @@ window.addEventListener('DOMContentLoaded', () => {
                                     }
                                     return filter;
                                 })
-                                .map(([key, value]) =>
-                                    key.includes('_new') ? [key.split('_new')[0], value] : [key, value]
-                                )
-                                .map(([key, value]) =>
-                                    (key == 'lat' || key == 'lon') ? [key, value.toString()] : [key, value]
-                                )
+                                .map(([key, value]) => {
+                                    const baseKey = key.endsWith('_new') ? key.slice(0, -4) : key;
+                                    const coordinatesToString = (baseKey == 'lat' || baseKey == 'lon') ? String(value) : value;
+                                    return [
+                                        baseKey,
+                                        coordinatesToString
+                                    ];
+                                })
                         )
                         if (Object.keys(obj).length > 0) return { uid: item.uid, ...obj };
 

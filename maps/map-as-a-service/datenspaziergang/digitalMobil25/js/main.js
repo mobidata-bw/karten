@@ -8,7 +8,7 @@ import {
 } from '../../../../../src/js/initializeMap.js';
 import {
     sourceRoute, layersRoute,
-    sourceAbstellzonen, layersAbstellzonen
+    sourceAbstellverbotszonen, sourceAbstellflaechen, layersScooterZones
 } from './layers.js';
 import {
     sourceSharingVehicles, sourceSharingStations,
@@ -51,7 +51,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================   
         const sources = [
             { id: 'sourceRoute', source: sourceRoute },
-            { id: 'sourceAbstellzonen', source: sourceAbstellzonen },
+            { id: 'sourceAbstellverbotszonen', source: sourceAbstellverbotszonen },
+            { id: 'sourceAbstellflaechen', source: sourceAbstellflaechen},
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
             { id: 'sourceSharingStations', source: sourceSharingStations },
             { id: 'sourceChargePoints', source: sourceChargePoints },
@@ -64,9 +65,9 @@ window.addEventListener('DOMContentLoaded', () => {
         layersDatenspaziergang.forEach(layer => addLayers(map, layer));
 
         const scooter = [
-            ...layersAbstellzonen.map(layer => ({ ...layer, group: 'Station 3: E-Scooter-Abstellflächen' })),
-            ...layersSharingScooterVehicles.map(layer => ({ ...layer, group: 'Station 3: E-Scooter-Abstellflächen' })),
-            ...layersSharingScooterStations.map(layer => ({ ...layer, group: 'Station 3: E-Scooter-Abstellflächen' }))
+            ...layersScooterZones.map(layer => ({ ...layer, group: 'Station 3: E-Scooter-Sharing' })),
+            ...layersSharingScooterVehicles.map(layer => ({ ...layer, group: 'Station 3: E-Scooter-Sharing' })),
+            ...layersSharingScooterStations.map(layer => ({ ...layer, group: 'Station 3: E-Scooter-Sharing' }))
         ];
 
         layersIpl = [

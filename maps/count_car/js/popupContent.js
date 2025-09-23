@@ -14,27 +14,27 @@ export function popupContent(feature) {
 
     /* POPUP CONTENT */
     return `
-        <table>\
+        <table>
             <tr>
                 <th class="title">${klasse, nummer}</th>
             </tr>
         </table><br><table>
             ${svznr == null ? '' : `
-            <tr>\
+            <tr>
                 <td class="att">Zählstellen-Nr.</td>
                 <td class="attContent">${svznr}</td>
             </tr>
             `} 
             ${RI == null ? '' : `
-            <tr>\
+            <tr>
                 <td class="att">Von</td>
-                <td class="attContent">${RI}/td>
+                <td class="attContent">${RI}</td>
             </tr>
             `}
             ${RII == null ? '' : `
             <tr>
                 <td class="att">Nach</td>
-                <td class="attContent>${RII}</td>
+                <td class="attContent">${RII}</td>
             </tr>
             `}
             ${DTV2023 == null ? '' : `

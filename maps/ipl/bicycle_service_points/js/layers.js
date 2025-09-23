@@ -4,7 +4,7 @@
 export const sourceBicycleServicePoints = {
     layer: 'MobiData-BW:bicycle_service_points',
     style: '',
-    bounds: [7.5, 47.4, 10.4, 49.7],
+    bounds: [7.3, 47.4, 10.4, 49.7],
     server: 'test'
 };
 
@@ -25,8 +25,8 @@ export const layersBicycleServicePoints = [
         filter:
             [
                 'any',
-                ['==', ['get', 'QuelleLayer'], 'TFISReparatur'],
-                ['==', ['get', 'QuelleLayer'], 'TFISRadservicepunkte']
+                ['==', ['get', 'Datengeber'], 'TFISReparatur'],
+                ['==', ['get', 'Datengeber'], 'TFISRadservicepunkte']
             ],
         color: '#cacaca',
         ...layers
@@ -36,7 +36,7 @@ export const layersBicycleServicePoints = [
         label: 'RadVIS',
         filter:
             [
-                '==', ['get', 'QuelleLayer'], 'RadVIS'
+                '==', ['get', 'Datengeber'], 'RadVIS'
             ],
         color: '#e6007d',
         ...layers
@@ -46,7 +46,7 @@ export const layersBicycleServicePoints = [
         label: 'RadKULTUR',
         filter:
             [
-                '==', ['get', 'QuelleLayer'], 'RadKULTUR'
+                '==', ['get', 'Datengeber'], 'RadKULTUR'
             ],
         color: '#0d46a0ff',
         ...layers
@@ -56,7 +56,7 @@ export const layersBicycleServicePoints = [
         label: 'Stadt Konstanz',
         filter:
             [
-                '==', ['get', 'QuelleLayer'], 'SB_Fahrradreparaturstationen(Konstanz)'
+                '==', ['get', 'Datengeber'], 'SB_Fahrradreparaturstationen(Konstanz)'
             ],
         color: '#00ff00',
         ...layers
@@ -66,9 +66,19 @@ export const layersBicycleServicePoints = [
         label: 'Stadt Freiburg im Breisgau',
         filter:
             [
-                '==', ['get', 'QuelleLayer'], 'Frelo-Radreparaturstationen'
+                '==', ['get', 'Datengeber'], 'Frelo-Radreparaturstationen'
             ],
         color: 'black',
+        ...layers
+    },
+    {
+        id: 'adac',
+        label: 'ADAC',
+        filter:
+            [
+                '==', ['get', 'Datengeber'], 'ADAC'
+            ],
+        color: '#ffd000',
         ...layers
     }
 ];

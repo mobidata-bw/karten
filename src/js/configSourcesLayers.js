@@ -13,7 +13,7 @@ export function addSources(map, sourceConfig) {
     if (source.type == 'vector') {
         source.tiles =
             [
-                'https://' + (sourceConfig.source.server == 'test' ? 'test-ipl' : iplPath) + '.mobidata-bw.de/geoserver/gwc/service/wmts/rest/' + sourceConfig.source.layer + '/' +
+                'https://' + (sourceConfig.source.server == 'test' ? 'test-ipl' : (sourceConfig.source.server == 'dev' ? 'dev-ipl' : iplPath)) + '.mobidata-bw.de/geoserver/gwc/service/wmts/rest/' + sourceConfig.source.layer + '/' +
                 sourceConfig.source.style + '/WebMercatorQuadx2/{z}/{y}/{x}?format=application/vnd.mapbox-vector-tile'
             ],
             source.minzoom = 4,
