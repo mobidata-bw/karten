@@ -1,7 +1,7 @@
-export const shapeRegierungsbezirke = {
-    'type': 'geojson',
-    'data': '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/regierungsbezirke.geojson'
-};
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+
+
+export const shapeRegierungsbezirke = setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'regierungsbezirke');
 
 export const lineShapeRegierungsbezirke = {
     'id': 'lineShapeRegierungsbezirke',

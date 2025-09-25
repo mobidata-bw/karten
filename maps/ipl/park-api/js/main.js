@@ -20,16 +20,19 @@ export let layers, layersGeneral, layersDisabled, layersItem = layersParkApiItem
 window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
-    // MAP CONTROLS
-    // ==============================  
-    const map = initializeMap();
-    basemaps(map);
-
-
-    // ==============================
     // URL PARAMS
     // ==============================  
     const { purpose, type, geometry, object } = urlParams();
+
+
+    // ==============================
+    // MAP CONTROLS
+    // ==============================  
+    const map = initializeMap();
+
+    const options = {};
+    if (purpose == 'bicycle') options.style = 'bicycle';
+    basemaps(map, options);
 
 
     map.on('load', () => {

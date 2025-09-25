@@ -1,10 +1,10 @@
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
-export const sourceTransparenzportale = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/auswertungen/transparenzportale/transparenzportale.geojson',
-};
+export const sourceTransparenzportale = setGeoJsonPath('maps/auswertungen/transparenzportale', 'transparenzportale');
 
 
 // ==============================

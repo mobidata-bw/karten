@@ -1,26 +1,14 @@
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
-export const sourceMobilstationen = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/auswertungen/mobilstationen/Mobilstationen.geojson'
-};
-export const sourceOEV = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/auswertungen/mobilstationen/OEV.geojson'
-};
-export const sourceScooter = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/auswertungen/mobilstationen/Scooter.geojson'
-};
-export const sourceFahrrad = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/auswertungen/mobilstationen/Fahrrad.geojson'
-};
-export const sourceMIV = {
-    type: 'geojson',
-    data: '/karten_geojsons/maps/auswertungen/mobilstationen/MIV.geojson'
-};
+export const sourceMobilstationen = setGeoJsonPath('maps/auswertungen/mobilstationen', 'Mobilstationen');
+export const sourceOEV = setGeoJsonPath('maps/auswertungen/mobilstationen', 'OEV');
+export const sourceScooter = setGeoJsonPath('maps/auswertungen/mobilstationen', 'Scooter');
+export const sourceFahrrad = setGeoJsonPath('maps/auswertungen/mobilstationen', 'Fahrrad');
+export const sourceMIV = setGeoJsonPath('maps/auswertungen/mobilstationen', 'MIV');
 
 
 // ==============================

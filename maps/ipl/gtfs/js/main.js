@@ -28,7 +28,9 @@ window.addEventListener('DOMContentLoaded', () => {
     // MAP CONTROLS
     // ==============================  
     const map = initializeMap();
-    basemaps(map);
+    basemaps(map, {
+        style: 'railway'
+    });
 
 
     map.on('load', () => {

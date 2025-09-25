@@ -20,6 +20,36 @@ const layers = {
 
 export const layersBicycleServicePoints = [
     {
+        id: 'konstanz',
+        label: 'Stadt Konstanz',
+        filter:
+            [
+                '==', ['get', 'Datengeber'], 'SB_Fahrradreparaturstationen(Konstanz)'
+            ],
+        color: '#00ff00',
+        ...layers
+    },
+    {
+        id: 'freiburg',
+        label: 'Stadt Freiburg im Breisgau',
+        filter:
+            [
+                '==', ['get', 'Datengeber'], 'Frelo-Radreparaturstationen'
+            ],
+        color: 'black',
+        ...layers
+    },
+    {
+        id: 'adac',
+        label: 'ADAC',
+        filter:
+            [
+                '==', ['get', 'Datengeber'], 'ADAC'
+            ],
+        color: '#ffd000',
+        ...layers
+    },
+    {
         id: 'TFIS',
         label: 'Touristisches Freizeitinformationssystem',
         filter:
@@ -49,36 +79,6 @@ export const layersBicycleServicePoints = [
                 '==', ['get', 'Datengeber'], 'RadKULTUR'
             ],
         color: '#0d46a0ff',
-        ...layers
-    },
-    {
-        id: 'konstanz',
-        label: 'Stadt Konstanz',
-        filter:
-            [
-                '==', ['get', 'Datengeber'], 'SB_Fahrradreparaturstationen(Konstanz)'
-            ],
-        color: '#00ff00',
-        ...layers
-    },
-    {
-        id: 'freiburg',
-        label: 'Stadt Freiburg im Breisgau',
-        filter:
-            [
-                '==', ['get', 'Datengeber'], 'Frelo-Radreparaturstationen'
-            ],
-        color: 'black',
-        ...layers
-    },
-    {
-        id: 'adac',
-        label: 'ADAC',
-        filter:
-            [
-                '==', ['get', 'Datengeber'], 'ADAC'
-            ],
-        color: '#ffd000',
         ...layers
     }
 ];

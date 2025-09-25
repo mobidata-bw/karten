@@ -10,6 +10,7 @@ import {
 } from './layers.js';
 import { popupContent } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
+import { urlParams } from '../../../../src/js/urlParams.js';
 
 export let layers;
 
@@ -17,10 +18,19 @@ export let layers;
 window.addEventListener('DOMContentLoaded', () => {
 
     // ==============================
+    // URL PARAMS
+    // ==============================  
+    const { formFactor } = urlParams();
+
+
+    // ==============================
     // MAP CONTROLS
     // ==============================  
     const map = initializeMap();
-    basemaps(map);
+
+    const options = {};
+    if (formFactor == 'bicycle' || formFactor == 'cargo_bicycle' || formFactor == 'scooter') options.style = 'bicycle';
+    basemaps(map, options);
 
 
     map.on('load', () => {

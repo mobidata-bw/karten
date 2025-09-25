@@ -4,7 +4,7 @@ export function popupContent(features) {
     const {
         Name,
         Location
-    } = features;
+    } = features;  
 
     /* POPUP CONTENT */   
     return `

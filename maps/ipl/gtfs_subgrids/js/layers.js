@@ -1,3 +1,4 @@
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
 import { legendLine, legendDoubleLine, legendTripleLine, legendQuadrupleLine } from '../../../../src/js/controlLayers.js';
 
 
@@ -10,10 +11,23 @@ export const sourceTransitShapes = {
     bounds: [4.3, 45.8, 15.4, 53.8]
 };
 
+export const sourceTransitAssociations = setGeoJsonPath('maps/ipl/gtfs_subgrids', 'verkehrsverbuende_teilnetze');
+
 
 // ==============================
 // LAYERS
 // ==============================
+export const layersTransitAssociations = [
+    {
+        id: 'transitAssociations',
+        source: 'sourceTransitAssociations',
+        type: 'fill',
+        color: 'rgba(0,0,0,0)',
+        fillOpacity: 0,
+        fillOutlineColor: 'black'
+    }
+];
+
 const transitShapes = {
     type: 'line',
     source: 'sourceTransitShapes',
@@ -356,7 +370,7 @@ export const layersTransitShapes = [
         id: 'transitShapes_OMP',
         label: 'Omnipart',
         subGroup: 'Verkehrsunternehmen',
-          symbol: () => legendLine('#a7007e'),
+        symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter:
             [

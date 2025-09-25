@@ -70,6 +70,6 @@ export const layersNetzknoten = [
         source: 'sourceNetzknoten',
         color: '#e12942',
         visibility: 'none',
-        url: '/karten_geojsons/maps/strassennetz_netzknoten/BLK_Netzknoten_250130.geojson'
+        url: setGeoJsonPath('maps/strassennetz_netzknoten', 'BLK_Netzknoten_250130').data
     }
 ];

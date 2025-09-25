@@ -7,7 +7,7 @@ import {
     addSources, addLayers
 } from '../../../../../src/js/initializeMap.js';
 import {
-    sourceRoute, layersRoute,
+    sourceMap, layersRoute, layersStations,
     sourceAbstellverbotszonen, sourceAbstellflaechen, layersScooterZones
 } from './layers.js';
 import {
@@ -29,7 +29,7 @@ export let layersDatenspaziergang, layersIpl;
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    
+
     document.title = 'MobiData BW® - Datenspaziergang digitalMobil25';
 
     // ==============================
@@ -50,9 +50,9 @@ window.addEventListener('DOMContentLoaded', () => {
         // SOURCES AND LAYERS
         // ==============================   
         const sources = [
-            { id: 'sourceRoute', source: sourceRoute },
+            { id: 'sourceMap', source: sourceMap },
             { id: 'sourceAbstellverbotszonen', source: sourceAbstellverbotszonen },
-            { id: 'sourceAbstellflaechen', source: sourceAbstellflaechen},
+            { id: 'sourceAbstellflaechen', source: sourceAbstellflaechen },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
             { id: 'sourceSharingStations', source: sourceSharingStations },
             { id: 'sourceChargePoints', source: sourceChargePoints },
@@ -61,7 +61,10 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layersDatenspaziergang = layersRoute;
+        layersDatenspaziergang = [
+            ...layersRoute,
+            ...layersStations
+        ];
         layersDatenspaziergang.forEach(layer => addLayers(map, layer));
 
         const scooter = [
@@ -99,7 +102,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layersRoute, popupContentRoute);
+        popups(map, layersStations, popupContentRoute);
         popups(map, layersChargePointsOccupancy, popupContentChargePoints);
         popups(map, [...layersSharingCarVehicles, ...layersSharingCarStations, ...layersSharingScooterVehicles, ...layersSharingScooterStations], popupContentSharing);
         popups(map, layersTransitStops, popupContentTransitStops);

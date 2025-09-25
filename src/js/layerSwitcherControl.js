@@ -9,7 +9,7 @@ export let layerSwitcher;
 let attributionControl = null;
 
 
-export function basemaps(map) {
+export function basemaps(map, options = {}) {
 
     // ==============================
     // BASEMAPS & ATTRIBUTIONS
@@ -32,35 +32,44 @@ export function basemaps(map) {
             title: 'Fahrrad',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
         },
-        'darkmatter': {
-            img: `${basePath}img/basemaps/darkmatter.png`,
-            style: 'https://tiles.mobidata-bw.de/styles/darkmatter/style.json',
-            title: 'Dunkelmodus',
+         'railway': {
+            img: `${basePath}img/basemaps/railway.png`,
+            style: 'https://tiles.mobidata-bw.de/styles/railway/style.json',
+            title: 'Schienen',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
-        },
+        },        
         'aerialphotos': {
             img: `${basePath}img/basemaps/aerialphotos.png`,
             style: 'https://tiles.mobidata-bw.de/styles/aerialphotos/style.json',
             title: 'Luftbild',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} ${lgl} </div>`
         },
-        'basemap': {
+        'terrain': {
             img: `${basePath}img/basemaps/terrain.png`,
             style: 'https://sgx.geodatenzentrum.de/gdz_basemapde_vektor/styles/bm_web_top.json',
             title: 'Geländemodell',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} </div>`
+        },
+        'darkmatter': {
+            img: `${basePath}img/basemaps/darkmatter.png`,
+            style: 'https://tiles.mobidata-bw.de/styles/darkmatter/style.json',
+            title: 'Dunkelmodus',
+            attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${mapLibre} | ${openStreetMap} ${mapTiler} </div>`
         }
     };
+
+    // setStyle
+    const style = options.style;
+    const setStyle = style ? style : 'streets';
 
     /* Default Attribution Control */
     attributionControl = new maplibregl.AttributionControl({
         compact: true,
-        customAttribution: baseMaps['streets'].attribution
+        customAttribution: baseMaps[setStyle].attribution
     });
     map.addControl(attributionControl);
 
-
-    let initialStyle = Object.keys(baseMaps)[0];
+    let initialStyle = setStyle;
 
 
     // ==============================
@@ -147,7 +156,7 @@ export function basemaps(map) {
         }
     };
 
-    // map.setStyle(baseMaps[initialStyle].style);
+    map.setStyle(baseMaps[initialStyle].style);
 
 
     layerSwitcher = new layerSwitcherControl({ basemaps: baseMaps, initialBasemap: { id: initialStyle } });

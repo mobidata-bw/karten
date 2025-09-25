@@ -46,7 +46,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
 
     map = new maplibregl.Map({
         container: 'map',
-        style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
+        // style: 'https://tiles.mobidata-bw.de/styles/streets/style.json', moved setStyle to layerSwitcherControl.js
         center: [lng, lat],
         zoom: zoom,
         minZoom: configMinZoom || 4,

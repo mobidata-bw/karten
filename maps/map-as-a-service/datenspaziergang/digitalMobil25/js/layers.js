@@ -4,7 +4,7 @@ import { setGeoJsonPath } from '../../../../../src/js/setGeoJsonPath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceRoute = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'map');
+export const sourceMap = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'map');
 export const sourceAbstellverbotszonen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellverbotszonen');
 export const sourceAbstellflaechen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellflaechen');
 
@@ -14,9 +14,9 @@ export const sourceAbstellflaechen = setGeoJsonPath('maps/map-as-a-service/daten
 // ==============================
 export const layersRoute = [
     {
-        id: 'line',
+        id: 'route',
         type: 'line',
-        source: 'sourceRoute',
+        source: 'sourceMap',
         color: 'black',
         filter: [
             '==', ['geometry-type'], 'LineString'
@@ -27,10 +27,13 @@ export const layersRoute = [
                 14, 3,
                 20, 5
             ]
-    },
+    }
+];
+
+export const layersStations = [
     {
         id: 'stations',
-        source: 'sourceRoute',
+        source: 'sourceMap',
         color: 'black',
         filter: [
             '==', ['geometry-type'], 'Point'
@@ -48,7 +51,7 @@ export const layersScooterZones = [
         type: 'fill',
         source: 'sourceAbstellverbotszonen',
         color: 'yellow',
-        fillOpacity: 0.5      
+        fillOpacity: 0.5
     },
     {
         id: 'abstellflaechen',
@@ -56,6 +59,6 @@ export const layersScooterZones = [
         type: 'fill',
         source: 'sourceAbstellflaechen',
         color: 'lightgreen',
-        fillOpacity: 0.5        
+        fillOpacity: 0.5
     }
 ];

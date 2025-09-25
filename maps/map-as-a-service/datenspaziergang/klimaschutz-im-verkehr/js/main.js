@@ -28,7 +28,7 @@ import { popupContent as popupContentCountBicycle } from '../../../../count_bicy
 import { popupContent as popupContentParkApi } from '../../../../ipl/park-api/js/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
-export let layersDatenspaziergang, layersIpl;
+export let layersDatenspaziergang, layersIpl, layersZones;
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    const map = initializeMap({      
+    const map = initializeMap({
         configZoom: window.innerWidth < 577 ? 12.5 : 14.5,
         configCenter: [9.1798, 48.7759],
         configMinZoom: 12,
@@ -64,6 +64,14 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
+        layersZones = layersScooterZones.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing', visibility: 'none' }));
+        layersZones.forEach(layer => addLayers(map, layer));
+
+        const layersSharingScooter = [
+            ...layersSharingScooterVehicles.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' })),
+            ...layersSharingScooterStations.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' }))
+        ];
+
         layersDatenspaziergang = [
             ...layersRoute,
             ...layersStations
@@ -83,9 +91,9 @@ window.addEventListener('DOMContentLoaded', () => {
             ...scooter.filter(layer => layer.id == 'abstellflaechen'),
             ...scooter.filter(layer => layer.id == 'sharingScooter_StationsOccupied').map(layer => ({ ...layer, label: 'Station: Fahrzeuge nicht verfügbar' })),
             ...scooter.filter(layer => layer.id == 'sharingScooter_StationsFree').map(layer => ({ ...layer, label: 'Station: Fahrzeuge verfügbar' })),
-            ...scooter.filter(layer => layer.id == 'sharingScooter_VehiclesRealtimeData').map(layer => ({ ...layer, label: 'Fahrzeug: verfügbar' })), ,
+            ...scooter.filter(layer => layer.id == 'sharingScooter_VehiclesRealtimeData').map(layer => ({ ...layer, label: 'Fahrzeug: verfügbar' })),
 
-            ...layersTransitStops.map(layer => ({ ...layer, group: 'Station 3: Haltestellen' })), ,
+            ...layersTransitStops.map(layer => ({ ...layer, group: 'Station 3: Haltestellen' })),
             ...layersCountBicycle.filter(layer => layer.id == 'countBicycle3').map(layer => ({ ...layer, label: 'Fahrradzählstellen', group: 'Station 4: Fahrradzählstellen' })),
 
             ...layersSharingCarStations.filter(layer => layer.id == 'sharingCar_StationsNoRealtimeData').map(layer => ({ ...layer, label: 'Station: Echtzeitdaten älter 30 Minuten', group: 'Station 5: Carsharing' })),

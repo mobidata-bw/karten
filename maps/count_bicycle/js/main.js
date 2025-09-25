@@ -17,7 +17,9 @@ window.addEventListener('DOMContentLoaded', () => {
     // INITIALIZE MAP
     // ==============================   
     const map = initializeMap();
-    basemaps(map);
+    basemaps(map, {
+        style: 'bicycle'
+    });
 
 
     map.on('load', () => {

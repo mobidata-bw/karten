@@ -1,13 +1,10 @@
+import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+
+
 // ==============================
 // SOURCES
 // ==============================
-export const sourceOepnvGueteklassenStuttgart = {
-    type: 'geojson',
-    data: {
-        type: 'FeatureCollection',
-        features: []
-    }
-};
+export const sourceOepnvGueteklassenStuttgart = setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_stuttgart');
 export const sourceOepnvGueteklassenKarlsruhe = {
     type: 'geojson',
     data: {
@@ -64,7 +61,6 @@ const oepnvGueteklassen = {
     fillOutlineColor: 'transparent'
 };
 
-
 export const layersOepnvGueteklassen = [
     {
         id: 'oepnvGueteklassenTuebingen',
@@ -73,7 +69,7 @@ export const layersOepnvGueteklassen = [
         visibility: 'none',
         legendColor: 'none',
         ...oepnvGueteklassen,
-        url: '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_tuebingen.geojson'
+        url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_tuebingen').data
     },
     {
         id: 'oepnvGueteklassenFreiburg',
@@ -82,7 +78,7 @@ export const layersOepnvGueteklassen = [
         visibility: 'none',
         legendColor: 'none',
         ...oepnvGueteklassen,
-        url: '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_freiburg.geojson'
+        url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_freiburg').data
     },
     {
         id: 'oepnvGueteklassenKarlsruhe',
@@ -91,14 +87,13 @@ export const layersOepnvGueteklassen = [
         visibility: 'none',
         legendColor: 'none',
         ...oepnvGueteklassen,
-        url: '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_karlsruhe.geojson'
+        url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_karlsruhe').data
     },
     {
         id: 'oepnvGueteklassenStuttgart',
         label: 'Stuttgart',
         source: 'sourceOepnvGueteklassenStuttgart',
         legendColor: 'none',
-        ...oepnvGueteklassen,
-        url: '/karten_geojsons/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_stuttgart.geojson'
+        ...oepnvGueteklassen
     }
 ];

@@ -25,7 +25,9 @@ window.addEventListener('DOMContentLoaded', () => {
         configMinZoom: 12,
         configShape: 'shapeStuttgart'
     });
-    basemaps(map);
+    basemaps(map, {
+        style: 'bicycle'
+    });
 
 
     map.on('load', () => {

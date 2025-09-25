@@ -4,7 +4,10 @@ import {
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { sourceTransitShapes, layersTransitShapes } from './layers.js';
+import {
+    sourceTransitAssociations, layersTransitAssociations,
+    sourceTransitShapes, layersTransitShapes
+} from './layers.js';
 import { popupContentTransitShapes as popupContent } from '../../gtfs/js/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
@@ -17,7 +20,9 @@ window.addEventListener('DOMContentLoaded', () => {
     // MAP CONTROLS
     // ==============================  
     const map = initializeMap();
-    basemaps(map);
+    basemaps(map, {
+        style: 'railway'
+    });
 
 
     map.on('load', () => {
@@ -26,10 +31,12 @@ window.addEventListener('DOMContentLoaded', () => {
         // SOURCES AND LAYERS
         // ==============================      
         const sources = [
+            { id: 'sourceTransitAssociations', source: sourceTransitAssociations },
             { id: 'sourceTransitShapes', source: sourceTransitShapes }
         ];
         sources.forEach(source => addSources(map, source));
 
+        layersTransitAssociations.forEach(layer => addLayers(map, layer));
         layers = layersTransitShapes;
         layers.forEach(layer => addLayers(map, layer));
 
