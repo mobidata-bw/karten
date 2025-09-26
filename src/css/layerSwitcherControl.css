@@ -51,11 +51,9 @@
     bottom: 0px;
 }
 
-
 .maplibregl-ctrl-basemaps .basemap {
     position: relative;
 }
-
 
 .maplibregl-ctrl-basemaps .img,
 .maplibregl-ctrl-basemaps .figcaption {
@@ -69,9 +67,11 @@
 }
 
 .maplibregl-ctrl-basemaps .figcaption {
+    left: 0;
+    right: 0;
     bottom: 0;
+    text-align: center;
     font-weight: bold;
-    justify-self: center;
     color: white;
     filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000);
 }
@@ -83,7 +83,7 @@
     }
 
     .maplibregl-ctrl-basemaps .figcaption {
-        font-size: 10px;
+        font-size: 11px;
     }
 }
 
@@ -94,6 +94,6 @@
     }
 
     .maplibregl-ctrl-basemaps .figcaption {
-        font-size: 13px;
+        font-size: 14px;
     }
-} 
+}
