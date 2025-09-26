@@ -39,9 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layers = map.layerGroups({
-            'pedestrian_crossings': layersPedestrianCrossings
-        });
+        layers = layersPedestrianCrossings;
         layers.forEach(layer => addLayers(map, layer));
 
 

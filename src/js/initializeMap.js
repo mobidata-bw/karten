@@ -115,23 +115,19 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             }
         });
 
+        // map.layerGroups = (groups) => {
+        //     return Object.entries(groups).flatMap(([name, layers]) => {
+        //         if (params.get(name) === 'false') return [];              
+        //         return layers.filter(layer => params.get(layer.id) != 'false');
+        //     });
+        // };
 
-        map.layerGroups = (groups) => {
-            return Object.entries(groups).flatMap(([name, layers]) => {
-                if (params.get(name) === 'false') return [];
-
-                // if (params.get(name) === 'invisible') {
-                //     requestAnimationFrame(() => {
-                //         const element = document.getElementById(`layerGroup_${name}`).parentNode;
-                //         if (element) {
-                //             element.style.display = 'none';
-                //         }
-                //     });
-                // }
-
-                return layers.filter(layer => params.get(layer.id) != 'false');
-            });
-        };
+        //   layers = map.layerGroups({
+        //     'transit_stops': layersTransitStops,
+        //     'transit_stations': layersTransitStations,
+        //     'transit_shapes': layersTransitShapes
+        // });
+        // layers.forEach(layer => addLayers(map, layer));
 
     });
 

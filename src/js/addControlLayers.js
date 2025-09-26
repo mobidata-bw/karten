@@ -51,6 +51,5 @@ export function addControlLayers(layers, directory, groupOrGroups) {
       }
     };
   })
-    .reverse()
 
 };

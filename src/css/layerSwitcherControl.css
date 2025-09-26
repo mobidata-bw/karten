@@ -3,7 +3,7 @@
 /* ====================================================================== */
 .maplibregl-ctrl-basemaps {
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     pointer-events: auto;
     bottom: 15px;
     position: relative;

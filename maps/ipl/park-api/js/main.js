@@ -70,12 +70,11 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersParkApiOccupancy,
             ...layersParkApiType
         ];
-        layers = map.layerGroups({
-            'occupancy': layersParkApiOccupancy,
-            'type': layersParkApiType,
-            ...(addLayersDisabled ? { 'occupancy_disabled': layersDisabled } : {}),
-            ...(addLayersItem ? { 'occupancy_item': layersItem } : {})
-        });
+        layers = [
+            ...layersGeneral,
+            ...(addLayersDisabled ? layersDisabled : ''),
+            ...(addLayersItem ? layersItem : '')
+        ];
         layers.forEach(layer => addLayers(map, layer));
 
 

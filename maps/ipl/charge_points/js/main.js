@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     map.on('load', () => {
-        
+
         // ==============================
         // SOURCES AND LAYERS
         // ==============================    
@@ -30,10 +30,10 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layers = map.layerGroups({
-            'power': layersChargePointsPower,
-            'occupancy': layersChargePointsOccupancy,
-        });       
+        layers = [
+            ...layersChargePointsPower,
+            ...layersChargePointsOccupancy
+        ];
         layers.forEach(layer => addLayers(map, layer));
 
 

@@ -71,10 +71,11 @@ export function initializeControlLayers(map) {
 
         const configExtra = {
             collapsed: false,
+            directoriesCollapsed: true,
             layers: addControlLayers(layersExtra, controlLayersTitleExtra)
-        };
+        };      
         const layerControlExtra = new layerControlGrouped(configExtra);
-        map.addControl(layerControlExtra, 'top-right');      
+        map.addControl(layerControlExtra, 'top-right');
 
     } else {
 
@@ -87,5 +88,6 @@ export function initializeControlLayers(map) {
         map.addControl(layerControlDefault, 'top-right');
 
     };
+
 
 };

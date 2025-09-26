@@ -150,11 +150,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         initializeControlLayers(map);
 
-        document.querySelectorAll('.config2.mgl-layerControlDirectory>div:not(.directory)').forEach(element => {
-            element.style.setProperty('display', 'none', 'important');
-        });
-
-
+        
         // ==============================
         // POPUPS
         // ==============================       

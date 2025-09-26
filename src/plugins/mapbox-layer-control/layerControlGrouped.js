@@ -24,7 +24,12 @@ export class layerControlGrouped {
       this._addLayers = true;
     }
 
-    this._layers = options.layers.reverse().slice()
+    // NEU: Alle Directories beim Initialisieren einklappen
+    this._directoriesCollapsed =
+      !!((options.options && options.options.directoriesCollapsed) || options.directoriesCollapsed);
+
+    // this._layers = options.layers.reverse().slice()
+    this._layers = options.layers.slice()
     this._layerIds = this._layers.reduce((i, l) => {
       return [...i, l.id]
     }, [])
@@ -45,45 +50,31 @@ export class layerControlGrouped {
 
     this._groups = [...new Set(groups)];
 
+    // --- NEU: 1-Pass, bewahrt Reihenfolge exakt wie this._layers ---
     let config = {};
+    // Directory- und Group-Order mitschreiben (für spätere, stabile Iteration)
+    this._dirOrder = [];
+    this._dirToGroups = {};
 
-    this._directories.forEach(function (d) {
-      options.layers.forEach(function (layer) {
-        if (layer.directory === d) {
-          config[layer.directory] = {}
-        }
-      })
-    })
-
-    this._layers.forEach(function (l) {
+    for (const l of this._layers) {
       if (!l.group) l.group = "Operational Layers";
-      config[l.directory][l.group] = []
-    })
+      const d = l.directory;
+      const g = l.group;
 
-    this._layers.forEach(function (l) {
-      config[l.directory][l.group].push(l)
-    });
-
-    let layersClone = this._layers.slice();
-
-    //CREATE A LAYERS GROUP IN METADATA FOR FILTERING
-    this._layers.forEach(function (l) {
-      if (!l.name) l.name = l.id
-      //ADD METADATA AND METADATA.LAYERS IF NOT EXIST
-      if (!l.metadata) {
-        l.metadata = {};
+      if (!config[d]) {
+        config[d] = {};
+        this._dirOrder.push(d);                  // Directory-Reihenfolge
+        this._dirToGroups[d] = [];
       }
-      if (!l.metadata.layers) l.metadata.layers = [l.id];
-
-      //ADD CHILD LAYERS IF ANY
-      if (l.children) {
-        layersClone.forEach(child => {
-          if (child.parent && child.parent === l.id) l.metadata.layers = [...l.metadata.layers, child.id]
-        })
+      if (!config[d][g]) {
+        config[d][g] = [];
+        this._dirToGroups[d].push(g);            // Gruppen-Reihenfolge je Directory
       }
-    })
+      // Layer in Ankunftsreihenfolge anhängen
+      config[d][g].push(l);
+    }
 
-    this._layerControlConfig = config
+    this._layerControlConfig = config;
 
     // this._layers.forEach(l => {
     //   Object.keys(l).map(k => {
@@ -152,53 +143,66 @@ export class layerControlGrouped {
 
     // console.log(this._mapLayerIds, this._layers)
 
-    //BUILD DIRECTORIES, GROUPS, LAYER TOGGLES AND LEGENDS FROM THE layerControlConfig
-    for (let d in this._layerControlConfig) {
-
-      //CREATE DIRECTORY
-      let directory = d;
+    // --- NEU ---
+    //BUILD DIRECTORIES, GROUPS, ... (ordnungstreu)
+    for (const d of this._dirOrder) {
+      const directory = d;
 
       let layerCount = 0;
-
       this._layers.forEach(l => {
         if (l.directory === d && !l.parent) {
-          var checked = mglHelper.GetLayerVisibility(this._mapLayers, this._mapLayerIds, l.id);
-          if (checked) {
-            layerCount = layerCount + 1
-          }
+          const checked = mglHelper.GetLayerVisibility(this._mapLayers, this._mapLayerIds, l.id);
+          if (checked) layerCount++;
         }
-      })
+      });
 
-      let directoryDiv = lcCreateDicrectory(directory, layerCount);
+      const directoryDiv = lcCreateDicrectory(directory, layerCount);
 
-      //CREATE TOGGLE GROUPS
-      for (let g in this._layerControlConfig[d]) {
+      for (const g of this._dirToGroups[d]) {
+        const groupDiv = lcCreateGroup(g, this._layerControlConfig[d][g], map);
+        const groupLayers = this._layerControlConfig[d][g];
 
-        let groupDiv = lcCreateGroup(g, this._layerControlConfig[d][g], map)
-
-        let groupLayers = this._layerControlConfig[d][g];
-
-        // CREATE INDIVIDUAL LAYER TOGGLES
-        for (let l = 0; l < groupLayers.length; l++) {
-          let layer = groupLayers[l];
-          let style = mglHelper.GetStyle(this._mapLayers, layer);
-          if (!layer.legend && style) {
-            layer.simpleLegend = lcCreateLegend(style)
-          }
-          let checked;
-          checked = mglHelper.GetLayerVisibility(this._mapLayers, this._mapLayerIds, layer.id);
-          // if (layer.parent) {
-          //   checked = mglHelper.GetLayerVisibility(this._mapLayers, this._mapLayerIds, layer.parent);
-          // }
-          let { layerSelector, newSources } = lcCreateLayerToggle(this._map, layer, checked, this._sources);
+        // vorwärts, keine Umkehr
+        // Einträge innerhalb der Gruppe umgekehrt, Gruppenreihenfolge bleibt
+        for (let i = groupLayers.length - 1; i >= 0; i--) {
+          const layer = groupLayers[i];
+          const style = mglHelper.GetStyle(this._mapLayers, layer);
+          if (!layer.legend && style) layer.simpleLegend = lcCreateLegend(style);
+          const checked = mglHelper.GetLayerVisibility(this._mapLayers, this._mapLayerIds, layer.id);
+          const { layerSelector, newSources } = lcCreateLayerToggle(this._map, layer, checked, this._sources);
           this._sources = newSources;
-          groupDiv.appendChild(layerSelector)
+          groupDiv.appendChild(layerSelector);
         }
+
         directoryDiv.appendChild(groupDiv);
       }
 
-      this._div.appendChild(directoryDiv)
+      this._div.appendChild(directoryDiv);
     }
+
+
+    // --- NEU: alle Directories initial zuklappen, falls gewünscht ---
+    if (this._directoriesCollapsed) {
+      const accs = this._div.querySelectorAll('.mgl-layerControlDirectory');
+      accs.forEach(acc => {
+        // Button-Zustand für das Icon
+        const btn = acc.querySelector(':scope > button');
+        if (btn) btn.classList.add('collapsed');
+
+        // Inhalte verbergen: alles außer Button + .directory
+        let el = acc.firstElementChild;
+        while (el) {
+          const keep = el.tagName === 'BUTTON' || el.classList.contains('directory');
+          if (!keep) el.style.display = 'none';
+          el = el.nextElementSibling;
+        }
+
+        // optional (schadet nicht, hilft beim Debuggen/Styling)
+        acc.setAttribute('aria-expanded', 'false');
+        acc.dataset.collapsed = 'true';
+      });
+    }
+
 
     /****
      * ADD EVENT LISTENERS FOR THE LAYER CONTROL ALL ON THE CONTROL ITSELF
@@ -419,7 +423,7 @@ function lcCreateLayerToggle(map, layer, checked, sources) {
   // ==============================
   // LEGEND NAMES
   // ==============================
-  
+
 
   label.dataset.layerToggle = "true";
 

@@ -32,9 +32,7 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layers = map.layerGroups({
-            'count_bicycle': layersCountBicycle,
-        });
+        layers = layersCountBicycle;
         layers.forEach(layer => addLayers(map, layer));
 
 

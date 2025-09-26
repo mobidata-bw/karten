@@ -24,15 +24,13 @@ export function initializeControlLayers(map) {
     // ============================== 
     const config2 = {
         collapsed: false,
+        directoriesCollapsed: true,
         layers: addControlLayers(layersGeoJson, 'Weitere Datenprofile', 'group')
     };
 
     control2 = new layerControlGrouped(config2);
 
     map.addControl(control2, 'top-right');
-
-    // add class to add different max-height for config2 
-    document.getElementById('Weitere_Datenprofile').parentElement.classList.add('config2');
 
 
     // ==============================

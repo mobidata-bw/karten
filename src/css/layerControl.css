@@ -38,7 +38,7 @@ svg {
 		max-height: 170px;
 	}
 
-	.config2 {
+	.configHidden {
 		max-height: 120px !important;
 	}
 
@@ -73,7 +73,7 @@ svg {
 		max-height: 370px;
 	}
 
-	.config2 {
+	.configHidden {
 		max-height: 130px !important;
 	}
 }
@@ -83,7 +83,7 @@ svg {
 		max-height: 500px;
 	}
 
-	.config2 {
+	.configHidden {
 		max-height: 285px !important;
 	}
 }
@@ -210,14 +210,4 @@ input.slide-toggle:checked {
 	svg {
 		margin-bottom: 2px;
 	}
-}
-
-/* REVERSE CONTROL LAYERS */
-.mgl-layerControlDirectory>div:not(.directory) {
-	display: flex;
-	flex-direction: column-reverse;
-}
-
-.mgl-layerControlDirectory>div:not(.directory)>label.mgl-layerControlGroupHeading {
-	order: 1;
 }

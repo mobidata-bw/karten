@@ -44,10 +44,10 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layers = map.layerGroups({
-            'vehicles': layersSharingVehicles,
-            'stations': layersSharingStations,
-        });
+        layers = [
+            ...layersSharingVehicles,
+            ...layersSharingStations
+        ];
         layers.forEach(layer => addLayers(map, layer));
 
 

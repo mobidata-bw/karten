@@ -36,11 +36,11 @@ window.addEventListener('DOMContentLoaded', () => {
             { id: 'sourceStrassennetz', source: sourceStrassennetz }
         ];
         sources.forEach(source => addSources(map, source));
-      
-        layers = map.layerGroups({
-            'netzknoten': layersNetzknoten,
-            'strassennetz': layersStrassennetz,
-        });
+
+        layers = [
+            ...layersNetzknoten,
+            ...layersStrassennetz
+        ];
         layers.forEach(layer => addLayers(map, layer));
 
 
