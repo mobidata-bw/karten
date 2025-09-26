@@ -15,8 +15,8 @@ build:
 karten:
 	cp -r dist_prod karten
 	cd karten && mv maps/* .
-	rm -rf karten/maps	
-	sudo rm -rf /var/www/html/daten/public/karten	
+	rm -rf karten/maps
+	sudo rm -rf /var/www/html/daten/public/karten
 	sudo mv karten /var/www/html/daten/public
 	sudo rm -rf /var/www/html/daten/public/karten/map-as-a-service/data_center
 	sudo cp -r ../data_center /var/www/html/daten/public/karten/map-as-a-service
@@ -31,7 +31,7 @@ karten-test:
 karten-dev:
 	cp -r dist_dev karten_dev
 	cd karten_dev && mv maps/* .
-	rm -rf karten_dev/maps	
+	rm -rf karten_dev/maps
 	sudo rm -rf /var/www/html/daten/public/karten_dev
 	sudo mv karten_dev /var/www/html/daten/public
 
