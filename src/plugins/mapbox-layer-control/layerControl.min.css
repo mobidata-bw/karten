@@ -32,12 +32,8 @@
 }
 
 .mgl-layerControl:not(.collapsed) {
-    height: auto;
-    width: calc(100% + 20px);
-    max-width: 100%;
-    overflow-x: hidden;
-    display: grid;
-    overflow-y: auto
+  width: calc(100% + 10px);
+  transform: translateX(-10px); 
 }
 
 .mgl-layerControlLegend {

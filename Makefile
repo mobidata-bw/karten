@@ -6,6 +6,12 @@
   karten-auswertungen-% \
   karten-map-as-a-service-%
 
+build:
+	npm run build
+	npm run build:test
+	git add .
+	git commit
+
 karten:
 	cp -r dist_prod karten
 	cd karten && mv maps/* .
