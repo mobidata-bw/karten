@@ -23,7 +23,7 @@ export function basemaps(map, options = {}) {
         'streets': {
             img: `${basePath}img/basemaps/streets.png`,
             style: 'https://tiles.mobidata-bw.de/styles/streets/style.json',
-            title: 'Straßen',
+            title: 'Straße',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${maplibre} | ${openStreetMap} ${mapTiler} </div>`
         },
         'bicycle': {
@@ -35,7 +35,7 @@ export function basemaps(map, options = {}) {
         'railway': {
             img: `${basePath}img/basemaps/railway.png`,
             style: 'https://tiles.mobidata-bw.de/styles/railway/style.json',
-            title: 'Schienen',
+            title: 'Schiene',
             attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${maplibre} | ${openStreetMap} ${mapTiler} </div>`
         },
         'aerialphotos': {

@@ -10,7 +10,7 @@
 }
 
 .legendRectangle {
-	transform: translateX(1px) translateY(1px);
+	transform: translateX(0.5px) translateY(0.5px);
 	width: 10px;
 	height: 10px;
 	stroke: black;

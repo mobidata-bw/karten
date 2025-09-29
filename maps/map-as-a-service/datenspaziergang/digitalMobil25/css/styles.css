@@ -1,9 +1,9 @@
 .mgl-layerControlDirectory {
-    max-height: 260px !important;
+    max-height: 255px !important;
 }
 
 @media (max-width: 575px) {
     .mgl-layerControlDirectory {
-        max-height: 190px !important;
+        max-height: 185px !important;
     }
 }

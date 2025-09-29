@@ -18,7 +18,7 @@ export function popupContent(features) {
     is_virtual_station,
     num_cars_available,
     num_bicycles_available,
-    num_scooters_standing_available,
+    num_scooters_available,
     num_cargo_bicycles_available,
     num_mopeds_available,
     propulsion_type,
@@ -141,7 +141,7 @@ export function popupContent(features) {
         <td class="att">Verfügbare Fahrzeuge</td>
         ${feed_id == noRealtimeData ? '<td class="attContent"><i>Echtzeitdaten nicht vorhanden</i></td>' :
         ((realtime_data_outdated == true && (is_virtual_station == false || !is_virtual_station)) ? '<td class="attContent"><i>Echtzeitdaten älter 30 Minuten</i></td>' :
-          `<td class="attContent">${num_cars_available ?? num_bicycles_available ?? num_scooters_standing_available ?? num_cargo_bicycles_available ?? num_mopeds_available}</td>`)}
+          `<td class="attContent">${num_cars_available ?? num_bicycles_available ?? num_scooters_available ?? num_cargo_bicycles_available ?? num_mopeds_available}</td>`)}
       </tr>
       `}
       <tr>
