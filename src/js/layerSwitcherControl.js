@@ -132,7 +132,7 @@ export function basemaps(map, options = {}) {
                     if (activeElement) {
                         activeElement.classList.remove('active');
                     }
-                    basemapContainer.classList.add('active');
+                    basemapContainer.classList.add('active');              
 
                     map.setStyle(base.style);
 
@@ -192,7 +192,9 @@ export function basemaps(map, options = {}) {
         return addLayer(layer);
     };
 
-    map.on('styledata', () => {
+    map.on('styledata', () => {    
+
+
         setTimeout(() => {
 
             for (let [id, src] of sources) {
@@ -202,9 +204,26 @@ export function basemaps(map, options = {}) {
                 if (!map.getLayer(layer.id)) map.addLayer(layer);
             }
 
+            const visibleLayers = [];
+            
+            layers.forEach(layer => {
+
+                const visibility = map.getLayoutProperty(layer.id, 'visibility');
+
+
+                // console.log('Aktive Layers: ', activeLayers);
+                // console.log('Inaktive Layers: ', inactiveLayers);
+                // if (visibility == 'visible') {
+                //     map.setLayoutProperty(layer.id, 'visibility', 'none');
+                //     visibleLayers.push(layer.id)
+                //      console.log(visibleLayers);
+                // } else {
+                //     map.setLayoutProperty(layer.id, 'visibility', 'visible');
+                // }
+              
+            });
 
             if (map.getStyle().name == 'Dark Matter') {
-
                 const shapeLayers = map
                     .getStyle()
                     .layers
@@ -217,13 +236,12 @@ export function basemaps(map, options = {}) {
                     else if (shapeLayer.type == 'fill') {
                         map.setPaintProperty(shapeLayer.id, 'fill-color', 'white');
                     }
-                });
-
+                })
             }
 
         }, 0);
-    });
 
+    });
 
 
 };

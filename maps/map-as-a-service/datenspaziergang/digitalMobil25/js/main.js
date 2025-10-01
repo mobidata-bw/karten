@@ -74,7 +74,7 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
 
         layersIpl = [
-            ...layersSharingCarStations.filter(layer => layer.id == 'sharingCar_StationsNoRealtimeData').map(layer => ({ ...layer, label: 'Station: Echtzeitdaten älter 30 Minuten', group: 'Station 1: Carsharing', visibility: 'visible' })),
+            ...layersSharingCarStations.filter(layer => layer.id == 'sharingCar_StationsNoRealtimeData').map(layer => ({ ...layer, label: 'Station: Echtzeitdaten nicht vorhanden', group: 'Station 1: Carsharing', visibility: 'visible' })),
             ...layersSharingCarStations.filter(layer => layer.id == 'sharingCar_StationsOccupied').map(layer => ({ ...layer, label: 'Station: Fahrzeuge nicht verfügbar', group: 'Station 1: Carsharing', visibility: 'visible' })),
             ...layersSharingCarStations.filter(layer => layer.id == 'sharingCar_StationsFree').map(layer => ({ ...layer, label: 'Station: Fahrzeuge verfügbar', group: 'Station 1: Carsharing', visibility: 'visible' })),
 

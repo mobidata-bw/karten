@@ -62,7 +62,7 @@ export const layersChargePointsPower = [
 export const layersChargePointsOccupancy = [
     {
         id: 'chargePointsOccupancy_Static',
-        label: 'Echtzeitdaten fehlen',
+        label: 'Echtzeitdaten nicht vorhanden',
         subGroup: 'Belegung',
         filter:
             [

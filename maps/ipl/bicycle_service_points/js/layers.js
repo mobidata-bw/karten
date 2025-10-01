@@ -4,8 +4,7 @@
 export const sourceBicycleServicePoints = {
     layer: 'MobiData-BW:bicycle_service_points',
     style: '',
-    bounds: [7.3, 47.4, 10.4, 49.7],
-    server: 'test'
+    bounds: [7.3, 47.4, 10.4, 49.7]
 };
 
 
