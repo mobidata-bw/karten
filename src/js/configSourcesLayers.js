@@ -19,9 +19,7 @@ export function addSources(map, sourceConfig) {
             source.minzoom = 4,
             source.maxzoom = 15;
 
-        if (source.bounds) {
-            source.bounds = sourceConfig.source.bounds
-        }
+        if (source.bounds) source.bounds = sourceConfig.source.bounds;
     }
     else if (source.type == 'raster') {
         const cql = sourceConfig.source.cql ? 'cql_filter=' + encodeURIComponent(sourceConfig.source.cql) : '';
@@ -45,12 +43,8 @@ export function addSources(map, sourceConfig) {
     else if (source.type == 'geojson') {
         source.data = sourceConfig.source.data
 
-        if (source.buffer) {
-            source.buffer = sourceConfig.source.buffer
-        };
-        if (source.tolerance) {
-            source.tolerance = sourceConfig.source.tolerance
-        };
+        if (source.buffer) source.buffer = sourceConfig.source.buffer;
+        if (source.tolerance) source.tolerance = sourceConfig.source.tolerance;
 
         // source.cluster = true;             
         // source.clusterMaxZoom = 14;
@@ -78,7 +72,7 @@ export function addLayers(map, layerConfig) {
         line: {
             'line-color': layerConfig.color,
             'line-width': layerConfig.lineWidth || 1.5,
-            'line-opacity': layerConfig.lineOpacity || 1,
+            'line-opacity': layerConfig.lineOpacity || 1
         },
         fill: {
             'fill-color': layerConfig.color,
@@ -105,9 +99,7 @@ export function addLayers(map, layerConfig) {
         paint.circle['circle-opacity'] = 0.8
     };
     // change stroke color if black
-    if (layerConfig.color == 'black') {
-        paint.circle['circle-stroke-color'] = 'white'
-    }
+    if (layerConfig.color == 'black') paint.circle['circle-stroke-color'] = 'white'
 
     const layer = {
         'id': layerConfig.id,
@@ -120,12 +112,10 @@ export function addLayers(map, layerConfig) {
         'paint': paint[layerConfig.type || 'circle'], // default: 'circle'     
     };
 
-    if (layerConfig.filter) {
-        layer.filter = layerConfig.filter
-    };
-    if (layerConfig.fillSortKey) {
-        layer.layout['fill-sort-key'] = layerConfig.fillSortKey
-    };
+    if (layerConfig.filter) layer.filter = layerConfig.filter;
+    if (layerConfig.fillSortKey) layer.layout['fill-sort-key'] = layerConfig.fillSortKey;
+    if (layerConfig.lineJoin) layer.layout['line-join'] = layerConfig.lineJoin;
+    if (layerConfig.lineCap) layer.layout['line-cap'] = layerConfig.lineCap;
 
     map.addLayer(layer);
 
