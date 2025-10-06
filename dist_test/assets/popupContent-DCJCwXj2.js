@@ -121,13 +121,11 @@ import{u as _,t as et}from"./timeStamps-CJ2Ek9ou.js";import{j as Z}from"./addCon
         <br>
         <div class="title title2">Parkplätze</div>
         <div id="divParkingSites">
-        <div><div id="anchor-${c}"></div></div>
+        <div id="anchor-${c}"></div>
         <div id="divTable">
         <table>
             ${e=="spot"?I:J}
-        </table>
-            </div>
-        </div>
+        </table>          
         <table id="divURLs">
             <tr>
                 ${b?`<td class="attContentLink"><a href="${b}" target="_blank">&#10149 Datengeber</a></td>`:""}

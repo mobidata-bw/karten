@@ -18,7 +18,7 @@ const afzs = {
     lineCap: 'round'
 };
 
-const attribute = '18.06.2025_Querschnittsbelastungen für neue Juranek-Karte_Querschnitt';
+const attribute = 'Querschnitt';
 
 export const layersAfzs = [
     {

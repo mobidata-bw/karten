@@ -179,13 +179,11 @@ export function popupContent(features) {
         <br>
         <div class="title title2">Parkplätze</div>
         <div id="divParkingSites">
-        <div><div id="anchor-${id}"></div></div>
+        <div id="anchor-${id}"></div>
         <div id="divTable">
         <table>
             ${parking_object == 'spot' ? spots : sites}
-        </table>
-            </div>
-        </div>
+        </table>          
         <table id="divURLs">
             <tr>
                 ${public_url ? `<td class="attContentLink"><a href="${public_url}" target="_blank">&#10149 Datengeber</a></td>` : ''}

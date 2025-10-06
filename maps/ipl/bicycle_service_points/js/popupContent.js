@@ -1,9 +1,8 @@
-import { iplPath } from '../../../../src/utils/paths.js';
 import { popupImages } from '../../../../src/js/popupImages.js';
 
 
 export function popupContent(features) {
-    // console.log(features)
+    console.log(features)
 
     /* INITIALIZE VARIABLES */
     const {

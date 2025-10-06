@@ -28,9 +28,9 @@ export function popupContent(features) {
     /* PATHS */
     let filePath;
     if (basePath == '/') {
-        filePath = 'data/';
+        filePath = '/data/maps/map-as-a-service/strassenverkehrszaehlung_ravensburg';
     } else {
-        filePath = '/karten_geojsons/maps/map-as-a-service/strassenverkehrszaehlung_ravensburg/data/';
+        filePath = '/karten_geojsons/maps/map-as-a-service/strassenverkehrszaehlung_ravensburg';
     };
 
     /* POPUP CONTENT */

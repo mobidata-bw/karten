@@ -1,4 +1,4 @@
-import{s as c,j as l,a as d,l as i,i as b,b as m,c as p,d as u}from"../../addControlLayers-D5roa0l2.js";import{p as h}from"../../popups-CV_HI68r.js";window.PUBLIC_PATH="/karten_test/";const C=c("maps/ipl/webcam","webcam"),w=[{id:"webcam",group:"Webcam-Bilder",label:"Webcam-Standorte",source:"sourceWebcam",color:"black"}];function g(t){const{strasse:e,bezeichnung:a,blickrichtung:o,kamera_nr:r,bild:n}=t;return`
+import{s as c,j as l,a as d,l as i,i as b,b as m,c as p,d as u}from"../../addControlLayers-D5roa0l2.js";import{p as h}from"../../popups-CV_HI68r.js";window.PUBLIC_PATH="/karten_test/";const C=c("maps/ipl/webcam","webcam"),w=[{id:"webcam",group:"Webcam-Bilder",label:"Standorte",source:"sourceWebcam",color:"black"}];function g(t){const{strasse:e,bezeichnung:a,blickrichtung:o,kamera_nr:r,bild:n}=t;return`
         <table>
             <tr>              
                 <th class='title'>${e}</th>

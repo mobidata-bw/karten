@@ -15,7 +15,7 @@ export const layersWebcam = [
     {
         id: 'webcam',
         group: 'Webcam-Bilder',
-        label: 'Webcam-Standorte',
+        label: 'Standorte',
         source: 'sourceWebcam',
         color: 'black'
     }
