@@ -17,17 +17,17 @@ export function popupContent(features) {
     return `
         <table>
             <tr>              
-                <th class='title'>${strasse}</th>
+                <th class='title'>${kamera_nr}</th>
             </tr>
         </table><br><table>
             <tr>
-                <td class='att'>Kamera-Nummer</td>
-                <td class='attContent'>${kamera_nr}</td>
+                <td class='att'>Straße</td>
+                <td class='attContent'>${strasse}</td>
             </tr><tr>
-                <td class='att'>Bezeichnung</td>
+                <td class='att'>Standort</td>
                 <td class='attContent'>${bezeichnung}</td>
             </tr><tr>
-                    <td class='att'>Blickrichtung</td>
+                    <td class='att'>Richtung</td>
                     <td class='attContent'>${blickrichtung}</td>
             </tr>        
         </table><table>
