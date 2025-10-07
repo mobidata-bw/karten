@@ -1,7 +1,7 @@
 import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
 
 
-export const shapeKonstanz = setGeoJsonPath('boundaries', 'shapeKonstanz');
+export const shapeKonstanz = setGeoJsonPath('shapes', 'shapeKonstanz');
 
 export const fillShapeKonstanz = {
     'id': 'fillShapeKonstanz',
@@ -10,6 +10,9 @@ export const fillShapeKonstanz = {
     'paint': {
         'fill-color': 'black',
         'fill-opacity': 0.1,
+    },
+    'layout': {
+        'visibility': 'visible'
     }
 };
 
@@ -20,5 +23,8 @@ export const lineShapeKonstanz = {
     'paint': {
         'line-color': 'black',
         'line-width': 2
+    },
+    'layout': {
+        'visibility': 'visible'
     }
 };

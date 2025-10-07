@@ -81,7 +81,7 @@ export function basemaps(map, options = {}) {
                     window.__basemapSwitching = true; // set variable to true as soon as basemap is clicked
                     preservedActiveLayers = [];
                     layers.forEach(layer => {
-                        if (map.getLayoutProperty(layer.id, 'visibility') == 'visible' || layer.id.includes('Shape')) preservedActiveLayers.push(layer.id);
+                        if (map.getLayoutProperty(layer.id, 'visibility') == 'visible') preservedActiveLayers.push(layer.id);
                     });
 
                     /* Set Style */
@@ -138,6 +138,7 @@ export function basemaps(map, options = {}) {
         return _addLayer(layer);
     };
 
+
     /* Set Visibility */
     let activeLayers = [];
 
@@ -158,7 +159,7 @@ export function basemaps(map, options = {}) {
             activeLayers.length = 0;
             layers.forEach(layer => {
                 if (map.getLayer(layer.id)) {
-                    if (map.getLayoutProperty(layer.id, 'visibility') == 'visible' || layer.id.includes('Shape')) activeLayers.push(layer.id)
+                    if (map.getLayoutProperty(layer.id, 'visibility') == 'visible') activeLayers.push(layer.id)
                 }
             });
             if (!window.__basemapSwitching) return; // if false then no further actions

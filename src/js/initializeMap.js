@@ -52,7 +52,6 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
         minZoom: configMinZoom || 4,
         maxBounds: [[-21.4, 35.1], [40.9, 72.4]],
         attributionControl: false
-        // pixelRatio: 1
     });
 
     map.once('load', () => {
@@ -101,7 +100,10 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             'source': 'shape',
             'paint': {
                 'fill-color': 'black',
-                'fill-opacity': 0.1,
+                'fill-opacity': 0.1
+            },
+            'layout': {
+                'visibility': 'visible'
             }
         });
 
@@ -112,6 +114,9 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             'paint': {
                 'line-color': 'black',
                 'line-width': 2
+            },
+            'layout': {
+                'visibility': 'visible'
             }
         });
 

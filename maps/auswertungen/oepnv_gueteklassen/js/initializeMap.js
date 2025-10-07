@@ -10,5 +10,8 @@ export const lineShapeRegierungsbezirke = {
     'paint': {
         'line-color': 'black',
         'line-width': 1
+    },
+    'layout': {
+        'visibility': 'visible'
     }
 };

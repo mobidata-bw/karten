@@ -63,7 +63,7 @@ export function addLayers(map, layerConfig) {
 
     const paint = {
         circle: {
-            'circle-radius': layerConfig.circleRadius || 5, // default: '5'
+            'circle-radius': layerConfig.circleRadius || 5,
             'circle-color': layerConfig.color,
             'circle-opacity': layerConfig.circleOpacity || 0.8,
             'circle-stroke-color': layerConfig.circleStrokeColor || 'black',
@@ -103,13 +103,13 @@ export function addLayers(map, layerConfig) {
 
     const layer = {
         'id': layerConfig.id,
-        'type': layerConfig.type || 'circle', // default: 'circle'
+        'type': layerConfig.type || 'circle', 
         'source': layerConfig.source,
-        'source-layer': layerConfig.sourceLayer || '', // default: ''
+        'source-layer': layerConfig.sourceLayer || '', 
         'layout': {
-            'visibility': layerConfig.visibility || 'visible' // default: 'visible'
+            'visibility': layerConfig.visibility || 'visible' 
         },
-        'paint': paint[layerConfig.type || 'circle'], // default: 'circle'     
+        'paint': paint[layerConfig.type || 'circle']
     };
 
     if (layerConfig.filter) layer.filter = layerConfig.filter;
