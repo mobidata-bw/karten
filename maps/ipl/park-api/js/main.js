@@ -76,7 +76,7 @@ window.addEventListener('DOMContentLoaded', () => {
             ...(addLayersItem ? layersItem : '')
         ];
         layers.forEach(layer => addLayers(map, layer));
-
+  
 
         // ==============================
         // LAYER CONTROL

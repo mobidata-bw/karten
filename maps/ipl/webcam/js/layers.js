@@ -17,6 +17,6 @@ export const layersWebcam = [
         group: 'Webcam-Bilder',
         label: 'Standorte',
         source: 'sourceWebcam',
-        color: 'black'
+        color: 'white'
     }
 ];
