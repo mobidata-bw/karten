@@ -166,6 +166,7 @@ export function basemaps(map, options = {}) {
             });
             if (!window.__basemapSwitching) return; // if false then no further actions
             const restoreArray = Array.isArray(preservedActiveLayers) ? preservedActiveLayers : activeLayers;
+            // console.log(restoreArray);
             layers.forEach(layer => {
                 if (restoreArray.includes(layer.id)) map.setLayoutProperty(layer.id, 'visibility', 'visible');
                 else map.setLayoutProperty(layer.id, 'visibility', 'none');

@@ -57,7 +57,7 @@ const oepnvGueteklassen = {
         'J', '#4b44f3',
         '#cacaca'
     ],
-    fillOpacity: 1,
+    fillOpacity: 0.05,
     fillOutlineColor: 'transparent'
 };
 

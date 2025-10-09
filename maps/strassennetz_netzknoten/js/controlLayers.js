@@ -13,10 +13,16 @@ export function initializeControlLayers(map) {
 
     const layerControl = new layerControlGrouped(config);
 
-    map.moveLayer('strassennetz_B', 'netzknoten');
-    map.moveLayer('strassennetz_L', 'netzknoten');
-    map.moveLayer('strassennetz_K', 'netzknoten');
-  
+    map.moveLayer('netzknoten');
+    map.on('styledata', () => {
+        if (!window.__basemapSwitching) return;
+        setTimeout(() => {
+            if (map.getLayer('netzknoten')) {
+                map.moveLayer('netzknoten');
+            }
+        }, 0);
+    });
+
     map.addControl(layerControl, 'top-right');
 
 };
