@@ -20,8 +20,6 @@ karten:
 	sudo mv karten /var/www/html/daten/public
 	sudo rm -rf /var/www/html/daten/public/karten/map-as-a-service/data_center
 	sudo cp -r ../data_center /var/www/html/daten/public/karten/map-as-a-service
-
-karten-test:
 	cp -r dist_test karten_test
 	cd karten_test && mv maps/* .
 	rm -rf karten_test/maps
