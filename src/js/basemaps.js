@@ -2,6 +2,9 @@ import { basePath } from '../utils/paths.js';
 export let basemapConfig;
 
 
+// ==============================
+// CONFIGURE BASEMAPS
+// ============================== 
 const maplibre = "<a href='https://maplibre.org/' target='_blank'>MapLibre</a>";
 const openStreetMap = "<a href='https://www.openstreetmap.org/copyright' target='_blank'>© OpenStreetMap Mitwirkende</a>";
 const mapTiler = "<a href='https://www.maptiler.com/copyright/' target='_blank'>© MapTiler</a>";
@@ -44,4 +47,40 @@ basemapConfig = {
         title: 'Nacht',
         attribution: `<div class='maplibregl-ctrl-attrib-inner'> ${maplibre} | ${openStreetMap} ${mapTiler} </div>`
     }
-}; 
+};
+
+
+// ==============================
+// STYLE BASEMAPS
+// ============================== 
+export function styleBasemaps(map, layers) {
+
+    const styleName = map.getStyle().name;
+
+    switch (styleName) {
+        case 'Streets':
+        case 'Labeled Aerial Photos':
+        case 'Dark Matter':
+            map.moveLayer('lineShape', 'place_other');
+            map.moveLayer('fillShape', 'place_other');
+            if (styleName == 'Dark Matter') {
+                layers.forEach(layer => {
+                    if (layer.id.endsWith('Shape')) {
+                        if (layer.type == 'line') map.setPaintProperty(layer.id, 'line-color', 'white');
+                        else if (layer.type == 'fill') map.setPaintProperty(layer.id, 'fill-color', 'white');
+                    }
+                })
+            };
+            break;
+        case 'CycloBright':
+        case 'Railway':
+            map.moveLayer('lineShape', 'place-other');
+            map.moveLayer('fillShape', 'place-other');
+            break;
+        case 'bm_web_top':
+            map.moveLayer('lineShape', 'Name_Bahnstrecke_Sonderbahnen');
+            map.moveLayer('fillShape', 'Name_Bahnstrecke_Sonderbahnen');
+            break;
+    };
+
+};

@@ -1,7 +1,7 @@
 /* ====================================================================== */
 /* https://docs.maptiler.com/sdk-js/examples/control-style-switcher/      */
 /* ====================================================================== */
-import { basemapConfig } from './basemaps.js';
+import { basemapConfig, styleBasemaps } from './basemaps.js';
 import maplibregl from 'maplibre-gl';
 export let layerSwitcher;
 
@@ -36,7 +36,6 @@ export function basemaps(map, options = {}) {
             this._container.classList.add('maplibregl-ctrl');
             this._container.classList.add('maplibregl-ctrl-basemaps');
             this._container.classList.add('closed');
-
             this._container.addEventListener('mouseenter', () => {
                 this._container.classList.remove('closed');
             });
@@ -51,9 +50,7 @@ export function basemaps(map, options = {}) {
             Object.keys(basemaps).forEach((layerId) => {
                 const base = basemaps[layerId];
 
-                // ==============================
-                // CONSTRUCT HTML
-                // ============================== 
+                /* Construct HTML */
                 const basemapContainer = document.createElement('figure');
                 basemapContainer.classList.add('basemap');
                 basemapContainer.dataset.id = layerId;
@@ -68,9 +65,10 @@ export function basemaps(map, options = {}) {
 
                 basemapContainer.append(img, figcaption);
 
+
                 // ==============================
-                // CLICK EVENT
-                // ============================== 
+                // BASEMAP CONTAINER EVENTS
+                // ==============================  
                 basemapContainer.addEventListener('click', () => {
 
                     const activeElement = this._container.querySelector('.active');
@@ -121,10 +119,7 @@ export function basemaps(map, options = {}) {
     layerSwitcher = new layerSwitcherControl({ basemaps: basemapConfig, initialBasemap: { id: initialStyle } });
     map.addControl(layerSwitcher, 'bottom-left');
 
-
-    // ==============================
-    // RE-ADD SOURCES & LAYERS
-    // ==============================  
+    /* Re-add sources and layers */
     const sources = new Map(), layers = new Map();
 
     const _addSource = map.addSource.bind(map);
@@ -138,14 +133,23 @@ export function basemaps(map, options = {}) {
         return _addLayer(layer);
     };
 
-
     /* Set Visibility */
     let activeLayers = [];
 
+    /* Style basemaps */
+    map.on('load', () => {
+        styleBasemaps(map, layers);
+    });
+
+
+    // ==============================
+    // SWITCH BASEMAP EVENTS
+    // ============================== 
     map.on('styledata', () => {
 
         setTimeout(() => {
 
+            /* Re-add sources and layers */
             for (let [id, src] of sources) {
                 if (!map.getSource(id)) map.addSource(id, src);
             };
@@ -153,9 +157,7 @@ export function basemaps(map, options = {}) {
                 if (!map.getLayer(layer.id)) map.addLayer(layer);
             };
 
-            // ==============================
-            // SET VISIBILITY
-            // ============================== 
+            /* Set visibility */
             activeLayers.length = 0;
             layers.forEach(layer => {
                 if (map.getLayer(layer.id)) {
@@ -169,26 +171,15 @@ export function basemaps(map, options = {}) {
                 else map.setLayoutProperty(layer.id, 'visibility', 'none');
             });
 
-            // ==============================
-            // DARK MATTER
-            // ============================== 
-            if (map.getStyle().name == 'Dark Matter') {
-                layers.forEach(layer => {
-                    if (layer.id.includes('Shape')) {
-                        if (layer.type == 'line') map.setPaintProperty(layer.id, 'line-color', 'white');
-                        else if (layer.type == 'fill') map.setPaintProperty(layer.id, 'fill-color', 'white');
-                    }
-                })
-            };
+            /* Style basemaps */
+            styleBasemaps(map, layers);
 
             /* Set Visibility: Reset flag and array */
             window.__basemapSwitching = false;
             preservedActiveLayers = null;
 
-
         }, 0);
 
     });
-
 
 };
