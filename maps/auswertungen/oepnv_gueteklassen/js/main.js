@@ -16,6 +16,7 @@ import {
 } from './layers.js';
 import { popupContent } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
+import { legendHtml } from './legend.js';
 import { moveLayer } from './moveLayer.js';
 
 export let layers;
@@ -58,6 +59,13 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================     
         initializeControlLayers(map);
 
+
+        // ==============================
+        // LEGEND
+        // ==============================   
+        const element = document.getElementById('legend');
+        if (element) element.innerHTML = legendHtml;
+        
 
         // ==============================
         // MOVE LAYER

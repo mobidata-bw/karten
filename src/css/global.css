@@ -26,6 +26,8 @@ body {
 
 	--borderRadius: 4px;
 	--boxShadow: 0 0 0 2px rgba(0, 0, 0, .1);
+
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 #MobiDataBW img {
