@@ -50,6 +50,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         // ==============================
+        // MOVE LAYER
+        // ==============================     
+        map.moveLayer('stations');
+
+
+        // ==============================
         // POPUPS
         // ============================== 
         popups(map, layersStations, popupContentStations);

@@ -13,16 +13,6 @@ export function initializeControlLayers(map) {
 
     const layerControl = new layerControlGrouped(config);
 
-    map.moveLayer('netzknoten');
-    map.on('styledata', () => {
-        if (!window.__basemapSwitching) return;
-        setTimeout(() => {
-            if (map.getLayer('netzknoten')) {
-                map.moveLayer('netzknoten');
-            }
-        }, 0);
-    });
-
-    map.addControl(layerControl, 'top-right');
+    map.addControl(layerControl, 'top-right');  
 
 };

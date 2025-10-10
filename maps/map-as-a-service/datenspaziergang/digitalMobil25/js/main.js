@@ -100,6 +100,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         // ==============================
+        // MOVE LAYER
+        // ==============================     
+        map.moveLayer('abstellverbotszonen', 'route');
+
+
+        // ==============================
         // POPUPS
         // ============================== 
         popups(map, layersStations, popupContentRoute);

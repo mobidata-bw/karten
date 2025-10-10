@@ -16,6 +16,7 @@ import {
 } from './layers.js';
 import { popupContent } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
+import { moveLayer } from './moveLayer.js';
 
 export let layers;
 
@@ -59,10 +60,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         // ==============================
+        // MOVE LAYER
+        // ==============================          
+        moveLayer(map);
+
+        map.on('styledata', () => {
+            if (!(window.__layerSwitching || window.__basemapSwitching)) return;
+            window.__layerSwitching = false;
+            window.__basemapSwitching = false;
+            moveLayer(map);
+        });
+
+
+        // ==============================
         // POPUPS
         // ============================== 
         popups(map, layers, popupContent);
-
 
 
     });

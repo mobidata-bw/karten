@@ -31,11 +31,4 @@ export function initializeControlLayers(map) {
 
     map.addControl(layerControl2, 'top-right');
 
-
-    // ==============================
-    // LAYER ORDER
-    // ==============================
-    map.moveLayer('geoJson');
-
-
 };

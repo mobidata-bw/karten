@@ -51,6 +51,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         // ==============================
+        // MOVE LAYER
+        // ==============================    
+        map.moveLayer('netzknoten');
+        map.on('styledata', () => {
+            if (!window.__basemapSwitching) return;
+            setTimeout(() => {
+                if (map.getLayer('netzknoten')) {
+                    map.moveLayer('netzknoten');
+                }
+            }, 0);
+        });
+
+
+        // ==============================
         // POPUPS
         // ============================== 
         popups(map, layersStrassennetz, popupContentStrassennetz);

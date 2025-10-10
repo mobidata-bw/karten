@@ -15,8 +15,6 @@ export function initializeControlLayers(map) {
 
     layerControl._exclusiveAllGroups = true;
 
-    map.addControl(layerControl, 'top-right');
-
-    map.moveLayer('abstellverbotszonen', 'route');
+    map.addControl(layerControl, 'top-right'); 
 
 };

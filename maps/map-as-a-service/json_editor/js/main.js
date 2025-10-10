@@ -281,6 +281,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
             // ==============================
+            // MOVE LAYER
+            // ==============================
+            map.moveLayer('geoJson');
+
+
+            // ==============================
             // POPUPS
             // ============================== 
             popups(map, [...layersGeoJson, ...layersParkApiCar, ...layersParkApiBicycle], popupContentParkApi);

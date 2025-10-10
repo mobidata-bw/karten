@@ -12,7 +12,7 @@ export function initializeControlLayers(map) {
     };
 
     const layerControl = new layerControlGrouped(config);
-  
+
     map.addControl(layerControl, 'top-right');
 
 };

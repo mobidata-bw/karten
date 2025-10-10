@@ -236,6 +236,7 @@ export class layerControlGrouped {
       }
 
       if (e.target.dataset.mapLayer) {
+        window.__layerSwitching = true; // flag
         mglHelper.SetLayerVisibility(map, e.target.checked, e.target.id);
         if (e.target.dataset.children) {
           let children = document.querySelectorAll("[data-parent]");

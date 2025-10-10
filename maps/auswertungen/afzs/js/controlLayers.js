@@ -15,6 +15,4 @@ export function initializeControlLayers(map) {
   
     map.addControl(layerControl, 'top-right');
 
-    map.moveLayer('stations');
-
 };
