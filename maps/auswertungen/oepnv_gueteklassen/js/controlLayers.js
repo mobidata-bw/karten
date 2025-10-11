@@ -8,7 +8,7 @@ export function initializeControlLayers(map) {
 
     const config = {
         collapsed: false,
-        layers: addControlLayers(layers, 'ÖPNV-Güteklassen')
+        layers: addControlLayers(layers, 'Legende')
     };
 
     const layerControl = new layerControlGrouped(config);

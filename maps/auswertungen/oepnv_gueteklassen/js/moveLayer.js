@@ -1,9 +1,11 @@
-let activeLayer;
+// let activeLayer;
 
 
 export function moveLayer(map) {
 
     const styleLayers = map.getStyle().layers;
+
+    // console.log(styleLayers)
 
     const lastLayer = styleLayers.find(styleLayer => styleLayer.type == 'fill');
 
@@ -15,12 +17,12 @@ export function moveLayer(map) {
         .filter(styleLayer => styleLayer.id.startsWith('oepnvGueteklassen'))
         .forEach(styleLayer => {
             if (map.getLayer(styleLayer.id)) {
-                if (map.getLayoutProperty(styleLayer.id, 'visibility') == 'visible')
-                    activeLayer = styleLayer.id;
+                map.moveLayer(styleLayer.id, lastLayer.id)
+                // activeLayer = styleLayer.id;
             }
         });
 
-    if (!activeLayer || !map.getLayer(activeLayer)) return;
-    map.moveLayer(activeLayer, lastLayer.id);
+    // if (!activeLayer || !map.getLayer(activeLayer)) return;
+    // map.moveLayer('oepnvGueteklassen_J', lastLayer.id);
 
 };

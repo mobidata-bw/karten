@@ -10,15 +10,13 @@ export function addSources(map, sourceConfig) {
         type: sourceConfig.source.type || 'vector'
     };
 
-    source.minzoom = 4;
     source.maxzoom = 15;
+    source.minzoom = 4;
 
     if (source.type == 'vector') {
-
         if (sourceConfig.source.url) {
             source.url = sourceConfig.source.url;
-        }
-        else {
+        } else {
             source.tiles =
                 [
                     'https://' + (sourceConfig.source.server == 'test' ? 'test-ipl' : (sourceConfig.source.server == 'dev' ? 'dev-ipl' : iplPath)) + '.mobidata-bw.de/geoserver/gwc/service/wmts/rest/' + sourceConfig.source.layer + '/' +
@@ -26,7 +24,6 @@ export function addSources(map, sourceConfig) {
                 ]
         };
         if (source.bounds) source.bounds = sourceConfig.source.bounds;
-
     }
     else if (source.type == 'raster') {
         const cql = sourceConfig.source.cql ? 'cql_filter=' + encodeURIComponent(sourceConfig.source.cql) : '';

@@ -5,9 +5,10 @@ export function setFilePath(format, projectPath, name) {
 
     let path;
 
-    if (format == 'pmtiles') {        
+    if (format == 'pmtiles') {
         path = {
-            url: mode == 'liveserver' ? `pmtiles:///data/${projectPath}/${name}.pmtiles` : `/karten_geojsons/${projectPath}/${name}.pmtiles`
+            type: 'vector',
+            url: mode == 'liveserver' ? `pmtiles:///data/${projectPath}/${name}.pmtiles` : `pmtiles:///karten_geojsons/${projectPath}/${name}.pmtiles`
         }
     }
     else if (format == 'geojson') {
@@ -15,7 +16,7 @@ export function setFilePath(format, projectPath, name) {
             type: 'geojson',
             data: mode == 'liveserver' ? `/data/${projectPath}/${name}.geojson` : `/karten_geojsons/${projectPath}/${name}.geojson`
         }
-    };  
+    };
 
     return path;
 

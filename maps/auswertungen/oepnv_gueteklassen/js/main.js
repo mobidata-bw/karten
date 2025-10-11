@@ -7,16 +7,9 @@ import {
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { shapeRegierungsbezirke, lineShapeRegierungsbezirke } from './initializeMap.js';
-import {
-    sourceOepnvGueteklassenStuttgart,
-    sourceOepnvGueteklassenKarlsruhe,
-    sourceOepnvGueteklassenFreiburg,
-    sourceOepnvGueteklassenTuebingen,
-    layersOepnvGueteklassen
-} from './layers.js';
+import { sourceOepnvGueteklassen, layersOepnvGueteklassen } from './layers.js';
 import { popupContent } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
-import { legendHtml } from './legend.js';
 import { moveLayer } from './moveLayer.js';
 
 export let layers;
@@ -24,7 +17,7 @@ export let layers;
 
 window.addEventListener('DOMContentLoaded', () => {
 
-      // ==============================
+    // ==============================
     // INITIALIZE MAP
     // ==============================  
     const map = initializeMap();
@@ -43,10 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
         const sources = [
-            { id: 'sourceOepnvGueteklassenStuttgart', source: sourceOepnvGueteklassenStuttgart },
-            // { id: 'sourceOepnvGueteklassenKarlsruhe', source: sourceOepnvGueteklassenKarlsruhe },
-            // { id: 'sourceOepnvGueteklassenFreiburg', source: sourceOepnvGueteklassenFreiburg },
-            // { id: 'sourceOepnvGueteklassenTuebingen', source: sourceOepnvGueteklassenTuebingen }
+            { id: 'sourceOepnvGueteklassen', source: sourceOepnvGueteklassen }
         ];
         sources.forEach(source => addSources(map, source));
 
@@ -59,13 +49,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================     
         initializeControlLayers(map);
 
-
-        // ==============================
-        // LEGEND
-        // ==============================   
-        const element = document.getElementById('legend');
-        if (element) element.innerHTML = legendHtml;
-        
 
         // ==============================
         // MOVE LAYER
