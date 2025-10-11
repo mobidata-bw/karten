@@ -4,7 +4,7 @@ import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceOepnvGueteklassenStuttgart = setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_stuttgart');
+// export const sourceOepnvGueteklassenStuttgart = setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_stuttgart');
 export const sourceOepnvGueteklassenKarlsruhe = {
     type: 'geojson',
     data: {
@@ -26,6 +26,9 @@ export const sourceOepnvGueteklassenTuebingen = {
         type: 'FeatureCollection',
         features: []
     }
+};
+export const sourceOepnvGueteklassenStuttgart = {
+    url: 'pmtiles:///data/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_stuttgart.pmtiles'
 };
 
 
@@ -62,38 +65,39 @@ const oepnvGueteklassen = {
 };
 
 export const layersOepnvGueteklassen = [
-    {
-        id: 'oepnvGueteklassenTuebingen',
-        label: 'Tübingen',
-        source: 'sourceOepnvGueteklassenTuebingen',
-        visibility: 'none',
-        legendColor: 'none',
-        ...oepnvGueteklassen,
-        url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_tuebingen').data
-    },
-    {
-        id: 'oepnvGueteklassenFreiburg',
-        label: 'Freiburg',
-        source: 'sourceOepnvGueteklassenFreiburg',
-        visibility: 'none',
-        legendColor: 'none',
-        ...oepnvGueteklassen,
-        url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_freiburg').data
-    },
-    {
-        id: 'oepnvGueteklassenKarlsruhe',
-        label: 'Karlsruhe',
-        source: 'sourceOepnvGueteklassenKarlsruhe',
-        visibility: 'none',
-        legendColor: 'none',
-        ...oepnvGueteklassen,
-        url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_karlsruhe').data
-    },
+    // {
+    //     id: 'oepnvGueteklassenTuebingen',
+    //     label: 'Tübingen',
+    //     source: 'sourceOepnvGueteklassenTuebingen',
+    //     visibility: 'none',
+    //     legendColor: 'none',
+    //     ...oepnvGueteklassen,
+    //     url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_tuebingen').data
+    // },
+    // {
+    //     id: 'oepnvGueteklassenFreiburg',
+    //     label: 'Freiburg',
+    //     source: 'sourceOepnvGueteklassenFreiburg',
+    //     visibility: 'none',
+    //     legendColor: 'none',
+    //     ...oepnvGueteklassen,
+    //     url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_freiburg').data
+    // },
+    // {
+    //     id: 'oepnvGueteklassenKarlsruhe',
+    //     label: 'Karlsruhe',
+    //     source: 'sourceOepnvGueteklassenKarlsruhe',
+    //     visibility: 'none',
+    //     legendColor: 'none',
+    //     ...oepnvGueteklassen,
+    //     url: setGeoJsonPath('maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_karlsruhe').data
+    // },
     {
         id: 'oepnvGueteklassenStuttgart',
         label: 'Stuttgart',
         source: 'sourceOepnvGueteklassenStuttgart',
         legendColor: 'none',
+        sourceLayer: 'oepnv_gueteklassen_stuttgart',
         ...oepnvGueteklassen
     }
 ];

@@ -24,7 +24,7 @@ export let layers;
 
 window.addEventListener('DOMContentLoaded', () => {
 
-    // ==============================
+      // ==============================
     // INITIALIZE MAP
     // ==============================  
     const map = initializeMap();
@@ -44,9 +44,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const sources = [
             { id: 'sourceOepnvGueteklassenStuttgart', source: sourceOepnvGueteklassenStuttgart },
-            { id: 'sourceOepnvGueteklassenKarlsruhe', source: sourceOepnvGueteklassenKarlsruhe },
-            { id: 'sourceOepnvGueteklassenFreiburg', source: sourceOepnvGueteklassenFreiburg },
-            { id: 'sourceOepnvGueteklassenTuebingen', source: sourceOepnvGueteklassenTuebingen }
+            // { id: 'sourceOepnvGueteklassenKarlsruhe', source: sourceOepnvGueteklassenKarlsruhe },
+            // { id: 'sourceOepnvGueteklassenFreiburg', source: sourceOepnvGueteklassenFreiburg },
+            // { id: 'sourceOepnvGueteklassenTuebingen', source: sourceOepnvGueteklassenTuebingen }
         ];
         sources.forEach(source => addSources(map, source));
 

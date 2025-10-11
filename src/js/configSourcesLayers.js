@@ -10,16 +10,23 @@ export function addSources(map, sourceConfig) {
         type: sourceConfig.source.type || 'vector'
     };
 
-    if (source.type == 'vector') {
-        source.tiles =
-            [
-                'https://' + (sourceConfig.source.server == 'test' ? 'test-ipl' : (sourceConfig.source.server == 'dev' ? 'dev-ipl' : iplPath)) + '.mobidata-bw.de/geoserver/gwc/service/wmts/rest/' + sourceConfig.source.layer + '/' +
-                sourceConfig.source.style + '/WebMercatorQuadx2/{z}/{y}/{x}?format=application/vnd.mapbox-vector-tile'
-            ],
-            source.minzoom = 4,
-            source.maxzoom = 15;
+    source.minzoom = 4;
+    source.maxzoom = 15;
 
+    if (source.type == 'vector') {
+
+        if (sourceConfig.source.url) {
+            source.url = sourceConfig.source.url;
+        }
+        else {
+            source.tiles =
+                [
+                    'https://' + (sourceConfig.source.server == 'test' ? 'test-ipl' : (sourceConfig.source.server == 'dev' ? 'dev-ipl' : iplPath)) + '.mobidata-bw.de/geoserver/gwc/service/wmts/rest/' + sourceConfig.source.layer + '/' +
+                    sourceConfig.source.style + '/WebMercatorQuadx2/{z}/{y}/{x}?format=application/vnd.mapbox-vector-tile'
+                ]
+        };
         if (source.bounds) source.bounds = sourceConfig.source.bounds;
+
     }
     else if (source.type == 'raster') {
         const cql = sourceConfig.source.cql ? 'cql_filter=' + encodeURIComponent(sourceConfig.source.cql) : '';
@@ -45,11 +52,7 @@ export function addSources(map, sourceConfig) {
 
         if (source.buffer) source.buffer = sourceConfig.source.buffer;
         if (source.tolerance) source.tolerance = sourceConfig.source.tolerance;
-
-        // source.cluster = true;             
-        // source.clusterMaxZoom = 14;
-        // source.clusterRadius = 2
-    }
+    };
 
     map.addSource(sourceConfig.id, source);
 
@@ -103,11 +106,11 @@ export function addLayers(map, layerConfig) {
 
     const layer = {
         'id': layerConfig.id,
-        'type': layerConfig.type || 'circle', 
+        'type': layerConfig.type || 'circle',
         'source': layerConfig.source,
-        'source-layer': layerConfig.sourceLayer || '', 
+        'source-layer': layerConfig.sourceLayer || '',
         'layout': {
-            'visibility': layerConfig.visibility || 'visible' 
+            'visibility': layerConfig.visibility || 'visible'
         },
         'paint': paint[layerConfig.type || 'circle']
     };

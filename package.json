@@ -16,7 +16,8 @@
     "@maplibre/maplibre-gl-inspect": "^1.7.1",
     "file-saver": "^2.0.5",
     "jsoneditor": "^10.3.0",
-    "maplibre-gl": "^5.5.0"
+    "maplibre-gl": "^5.5.0",
+    "pmtiles": "^4.3.0"
   },
   "devDependencies": {
     "fast-glob": "^3.3.3",
