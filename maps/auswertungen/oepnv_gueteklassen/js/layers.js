@@ -1,4 +1,4 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
 // ==============================
@@ -27,9 +27,7 @@ export const sourceOepnvGueteklassenTuebingen = {
         features: []
     }
 };
-export const sourceOepnvGueteklassenStuttgart = {
-    url: 'pmtiles:///data/maps/auswertungen/oepnv_gueteklassen/oepnv_gueteklassen_stuttgart.pmtiles'
-};
+export const sourceOepnvGueteklassenStuttgart = setFilePath('pmtiles', 'maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen_stuttgart');
 
 
 // ==============================

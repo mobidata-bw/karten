@@ -27,7 +27,6 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     // ==============================
     // PMTILES
     // ==============================
-    console.log(window.__pmtilesRegistered)
     if (!window.__pmtilesRegistered) {
         const protocol = new pmtiles.Protocol();
         maplibregl.addProtocol("pmtiles", protocol.tile);
