@@ -1,10 +1,10 @@
-import { setGeoJsonPath } from '../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceCountCar = setGeoJsonPath('maps/count_car', 'SVZ-Zaehlstellen_231011_augmented_SVZ2023');
+export const sourceCountCar = setFilePath('geojson', 'maps/count_car', 'SVZ-Zaehlstellen_231011_augmented_SVZ2023');
 
 
 // ==============================

@@ -1,14 +1,14 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceMobilstationen = setGeoJsonPath('maps/auswertungen/mobilstationen', 'Mobilstationen');
-export const sourceOEV = setGeoJsonPath('maps/auswertungen/mobilstationen', 'OEV');
-export const sourceScooter = setGeoJsonPath('maps/auswertungen/mobilstationen', 'Scooter');
-export const sourceFahrrad = setGeoJsonPath('maps/auswertungen/mobilstationen', 'Fahrrad');
-export const sourceMIV = setGeoJsonPath('maps/auswertungen/mobilstationen', 'MIV');
+export const sourceMobilstationen = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'Mobilstationen');
+export const sourceOEV = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'OEV');
+export const sourceScooter = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'Scooter');
+export const sourceFahrrad = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'Fahrrad');
+export const sourceMIV = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'MIV');
 
 
 // ==============================
@@ -105,7 +105,7 @@ export const layersScooter = [
         source: 'sourceScooter',
         color: '#5353ec',
         ...mobilitaetsAngebote,
-        ...ohneMS    
+        ...ohneMS
     }
 ];
 
@@ -129,6 +129,6 @@ export const layersMIV = [
         source: 'sourceMIV',
         color: '#fbe870',
         ...mobilitaetsAngebote,
-        ...ohneMS      
+        ...ohneMS
     }
 ];

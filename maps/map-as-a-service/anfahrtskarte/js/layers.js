@@ -1,11 +1,11 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceNvbw = setGeoJsonPath('maps/map-as-a-service/anfahrtskarte', 'nvbw');
-export const sourceTouren = setGeoJsonPath('maps/map-as-a-service/anfahrtskarte', 'touren');
+export const sourceNvbw = setFilePath('geojson', 'maps/map-as-a-service/anfahrtskarte', 'nvbw');
+export const sourceTouren = setFilePath('geojson', 'maps/map-as-a-service/anfahrtskarte', 'touren');
 
 
 // ==============================

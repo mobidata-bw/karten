@@ -1,34 +1,13 @@
-import { setGeoJsonPath } from '../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceFootway = {
-    type: 'geojson',
-    data: {
-        type: 'FeatureCollection',
-        features: []
-    }
-};
-
-export const sourceMarked = {
-    type: 'geojson',
-    data: {
-        type: 'FeatureCollection',
-        features: []
-    }
-};
-
-export const sourceUncontrolled = {
-    type: 'geojson',
-    data: {
-        type: 'FeatureCollection',
-        features: []
-    }
-};
-
-export const sourceZebra = setGeoJsonPath('maps/pedestrian_crossings', 'zebra');
+export const sourceFootway = setFilePath('pmtiles', 'maps/pedestrian_crossings', 'footway');
+export const sourceMarked = setFilePath('pmtiles', 'maps/pedestrian_crossings', 'marked');
+export const sourceUncontrolled = setFilePath('pmtiles', 'maps/pedestrian_crossings', 'uncontrolled');
+export const sourceZebra = setFilePath('pmtiles', 'maps/pedestrian_crossings', 'zebra');
 
 
 // ==============================
@@ -44,33 +23,31 @@ export const layersPedestrianCrossings = [
         id: 'uncontrolled',
         label: 'Uncontrolled',
         source: 'sourceUncontrolled',
+        sourceLayer: 'uncontrolled',
         color: '#C4001F',
-        ...layers,
-        url: setGeoJsonPath('maps/pedestrian_crossings', 'uncontrolled').data,
-        visibility: 'none'
+        ...layers
     },
     {
         id: 'footway',
         label: 'Footway',
         source: 'sourceFootway',
+        sourceLayer: 'footway',
         color: '#75b9a2',
-        ...layers,
-        url: setGeoJsonPath('maps/pedestrian_crossings', 'footway').data,
-        visibility: 'none'
+        ...layers
     },
     {
         id: 'marked',
         label: 'Marked',
         source: 'sourceMarked',
+        sourceLayer: 'marked',
         color: '#ffe280',
-        ...layers,
-        url: setGeoJsonPath('maps/pedestrian_crossings', 'marked').data,
-        visibility: 'none'
+        ...layers
     },
     {
         id: 'zebra',
         label: 'Zebra',
         source: 'sourceZebra',
+        sourceLayer: 'zebra',
         color: '#366491',
         ...layers
     }

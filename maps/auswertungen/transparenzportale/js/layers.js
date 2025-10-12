@@ -1,10 +1,10 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceTransparenzportale = setGeoJsonPath('maps/auswertungen/transparenzportale', 'transparenzportale');
+export const sourceTransparenzportale = setFilePath('pmtiles', 'maps/auswertungen/transparenzportale', 'transparenzportale');
 
 
 // ==============================
@@ -12,9 +12,10 @@ export const sourceTransparenzportale = setGeoJsonPath('maps/auswertungen/transp
 // ==============================
 const transparenzportale = {
     source: 'sourceTransparenzportale',
+    sourceLayer: 'transparenzportale',
     group: 'Transparenzportale',
     type: 'fill'
-};
+  };
 
 export const layersTransparenzportale = [
     {

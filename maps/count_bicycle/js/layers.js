@@ -1,10 +1,10 @@
-import { setGeoJsonPath } from '../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceCountBicycle = setGeoJsonPath('maps/count_bicycle', 'fahrradzaehler_tageswerten_gesamt');
+export const sourceCountBicycle = setFilePath('geojson', 'maps/count_bicycle', 'fahrradzaehler_tageswerten_gesamt');
 
 
 // ==============================

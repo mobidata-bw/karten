@@ -1,10 +1,10 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceCountRavensburg = setGeoJsonPath('maps/map-as-a-service/strassenverkehrszaehlung_ravensburg', 'strassenverkehrszaehlung_ravensburg');
+export const sourceCountRavensburg = setFilePath('geojson', 'maps/map-as-a-service/strassenverkehrszaehlung_ravensburg', 'strassenverkehrszaehlung_ravensburg');
 
 
 // ==============================

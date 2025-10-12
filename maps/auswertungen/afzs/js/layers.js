@@ -1,11 +1,11 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceStations = setGeoJsonPath('maps/auswertungen/afzs', 'stations');
-export const sourceAfzs = setGeoJsonPath('maps/auswertungen/afzs', 'afzs');
+export const sourceStations = setFilePath('geojson', 'maps/auswertungen/afzs', 'stations');
+export const sourceAfzs = setFilePath('pmtiles', 'maps/auswertungen/afzs', 'afzs');
 
 
 // ==============================
@@ -13,6 +13,7 @@ export const sourceAfzs = setGeoJsonPath('maps/auswertungen/afzs', 'afzs');
 // ==============================
 const afzs = {
     source: 'sourceAfzs',
+    sourceLayer: 'afzs',
     group: 'AFZS',
     type: 'line',
     lineCap: 'round'

@@ -1,0 +1,1 @@
+function n(s,t,o){let e;return s=="pmtiles"?e={type:"vector",url:`pmtiles:///karten_geojsons/${t}/${o}.pmtiles`}:s=="geojson"&&(e={type:"geojson",data:`/karten_geojsons/${t}/${o}.geojson`}),e}export{n as s};

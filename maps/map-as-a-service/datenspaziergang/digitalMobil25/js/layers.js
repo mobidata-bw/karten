@@ -1,12 +1,12 @@
-import { setGeoJsonPath } from '../../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceMap = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'map');
-export const sourceAbstellverbotszonen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellverbotszonen');
-export const sourceAbstellflaechen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellflaechen');
+export const sourceMap = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/digitalMobil25', 'map');
+export const sourceAbstellverbotszonen = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellverbotszonen');
+export const sourceAbstellflaechen = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/digitalMobil25', 'abstellflaechen');
 
 
 // ==============================

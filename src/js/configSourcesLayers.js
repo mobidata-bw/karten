@@ -10,9 +10,6 @@ export function addSources(map, sourceConfig) {
         type: sourceConfig.source.type || 'vector'
     };
 
-    source.maxzoom = 15;
-    source.minzoom = 4;
-
     if (source.type == 'vector') {
         if (sourceConfig.source.url) {
             source.url = sourceConfig.source.url;
@@ -23,7 +20,11 @@ export function addSources(map, sourceConfig) {
                     sourceConfig.source.style + '/WebMercatorQuadx2/{z}/{y}/{x}?format=application/vnd.mapbox-vector-tile'
                 ]
         };
+        
         if (source.bounds) source.bounds = sourceConfig.source.bounds;
+
+        source.maxzoom = 15;
+        source.minzoom = 4;
     }
     else if (source.type == 'raster') {
         const cql = sourceConfig.source.cql ? 'cql_filter=' + encodeURIComponent(sourceConfig.source.cql) : '';

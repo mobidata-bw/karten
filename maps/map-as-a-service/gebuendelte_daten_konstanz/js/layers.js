@@ -1,32 +1,32 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceKonstanzPls = setGeoJsonPath('maps/map-as-a-service/gebuendelte_daten_konstanz', 'konstanz_pls');
-export const sourceKonstanzBehindertenparken = setGeoJsonPath('maps/map-as-a-service/gebuendelte_daten_konstanz', 'konstanz_behindertenparken');
+export const sourceKonstanzPls = setFilePath('geojson', 'maps/map-as-a-service/gebuendelte_daten_konstanz', 'konstanz_pls');
+export const sourceKonstanzBehindertenparken = setFilePath('geojson', 'maps/map-as-a-service/gebuendelte_daten_konstanz', 'konstanz_behindertenparken');
 
 
 // ==============================
 // LAYERS
 // ==============================
-export const layersKonstanzPls= [
+export const layersKonstanzPls = [
     {
         id: 'konstanzPls',
         label: 'Parkleitsystem',
         subGroup: 'Parken',
-        source: 'sourceKonstanzPls',      
+        source: 'sourceKonstanzPls',
         color: '#d85959'
-    }   
+    }
 ];
 
-export const layersKonstanzBehindertenparken= [
+export const layersKonstanzBehindertenparken = [
     {
         id: 'konstanzBehindertenparken',
         label: 'Behindertenparken',
         subGroup: 'Parken',
-        source: 'sourceKonstanzBehindertenparken',      
+        source: 'sourceKonstanzBehindertenparken',
         color: '#325ff2'
-    }   
+    }
 ];

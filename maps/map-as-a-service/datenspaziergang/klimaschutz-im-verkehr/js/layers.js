@@ -1,13 +1,13 @@
-import { setGeoJsonPath } from '../../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceRoute = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'route');
-export const sourceStations = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'stations');
-export const sourceAbstellverbotszonen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellverbotszonen');
-export const sourceAbstellflaechen = setGeoJsonPath('maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellflaechen');
+export const sourceRoute = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'route');
+export const sourceStations = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'stations');
+export const sourceAbstellverbotszonen = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellverbotszonen');
+export const sourceAbstellflaechen = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellflaechen');
 
 
 // ==============================
@@ -45,7 +45,7 @@ export const layersScooterZones = [
         type: 'fill',
         source: 'sourceAbstellverbotszonen',
         color: 'yellow',
-        fillOpacity: 0.5       
+        fillOpacity: 0.5
     },
     {
         id: 'abstellflaechen',
@@ -53,7 +53,7 @@ export const layersScooterZones = [
         type: 'fill',
         source: 'sourceAbstellflaechen',
         color: 'lightgreen',
-        fillOpacity: 0.5       
+        fillOpacity: 0.5
     }
 ];
 
