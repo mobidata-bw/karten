@@ -4,7 +4,7 @@ import { setFilePath } from '../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceCountCar = setFilePath('geojson', 'maps/count_car', 'SVZ-Zaehlstellen_231011_augmented_SVZ2023');
+export const sourceCountCar = setFilePath('pmtiles', 'maps/count_car', 'SVZ-Zaehlstellen_231011_augmented_SVZ2023');
 
 
 // ==============================
@@ -12,6 +12,7 @@ export const sourceCountCar = setFilePath('geojson', 'maps/count_car', 'SVZ-Zaeh
 // ==============================
 const countCar = {
     source: 'sourceCountCar',
+    sourceLayer: 'countCar',
     group: 'Straßenverkehrszählung'
 };
 

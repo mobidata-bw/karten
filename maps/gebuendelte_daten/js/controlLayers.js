@@ -1,6 +1,6 @@
 import { layerControlGrouped } from '../../../src/plugins/mapbox-layer-control/layerControlGrouped.js';
 import '../../../src/plugins/mapbox-layer-control/layerControl-patch.js';
-import { layersIpl, layersGeoJson } from './main.js';
+import { layersIpl, layersNonIpl } from './main.js';
 import { addControlLayers } from '../../../src/js/addControlLayers.js';
 export let control2;
 
@@ -25,7 +25,7 @@ export function initializeControlLayers(map) {
     const config2 = {
         collapsed: false,
         directoriesCollapsed: true,
-        layers: addControlLayers(layersGeoJson, 'Weitere Datenprofile', 'group')
+        layers: addControlLayers(layersNonIpl, 'Weitere Datenprofile', 'group')
     };
 
     control2 = new layerControlGrouped(config2);

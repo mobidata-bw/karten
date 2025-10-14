@@ -1,7 +1,7 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
-export const shapeKonstanz = setGeoJsonPath('shapes', 'shapeKonstanz');
+export const shapeKonstanz = setFilePath('geojson', 'shapes', 'shapeKonstanz');
 
 export const fillShapeKonstanz = {
     'id': 'fillShapeKonstanz',

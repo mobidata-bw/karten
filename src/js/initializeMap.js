@@ -12,7 +12,7 @@ import MaplibreInspect from '@maplibre/maplibre-gl-inspect';
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
 import * as pmtiles from 'pmtiles';
 
-import { setGeoJsonPath } from './setGeoJsonPath.js';
+import { setFilePath } from './setFilePath.js';
 
 export { addSources, addLayers } from './configSourcesLayers.js';
 export { basemaps } from '../js/layerSwitcherControl.js';
@@ -29,7 +29,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     // ==============================
     if (!window.__pmtilesRegistered) {
         const protocol = new pmtiles.Protocol();
-        maplibregl.addProtocol("pmtiles", protocol.tile);
+        maplibregl.addProtocol('pmtiles', protocol.tile);
         window.__pmtilesRegistered = true;
     };
 
@@ -96,11 +96,11 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
 
         const shape =
             configShape ?
-                setGeoJsonPath('shapes', configShape) :
+                setFilePath('geojson', 'shapes', configShape) :
                 (
                     window.innerWidth < 473 ?
-                        setGeoJsonPath('shapes', 'shapeBadenWuerttembergSimplified') :
-                        setGeoJsonPath('shapes', 'shapeBadenWuerttemberg')
+                        setFilePath('geojson', 'shapes', 'shapeBadenWuerttembergSimplified') :
+                        setFilePath('geojson', 'shapes', 'shapeBadenWuerttemberg')
                 );
 
         map.addSource('shape', shape);

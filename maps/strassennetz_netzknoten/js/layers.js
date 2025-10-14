@@ -15,7 +15,8 @@ const strassennetz = {
     source: 'sourceStrassennetz',
     sourceLayer: 'strassennetz',
     type: 'line',
-    group: 'Straßennetz',
+    group: 'Straßennetz und Netzknoten',
+    subGroup: 'Straßennetz',
     lineWidth:
         [
             "interpolate", ["linear"], ["zoom"],
@@ -61,7 +62,8 @@ export const layersNetzknoten = [
     {
         id: 'netzknoten',
         label: 'Netzknoten',
-        group: 'Netzknoten',
+        group: 'Straßennetz und Netzknoten',
+        subGroup: 'Netzknoten',
         source: 'sourceNetzknoten',
         sourceLayer: 'netzknoten',
         color: '#e12942',

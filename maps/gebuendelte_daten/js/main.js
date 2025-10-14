@@ -12,6 +12,7 @@ import {
     layersParkApiCarOccupancy as layersParkApiCar,
     layersParkApiBicycleOccupancy as layersParkApiBicycle
 } from '../../ipl/park-api/js/layers.js';
+import { sourceBicycleServicePoints, layersBicycleServicePoints } from '../../ipl/bicycle_service_points/js/layers.js';
 import {
     sourceSharingVehicles, sourceSharingStations,
     layersSharingCarVehicles, layersSharingCarStations,
@@ -28,11 +29,16 @@ import {
     sourceTransitShapes, layersTransitShapes
 } from '../../ipl/gtfs/js/layers.js';
 import { sourceRoadworks, layersRoadworks } from '../../ipl/roadworks/js/layers.js';
+import {
+    sourceStrassennetz, layersStrassennetz,
+    sourceNetzknoten, layersNetzknoten
+} from '../../strassennetz_netzknoten/js/layers.js';
 import { sourceCountCar, layersCountCar } from '../../count_car/js/layers.js';
 import { sourceCountBicycle, layersCountBicycle } from '../../count_bicycle/js/layers.js';
 import { sourceFootway, sourceMarked, sourceUncontrolled, sourceZebra, layersPedestrianCrossings } from '../../pedestrian_crossings/js/layers.js';
 
 import { popupContent as popupContentParkApi } from '../../ipl/park-api/js/popupContent.js';
+import { popupContent as popupContentBicycleServicePoints } from '../../ipl/bicycle_service_points/js/popupContent.js';
 import { popupContent as popupContentSharing } from '../../ipl/sharing/js/popupContent.js';
 import { popupContent as popupContentChargePoints } from '../../ipl/charge_points/js/popupContent.js';
 import { popupContent as popupContentRadvis } from '../../ipl/radvis_cycle_network/js/popupContent.js';
@@ -45,10 +51,11 @@ import { popupContent as popupContentRoadworks } from '../../ipl/roadworks/js/po
 import { popupContent as popupContentCountCar } from '../../count_car/js/popupContent.js';
 import { popupContent as popupContentCountBicycle } from '../../count_bicycle/js/popupContent.js';
 import { popupContent as popupContentPedestrianCrossings } from '../../pedestrian_crossings/js/popupContent.js';
+import { popupContentStrassennetz, popupContentNetzknoten } from '../../strassennetz_netzknoten/js/popupContent.js';
 
 import { initializeControlLayers } from './controlLayers.js';
 
-export let layers, layersIpl, layersGeoJson;
+export let layers, layersIpl, layersNonIpl;
 
 export { map };
 
@@ -72,6 +79,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const sources = [
             { id: 'sourceParkApiCar', source: sourceParkApiCar },
             { id: 'sourceParkApiBicycle', source: sourceParkApiBicycle },
+            { id: 'sourceBicycleServicePoints', source: sourceBicycleServicePoints },
             { id: 'sourceSharingVehicles', source: sourceSharingVehicles },
             { id: 'sourceSharingStations', source: sourceSharingStations },
             { id: 'sourceChargePoints', source: sourceChargePoints },
@@ -85,6 +93,8 @@ window.addEventListener('DOMContentLoaded', () => {
             { id: sourceTransitShapes[4].id, source: sourceTransitShapes[4] },
             { id: sourceTransitShapes[5].id, source: sourceTransitShapes[5] },
             { id: 'sourceRoadworks', source: sourceRoadworks },
+            { id: 'sourceStrassennetz', source: sourceStrassennetz },
+            { id: 'sourceNetzknoten', source: sourceNetzknoten },
             { id: 'sourceCountCar', source: sourceCountCar },
             { id: 'sourceCountBicycle', source: sourceCountBicycle },
             { id: 'sourceFootway', source: sourceFootway },
@@ -110,6 +120,7 @@ window.addEventListener('DOMContentLoaded', () => {
         layersIpl = [
             ...layersParkApiCar,
             ...layersParkApiBicycle,
+            ...layersBicycleServicePoints,
             ...layersSharing.filter(layer => layer.id.includes('StationsNoRealtimeData')).map(layer => ({ ...layer, label: 'Station: Echtzeitdaten nicht vorhanden' })),
             ...layersSharing.filter(layer => layer.id.includes('StationsOutdatedRealtimeData')).map(layer => ({ ...layer, label: 'Station: Echtzeitdaten älter 30 Minuten' })),
             ...layersSharing.filter(layer => layer.id.includes('StationsOccupied')).map(layer => ({ ...layer, label: 'Station: Fahrzeuge nicht vorhanden' })),
@@ -124,14 +135,16 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersTransitShapes,
             ...layersRoadworks
         ];
-        layersGeoJson = [
+        layersNonIpl = [
+            ...layersStrassennetz,
+            ...layersNetzknoten,
             ...layersCountCar,
             ...layersCountBicycle,
             ...layersPedestrianCrossings
         ];
         layers = [
             ...layersIpl,
-            ...layersGeoJson
+            ...layersNonIpl
         ];
 
         layers.forEach(layer => {
@@ -150,16 +163,19 @@ window.addEventListener('DOMContentLoaded', () => {
         // ============================== 
         initializeControlLayers(map);
 
-        
+
         // ==============================
         // POPUPS
         // ==============================       
         popups(map, [...layersParkApiCar, ...layersParkApiBicycle], popupContentParkApi);
+        popups(map, layersBicycleServicePoints, popupContentBicycleServicePoints);
         popups(map, layersSharing, popupContentSharing);
         popups(map, layersChargePointsPower, popupContentChargePoints);
         popups(map, layersRadvis, popupContentRadvis);
         popups(map, layersTransitStops, popupContentTransitStops);
         popups(map, layersTransitStations, popupContentTransitStations);
+        popups(map, layersStrassennetz, popupContentStrassennetz);
+        popups(map, layersNetzknoten, popupContentNetzknoten);
         popups(map, layersCountCar, popupContentCountCar);
         popups(map, layersCountBicycle, popupContentCountBicycle);
         popups(map, layersPedestrianCrossings, popupContentPedestrianCrossings);

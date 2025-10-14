@@ -14,7 +14,8 @@ export const sourceBicycleServicePoints = {
 const layers = {
     source: 'sourceBicycleServicePoints',
     sourceLayer: 'bicycle_service_points',
-    group: 'Datengeber'
+    group: 'Radservicepunkte',
+    subGroup: 'Datengeber'
 };
 
 export const layersBicycleServicePoints = [

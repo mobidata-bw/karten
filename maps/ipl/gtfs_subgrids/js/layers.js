@@ -1,4 +1,4 @@
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 import { legendLine, legendDoubleLine, legendTripleLine, legendQuadrupleLine } from '../../../../src/js/controlLayers.js';
 
 
@@ -11,7 +11,7 @@ export const sourceTransitShapes = {
     bounds: [4.3, 45.8, 15.4, 53.8]
 };
 
-export const sourceTransitAssociations = setGeoJsonPath('maps/ipl/gtfs_subgrids', 'verkehrsverbuende_teilnetze');
+export const sourceTransitAssociations = setFilePath('pmtiles', 'maps/ipl/gtfs_subgrids', 'verkehrsverbuende_teilnetze');
 
 
 // ==============================
@@ -21,6 +21,7 @@ export const layersTransitAssociations = [
     {
         id: 'transitAssociations',
         source: 'sourceTransitAssociations',
+        sourceLayer: 'transitAssociations',
         type: 'fill',
         color: 'rgba(0,0,0,0)',
         fillOpacity: 0,

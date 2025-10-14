@@ -1,11 +1,11 @@
 
-import { setGeoJsonPath } from '../../../../src/js/setGeoJsonPath.js';
+import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
 // ==============================
 // SOURCES
 // ==============================
-export const sourceWebcam = setGeoJsonPath('maps/ipl/webcam', 'webcam');
+export const sourceWebcam = setFilePath('geojson', 'maps/ipl/webcam', 'webcam');
 
 
 // ==============================
