@@ -96,11 +96,11 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
 
         const shape =
             configShape ?
-                setFilePath('geojson', 'shapes', configShape) :
+                setFilePath({ format: 'geojson', directory: 'shapes', file: configShape }) :
                 (
                     window.innerWidth < 473 ?
-                        setFilePath('geojson', 'shapes', 'shapeBadenWuerttembergSimplified') :
-                        setFilePath('geojson', 'shapes', 'shapeBadenWuerttemberg')
+                        setFilePath({ format: 'geojson', directory: 'shapes', file: 'shapeBadenWuerttembergSimplified' }) :
+                        setFilePath({ format: 'geojson', directory: 'shapes', file: 'shapeBadenWuerttemberg' })
                 );
 
         map.addSource('shape', shape);

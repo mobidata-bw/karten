@@ -4,7 +4,7 @@ import { setFilePath } from '../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceCountBicycle = setFilePath('geojson', 'maps/count_bicycle', 'fahrradzaehler_tageswerten_gesamt');
+export const sourceCountBicycle = setFilePath({ format: 'mbtiles', file: 'count_bicycle' });
 
 
 // ==============================
@@ -12,6 +12,7 @@ export const sourceCountBicycle = setFilePath('geojson', 'maps/count_bicycle', '
 // ==============================
 const layers = {
     source: 'sourceCountBicycle',
+    sourceLayer: 'countBicycle',
     group: 'Fahrradzählstellen'
 };
 

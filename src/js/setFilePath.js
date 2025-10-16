@@ -1,23 +1,34 @@
 import { mode } from '../utils/paths.js';
 
 
-export function setFilePath(format, projectPath, name) {
+export function setFilePath(options = {}) {
 
-    let path;
 
-    if (format == 'pmtiles') {
-        path = {
+    const format = options.format;
+    const file = options.file;
+    const directory = options.directory;
+
+    let src;
+
+    if (format == 'mbtiles') {
+        src = {
             type: 'vector',
-            url: mode == 'liveserver' ? `pmtiles:///data/${projectPath}/${name}.pmtiles` : `pmtiles:///karten_geojsons/${projectPath}/${name}.pmtiles`
+            url: `https://tiles.mobidata-bw.de/data/${file}.json`
+        }
+    }
+    else if (format == 'pmtiles') {
+        src = {
+            type: 'vector',
+            url: mode == 'liveserver' ? `pmtiles:///data/${directory}/${file}.pmtiles` : `pmtiles:///karten_geojsons/${directory}/${file}.pmtiles`
         }
     }
     else if (format == 'geojson') {
-        path = {
+        src = {
             type: 'geojson',
-            data: mode == 'liveserver' ? `/data/${projectPath}/${name}.geojson` : `/karten_geojsons/${projectPath}/${name}.geojson`
+            data: mode == 'liveserver' ? `/data/${directory}/${file}.geojson` : `/karten_geojsons/${directory}/${file}.geojson`
         }
     };
 
-    return path;
+    return src;
 
 };

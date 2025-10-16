@@ -11,7 +11,7 @@ export const sourceTransitShapes = {
     bounds: [4.3, 45.8, 15.4, 53.8]
 };
 
-export const sourceTransitAssociations = setFilePath('pmtiles', 'maps/ipl/gtfs_subgrids', 'verkehrsverbuende_teilnetze');
+export const sourceTransitAssociations = setFilePath({ format: 'mbtiles', file: 'transitAssociations' });
 
 
 // ==============================

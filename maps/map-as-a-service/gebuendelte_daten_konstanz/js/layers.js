@@ -4,8 +4,8 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceKonstanzPls = setFilePath('geojson', 'maps/map-as-a-service/gebuendelte_daten_konstanz', 'konstanz_pls');
-export const sourceKonstanzBehindertenparken = setFilePath('geojson', 'maps/map-as-a-service/gebuendelte_daten_konstanz', 'konstanz_behindertenparken');
+export const sourceKonstanzPls = setFilePath({ format: 'geojson', directory: 'maps/map-as-a-service/gebuendelte_daten_konstanz', file: 'konstanz_pls' });
+export const sourceKonstanzBehindertenparken = setFilePath({ format: 'geojson', directory: 'maps/map-as-a-service/gebuendelte_daten_konstanz', file: 'konstanz_behindertenparken' });
 
 
 // ==============================

@@ -4,10 +4,10 @@ import { setFilePath } from '../../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceRoute = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'route');
-export const sourceStations = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'stations');
-export const sourceAbstellverbotszonen = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellverbotszonen');
-export const sourceAbstellflaechen = setFilePath('geojson', 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', 'abstellflaechen');
+export const sourceRoute = setFilePath({ format: 'geojson', directory: 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', file: 'route' });
+export const sourceStations = setFilePath({ format: 'geojson', directory: 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', file: 'stations' });
+export const sourceAbstellverbotszonen = setFilePath({ format: 'geojson', directory: 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', file: 'abstellverbotszonen' });
+export const sourceAbstellflaechen = setFilePath({ format: 'geojson', directory: 'maps/map-as-a-service/datenspaziergang/klimaschutz-im-verkehr', file: 'abstellflaechen' });
 
 
 // ==============================

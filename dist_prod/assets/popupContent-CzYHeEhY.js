@@ -1,0 +1,62 @@
+import{s as o}from"./addControlLayers-CBCcx4TP.js";import{p as g}from"./popupImages-_dRsmDU7.js";const _=o({format:"mbtiles",file:"footway"}),k=o({format:"mbtiles",file:"marked"}),y=o({format:"mbtiles",file:"uncontrolled"}),F=o({format:"mbtiles",file:"zebra"}),n={group:"Fußgängerüberwege"},z=[{id:"uncontrolled",label:"Uncontrolled",source:"sourceUncontrolled",sourceLayer:"uncontrolled",color:"#C4001F",...n},{id:"footway",label:"Footway",source:"sourceFootway",sourceLayer:"footway",color:"#75b9a2",...n},{id:"marked",label:"Marked",source:"sourceMarked",sourceLayer:"marked",color:"#ffe280",...n},{id:"zebra",label:"Zebra",source:"sourceZebra",sourceLayer:"zebra",color:"#366491",...n}];function S(p){const{id:u,id_2:h,check_date:r,check_da_1:d,check_da_2:l,check_da_3:c,check_da_4:i,check_da_5:$,survey_dat:b,highway:e,turning_circle:C,kerb:a,surface:t,wheelchair:s,image:f}=p;return`
+        <table>
+            <tr>
+                ${g("OpenStreetMap")}
+                ${u?`<th class="title">${u}</th>`:""}
+                ${h?`<th class="title">${h}</th>`:""}
+            </tr>
+        </table><br><table>
+            <tr>
+                ${!r&&!d&&!l&&!c&&!i&&!$&&!b?"":'<td class="att">Letze Überprüfung</td>'}
+                ${r?`<td class="attContent">${r}</td>`:""}
+                ${d?`<td class="attContent">${d}</td>`:""}
+                ${l?`<td class="attContent">${l}</td>`:""}
+                ${c?`<td class="attContent">${c}</td>`:""}
+                ${i?`<td class="attContent">${i}</td>`:""}
+                ${$?`<td class="attContent">${$}</td>`:""}
+                ${b?`<td class="attContent">${b}</td>`:""}
+            </tr><tr>
+                ${e?'<td class="att">Straßentyp</td>':""}
+                ${e=="crossing"?'<td class="attContent">Fußgängerüberweg</td>':""}
+                ${e=="footway"?'<td class="attContent">Gehweg</td>':""}
+                ${e=="cycleway"?'<td class="attContent">Radweg</td>':""}
+                ${e=="path"?'<td class="attContent">Wanderweg/Trampelpfad</td>':""}
+                ${e=="proposed"?'<td class="attContent">Geplante, noch nicht gebaute Straße</td>':""}
+                ${e=="service"?'<td class="attContent">Erschließungsweg</td>':""}
+                ${e=="track"?'<td class="attContent">Wirtschafts-, Feld- oder Waldweg</td>':""}
+                ${e=="pedestrian"?'<td class="attContent">Weg, Platz oder Straße ausschließlich für Fußgänger (z.B. Fußgängerzone)</td>':""}
+                ${C=="turning_circle"?'<td class="attContent">Wendestelle</td>':""}
+                ${C=="traffic_signals"?'<td class="attContent">Ampel</td>':""}
+            </tr><tr>
+                ${a?'<td class="att">Bordstein</td>':""}
+                ${a=="no"?'<td class="attContent">nein</td>':""}
+                ${a=="lowered"?'<td class="attContent">abgesenkt</td>':""}
+                ${a=="raised"?'<td class="attContent">erhöht</td>':""}
+                ${a=="flush"?'<td class="attContent">auf Straßenebene</td>':""}
+            </tr><tr>
+                ${t?'<td class="att">Oberfläche</td>':""}
+                ${t=="asphalt"?'<td class="attContent">Asphalt</td>':""}
+                ${t=="paving_stones"?'<td class="attContent">Pflastersteine</td>':""}
+                ${t=="sett"?'<td class="attContent">Behauenes Steinpflaster</td>':""}
+                ${t=="cobblestone"?'<td class="attContent">Kopfsteinpflaster</td>':""}
+                ${t=="cobblestone:flattened"?'<td class="attContent">Pflaster mit abgeflachten Steinen</td>':""}
+                ${t=="compacted"?'<td class="attContent">Verdichtete Deckschicht</td>':""}
+                ${t=="concrete"?'<td class="attContent">Beton</td>':""}
+                ${t=="concrete:plates"?'<td class="attContent">Betonplatten</td>':""}
+                ${t=="ground"?'<td class="attContent">Gewachsene, naturbelassene Oberfläche</td>':""}
+                ${t=="grass_paver"?'<td class="attContent">Rasengittersteine</td>':""}
+                ${t=="pebblestone"?'<td class="attContent">Kies</td>':""}
+                ${t=="unhewn_cobblestone"?'<td class="attContent">Rohes Kopfsteinpflaster</td>':""}
+                ${t=="unpaved"?'<td class="attContent">Ohne Straßenbelag</td>':""}                    
+            </tr><tr>
+                ${s?'<td class="att">Rollstuhlbefahrbarkeit</td>':""}
+                ${s=="yes"?'<td class="attContent">ja</td>':""}
+                ${s=="no"?'<td class="attContent">nein</td>':""}
+                ${s=="limited"?'<td class="attContent">begrenzt</td>':""}              
+            </tr>
+        </table><table>
+            <tr>
+                ${f?`<td class="attContentLink"><a href="${f}" target="_blank">&#10149 Foto</a></td>`:""}
+            </tr>
+        </table>
+    `}export{k as a,y as b,F as c,z as l,S as p,_ as s};

@@ -128,9 +128,9 @@ export function basemaps(map, options = {}) {
         return _addSource(id, src);
     };
     const _addLayer = map.addLayer.bind(map);
-    map.addLayer = (layer) => {
+    map.addLayer = (layer, beforeId) => {
         layers.set(layer.id, layer);
-        return _addLayer(layer);
+        return _addLayer(layer, beforeId);
     };
 
     /* Set Visibility */

@@ -64,14 +64,6 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         sources.forEach(source => addSources(map, source));
 
-        layersZones = layersScooterZones.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing', visibility: 'none' }));
-        layersZones.forEach(layer => addLayers(map, layer));
-
-        const layersSharingScooter = [
-            ...layersSharingScooterVehicles.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' })),
-            ...layersSharingScooterStations.map(layer => ({ ...layer, group: 'Station 2: E-Scooter-Sharing' }))
-        ];
-
         layersDatenspaziergang = [
             ...layersRoute,
             ...layersStations
@@ -122,7 +114,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // MOVE LAYER
         // ==============================  
-        map.moveLayer('abstellverbotszonen', 'map');
+        map.moveLayer('abstellverbotszonen', 'stations');
+        map.moveLayer('abstellverbotszonen', 'route');
 
 
         // ==============================

@@ -4,11 +4,11 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceMobilstationen = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'Mobilstationen');
-export const sourceOEV = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'OEV');
-export const sourceScooter = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'Scooter');
-export const sourceFahrrad = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'Fahrrad');
-export const sourceMIV = setFilePath('geojson', 'maps/auswertungen/mobilstationen', 'MIV');
+export const sourceMobilstationen = setFilePath({ format: 'mbtiles', file: 'mobilstationen' });
+export const sourceOEV = setFilePath({ format: 'mbtiles', file: 'oev' });
+export const sourceScooter = setFilePath({ format: 'mbtiles', file: 'scooter' });
+export const sourceFahrrad = setFilePath({ format: 'mbtiles', file: 'fahrrad' });
+export const sourceMIV = setFilePath({ format: 'mbtiles', file: 'miv' });
 
 
 // ==============================
@@ -32,6 +32,7 @@ export const layersMobilstationen = [
         group: 'Mobilstationen',
         label: 'Standorte',
         source: 'sourceMobilstationen',
+        sourceLayer: 'mobilstationen',
         type: 'fill',
         color: '#9b9c96',
         fillOpacity: 0.5
@@ -44,6 +45,7 @@ export const layersOEV = [
         group: 'Öffentlicher Verkehr',
         label: 'Fähranleger',
         source: 'sourceOEV',
+        sourceLayer: 'oev',
         color: 'orange',
         filter:
             [
@@ -58,6 +60,7 @@ export const layersOEV = [
         group: 'Öffentlicher Verkehr',
         label: 'Bushaltestelle',
         source: 'sourceOEV',
+        sourceLayer: 'oev',
         color: '#a5027d',
         filter:
             [
@@ -72,6 +75,7 @@ export const layersOEV = [
         group: 'Öffentlicher Verkehr',
         label: 'Straßen- oder U-Bahn-Haltestelle',
         source: 'sourceOEV',
+        sourceLayer: 'oev',
         color: '#008d4f',
         filter:
             [
@@ -86,6 +90,7 @@ export const layersOEV = [
         group: 'Öffentlicher Verkehr',
         label: 'Bahnhof',
         source: 'sourceOEV',
+        sourceLayer: 'oev',
         color: '#f01414',
         filter:
             [
@@ -103,6 +108,7 @@ export const layersScooter = [
         group: 'Weitere Angebote',
         label: 'Scooter',
         source: 'sourceScooter',
+        sourceLayer: 'scooter',
         color: '#5353ec',
         ...mobilitaetsAngebote,
         ...ohneMS
@@ -115,6 +121,7 @@ export const layersFahrrad = [
         group: 'Weitere Angebote',
         label: 'Fahrrad',
         source: 'sourceFahrrad',
+        sourceLayer: 'fahrrad',
         color: '#b9d8ae',
         ...mobilitaetsAngebote,
         ...ohneMS
@@ -127,6 +134,7 @@ export const layersMIV = [
         group: 'Weitere Angebote',
         label: 'MIV',
         source: 'sourceMIV',
+        sourceLayer: 'miv',
         color: '#fbe870',
         ...mobilitaetsAngebote,
         ...ohneMS

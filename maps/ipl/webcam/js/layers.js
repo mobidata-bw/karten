@@ -5,7 +5,7 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceWebcam = setFilePath('geojson', 'maps/ipl/webcam', 'webcam');
+export const sourceWebcam = setFilePath({ format: 'geojson', directory: 'maps/ipl/webcam', file: 'webcam' });
 
 
 // ==============================
@@ -17,6 +17,6 @@ export const layersWebcam = [
         group: 'Webcam-Bilder',
         label: 'Standorte',
         source: 'sourceWebcam',
-        color: 'white'
+        color: 'grey'
     }
 ];

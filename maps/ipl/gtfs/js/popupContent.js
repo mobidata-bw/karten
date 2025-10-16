@@ -181,7 +181,7 @@ export function popupContentTransitShapes(features) {
                 <td class="att">Betreiber-Webseite</td>
                 <td class="attContent"><a href="${agency_url}" target="_blank">Link</a></td>
             </tr>
-        </table>' +
+        </table>
         ${teilnetze == '' ? '' : (`
         <br><table>
         <div class="title title2">Teilnetz</div>
@@ -198,7 +198,7 @@ export function popupContentTransitShapes(features) {
             </tr><tr>
                 <td class="att">Datengeber</td>
                 <td class="attContent">${datengeber}</td>
-            </tr>'
+            </tr>
             ` : '' }
             ${teilnetzeBeschreibung == '' ? '' : `
             <tr>
@@ -206,7 +206,7 @@ export function popupContentTransitShapes(features) {
                 <td class="attContent">${teilnetzeBeschreibung}</td>
             </tr>
             `}
-            '<tr>
+            <tr>
                 <td class="att">Bus</td>
                 ${verkehrsmittel.match("Bus") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
             </tr><tr>

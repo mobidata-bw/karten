@@ -4,8 +4,8 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceParking = setFilePath('geojson', 'maps/map-as-a-service/parken_friedrichshafen', 'friedrichshafen_inventory');
-export const sourceTaxi = setFilePath('geojson', 'maps/map-as-a-service/parken_friedrichshafen', 'taxistaende');
+export const sourceParking = setFilePath({ format: 'geojson', directory: 'maps/map-as-a-service/parken_friedrichshafen', file: 'friedrichshafen_inventory' });
+export const sourceTaxi = setFilePath({ format: 'geojson', directory: 'maps/map-as-a-service/parken_friedrichshafen', file: 'taxistaende' });
 
 
 // ==============================

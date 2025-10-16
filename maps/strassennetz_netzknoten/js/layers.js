@@ -4,8 +4,8 @@ import { setFilePath } from '../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceStrassennetz = setFilePath('pmtiles', 'maps/strassennetz_netzknoten', 'BLK_Strassennetz_250130');
-export const sourceNetzknoten = setFilePath('pmtiles', 'maps/strassennetz_netzknoten', 'BLK_Netzknoten_250130');
+export const sourceStrassennetz = setFilePath({ format: 'mbtiles', file: 'strassennetz' });
+export const sourceNetzknoten = setFilePath({ format: 'mbtiles', file: 'netzknoten' });
 
 
 // ==============================

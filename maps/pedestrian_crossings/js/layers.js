@@ -4,10 +4,10 @@ import { setFilePath } from '../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceFootway = setFilePath('pmtiles', 'maps/pedestrian_crossings', 'footway');
-export const sourceMarked = setFilePath('pmtiles', 'maps/pedestrian_crossings', 'marked');
-export const sourceUncontrolled = setFilePath('pmtiles', 'maps/pedestrian_crossings', 'uncontrolled');
-export const sourceZebra = setFilePath('pmtiles', 'maps/pedestrian_crossings', 'zebra');
+export const sourceFootway = setFilePath({ format: 'mbtiles', file: 'footway' });
+export const sourceMarked = setFilePath({ format: 'mbtiles', file: 'marked' });
+export const sourceUncontrolled = setFilePath({ format: 'mbtiles', file: 'uncontrolled' });
+export const sourceZebra = setFilePath({ format: 'mbtiles', file: 'zebra' });
 
 
 // ==============================

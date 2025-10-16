@@ -1,7 +1,7 @@
 import { setFilePath } from '../../../../src/js/setFilePath.js';
 
 
-export const shapeKonstanz = setFilePath('geojson', 'shapes', 'shapeKonstanz');
+export const shapeKonstanz = setFilePath({ format: 'geojson', directory: 'shapes', file: 'shapeKonstanz' });
 
 export const fillShapeKonstanz = {
     'id': 'fillShapeKonstanz',

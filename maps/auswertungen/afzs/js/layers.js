@@ -4,8 +4,8 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceStations = setFilePath('geojson', 'maps/auswertungen/afzs', 'stations');
-export const sourceAfzs = setFilePath('pmtiles', 'maps/auswertungen/afzs', 'afzs');
+export const sourceStations = setFilePath({ format: 'mbtiles', file: 'stations' });
+export const sourceAfzs = setFilePath({ format: 'mbtiles', file: 'afzs' });
 
 
 // ==============================
@@ -133,6 +133,7 @@ export const layersStations = [
         group: 'Zentrale Bahnhöfe',
         label: 'Zentrale Bahnhöfe',
         source: 'sourceStations',
+        sourceLayer: 'stations',
         color: 'red',
         circleRadius: 7
     }

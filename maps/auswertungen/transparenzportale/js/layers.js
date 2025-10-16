@@ -4,7 +4,7 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceTransparenzportale = setFilePath('pmtiles', 'maps/auswertungen/transparenzportale', 'transparenzportale');
+export const sourceTransparenzportale = setFilePath({ format: 'mbtiles', file: 'transparenzportale' });
 
 
 // ==============================
@@ -15,7 +15,7 @@ const transparenzportale = {
     sourceLayer: 'transparenzportale',
     group: 'Transparenzportale',
     type: 'fill'
-  };
+};
 
 export const layersTransparenzportale = [
     {

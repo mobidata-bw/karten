@@ -4,7 +4,7 @@ import { setFilePath } from '../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceInrix = setFilePath('pmtiles', 'maps/inrix', 'Germany_Baden_Wurttemberg');
+export const sourceInrix = setFilePath({ format: 'mbtiles', file: 'inrix' });
 
 
 // ==============================

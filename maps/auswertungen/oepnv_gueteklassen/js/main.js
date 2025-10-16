@@ -6,7 +6,6 @@ import {
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { shapeRegierungsbezirke, lineShapeRegierungsbezirke } from './initializeMap.js';
 import { sourceOepnvGueteklassen, layersOepnvGueteklassen } from './layers.js';
 import { popupContent } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -31,10 +30,6 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // SOURCES AND LAYERS
         // ==============================        
-        map.addSource('shapeRegierungsbezirke', shapeRegierungsbezirke);
-        map.addLayer(lineShapeRegierungsbezirke);
-
-
         const sources = [
             { id: 'sourceOepnvGueteklassen', source: sourceOepnvGueteklassen }
         ];

@@ -4,7 +4,7 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceOepnvGueteklassen = setFilePath('pmtiles', 'maps/auswertungen/oepnv_gueteklassen', 'oepnv_gueteklassen');
+export const sourceOepnvGueteklassen = setFilePath({ format: 'mbtiles', file: 'oepnv_gueteklassen' });
 
 
 // ==============================
@@ -15,32 +15,12 @@ const oepnvGueteklassen = {
     type: 'fill',
     source: 'sourceOepnvGueteklassen',
     sourceLayer: 'oepnvGueteklassen',
-    // fillSortKey: [
-    //     'index-of',
-    //     ['get', 'quality_gr'],
-    //     ['literal', ['J', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A']]
-    // ],
-    // color: [
-    //     'match',
-    //     ['get', 'quality_gr'],
-    //     'A', '#ab1417',
-    //     'B', '#e75739',
-    //     'C', '#fdae61',
-    //     'D', '#fed266',
-    //     'E', '#efef63',
-    //     'F', '#aedc5e',
-    //     'G', '#5fba4f',
-    //     'H', '#5c9c7e',
-    //     'I', '#5a84e5',
-    //     'J', '#4b44f3',
-    //     '#cacaca'
-    // ],
     fillOpacity: 0.9,
     fillOutlineColor: 'transparent'
 };
 
 export const layersOepnvGueteklassen = [
-      {
+    {
         id: 'oepnvGueteklassen_J',
         label: 'J',
         filter: [
