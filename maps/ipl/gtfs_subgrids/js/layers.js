@@ -52,6 +52,19 @@ const transitShapes = {
     exclusiveWithinGroup: true
 };
 
+// already categorized
+const prefixes2 = ['cw', 'vu'];
+const prefixes3 = [
+    'fds', 'vsh', 'vpe', 'vhb', 'tgo', 'vvr',
+    'vsb', 'tvv', 'oam', 'hnv', 'bod', 'kvv',
+    'din', 'tub', 'vrn', 'vvs', 'rvs', 'ovf',
+    'sbg', 'rbs', 'rab', 'grh', 'ghu', 'gai',
+    'omp', 'swg', 'frb', 'swh', 'ddb', 'bvb',
+    'sbb', 'als', 'wvv', 'vgn', 'rmv', 'nth',
+    'hn-', 'bus', 'nvb'
+];
+
+
 export const layersTransitShapes = [
     // VERKEHRSVERBÜNDE
     {
@@ -60,10 +73,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'fds', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'fds'
+        ],
         visibility: 'none'
     },
     {
@@ -72,10 +84,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'vsh', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'vsh'
+        ],
         visibility: 'none'
     },
     {
@@ -84,10 +95,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'vpe', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'vpe'
+        ],
         visibility: 'none'
     },
     {
@@ -96,10 +106,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'vhb', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'vhb'
+        ],
         visibility: 'none'
     },
     {
@@ -108,10 +117,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'tgo', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'tgo'
+        ],
         visibility: 'none'
     },
     {
@@ -120,10 +128,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 2], 'cw', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 2], 'cw'
+        ],
         visibility: 'none'
     },
     {
@@ -132,10 +139,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'vvr', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'vvr'
+        ],
         visibility: 'none'
     },
     {
@@ -144,10 +150,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'vsb', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'vsb'
+        ],
         visibility: 'none'
     },
     {
@@ -156,10 +161,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'tvv', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'tvv'
+        ],
         visibility: 'none'
     },
     {
@@ -168,10 +172,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'oam', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'oam'
+        ],
         visibility: 'none'
     },
     {
@@ -182,7 +185,7 @@ export const layersTransitShapes = [
         ...transitShapes,
         filter:
             [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'hnv', true, false
+                '==', ['slice', ['get', 'route_ids'], 0, 3], 'hnv'
             ],
         visibility: 'none'
     },
@@ -192,10 +195,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendDoubleLine('#a7007e', '#666666'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'bod', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'bod'
+        ],
         visibility: 'none'
     },
     {
@@ -204,10 +206,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendDoubleLine('#a7007e', '#0065b0'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'kvv', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'kvv'
+        ],
         visibility: 'none'
     },
     {
@@ -216,10 +217,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendDoubleLine('#a7007e', '#0065b0'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'din', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'din'
+        ],
         visibility: 'none'
     },
     {
@@ -228,10 +228,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendDoubleLine('#a7007e', '#666666'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'tub', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'tub'
+        ],
         visibility: 'none'
     },
     {
@@ -240,10 +239,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendQuadrupleLine('#a7007e', '#0065b0', '#f39f18', '#808000'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'vrn', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'vrn'
+        ],
         visibility: 'none'
     },
     {
@@ -252,10 +250,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsverbünde',
         symbol: () => legendTripleLine('#a7007e', '#666666', '#0065b0'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'vvs', true, false
-            ]
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'vvs'
+        ]
     },
     // DB Regio-Töchter
     {
@@ -264,10 +261,9 @@ export const layersTransitShapes = [
         subGroup: 'DB Regio-Töchter',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'rvs', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'rvs'
+        ],
         visibility: 'none'
     },
     {
@@ -276,10 +272,9 @@ export const layersTransitShapes = [
         subGroup: 'DB Regio-Töchter',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'ovf', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'ovf'
+        ],
         visibility: 'none'
     },
     {
@@ -288,10 +283,9 @@ export const layersTransitShapes = [
         subGroup: 'DB Regio-Töchter',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'sbg', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'sbg'
+        ],
         visibility: 'none'
     },
     {
@@ -300,10 +294,9 @@ export const layersTransitShapes = [
         subGroup: 'DB Regio-Töchter',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'rbs', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'rbs'
+        ],
         visibility: 'none'
     },
     {
@@ -312,10 +305,9 @@ export const layersTransitShapes = [
         subGroup: 'DB Regio-Töchter',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'rab', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'rab'
+        ],
         visibility: 'none'
     },
     // // Verkehrsunternehmen
@@ -325,10 +317,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'grh', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'grh'
+        ],
         visibility: 'none'
     },
     {
@@ -337,10 +328,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'ghu', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'ghu'
+        ],
         visibility: 'none'
     },
     {
@@ -349,10 +339,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'gai', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'gai'
+        ],
         visibility: 'none'
     },
     {
@@ -361,10 +350,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 2], 'vu', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 2], 'vu'
+        ],
         visibility: 'none'
     },
     {
@@ -373,10 +361,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'omp', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'omp'
+        ],
         visibility: 'none'
     },
     {
@@ -385,10 +372,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'swg', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'swg'
+        ],
         visibility: 'none'
     },
     {
@@ -397,10 +383,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendDoubleLine('#a7007e', '#0065b0'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'frb', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'frb'
+        ],
         visibility: 'none'
     },
     {
@@ -409,10 +394,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'swh', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'swh'
+        ],
         visibility: 'none'
     },
     {
@@ -421,10 +405,9 @@ export const layersTransitShapes = [
         subGroup: 'Verkehrsunternehmen',
         symbol: () => legendDoubleLine('#666666', '#0065b0'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'ddb', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'ddb'
+        ],
         visibility: 'none'
     },
     // // Ausland
@@ -434,10 +417,9 @@ export const layersTransitShapes = [
         subGroup: 'Ausland',
         symbol: () => legendDoubleLine('#a7007e', '#0065b0'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'bvb', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'bvb'
+        ],
         visibility: 'none'
     },
     {
@@ -446,10 +428,9 @@ export const layersTransitShapes = [
         subGroup: 'Ausland',
         symbol: () => legendQuadrupleLine('#a7007e', '#666666', '#0065b0', '#f39f18'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'sbb', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'sbb'
+        ],
         visibility: 'none'
     },
     {
@@ -458,23 +439,34 @@ export const layersTransitShapes = [
         subGroup: 'Ausland',
         symbol: () => legendDoubleLine('#a7007e', '#0065b0'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'als', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'als'
+        ],
         visibility: 'none'
     },
     // Sonstige
+    {
+        id: 'transitShapes_WithoutCategory',
+        label: 'Übrige Verkehre',
+        subGroup: 'Sonstige',
+        symbol: () => legendLine('grey'),
+        ...transitShapes,
+        filter: [
+            'all',
+            ['!', ['in', ['slice', ['get', 'route_ids'], 0, 2], ['literal', prefixes2]]],
+            ['!', ['in', ['slice', ['get', 'route_ids'], 0, 3], ['literal', prefixes3]]]
+        ],
+        visibility: 'none'
+    },
     {
         id: 'transitShapes_WVV',
         label: 'Würzburger Verkehrsverbund',
         subGroup: 'Sonstige',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'wvv', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'wvv'
+        ],
         visibility: 'none'
     },
     {
@@ -483,10 +475,9 @@ export const layersTransitShapes = [
         subGroup: 'Sonstige',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'vgn', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'vgn'
+        ],
         visibility: 'none'
     },
     {
@@ -495,10 +486,9 @@ export const layersTransitShapes = [
         subGroup: 'Sonstige',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'rmv', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'rmv'
+        ],
         visibility: 'none'
     },
     {
@@ -507,10 +497,9 @@ export const layersTransitShapes = [
         subGroup: 'Sonstige',
         symbol: () => legendLine('#666666'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'nth', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'nth'
+        ],
         color: '#666666',
         visibility: 'none'
     },
@@ -520,10 +509,9 @@ export const layersTransitShapes = [
         subGroup: 'Sonstige',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'hn-', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'hn-'
+        ],
         visibility: 'none'
     },
     {
@@ -532,10 +520,9 @@ export const layersTransitShapes = [
         subGroup: 'Sonstige',
         symbol: () => legendDoubleLine('#a7007e', '#666666'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'bus', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'bus'
+        ],
         visibility: 'none'
     },
     {
@@ -544,10 +531,9 @@ export const layersTransitShapes = [
         subGroup: 'Sonstige',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter:
-            [
-                'match', ['slice', ['get', 'route_ids'], 0, 3], 'nvb', true, false
-            ],
+        filter: [
+            '==', ['slice', ['get', 'route_ids'], 0, 3], 'nvb'
+        ],
         visibility: 'none'
     }
 ];
