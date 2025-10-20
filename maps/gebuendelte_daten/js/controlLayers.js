@@ -2,6 +2,7 @@ import { layerControlGrouped } from '../../../src/plugins/mapbox-layer-control/l
 import '../../../src/plugins/mapbox-layer-control/layerControl-patch.js';
 import { layersIpl, layersNonIpl } from './main.js';
 import { addControlLayers } from '../../../src/js/addControlLayers.js';
+import { summarizeControlLayers } from '../../../src/js/summarizeControlLayers.js';
 export let control2;
 
 
@@ -34,38 +35,8 @@ export function initializeControlLayers(map) {
 
 
     // ==============================
-    // GROUP LAYER VISIBILITY
+    // SUMMARIZE CONTROL LAYERS
     // ============================== 
-    const groupLabels = document.querySelectorAll('label.mgl-layerControlGroupHeading');
-
-    function updateGroup(label, toggle = false) {
-
-        const group = label.parentElement;
-        const groupLayers = group.querySelectorAll('div.checkbox');
-
-        groupLayers.forEach(groupLayer => {
-
-            const groupLayerId = groupLayer.querySelector('input[type="checkbox"]').id;
-            const visibility = map.getLayoutProperty(groupLayerId, 'visibility');
-
-            if (visibility === 'visible') {
-                toggle ? groupLayer.classList.add('hiddenGroupLayers') : groupLayer.classList.remove('hiddenGroupLayers');
-                // label.style.fontWeight = 'unset';
-            } else {
-                toggle ? groupLayer.classList.remove('hiddenGroupLayers') : groupLayer.classList.add('hiddenGroupLayers');
-                // label.style.fontWeight = 'unset';            
-            }
-
-        });
-    };
-
-    groupLabels.forEach(label => {
-        updateGroup(label, false);
-
-        label.addEventListener('click', () => {
-            updateGroup(label, true);
-        });
-    });
-
+    summarizeControlLayers(map);
 
 };

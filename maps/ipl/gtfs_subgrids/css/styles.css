@@ -1,0 +1,3 @@
+.mgl-layerControl:not(.collapsed) {
+  width: 285px !important;
+}

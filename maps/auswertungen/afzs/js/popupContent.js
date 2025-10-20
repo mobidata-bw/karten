@@ -12,7 +12,12 @@ export function popupContentAfzs(feature) {
 
     /* POPUP CONTENT */
     return `
-        <table>          
+        <table>    
+            ${count == null ? `
+            <tr>
+                <td class="attContent"><i>Zähldaten nicht vorhanden</i></td>
+            </tr> 
+            ` : `     
             <tr>
                 <td class="att">Von</td>
                 <td class="attContent">${Von}</td>
@@ -27,6 +32,9 @@ export function popupContentAfzs(feature) {
                 <td class="att">Querschnitt</td>
                 <td class="attContent">${count.toLocaleString()}</td>
             </tr><tr>
+                <td class="att">Querschnitt</td>
+                <td class="attContent">${count.toLocaleString()}</td>
+            </tr><tr>
                 <td class="att">1. Hj. 2025</td>
                 <td class="attContent">${count_last.toLocaleString()}</td>
             </tr><tr>
@@ -35,7 +43,8 @@ export function popupContentAfzs(feature) {
             </tr><tr>
                 <td class="att">1. Hj. 2024</td>
                 <td class="attContent">${count_third_last.toLocaleString()}</td>
-            </tr>      
+            </tr>   
+            `}   
         </table>
     `;
 

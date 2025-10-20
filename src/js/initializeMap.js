@@ -10,7 +10,6 @@ import '../css/global.css';
 import maplibregl from 'maplibre-gl';
 import MaplibreInspect from '@maplibre/maplibre-gl-inspect';
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
-import * as pmtiles from 'pmtiles';
 
 import { setFilePath } from './setFilePath.js';
 
@@ -23,16 +22,6 @@ export let map;
 
 
 export function initializeMap({ configZoom, configCenter, configMinZoom, configShape } = {}) {
-
-    // ==============================
-    // PMTILES
-    // ==============================
-    if (!window.__pmtilesRegistered) {
-        const protocol = new pmtiles.Protocol();
-        maplibregl.addProtocol('pmtiles', protocol.tile);
-        window.__pmtilesRegistered = true;
-    };
-
 
     // ==============================
     // MAP
