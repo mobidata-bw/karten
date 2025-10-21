@@ -196,3 +196,11 @@ body {
 #divTable {
 	width: 173px;
 }
+
+/* ============================== */
+/* STREET VIEW                    */
+/* ============================== */
+.maplibre-streetview-pegman-container {
+	top: 190px !important;
+	left: 10px;
+}

@@ -1,6 +1,7 @@
 import 'maplibre-gl/dist/maplibre-gl.css';
 import '@maplibre/maplibre-gl-inspect/dist/maplibre-gl-inspect.css';
 import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
+import '@rezw4n/maplibre-google-streetview/dist/maplibre-google-streetview.css';
 import '../plugins/mapbox-layer-control/layerControl.min.css';
 import '../css/layerSwitcherControl.css';
 import '../css/geocoder.css';
@@ -10,6 +11,7 @@ import '../css/global.css';
 import maplibregl from 'maplibre-gl';
 import MaplibreInspect from '@maplibre/maplibre-gl-inspect';
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
+import MaplibreGoogleStreetView from '@rezw4n/maplibre-google-streetview/dist/maplibre-google-streetview.esm.js';
 
 import { setFilePath } from './setFilePath.js';
 
@@ -120,20 +122,6 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             }
         });
 
-        // map.layerGroups = (groups) => {
-        //     return Object.entries(groups).flatMap(([name, layers]) => {
-        //         if (params.get(name) === 'false') return [];              
-        //         return layers.filter(layer => params.get(layer.id) != 'false');
-        //     });
-        // };
-
-        //   layers = map.layerGroups({
-        //     'transit_stops': layersTransitStops,
-        //     'transit_stations': layersTransitStations,
-        //     'transit_shapes': layersTransitShapes
-        // });
-        // layers.forEach(layer => addLayers(map, layer));
-
     });
 
 
@@ -145,11 +133,7 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             const features = [];
             try {
 
-                const minX = 1.5;
-                const minY = 45.7;
-                const maxX = 16.0;
-                const maxY = 55.3;
-
+                const minX = 1.5; const minY = 45.7; const maxX = 16.0; const maxY = 55.3;
                 const viewbox = `${minX},${maxY},${maxX},${minY}`;
 
                 const request =
@@ -233,7 +217,12 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
             visualizePitch: true,
         }),
         'top-left'
-    )
+    );
+
+    new MaplibreGoogleStreetView({
+        map: map,
+        apiKey: 'AIzaSyAKXX0Z_4g0hyouUDMYG_kAsay9ztLcmOg'
+    });
 
 
     return map;
