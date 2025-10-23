@@ -6,10 +6,14 @@ import {
     popups,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import {
-    sourceTransitAssociations, layersTransitAssociations,
-    sourceTransitShapes, layersTransitShapes
-} from './layers.js';
+import { shapeTransitAssociations, lineShapeTransitAssociations } from './initializeMap.js';
+import { sourceTransitShapes } from './layers.js';
+import { layersTransitAssociations } from './layersTransitAssociations.js';
+import { layersMunicipalUtilities } from './layersMunicipalUtilities.js';
+import { layersDeutscheBahn } from './layersDeutscheBahn.js';
+import { layersTransitCompanies } from './layersTransitCompanies.js';
+import { layersAbroad } from './layersAbroad.js';
+import { layersOther } from './layersOther.js';
 import { popupContentTransitShapes as popupContent } from '../../gtfs/js/popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
 
@@ -31,15 +35,29 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // ==============================
         // SOURCES AND LAYERS
-        // ==============================      
+        // ============================== 
+        map.addSource('shapeTransitAssociations', shapeTransitAssociations);
+        map.addLayer(lineShapeTransitAssociations);
+
+        map.on('styledata', () => {
+            if (map.getLayer('lineShape')) {
+                map.setLayoutProperty('lineShape', 'visibility', 'none');
+            }
+        });
+
         const sources = [
-            { id: 'sourceTransitAssociations', source: sourceTransitAssociations },
             { id: 'sourceTransitShapes', source: sourceTransitShapes }
         ];
         sources.forEach(source => addSources(map, source));
 
-        layersTransitAssociations.forEach(layer => addLayers(map, layer));
-        layers = layersTransitShapes;
+        layers = [
+            ...layersTransitAssociations,
+            ...layersMunicipalUtilities,
+            ...layersDeutscheBahn,
+            ...layersTransitCompanies,
+            ...layersAbroad,
+            ...layersOther,
+        ];
         layers.forEach(layer => addLayers(map, layer));
 
 

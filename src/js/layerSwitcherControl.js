@@ -147,39 +147,35 @@ export function basemaps(map, options = {}) {
     // ============================== 
     map.on('styledata', () => {
 
-        setTimeout(() => {
+        /* Re-add sources and layers */
+        for (let [id, src] of sources) {
+            if (!map.getSource(id)) map.addSource(id, src);
+        };
+        for (let layer of layers.values()) {
+            if (!map.getLayer(layer.id)) map.addLayer(layer);
+        };
 
-            /* Re-add sources and layers */
-            for (let [id, src] of sources) {
-                if (!map.getSource(id)) map.addSource(id, src);
-            };
-            for (let layer of layers.values()) {
-                if (!map.getLayer(layer.id)) map.addLayer(layer);
-            };
+        /* Set visibility */
+        activeLayers.length = 0;
+        layers.forEach(layer => {
+            if (map.getLayer(layer.id)) {
+                if (map.getLayoutProperty(layer.id, 'visibility') == 'visible') activeLayers.push(layer.id)
+            }
+        });
+        if (!window.__basemapSwitching) return; // if false then no further actions
+        const restoreArray = Array.isArray(preservedActiveLayers) ? preservedActiveLayers : activeLayers;
+        // console.log(restoreArray);
+        layers.forEach(layer => {
+            if (restoreArray.includes(layer.id)) map.setLayoutProperty(layer.id, 'visibility', 'visible');
+            else map.setLayoutProperty(layer.id, 'visibility', 'none');
+        });
 
-            /* Set visibility */
-            activeLayers.length = 0;
-            layers.forEach(layer => {
-                if (map.getLayer(layer.id)) {
-                    if (map.getLayoutProperty(layer.id, 'visibility') == 'visible') activeLayers.push(layer.id)
-                }
-            });
-            if (!window.__basemapSwitching) return; // if false then no further actions
-            const restoreArray = Array.isArray(preservedActiveLayers) ? preservedActiveLayers : activeLayers;
-            // console.log(restoreArray);
-            layers.forEach(layer => {
-                if (restoreArray.includes(layer.id)) map.setLayoutProperty(layer.id, 'visibility', 'visible');
-                else map.setLayoutProperty(layer.id, 'visibility', 'none');
-            });
+        /* Style basemaps */
+        styleBasemaps(map, layers);
 
-            /* Style basemaps */
-            styleBasemaps(map, layers);
-
-            /* Set Visibility: Reset flag and array */
-            window.__basemapSwitching = false;
-            preservedActiveLayers = null;
-
-        }, 0);
+        /* Set Visibility: Reset flag and array */
+        window.__basemapSwitching = false;
+        preservedActiveLayers = null;
 
     });
 

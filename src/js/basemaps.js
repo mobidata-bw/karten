@@ -56,21 +56,22 @@ basemapConfig = {
 export function styleBasemaps(map, layers) {
 
     const styleName = map.getStyle().name;
+    // console.log(map.getStyle().layers);
 
     switch (styleName) {
         case 'Streets':
         case 'Labeled Aerial Photos':
+            map.moveLayer('lineShape', 'place_other'); map.moveLayer('fillShape', 'place_other');
+            map.moveLayer('lineShape', 'highway-shield'); map.moveLayer('fillShape', 'highway-shield');
+            break;
         case 'Dark Matter':
-            map.moveLayer('lineShape', 'place_other');
-            map.moveLayer('fillShape', 'place_other');
-            if (styleName == 'Dark Matter') {
-                layers.forEach(layer => {
-                    if (layer.id.endsWith('Shape')) {
-                        if (layer.type == 'line') map.setPaintProperty(layer.id, 'line-color', 'white');
-                        else if (layer.type == 'fill') map.setPaintProperty(layer.id, 'fill-color', 'white');
-                    }
-                })
-            };
+            map.moveLayer('lineShape', 'place_other'); map.moveLayer('fillShape', 'place_other');
+            layers.forEach(layer => {
+                if (layer.id.endsWith('Shape')) {
+                    if (layer.type == 'line') map.setPaintProperty(layer.id, 'line-color', 'white');
+                    else if (layer.type == 'fill') map.setPaintProperty(layer.id, 'fill-color', 'white');
+                }
+            });
             break;
         case 'CycloBright':
         case 'Railway':

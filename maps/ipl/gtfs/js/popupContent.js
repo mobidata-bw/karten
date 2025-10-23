@@ -44,7 +44,7 @@ export function popupContentTransitStops(features) {
             </tr><tr>
                 ${location_type == 'station' ? `
                 <td class="attContentLink"><a href="${urlDepartures}&name_dm=${stopIdStation}" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="${urlArrivals}&name_dm=${stopIdStation}" target="_blank">&#10149 Ankunftsmonitor<a></td>` :
-                `<td class="attContentLink"><a href="${urlDepartures}&name_dm=${stop_id}" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="${urlArrivals}&name_dm=${stop_id}" target="_blank">&#10149 Ankunftsmonitor<a></td>
+            `<td class="attContentLink"><a href="${urlDepartures}&name_dm=${stop_id}" target="_blank">&#10149 Abfahrtsmonitor<a></td><td class="attContentLink"><a href="${urlArrivals}&name_dm=${stop_id}" target="_blank">&#10149 Ankunftsmonitor<a></td>
                 `}   
              </tr>
         </table>
@@ -93,78 +93,77 @@ export function popupContentTransitShapes(features) {
     } = features;
 
     /* TEILNETZE */
-    const teilnetzeMapping = {
-
+    const subgrids = {
         /* DB-TOECHTER */
-        "rab": { teilnetz: "Regionalverkehr Alb-Bodensee", teilnetzBeschreibung: "", datengeber: "Regionalverkehr Alb-Bodensee", verkehrsmittel: "Bus" },
-        "rbs": { teilnetz: "Regional Bus Stuttgart", teilnetzBeschreibung: "", datengeber: "Regional Bus Stuttgart", verkehrsmittel: "Bus" },
-        "sbg": { teilnetz: "Südbadenbus", teilnetzBeschreibung: "", datengeber: "Südbadenbus", verkehrsmittel: "Bus" },
-        "ovf": { teilnetz: "Ominbusverkehr Franken", teilnetzBeschreibung: "", datengeber: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", verkehrsmittel: "Bus" },
-        "rvs": { teilnetz: "Südwestbus", teilnetzBeschreibung: "", datengeber: "Südwestbus", verkehrsmittel: "Bus" },
+        "rab": { subgrid: "Regionalverkehr Alb-Bodensee", description: "", source: "Regionalverkehr Alb-Bodensee", mode: "Bus" },
+        "rbs": { subgrid: "Regional Bus Stuttgart", description: "", source: "Regional Bus Stuttgart", mode: "Bus" },
+        "sbg": { subgrid: "Südbadenbus", description: "", source: "Südbadenbus", mode: "Bus" },
+        "ovf": { subgrid: "Ominbusverkehr Franken", description: "", source: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", mode: "Bus" },
+        "rvs": { subgrid: "Südwestbus", description: "", source: "Südwestbus", mode: "Bus" },
         /* VERKEHRSVERBUENDE BADEN-WUERTTEMBERG */
-        "vvs": { teilnetz: "Verkehrsverbund Stuttgart", teilnetzBeschreibung: "", datengeber: "Verkehrsverbund Stuttgart", verkehrsmittel: "Regionalverkehr, Straßen-/S-/U-Bahn, Bus" },
-        "vrn": { teilnetz: "Verkehrsverbund Rhein-Neckar", teilnetzBeschreibung: "", datengeber: "Verkehrsverbund Rhein-Neckar", verkehrsmittel: "Straßen-/S-/U-Bahn, Bus, Fähre, Seilbahn" },
-        "tub": { teilnetz: "Verkehrsverbund Neckar-Alb-Donau", teilnetzBeschreibung: "", datengeber: "Verkehrsverbund Neckar-Alb-Donau", verkehrsmittel: "Regionalverkehr, Bus" },
-        "din": { teilnetz: "Donau-Iller-Nahverkehrsverbund", teilnetzBeschreibung: "DING übernimmt Datenlieferung für den Heidenheimer Tarifverbund", datengeber: "Donau-Iller-Nahverkehrsverbund", verkehrsmittel: "Straßen-/S-/U-Bahn, Bus" },
-        "kvv": { teilnetz: "Karlsruher Verkehrsverbund", teilnetzBeschreibung: "", datengeber: "Karlsruher Verkehrsverbund", verkehrsmittel: "Straßen-/S-/U-Bahn, Bus" },
-        "bod": { teilnetz: "Bodensee-Oberschwaben-Verkehrsverbund", teilnetzBeschreibung: "", datengeber: "Bodensee-Oberschwaben-Verkehrsverbund", verkehrsmittel: "Regionalverkehr, Bus" },
-        "hnv": { teilnetz: "Heilbronner Hohenloher Haller Nahverkehr", teilnetzBeschreibung: "", datengeber: "Heilbronner Hohenloher Haller Nahverkehr", verkehrsmittel: "Regionalverkehr, Straßen-/S-/U-Bahn, Bus" },
-        "oam": { teilnetz: "OstalbMobil", teilnetzBeschreibung: "", datengeber: "OstalbMobil", verkehrsmittel: "Bus" },
-        "tvv": { teilnetz: "Move (TUTicket)", teilnetzBeschreibung: "ehemals TUTicket", datengeber: "Move (TUTicket)", verkehrsmittel: "Bus" },
-        "vsb": { teilnetz: "Move (VSB)", teilnetzBeschreibung: "ehemals Verkehrsverbund Schwarzwald-Baar", datengeber: "Landratsamt Schwarzwald-Baar-Kreis", verkehrsmittel: "Bus" },
-        "vvr": { teilnetz: "Move (VVR)", teilnetzBeschreibung: "ehemals Verkehrsverbund Rottweil", datengeber: "Move (VVR)", verkehrsmittel: "Bus" },
-        "cw": { teilnetz: "Verkehrsgesellschaft Calw", teilnetzBeschreibung: "", datengeber: "Verkehrsgesellschaft Calw", verkehrsmittel: "Bus" },
-        "tgo": { teilnetz: "Tarifverbund Ortenau", teilnetzBeschreibung: "", datengeber: "Tarifverbund Ortenau", verkehrsmittel: "Bus" },
-        "vhb": { teilnetz: "Verkehrsverbund Hegau-Bodensee", teilnetzBeschreibung: "", datengeber: "Verkehrsverbund Hegau-Bodensee", verkehrsmittel: "Bus" },
-        "vpe": { teilnetz: "Verkehrsverbund Pforzheim-Enzkreis", teilnetzBeschreibung: "", datengeber: "Verkehrsverbund Pforzheim-Enzkreis", verkehrsmittel: "Bus" },
-        "vsh": { teilnetz: "Kreisverkehr Schwäbisch Hall", teilnetzBeschreibung: "", datengeber: "Kreisverkehr Schwäbisch Hall", verkehrsmittel: "Bus" },
-        "fds": { teilnetz: "Verkehrsgemeinschaft Freudenstadt", teilnetzBeschreibung: "", datengeber: "Verkehrsgemeinschaft Freudenstadt", verkehrsmittel: "Bus" },
+        "vvs": { subgrid: "Verkehrsverbund Stuttgart", description: "", source: "Verkehrsverbund Stuttgart", mode: "Regionalverkehr, Straßen-/S-/U-Bahn, Bus" },
+        "vrn": { subgrid: "Verkehrsverbund Rhein-Neckar", description: "", source: "Verkehrsverbund Rhein-Neckar", mode: "Straßen-/S-/U-Bahn, Bus, Fähre, Seilbahn" },
+        "tub": { subgrid: "Verkehrsverbund Neckar-Alb-Donau", description: "", source: "Verkehrsverbund Neckar-Alb-Donau", mode: "Regionalverkehr, Bus" },
+        "din": { subgrid: "Donau-Iller-Nahverkehrsverbund", description: "DING übernimmt Datenlieferung für den Heidenheimer Tarifverbund", source: "Donau-Iller-Nahverkehrsverbund", mode: "Straßen-/S-/U-Bahn, Bus" },
+        "kvv": { subgrid: "Karlsruher Verkehrsverbund", description: "", source: "Karlsruher Verkehrsverbund", mode: "Straßen-/S-/U-Bahn, Bus" },
+        "bod": { subgrid: "Bodensee-Oberschwaben-Verkehrsverbund", description: "", source: "Bodensee-Oberschwaben-Verkehrsverbund", mode: "Regionalverkehr, Bus" },
+        "hnv": { subgrid: "Heilbronner Hohenloher Haller Nahverkehr", description: "", source: "Heilbronner Hohenloher Haller Nahverkehr", mode: "Regionalverkehr, Straßen-/S-/U-Bahn, Bus" },
+        "oam": { subgrid: "OstalbMobil", description: "", source: "OstalbMobil", mode: "Bus" },
+        "tvv": { subgrid: "Move (TUTicket)", description: "Verkehrsverbund Schwarzwald-Baar-Heuberg, ehemals TUTicket", source: "Move (TUTicket)", mode: "Bus" },
+        "vsb": { subgrid: "Move (VSB)", description: "Verkehrsverbund Schwarzwald-Baar-Heuberg, ehemals Verkehrsverbund Schwarzwald-Baar", source: "Landratsamt Schwarzwald-Baar-Kreis", mode: "Bus" },
+        "vvr": { subgrid: "Move (VVR)", description: "Verkehrsverbund Schwarzwald-Baar-Heuberg, ehemals Verkehrsverbund Rottweil", source: "Move (VVR)", mode: "Bus" },
+        "cw": { subgrid: "Verkehrsgesellschaft Calw", description: "", source: "Verkehrsgesellschaft Calw", mode: "Bus" },
+        "tgo": { subgrid: "Tarifverbund Ortenau", description: "", source: "Tarifverbund Ortenau", mode: "Bus" },
+        "vhb": { subgrid: "Verkehrsverbund Hegau-Bodensee", description: "", source: "Verkehrsverbund Hegau-Bodensee", mode: "Bus" },
+        "vpe": { subgrid: "Verkehrsverbund Pforzheim-Enzkreis", description: "", source: "Verkehrsverbund Pforzheim-Enzkreis", mode: "Bus" },
+        "vsh": { subgrid: "Kreisverkehr Schwäbisch Hall", description: "", source: "Kreisverkehr Schwäbisch Hall", mode: "Bus" },
+        "fds": { subgrid: "Verkehrsgemeinschaft Freudenstadt", description: "", source: "Verkehrsgemeinschaft Freudenstadt", mode: "Bus" },
+        "rmv": { subgrid: "Rhein-Main-Verkehrsverbund", description: "", source: "Rhein-Main-Verkehrsverbund Servicegesellschaft", mode: "Bus" },
+        "vgn": { subgrid: "Verkehrsverbund Großraum Nürnberg", description: "", source: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", mode: "Bus" },
+        "wvv": { subgrid: "Würzburger Versorgungs- und Verkehrs-GmbH", description: "", source: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", mode: "Bus" },
         /* VERKEHRSUNTERNEHMEN */
-        "ddb": { teilnetz: "Verschiedene Eisenbahngesellschaften", teilnetzBeschreibung: "", datengeber: "Europäisches Fahrplanzentrum", verkehrsmittel: "Regionalverkehr, Straßen-/S-/U-Bahn" },
-        "swh": { teilnetz: "Nahverkehr Hohenlohekreis", teilnetzBeschreibung: "Der NVH ist tariflich Teil des HNV, bestellt im Hohenlohekreis als dessen Eigenbetrieb aber die Busverkehre", datengeber: "Nahverkehr Hohenlohekreis", verkehrsmittel: "Bus" },
-        "frb": { teilnetz: "Freiburger Verkehrs AG", teilnetzBeschreibung: "", datengeber: "Freiburger Verkehrs AG", verkehrsmittel: "Straßen-/S-/U-Bahn, Bus" },
-        "swg": { teilnetz: "SWEG", teilnetzBeschreibung: "", datengeber: "SWEG", verkehrsmittel: "Bus" },
-        "omp": { teilnetz: "Omnipart", teilnetzBeschreibung: "", datengeber: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", verkehrsmittel: "Bus" },
-        "vu": { teilnetz: "Verkehrsgemeinschaft am Bayerischen Untermain", teilnetzBeschreibung: "", datengeber: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", verkehrsmittel: "Bus" },
-        "gai": { teilnetz: "Omnibusverkehr Gairing und Omnibus Weidachstein", teilnetzBeschreibung: "", datengeber: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", verkehrsmittel: "Bus" },
-        "ghu": { teilnetz: "Gute Reise Hauck", teilnetzBeschreibung: "", datengeber: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", verkehrsmittel: "Bus" },
-        "grh": { teilnetz: "Grasmann-Reisen Gmbh", teilnetzBeschreibung: "", datengeber: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", verkehrsmittel: "Bus" },
+        "bcl": { subgrid: "BusClassic", description: "Teil der Weiglein-Firmengruppe", source: "", mode: "Bus" },
+        "ddb": { subgrid: "Verschiedene Eisenbahngesellschaften", description: "", source: "Europäisches Fahrplanzentrum", mode: "Regionalverkehr, Straßen-/S-/U-Bahn" },
+        "swh": { subgrid: "Nahverkehr Hohenlohekreis", description: "Der NVH ist tariflich Teil des HNV, bestellt im Hohenlohekreis als dessen Eigenbetrieb aber die Busverkehre", source: "Nahverkehr Hohenlohekreis", mode: "Bus" },
+        "frb": { subgrid: "Freiburger Verkehrs AG", description: "", source: "Freiburger Verkehrs AG", mode: "Straßen-/S-/U-Bahn, Bus" },
+        "swg": { subgrid: "SWEG", description: "", source: "SWEG", mode: "Bus" },
+        "omp": { subgrid: "Omnipart", description: "", source: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", mode: "Bus" },
+        "vu": { subgrid: "Verkehrsgemeinschaft am Bayerischen Untermain", description: "", source: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", mode: "Bus" },
+        "gai": { subgrid: "Omnibusverkehr Gairing und Omnibus Weidachstein", description: "", source: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", mode: "Bus" },
+        "ghu": { subgrid: "Gute Reise Hauck", description: "", source: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", mode: "Bus" },
+        "grh": { subgrid: "Grasmann-Reisen Gmbh", description: "", source: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", mode: "Bus" },
         /* AUSLAND */
-        "als": { teilnetz: "Fluo Grand Est", teilnetzBeschreibung: "umfasst in der Region Grand Est das Elsass und Lothringen", datengeber: "Fluo Grand Est", verkehrsmittel: "Straßen-/S-/U-Bahn, Bus" },
-        "sbb": { teilnetz: "Schweizer Bundesbahn", teilnetzBeschreibung: "Landesweites Netz", datengeber: "Basler Verkehrsbetrieb", verkehrsmittel: "Regionalverkehr, Straßen-/S-/U-Bahn, Bus, Fähre" },
-        "bvb": { teilnetz: "Basler Verkehrsbetrieb", teilnetzBeschreibung: "", datengeber: "Basler Verkehrsbetrieb", verkehrsmittel: "Straßen-/S-/U-Bahn, Bus" },
+        "als": { subgrid: "Fluo Grand Est", description: "umfasst in der Region Grand Est das Elsass und Lothringen", source: "Fluo Grand Est", mode: "Straßen-/S-/U-Bahn, Bus" },
+        "sbb": { subgrid: "Schweizer Bundesbahn", description: "Landesweites Netz", source: "Basler Verkehrsbetrieb", mode: "Regionalverkehr, Straßen-/S-/U-Bahn, Bus, Fähre" },
+        "bvb": { subgrid: "Basler Verkehrsbetrieb", description: "", source: "Basler Verkehrsbetrieb", mode: "Straßen-/S-/U-Bahn, Bus" },
         /* SONSTIGE */
-        "nvb": { teilnetz: "NVBW", teilnetzBeschreibung: "seitens der NVBW eingepflegte Linien", datengeber: "NVBW", verkehrsmittel: "Bus" },
-        "bus": { teilnetz: "Flix", teilnetzBeschreibung: "FlixBus und FlixTrain", datengeber: "DELFI", verkehrsmittel: "Regionalverkehr, Bus" },
-        "hn": { teilnetz: "Bürgerbusverkehre", teilnetzBeschreibung: "enthalten sind Bürgerbusverkehre, die nicht über Verkehrsverbünde abgebildet werden", datengeber: "Match Rider im Auftrag der Bürgerbus-Vereine", verkehrsmittel: "Bus" },
-        "nth": { teilnetz: "Verkehrsgemeinschaft Mittelthüringen", teilnetzBeschreibung: "Thüringer Landesnetz", datengeber: "Verkehrsgemeinschaft Mittelthüringen", verkehrsmittel: "Regionalverkehr" },
-        "rmv": { teilnetz: "Rhein-Main-Verkehrsverbund", teilnetzBeschreibung: "", datengeber: "Rhein-Main-Verkehrsverbund Servicegesellschaft", verkehrsmittel: "Bus" },
-        "vgn": { teilnetz: "Verkehrsverbund Großraum Nürnberg", teilnetzBeschreibung: "", datengeber: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", verkehrsmittel: "Bus" },
-        "wvv": { teilnetz: "Würzburger Versorgungs- und Verkehrs-GmbH", teilnetzBeschreibung: "", datengeber: "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)", verkehrsmittel: "Bus" }
+        "nvb": { subgrid: "NVBW", description: "seitens der NVBW eingepflegte Linien", source: "NVBW", mode: "Bus" },
+        "bus": { subgrid: "Flix", description: "FlixBus und FlixTrain", source: "DELFI", mode: "Regionalverkehr, Bus" },
+        "hn": { subgrid: "Bürgerbusverkehre", description: "enthalten sind Bürgerbusverkehre, die nicht über Verkehrsverbünde abgebildet werden", source: "Match Rider im Auftrag der Bürgerbus-Vereine", mode: "Bus" },
+        "nth": { subgrid: "Verkehrsgemeinschaft Mittelthüringen", description: "Thüringer Landesnetz", source: "Verkehrsgemeinschaft Mittelthüringen", mode: "Regionalverkehr" }
     }
 
-
     const routeIdsPrefix = route_ids.split("-")[0];
-    let teilnetze = '', teilnetzeBeschreibung = '', datengeber = '', verkehrsmittel = '';
-    for (let teilnetz in teilnetzeMapping) {
-        teilnetz = teilnetz.split("-")[0];
-        if (routeIdsPrefix == teilnetz) {
-            teilnetze += teilnetzeMapping[teilnetz].teilnetz;
-            teilnetzeBeschreibung += teilnetzeMapping[teilnetz].teilnetzBeschreibung;
-            datengeber += teilnetzeMapping[teilnetz].datengeber;
-            verkehrsmittel += teilnetzeMapping[teilnetz].verkehrsmittel;
+    let subgrid = '', description = '', source = '', mode = '';
+    for (let i in subgrids) {
+        i = i.split("-")[0];
+        if (routeIdsPrefix == i) {
+            subgrid += subgrids[i].subgrid;
+            description += subgrids[i].description;
+            source += subgrids[i].source;
+            mode += subgrids[i].mode;
         }
         else {
-            teilnetze == '';
+            subgrid == '';
         }
     };
-
 
     /* POPUP CONTENT */
     return `
         <table>
             <tr>
-                ${(teilnetze == 'Verschiedene Eisenbahngesellschaften' || teilnetze == '') ? '' : (((teilnetze == 'Move (TUTicket)' || teilnetze == 'Move (VSB)') || teilnetze == 'Move (VVR)') ? popupImages("MOVE") : popupImages(teilnetze))}
+                ${(subgrid == 'Verschiedene Eisenbahngesellschaften' || subgrid == '') ? '' :
+            (subgrid.startsWith('Move') ? popupImages("MOVE") : popupImages(subgrid))}
                 <th class="title">${route_names}</th>
             </tr>
         </table><br><table>
@@ -182,45 +181,45 @@ export function popupContentTransitShapes(features) {
                 <td class="attContent"><a href="${agency_url}" target="_blank">Link</a></td>
             </tr>
         </table>
-        ${teilnetze == '' ? '' : (`
+        ${subgrid == '' ? '' : (`
         <br><table>
         <div class="title title2">Teilnetz</div>
-            ${teilnetze == datengeber ? `
+            ${subgrid == source ? `
             <tr>
                 <td class="att">Name/Datengeber</td>
-                <td class="attContent">${teilnetze}</td>
+                <td class="attContent">${subgrid}</td>
             </tr>
-            ` : '' }
-            ${teilnetze != datengeber ? `
+            ` : ''}
+            ${subgrid != source ? `
             <tr>
                 <td class="att">Name</td>
-                <td class="attContent">${teilnetze}</td>
+                <td class="attContent">${subgrid}</td>
             </tr><tr>
                 <td class="att">Datengeber</td>
-                <td class="attContent">${datengeber}</td>
+                <td class="attContent">${source}</td>
             </tr>
-            ` : '' }
-            ${teilnetzeBeschreibung == '' ? '' : `
+            ` : ''}
+            ${description == '' ? '' : `
             <tr>
                 <td class="att">Beschreibung</td>
-                <td class="attContent">${teilnetzeBeschreibung}</td>
+                <td class="attContent">${description}</td>
             </tr>
             `}
             <tr>
                 <td class="att">Bus</td>
-                ${verkehrsmittel.match("Bus") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+                ${mode.match("Bus") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
             </tr><tr>
                 <td class="att">Regionalverkehr</td>
-                ${verkehrsmittel.match("Regionalverkehr") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+                ${mode.match("Regionalverkehr") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
             </tr><tr>
                 <td class="att">Straßen-, S- oder U-Bahn</td>
-                ${verkehrsmittel.match("Straßen-/S-/U-Bahn") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+                ${mode.match("Straßen-/S-/U-Bahn") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
             </tr><tr>
                 <td class="att">Fähre</td>
-                ${verkehrsmittel.match("Fähre") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+                ${mode.match("Fähre") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
             </tr><tr>
                 <td class="att">Seilbahn</td>
-                ${verkehrsmittel.match("Seilbahn") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
+                ${mode.match("Seilbahn") ? '<td class="tdDatengeber">&#10003;</td>' : '<td class="tdDatengeber">&#x2717;</td>'}
             </tr>
         </table>`
         )}

@@ -2,12 +2,12 @@ export function popupContentAfzs(feature) {
 
     /* INITIALIZE VARIABLES */
     const {
-        Von,
-        Nach,
-        Querschnitt: count,
-        ['2025_HJ_1']: count_last,
-        ['2024_HJ_2']: count_second_last,
-        ['2024_HJ_1']: count_third_last
+        ['22.10.2025_Querschnitt_Von']: from,
+        ['22.10.2025_Querschnitt_Nach']: to,
+        ['22.10.2025_Querschnitt_Querschnitt']: count,
+        ['22.10.2025_Querschnitt_1. HJ 2025']: count_last,
+        ['22.10.2025_Querschnitt_2.HJ 2024']: count_second_last,
+        ['22.10.2025_Querschnitt_1.HJ 2024']: count_third_last
     } = feature;
 
     /* POPUP CONTENT */
@@ -20,18 +20,15 @@ export function popupContentAfzs(feature) {
             ` : `     
             <tr>
                 <td class="att">Von</td>
-                <td class="attContent">${Von}</td>
+                <td class="attContent">${from}</td>
             </tr><tr>
                 <td class="att">Nach</td>
-                <td class="attContent">${Nach}</td>           
+                <td class="attContent">${to}</td>           
             </tr>
         </table><br>
         <div class="title title2">Zählung</div>
         <table>
             <tr>
-                <td class="att">Querschnitt</td>
-                <td class="attContent">${count.toLocaleString()}</td>
-            </tr><tr>
                 <td class="att">Querschnitt</td>
                 <td class="attContent">${count.toLocaleString()}</td>
             </tr><tr>

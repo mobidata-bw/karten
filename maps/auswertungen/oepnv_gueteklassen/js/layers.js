@@ -27,6 +27,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'J'
         ],
         color: '#4b44f3',
+        fillSortKey: 0,
         ...oepnvGueteklassen
     },
     {
@@ -36,6 +37,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'I'
         ],
         color: '#5a84e5',
+        fillSortKey: 1,
         ...oepnvGueteklassen
     },
     {
@@ -45,6 +47,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'H'
         ],
         color: '#5c9c7e',
+        fillSortKey: 2,
         ...oepnvGueteklassen
     },
     {
@@ -54,6 +57,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'G'
         ],
         color: '#5fba4f',
+        fillSortKey: 3,
         ...oepnvGueteklassen
     },
     {
@@ -63,6 +67,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'F'
         ],
         color: '#aedc5e',
+        fillSortKey: 4,
         ...oepnvGueteklassen
     },
     {
@@ -72,6 +77,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'E'
         ],
         color: '#efef63',
+        fillSortKey: 5,
         ...oepnvGueteklassen
     },
     {
@@ -81,6 +87,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'D'
         ],
         color: '#fed266',
+        fillSortKey: 6,
         ...oepnvGueteklassen
     },
     {
@@ -90,6 +97,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'C'
         ],
         color: '#fdae61',
+        fillSortKey: 7,
         ...oepnvGueteklassen
     },
     {
@@ -99,6 +107,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'B'
         ],
         color: '#e75739',
+        fillSortKey: 8,
         ...oepnvGueteklassen
     },
     {
@@ -108,6 +117,7 @@ export const layersOepnvGueteklassen = [
             '==', ['get', 'quality_gr'], 'A'
         ],
         color: '#ab1417',
+        fillSortKey: 9,
         ...oepnvGueteklassen
     }
 ];

@@ -4,36 +4,35 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceStations = setFilePath({ format: 'mbtiles', file: 'stations' });
-export const sourceAfzs = setFilePath({ format: 'mbtiles', file: 'afzs' });
+export const sourceQuerschnittsdaten = setFilePath({ format: 'geojson', directory: 'maps/auswertungen/afzs', file: 'Querschnittsdaten' });
+export const sourceZentraleBahnhoefe = setFilePath({ format: 'geojson', directory: 'maps/auswertungen/afzs', file: 'zentraleBahnhoefe' });
 
 
 // ==============================
 // LAYERS
 // ==============================
-const afzs = {
-    source: 'sourceAfzs',
-    sourceLayer: 'afzs',
+const querschnittsdaten = {
+    source: 'sourceQuerschnittsdaten',
     group: 'AFZS',
     type: 'line',
     lineCap: 'round'
 };
 
-const attribute = 'Querschnitt';
+const attribute = '22.10.2025_Querschnitt_Querschnitt';
 
-export const layersAfzs = [
+export const layersQuerschnittsdaten = [
     {
-        id: 'afzs9',
+        id: 'querschnittsdaten9',
         label: 'über 17.500',
         filter: [
             '>', ['get', attribute], 17500
         ],
         color: '#070667',
         lineWidth: 10,
-        ...afzs
+        ...querschnittsdaten
     },
     {
-        id: 'afzs8',
+        id: 'querschnittsdaten8',
         label: '15.000 - 17.500',
         filter: [
             'all',
@@ -42,10 +41,10 @@ export const layersAfzs = [
         ],
         color: '#151878',
         lineWidth: 9,
-        ...afzs
+        ...querschnittsdaten
     },
     {
-        id: 'afzs7',
+        id: 'querschnittsdaten7',
         label: '10.000 - 15.000',
         filter: [
             'all',
@@ -54,10 +53,10 @@ export const layersAfzs = [
         ],
         color: '#232989',
         lineWidth: 8,
-        ...afzs
+        ...querschnittsdaten
     },
     {
-        id: 'afzs6',
+        id: 'querschnittsdaten6',
         label: '7.500 - 10.000',
         filter: [
             'all',
@@ -66,10 +65,10 @@ export const layersAfzs = [
         ],
         color: '#313B9A',
         lineWidth: 7,
-        ...afzs
+        ...querschnittsdaten
     },
     {
-        id: 'afzs5',
+        id: 'querschnittsdaten5',
         label: '5.000 - 7.500',
         filter: [
             'all',
@@ -78,10 +77,10 @@ export const layersAfzs = [
         ],
         color: '#3F4CAB',
         lineWidth: 6,
-        ...afzs
+        ...querschnittsdaten
     },
     {
-        id: 'afzs4',
+        id: 'querschnittsdaten4',
         label: '3.750 - 5.000',
         filter: [
             'all',
@@ -90,10 +89,10 @@ export const layersAfzs = [
         ],
         color: '#4C5EBB',
         lineWidth: 5,
-        ...afzs
+        ...querschnittsdaten
     },
     {
-        id: 'afzs3',
+        id: 'querschnittsdaten3',
         label: '2.500 - 3.750',
         filter: [
             'all',
@@ -102,10 +101,10 @@ export const layersAfzs = [
         ],
         color: '#5A6FCC',
         lineWidth: 4,
-        ...afzs
+        ...querschnittsdaten
     },
     {
-        id: 'afzs2',
+        id: 'querschnittsdaten2',
         label: '1.000 - 2.500',
         filter: [
             'all',
@@ -114,19 +113,19 @@ export const layersAfzs = [
         ],
         color: '#6881DD',
         lineWidth: 3,
-        ...afzs
+        ...querschnittsdaten
     },
     {
-        id: 'afzs1',
+        id: 'querschnittsdaten1',
         label: 'unter 1.000',
         filter: [
             '<', ['get', attribute], 1000
         ],
         color: '#7692EE',
         lineWidth: 2,
-        ...afzs
+        ...querschnittsdaten
     },
-     {
+    {
         id: 'afzs0',
         label: 'Ohne Zählung',
         filter: [
@@ -134,18 +133,17 @@ export const layersAfzs = [
         ],
         color: 'black',
         lineWidth: 2,
-        ...afzs
+        ...querschnittsdaten
     }
 ];
 
 
-export const layersStations = [
+export const layersZentraleBahnhoefe = [
     {
-        id: 'stations',
+        id: 'zentraleBahnhoefe',
         group: 'Zentrale Bahnhöfe',
         label: 'Zentrale Bahnhöfe',
-        source: 'sourceStations',
-        sourceLayer: 'stations',
+        source: 'sourceZentraleBahnhoefe',
         color: 'red',
         circleRadius: 7
     }

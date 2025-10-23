@@ -5,8 +5,8 @@ import {
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
-    sourceAfzs, layersAfzs,
-    sourceStations, layersStations
+    sourceQuerschnittsdaten, layersQuerschnittsdaten,
+    sourceZentraleBahnhoefe, layersZentraleBahnhoefe
 } from './layers.js';
 import { popupContentStations, popupContentAfzs } from './popupContent.js';
 import { initializeControlLayers } from './controlLayers.js';
@@ -31,14 +31,14 @@ window.addEventListener('DOMContentLoaded', () => {
         // SOURCES AND LAYERS
         // ==============================
         const sources = [
-            { id: 'sourceAfzs', source: sourceAfzs },
-            { id: 'sourceStations', source: sourceStations }
+            { id: 'sourceQuerschnittsdaten', source: sourceQuerschnittsdaten },
+            { id: 'sourceZentraleBahnhoefe', source: sourceZentraleBahnhoefe }
         ];
         sources.forEach(source => addSources(map, source));
 
         layers = [
-            ...layersStations,
-            ...layersAfzs
+            ...layersZentraleBahnhoefe,
+            ...layersQuerschnittsdaten
         ];
         layers.forEach(layer => addLayers(map, layer));
 
@@ -52,14 +52,14 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // MOVE LAYER
         // ==============================     
-        map.moveLayer('stations');
+        map.moveLayer('zentraleBahnhoefe');
 
 
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layersStations, popupContentStations);
-        popups(map, layersAfzs, popupContentAfzs);
+        popups(map, layersQuerschnittsdaten, popupContentAfzs);
+        popups(map, layersZentraleBahnhoefe, popupContentStations);
 
 
     });

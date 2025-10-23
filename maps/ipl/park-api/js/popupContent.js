@@ -231,6 +231,7 @@ export function popupContent(features) {
                     'opendata_swiss': 'Open-Data-Plattform Schweiz',
                     'pbw': 'Parkraumgesellschaft Baden-Württemberg mbH',
                     'pforzheim': 'Stadt Pforzheim',
+                    'p_m_sensade': 'Sensade',
                     'radvis_bw': 'RadVIS',
                     'radolfzell': 'Stadt Radolfzell',
                     'reutlingen': 'Stadt Reutlingen',

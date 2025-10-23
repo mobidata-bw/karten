@@ -20,7 +20,7 @@ export function addSources(map, sourceConfig) {
                     sourceConfig.source.style + '/WebMercatorQuadx2/{z}/{y}/{x}?format=application/vnd.mapbox-vector-tile'
                 ]
         };
-        
+
         if (source.bounds) source.bounds = sourceConfig.source.bounds;
 
         source.maxzoom = 15;
@@ -114,7 +114,7 @@ export function addLayers(map, layerConfig) {
     };
 
     if (layerConfig.filter) layer.filter = layerConfig.filter;
-    if (layerConfig.fillSortKey) layer.layout['fill-sort-key'] = layerConfig.fillSortKey;
+    if (typeof layerConfig.fillSortKey != 'undefined') layer.layout['fill-sort-key'] = layerConfig.fillSortKey;
     if (layerConfig.lineJoin) layer.layout['line-join'] = layerConfig.lineJoin;
     if (layerConfig.lineCap) layer.layout['line-cap'] = layerConfig.lineCap;
 
