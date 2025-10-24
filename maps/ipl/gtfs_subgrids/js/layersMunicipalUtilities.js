@@ -118,13 +118,5 @@ export const layersMunicipalUtilities = [
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid(3, 'esw')
-    }
-    // {
-    //     id: 'transitShapes_SWH',
-    //     label: 'NVH (Teil des HNV)',
-    //     subGroup: 'Verkehrsunternehmen',
-    //     symbol: () => legendLine('#a7007e'),
-    //     ...transitShapes,
-    //     filter: filterSubgrid(3, 'swh')
-    // }   
-].sort((a, b) => b.label.localeCompare(a.label, 'de', { sensitivity: 'base' }));;
+    }    
+].sort((a, b) => b.label.localeCompare(a.label, 'de', { sensitivity: 'base' }));
