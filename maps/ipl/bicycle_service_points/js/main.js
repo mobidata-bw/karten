@@ -1,6 +1,6 @@
 import {
     initializeMap,
-    popups,
+    setupLayerInteractions,
     basemaps,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
