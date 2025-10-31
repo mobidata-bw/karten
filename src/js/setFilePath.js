@@ -6,6 +6,8 @@ export function setFilePath(options = {}) {
 
     const format = options.format;
     const file = options.file;
+    const generateId = options.generateId;
+    const promoteId = options.promoteId;
     const directory = options.directory;
 
     let src;
@@ -16,18 +18,15 @@ export function setFilePath(options = {}) {
             url: `https://tiles.mobidata-bw.de/data/${file}.json`
         }
     }
-    else if (format == 'pmtiles') {
-        src = {
-            type: 'vector',
-            url: mode == 'liveserver' ? `pmtiles:///data/${directory}/${file}.pmtiles` : `pmtiles:///karten_geojsons/${directory}/${file}.pmtiles`
-        }
-    }
     else if (format == 'geojson') {
         src = {
             type: 'geojson',
             data: mode == 'liveserver' ? `/data/${directory}/${file}.geojson` : `/karten_geojsons/${directory}/${file}.geojson`
         }
     };
+
+    if (promoteId) src.promoteId = promoteId;
+    if (generateId) src.generateId = generateId;
 
     return src;
 

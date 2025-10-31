@@ -77,8 +77,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layersKonstanzPls, popKonstanzPls);
-        popups(map, layersKonstanzBehindertenparken, popKonstanzBehindertenparken);
+        setupLayerInteractions(map, layersKonstanzPls, popKonstanzPls);
+        setupLayerInteractions(map, layersKonstanzBehindertenparken, popKonstanzBehindertenparken);
 
 
     });

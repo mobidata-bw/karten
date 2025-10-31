@@ -3,7 +3,7 @@ import '../css/styles.css';
 import {
     initializeMap, map,
     basemaps,
-    popups,
+    setupLayerInteractions,
     wms,
     addSources, addLayers
 } from '../../../src/js/initializeMap.js';
@@ -167,18 +167,18 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, [...layersParkApiCar, ...layersParkApiBicycle], popupContentParkApi);
-        popups(map, layersBicycleServicePoints, popupContentBicycleServicePoints);
-        popups(map, layersSharing, popupContentSharing);
-        popups(map, layersChargePointsPower, popupContentChargePoints);
-        popups(map, layersRadvis, popupContentRadvis);
-        popups(map, layersTransitStops, popupContentTransitStops);
-        popups(map, layersTransitStations, popupContentTransitStations);
-        popups(map, layersStrassennetz, popupContentStrassennetz);
-        popups(map, layersNetzknoten, popupContentNetzknoten);
-        popups(map, layersCountCar, popupContentCountCar);
-        popups(map, layersCountBicycle, popupContentCountBicycle);
-        popups(map, layersPedestrianCrossings, popupContentPedestrianCrossings);
+        setupLayerInteractions(map, [...layersParkApiCar, ...layersParkApiBicycle], popupContentParkApi);
+        setupLayerInteractions(map, layersBicycleServicePoints, popupContentBicycleServicePoints);
+        setupLayerInteractions(map, layersSharing, popupContentSharing);
+        setupLayerInteractions(map, layersChargePointsPower, popupContentChargePoints);
+        setupLayerInteractions(map, layersRadvis, popupContentRadvis, sources);
+        setupLayerInteractions(map, layersTransitStops, popupContentTransitStops);
+        setupLayerInteractions(map, layersTransitStations, popupContentTransitStations);
+        setupLayerInteractions(map, layersStrassennetz, popupContentStrassennetz, sources);
+        setupLayerInteractions(map, layersNetzknoten, popupContentNetzknoten);
+        setupLayerInteractions(map, layersCountCar, popupContentCountCar);
+        setupLayerInteractions(map, layersCountBicycle, popupContentCountBicycle);
+        setupLayerInteractions(map, layersPedestrianCrossings, popupContentPedestrianCrossings);
 
 
         // ==============================

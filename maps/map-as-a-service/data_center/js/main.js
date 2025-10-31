@@ -1,7 +1,7 @@
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { Geoman } from '@geoman-io/maplibre-geoman-free';
@@ -138,7 +138,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
             return Promise.all(promises).then(() => {
                 layersDataCenter = [parkingSites, parkingSpots];
-                popups(map, layersDataCenter, popupContentDataCenter);
+                setupLayerInteractions(map, layersDataCenter, popupContentDataCenter);
             });
         };
 
@@ -156,7 +156,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layersIpl, popupContentIpl);
+        setupLayerInteractions(map, layersIpl, popupContentIpl);
 
 
         // ==============================

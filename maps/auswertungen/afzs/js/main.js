@@ -1,7 +1,7 @@
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
@@ -58,8 +58,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layersQuerschnittsdaten, popupContentAfzs);
-        popups(map, layersZentraleBahnhoefe, popupContentStations);
+        setupLayerInteractions(map, layersQuerschnittsdaten, popupContentAfzs, sources);
+        setupLayerInteractions(map, layersZentraleBahnhoefe, popupContentStations);
 
 
     });

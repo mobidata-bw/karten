@@ -15,7 +15,7 @@ import { setFilePath } from './setFilePath.js';
 
 export { addSources, addLayers } from './configSourcesLayers.js';
 export { basemaps } from '../js/layerSwitcherControl.js';
-export { popups } from '../js/popups.js';
+export { setupLayerInteractions } from '../js/setupLayerInteractions.js';
 export { wms } from '../js/wms.js';
 
 export let map;

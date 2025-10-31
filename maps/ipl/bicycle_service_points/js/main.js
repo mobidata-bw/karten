@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layers, popupContent);
+        setupLayerInteractions(map, layers, popupContent);
 
 
     });

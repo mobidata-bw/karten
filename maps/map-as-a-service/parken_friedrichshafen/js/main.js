@@ -1,7 +1,7 @@
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {
@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // ==============================
     // INITIALIZE MAP
     // ==============================  
-    const map = initializeMap({        
+    const map = initializeMap({
         configZoom: window.innerWidth < 577 ? 12.5 : 14.5,
         configCenter: [9.479215, 47.655577],
         configMinZoom: 12,
@@ -59,9 +59,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layersParkingOnStreet, popupContentOnStreet);
-        popups(map, layersParkingOther, popupContentOnStreet);
-        popups(map, layersTaxi, popupContentTaxis);
+        setupLayerInteractions(map, [...layersParkingOnStreet, ...layersParkingOther], popupContentOnStreet, sources);
+        setupLayerInteractions(map, layersTaxi, popupContentTaxis);
 
 
     });

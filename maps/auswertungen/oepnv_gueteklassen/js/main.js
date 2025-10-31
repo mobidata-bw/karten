@@ -3,7 +3,7 @@ import '../css/styles.css';
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { sourceOepnvGueteklassen, layersOepnvGueteklassen } from './layers.js';
@@ -61,7 +61,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layers, popupContent);
+        setupLayerInteractions(map, layers, popupContent);
 
 
     });

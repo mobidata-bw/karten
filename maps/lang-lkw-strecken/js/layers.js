@@ -4,7 +4,7 @@ import { setFilePath } from '../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceTruckRoutes = setFilePath({ format: 'geojson', directory: 'maps/lang-lkw-strecken', file: 'lang-lkw-strecken' });
+export const sourceTruckRoutes = setFilePath({ format: 'geojson', directory: 'maps/lang-lkw-strecken', file: 'lang-lkw-strecken', promoteId: 'ID' });
 
 
 // ==============================
@@ -17,6 +17,12 @@ export const layersTruckRoutes = [
         group: 'Lang-LKW-Strecken',
         type: 'line',
         source: 'sourceTruckRoutes',
-        color: '#C4001F'
+        color: '#C4001F',
+        lineWidth:
+            [
+                "interpolate", ["linear"], ["zoom"],
+                6, 1,
+                12, 4
+            ]
     }
 ];

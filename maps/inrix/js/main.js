@@ -1,7 +1,7 @@
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../src/js/initializeMap.js';
 import { sourceInrix, layersInrix } from './layers.js';
@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // SOURCES AND LAYERS
         // ==============================
         const sources = [
-            { id: 'sourceInrix', source: sourceInrix }          
+            { id: 'sourceInrix', source: sourceInrix }
         ];
         sources.forEach(source => addSources(map, source));
 
@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layers, popupContent);
+        setupLayerInteractions(map, layers, popupContent, sources); 
 
 
     });

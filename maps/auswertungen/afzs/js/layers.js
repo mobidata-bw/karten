@@ -4,8 +4,8 @@ import { setFilePath } from '../../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceQuerschnittsdaten = setFilePath({ format: 'geojson', directory: 'maps/auswertungen/afzs', file: 'Querschnittsdaten' });
-export const sourceZentraleBahnhoefe = setFilePath({ format: 'geojson', directory: 'maps/auswertungen/afzs', file: 'zentraleBahnhoefe' });
+export const sourceQuerschnittsdaten = setFilePath({ format: 'geojson', directory: 'maps/auswertungen/afzs', file: 'Querschnittsdaten', generateId: true });
+export const sourceZentraleBahnhoefe = setFilePath({ format: 'geojson', directory: 'maps/auswertungen/afzs', file: 'zentraleBahnhoefe', generateId: true });
 
 
 // ==============================
@@ -14,8 +14,8 @@ export const sourceZentraleBahnhoefe = setFilePath({ format: 'geojson', director
 const querschnittsdaten = {
     source: 'sourceQuerschnittsdaten',
     group: 'AFZS',
-    type: 'line',
-    lineCap: 'round'
+    type: 'line',    
+    lineCap: 'round'   
 };
 
 const attribute = '22.10.2025_Querschnitt_Querschnitt';

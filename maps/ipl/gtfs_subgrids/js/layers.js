@@ -4,7 +4,8 @@
 export const sourceTransitShapes = {
     layer: 'MobiData-BW:transit_shapes_with_routes',
     style: 'MobiData-BW:mdbw_transit_routes_default',
-    bounds: [4.3, 45.8, 15.4, 53.8]
+    bounds: [4.3, 45.8, 15.4, 53.8],
+    promoteId: 'route_ids'
 };
 
 
@@ -15,12 +16,11 @@ export const transitShapes = {
     type: 'line',
     source: 'sourceTransitShapes',
     sourceLayer: 'transit_shapes_with_routes',
-    lineWidth:
-        [
-            'interpolate', ['linear'], ['zoom'],
-            6, 1,
-            12, 2
-        ],
+    lineWidth: [
+        'interpolate', ['linear'], ['zoom'],
+        6, 1,
+        12, 3
+    ],
     color: [
         'match',
         ['get', 'route_type'],
@@ -31,6 +31,14 @@ export const transitShapes = {
         '7', '#FF0000',
         '#cacaca'
     ],
+    lineWidth:
+        [
+            "interpolate", ["linear"], ["zoom"],
+            6, 1,
+            12, 4
+        ],
     exclusiveWithinGroup: true,
     visibility: 'none'
 };
+
+

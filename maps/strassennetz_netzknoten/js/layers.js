@@ -4,7 +4,7 @@ import { setFilePath } from '../../../src/js/setFilePath.js';
 // ==============================
 // SOURCES
 // ==============================
-export const sourceStrassennetz = setFilePath({ format: 'mbtiles', file: 'strassennetz' });
+export const sourceStrassennetz = setFilePath({ format: 'mbtiles', file: 'strassennetz', promoteId: 'gml_id' });
 export const sourceNetzknoten = setFilePath({ format: 'mbtiles', file: 'netzknoten' });
 
 
@@ -20,8 +20,8 @@ const strassennetz = {
     lineWidth:
         [
             "interpolate", ["linear"], ["zoom"],
-            6, 2,
-            12, 3
+            6, 1,
+            12, 4
         ]
 };
 

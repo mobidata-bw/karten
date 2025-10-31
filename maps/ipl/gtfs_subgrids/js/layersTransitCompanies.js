@@ -11,125 +11,125 @@ export const layersTransitCompanies = [
         label: 'Schmetterling Reisen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'smr')
+        filter: filterSubgrid('smr')
     },
     {
         id: 'transitShapes_RMB',
         label: 'Rombs Touristik GmbH & Co',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'rmb')
+        filter: filterSubgrid('rmb')
     },
     {
         id: 'transitShapes_ROH',
         label: 'Röhler StadtBus Roth',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'roh')
+        filter: filterSubgrid('roh')
     },
     {
         id: 'transitShapes_KLZ',
         label: 'O.K. Reisen - Kleinhenz GmbH',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'klz')
+        filter: filterSubgrid('klz')
     },
     {
         id: 'transitShapes_ETG',
         label: 'Ehard Touristik GmbH Schwabach',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'etg')
+        filter: filterSubgrid('etg')
     },
     {
         id: 'transitShapes_BCL',
         label: 'BusClassic',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'bcl')
+        filter: filterSubgrid('bcl')
     },
     {
         id: 'transitShapes_VOG',
         label: 'Vogel Omnibus',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'vog')
+        filter: filterSubgrid('vog')
     },
     {
         id: 'transitShapes_HGG',
         label: 'Heiner Geis GmbH',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'hgg')
+        filter: filterSubgrid('hgg')
     },
     {
         id: 'transitShapes_KRG',
         label: 'Kraus Reisen GmbH',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'krg')
+        filter: filterSubgrid('krg')
     },
     {
         id: 'transitShapes_KRA',
         label: 'Omnibus Kraus',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'kra')
+        filter: filterSubgrid('kra')
     },
     {
         id: 'transitShapes_BUR',
         label: 'Burlein und Sohn & Wagenhäuser',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'bur')
+        filter: filterSubgrid('bur')
     },
     {
         id: 'transitShapes_GRH',
         label: 'Grasmann-Reisen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'grh')
+        filter: filterSubgrid('grh')
     },
     {
         id: 'transitShapes_GHU',
         label: 'Gute Reise Hauck',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'ghu')
+        filter: filterSubgrid('ghu')
     },
     {
         id: 'transitShapes_GAI',
         label: 'Omnibus Weidachstein',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'gai')
+        filter: filterSubgrid('gai')
     },
     {
         id: 'transitShapes_OMP',
         label: 'Omnipart',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'omp')
+        filter: filterSubgrid('omp')
     },
     {
         id: 'transitShapes_LYS',
         label: 'Lyst-Reisen Stefan Lyding KG',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'lys')
+        filter: filterSubgrid('lys')
     },
     {
         id: 'transitShapes_GEI',
         label: 'Kurt Geis GmbH',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'gei')
+        filter: filterSubgrid('gei')
     },
     {
         id: 'transitShapes_OSM',
         label: 'Omnibus-Service Mellrichstadt',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'osm')
+        filter: filterSubgrid('osm')
     }
 ].sort((a, b) => b.label.localeCompare(a.label, 'de', { sensitivity: 'base' }));

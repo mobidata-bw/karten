@@ -16,7 +16,7 @@ export const prefixes3 = [
     'osm', 'str', 'stv'
 ];
 
-export function filterSubgrid(prefix, id) {
+export function filterSubgrid(id, prefix = 3) {
     return [
         '==', ['slice', ['get', 'route_ids'], 0, prefix], `${id}`
     ];

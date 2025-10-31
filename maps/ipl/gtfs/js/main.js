@@ -3,7 +3,7 @@ import '../css/styles.css';
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     wms,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
@@ -67,8 +67,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layersTransitStops, popupContentTransitStops);
-        popups(map, layersTransitStations, popupContentTransitStations);
+        setupLayerInteractions(map, layersTransitStops, popupContentTransitStops);
+        setupLayerInteractions(map, layersTransitStations, popupContentTransitStations);
 
 
         // ==============================

@@ -52,6 +52,9 @@ export function addSources(map, sourceConfig) {
         if (source.tolerance) source.tolerance = sourceConfig.source.tolerance;
     };
 
+    if (sourceConfig.source.promoteId) source.promoteId = sourceConfig.source.promoteId;
+    if (sourceConfig.source.generateId) source.generateId = sourceConfig.source.generateId;
+
     map.addSource(sourceConfig.id, source);
 
 };
@@ -62,6 +65,13 @@ export function addSources(map, sourceConfig) {
 // ==============================
 export function addLayers(map, layerConfig) {
 
+    const highlightColor = [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        'yellow',
+        layerConfig.color
+    ];
+
     const paint = {
         circle: {
             'circle-radius': layerConfig.circleRadius || 5,
@@ -71,9 +81,9 @@ export function addLayers(map, layerConfig) {
             'circle-stroke-width': layerConfig.circleStrokeWidth || 0.5
         },
         line: {
-            'line-color': layerConfig.color,
+            'line-color': highlightColor,
             'line-width': layerConfig.lineWidth || 1.5,
-            'line-opacity': layerConfig.lineOpacity || 1
+            'line-opacity': layerConfig.lineOpacity || 1            
         },
         fill: {
             'fill-color': layerConfig.color,

@@ -22,7 +22,7 @@ export const layersOther = [
         label: 'Verkehrsgemeinschaft Mittelthüringen',
         symbol: () => legendLine('#666666'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'nth'),
+        filter: filterSubgrid('nth'),
         color: '#666666'
     },
     {
@@ -30,27 +30,27 @@ export const layersOther = [
         label: 'Nahverkehrsgesellschaft Baden-Württemberg',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'nvb')
+        filter: filterSubgrid('nvb')
     },
     {
         id: 'transitShapes_DDB',
         label: 'Mehrere Eisenbahngesellschaften',
         symbol: () => legendDoubleLine('#666666', '#0065b0'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'ddb')
+        filter: filterSubgrid('ddb')
     },
     {
         id: 'transitShapes_BUS',
         label: 'Flix',
         symbol: () => legendDoubleLine('#a7007e', '#666666'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'bus')
+        filter: filterSubgrid('bus')
     },
     {
         id: 'transitShapes_HN',
         label: 'Bürgerbusverkehre',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'hn-')
+        filter: filterSubgrid('hn-')
     }
 ];

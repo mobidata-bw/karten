@@ -1,7 +1,7 @@
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../src/js/initializeMap.js';
 import {
@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
             ...layersStrassennetz
         ];
         layers.forEach(layer => addLayers(map, layer));
-
+        
 
         // ==============================
         // LAYER CONTROL
@@ -67,8 +67,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layersStrassennetz, popupContentStrassennetz);
-        popups(map, layersNetzknoten, popupContentNetzknoten);
+        setupLayerInteractions(map, layersStrassennetz, popupContentStrassennetz, sources);
+        setupLayerInteractions(map, layersNetzknoten, popupContentNetzknoten);
 
 
     });

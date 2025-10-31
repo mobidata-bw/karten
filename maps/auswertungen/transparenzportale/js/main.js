@@ -1,7 +1,7 @@
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { sourceTransparenzportale, layersTransparenzportale } from './layers.js';
@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layers, popupContent);
+        setupLayerInteractions(map, layers, popupContent);
 
 
     });

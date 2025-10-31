@@ -11,55 +11,55 @@ export const layersDeutscheBahn = [
         label: 'Regionalverkehr Allgäu',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'rva')
+        filter: filterSubgrid('rva')
     },
     {
         id: 'transitShapes_DRB',
         label: 'DB Regio Bus Bayern',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'drb')
+        filter: filterSubgrid('drb')
     },
     {
         id: 'transitShapes_RVS',
         label: 'Südwestbus',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'rvs')
+        filter: filterSubgrid('rvs')
     },
     {
         id: 'transitShapes_OVF',
         label: 'Ominbusverkehr Franken',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'ovf')
+        filter: filterSubgrid('ovf')
     },
     {
         id: 'transitShapes_SBG',
         label: 'Südbadenbus',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'sbg')
+        filter: filterSubgrid('sbg')
     },
     {
         id: 'transitShapes_RBS',
         label: 'Regional Bus Stuttgart',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'rbs')
+        filter: filterSubgrid('rbs')
     },
     {
         id: 'transitShapes_RAB',
         label: 'Regionalverkehr Alb-Bodensee',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'rab')
+        filter: filterSubgrid('rab')
     },
      {
         id: 'transitShapes_RBO',
         label: 'Regionalbus Ostbayern',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
-        filter: filterSubgrid(3, 'rbo')
+        filter: filterSubgrid('rbo')
     }
 ].sort((a, b) => b.label.localeCompare(a.label, 'de', { sensitivity: 'base' }));

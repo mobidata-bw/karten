@@ -1,7 +1,7 @@
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import { sourceRadvis, layersRadvis } from './layers.js';
@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ==============================       
-        popups(map, layers, popupContent);
+        setupLayerInteractions(map, layers, popupContent);
 
 
     });

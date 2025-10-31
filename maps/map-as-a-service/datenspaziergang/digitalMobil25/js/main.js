@@ -3,7 +3,7 @@ import '../css/styles.css';
 import {
     initializeMap,
     basemaps,
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../../../src/js/initializeMap.js';
 import {
@@ -108,11 +108,11 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // POPUPS
         // ============================== 
-        popups(map, layersStations, popupContentRoute);
-        popups(map, layersChargePointsOccupancy, popupContentChargePoints);
-        popups(map, [...layersSharingCarVehicles, ...layersSharingCarStations, ...layersSharingScooterVehicles, ...layersSharingScooterStations], popupContentSharing);
-        popups(map, layersTransitStops, popupContentTransitStops);
-        popups(map, layersParkApiCarOccupancy, popupContentParkApi);
+        setupLayerInteractions(map, layersStations, popupContentRoute);
+        setupLayerInteractions(map, layersChargePointsOccupancy, popupContentChargePoints);
+        setupLayerInteractions(map, [...layersSharingCarVehicles, ...layersSharingCarStations, ...layersSharingScooterVehicles, ...layersSharingScooterStations], popupContentSharing);
+        setupLayerInteractions(map, layersTransitStops, popupContentTransitStops);
+        setupLayerInteractions(map, layersParkApiCarOccupancy, popupContentParkApi);
 
 
     });

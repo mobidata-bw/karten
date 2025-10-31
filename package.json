@@ -17,7 +17,8 @@
     "@rezw4n/maplibre-google-streetview": "^1.0.10",
     "file-saver": "^2.0.5",
     "jsoneditor": "^10.3.0",
-    "maplibre-gl": "^5.9.0"
+    "maplibre-gl": "^5.9.0",
+    "react": "^19.2.0"
   },
   "devDependencies": {
     "fast-glob": "^3.3.3",
