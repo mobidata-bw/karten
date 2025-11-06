@@ -1,7 +1,7 @@
 import { iplPath } from '../../../../src/utils/paths.js';
 import { timeStamps } from '../../../../src/js/timeStamps.js';
 import { popupImages } from '../../../../src/js/popupImages.js';
-import { popupSources } from './popupSources.js';
+import { popupSources, sourceUids } from './popupSources.js';
 import { popupCanvas } from './popupCanvas.js';
 
 
@@ -26,21 +26,13 @@ export function popupContent(features) {
         address,
         park_and_ride_type,
         realtime_opening_status,
-        capacity,
-        capacity_disabled,
-        capacity_woman,
-        capacity_family,
-        capacity_charging,
-        capacity_carsharing,
-        realtime_capacity,
+        capacity, capacity_disabled, capacity_woman, capacity_family, capacity_charging, capacity_carsharing, realtime_capacity,
         realtime_free_capacity,
         public_url,
         photo_url,
         // PARKING SPOTS
         realtime_status,
-        restriction_type,
-        restriction_hours,
-        restriction_max_stay
+        restriction_type, restriction_hours, restriction_max_stay
     } = features;
 
     let date, time;
@@ -179,23 +171,24 @@ export function popupContent(features) {
         <br>
         <div class="title title2">Parkplätze</div>
         <div id="divParkingSites">
-        <div id="anchor-${id}"></div>
-        <div id="divTable">
-        <table>
-            ${parking_object == 'spot' ? spots : sites}
-        </table>          
+            <div id="anchor-${id}"></div>
+            <div id="divTable">
+                <table>
+                    ${parking_object == 'spot' ? spots : sites}
+                </table>
+            </div>
+        </div>
         <table id="divURLs">
             <tr>
                 ${public_url ? `<td class="attContentLink"><a href="${public_url}" target="_blank">&#10149 Datengeber</a></td>` : ''}
                 <td class="attContentLink"><a href="https://${iplPath}.mobidata-bw.de/park-api/api/public/v3/parking-${parking_object}s/${id}" target="_blank">&#10149 ParkAPI</a></td>
                 ${photo_url ? `<td class="attContentLink"><a href="${photo_url}" class="photoMargin" target="_blank">&#10149 Foto</a></td>` : ''}
             </tr>
-        </table>
+        </table>        
     `;
 
 
     setTimeout(() => {
-
 
         /* PARK API SOURCES */
         let htmlLogo = '', htmlDatengeber = '';
@@ -203,52 +196,13 @@ export function popupContent(features) {
         sources.then(items => {
 
             items.forEach(item => {
-
-                const mapDatengeber = {
-                    'aalen': 'Stadt Aalen',
-                    'apcoa': 'APCOA PARKING',
-                    'bahn_v2': 'DB BahnPark',
-                    'bb_parkhaus': 'B+B Parkhaus GmbH & Co. KG',
-                    'bfrk': 'NVBW',
-                    'bietigheim_bissingen': 'Stadt Bietigheim-Bissingen',
-                    'buchen': 'Stadt Buchen',
-                    'ellwangen': 'Stadt Ellwangen',
-                    'esslingen': 'Stadt Esslingen',
-                    'freiburg': 'Stadt Freiburg im Breisgau',
-                    'friedrichshafen': 'Stadt Friedrichshafen',
-                    'goldbeck': 'Goldbeck',
-                    'heidelberg': 'Stadt Heidelberg',
-                    'herrenberg': 'Stadt Herrenberg',
-                    'huefner': 'PARK SERVICE HÜFNER GmbH + Co. KG',
-                    'karlsruhe': 'Stadt Karlsruhe',
-                    'keltern': 'Stadt Keltern',
-                    'kienzler': 'Kienzler',
-                    'konstanz': 'Stadt Konstanz',
-                    'ladenburg': 'Stadt Ladenburg',
-                    'mannheim': 'Stadt Mannheim',
-                    'm_bw': 'Ministerium für Verkehr Baden-Württemberg',
-                    'neckarsulm': 'Stadt Neckarsulm',
-                    'opendata_swiss': 'Open-Data-Plattform Schweiz',
-                    'pbw': 'Parkraumgesellschaft Baden-Württemberg mbH',
-                    'pforzheim': 'Stadt Pforzheim',
-                    'p_m_sensade': 'Ministerium für Verkehr Baden-Württemberg',
-                    'radvis_bw': 'RadVIS',
-                    'radolfzell': 'Stadt Radolfzell',
-                    'reutlingen': 'Stadt Reutlingen',
-                    'stuttgart_': 'Stadt Stuttgart',
-                    'ulm_': 'Stadt Ulm',
-                    'velobrix': 'Velobrix',
-                    'vrn_': 'Verkehrsverbund Rhein-Neckar',
-                    'vrs': 'Verband Region Stuttgart'
-                };
-
-                for (let key in mapDatengeber) {
-                    if (item.uid.match(key) && source_id == item.id) {
-                        htmlLogo += popupImages(mapDatengeber[key]);
-                        htmlDatengeber += `<td class="attContent">${mapDatengeber[key]}</td>`;
+                for (const [source, uid] of Object.entries(sourceUids)) {
+                    if (item.uid.match(uid) && source_id == item.id) {
+                        htmlLogo += popupImages(source);
+                        htmlDatengeber += `<td class="attContent">${source}</td>`;
+                        break;
                     }
-                };
-
+                }
             });
 
             const thLogo = document.getElementById('logos-' + id);

@@ -31,7 +31,8 @@ export const sourceParkApiCarPolygons = {
 export const sourceParkApiBicycle = {
     layer: 'MobiData-BW:park-api_bicycle',
     style: 'MobiData-BW:mdbw_park-api_parking-object',
-    bounds: [7.1, 47.5, 13.5, 53.8]
+    bounds: [7.1, 47.5, 13.5, 53.8],
+    // server: 'test'
 };
 
 

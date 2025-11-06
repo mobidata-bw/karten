@@ -3,8 +3,9 @@
 // ==============================
 export const sourceBicycleServicePoints = {
     layer: 'MobiData-BW:bicycle_service_points',
-    style: '',
-    bounds: [7.3, 47.4, 10.4, 49.7]
+    style: 'MobiData-BW:mdbw_bicycle_service_points',
+    bounds: [7.2, 47.5, 10.4, 49.6],
+    // server: 'test'
 };
 
 
@@ -22,62 +23,54 @@ export const layersBicycleServicePoints = [
     {
         id: 'konstanz',
         label: 'Stadt Konstanz',
-        filter:
-            [
-                '==', ['get', 'Datengeber'], 'SB_Fahrradreparaturstationen(Konstanz)'
-            ],
+        filter: [
+            '==', ['get', 'Datengeber'], 'Stadt Konstanz'
+        ],
         color: '#00ff00',
         ...layers
     },
     {
         id: 'freiburg',
         label: 'Stadt Freiburg im Breisgau',
-        filter:
-            [
-                '==', ['get', 'Datengeber'], 'Frelo-Radreparaturstationen'
-            ],
+        filter: [
+            '==', ['get', 'Datengeber'], 'Stadt Freiburg im Breisgau'
+        ],
         color: 'black',
         ...layers
     },
     {
         id: 'adac',
         label: 'ADAC',
-        filter:
-            [
-                '==', ['get', 'Datengeber'], 'ADAC'
-            ],
+        filter: [
+            '==', ['get', 'Datengeber'], 'ADAC'
+        ],
         color: '#ffd000',
         ...layers
     },
     {
         id: 'TFIS',
         label: 'Touristisches Freizeitinformationssystem',
-        filter:
-            [
-                'any',
-                ['==', ['get', 'Datengeber'], 'TFISReparatur'],
-                ['==', ['get', 'Datengeber'], 'TFISRadservicepunkte']
-            ],
+        filter: [
+            '==', ['get', 'Datengeber'], 'Touristisches Freizeitinformationssystem'
+        ],
         color: '#cacaca',
         ...layers
     },
     {
         id: 'radvis',
         label: 'RadVIS',
-        filter:
-            [
-                '==', ['get', 'Datengeber'], 'RadVIS'
-            ],
+        filter: [
+            '==', ['get', 'Datengeber'], 'RadVIS'
+        ],
         color: '#e6007d',
         ...layers
     },
     {
         id: 'radkultur',
         label: 'RadKULTUR',
-        filter:
-            [
-                '==', ['get', 'Datengeber'], 'RadKULTUR'
-            ],
+        filter: [
+            '==', ['get', 'Datengeber'], 'RadKULTUR'
+        ],
         color: '#0d46a0ff',
         ...layers
     }

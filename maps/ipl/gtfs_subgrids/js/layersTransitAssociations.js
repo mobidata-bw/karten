@@ -1,5 +1,5 @@
 import { filterSubgrid } from './filters.js';
-import { legendLine, legendDoubleLine, legendTripleLine, legendQuadrupleLine } from '../../../../src/js/controlLayers.js';
+import { legendLine, legendDoubleLine, legendTripleLine, legendQuintupleLine } from '../../../../src/js/controlLayers.js';
 import { transitShapes } from './layers.js';
 
 
@@ -150,7 +150,7 @@ export const layersTransitAssociations = [
     {
         id: 'transitShapes_VRN',
         label: 'Verkehrsverbund Rhein-Neckar',
-        symbol: () => legendQuadrupleLine('#a7007e', '#0065b0', '#f39f18', '#808000'),
+        symbol: () => legendQuintupleLine('#a7007e', '#0065b0', '#f39f18', '#808000', '#FF0000'),
         ...transitShapes,
         filter: filterSubgrid('vrn')
     },

@@ -1,5 +1,5 @@
 import { filterSubgrid } from './filters.js';
-import { legendLine, legendDoubleLine, legendQuadrupleLine } from '../../../../src/js/controlLayers.js';
+import { legendLine, legendDoubleLine, legendQuadrupleLine, legendTripleLine } from '../../../../src/js/controlLayers.js';
 import { transitShapes } from './layers.js';
 
 
@@ -44,7 +44,7 @@ export const layersAbroad = [
     {
         id: 'transitShapes_OBB',
         label: 'Österreichische Bundesbahn',
-        symbol: () => legendDoubleLine('#a7007e', '#666666'),
+        symbol: () => legendTripleLine('#a7007e', '#666666', '#0065b0'),
         ...transitShapes,
         filter: filterSubgrid('obb')
     },

@@ -6,77 +6,65 @@ export function popupContent(features) {
 
     /* INITIALIZE VARIABLES */
     const {
-        RadVIS_ID,
+        ID,
+        ['Externe ID']: externeId,
         Name,
-        Betreiber,      
-        Zuestaendig_in_RadVIS,
-        Servicestation_Typ,
+        Betreiber,
+        ['Zuständig in RadVIS']: zuestaendigInRadVIS,
+        ['Servicestation-Typ']: servicestationTyp,
         Marke,
         Luftpumpe,
         Kettenwerkzeug,
         Werkzeug,
-        Fahrradhalterung,       
-        Gebuehren,
-        Oeffnungszeiten,
+        Fahrradhalterung,
+        Gebühren,
+        Öffnungszeiten,
         Beschreibung,
         Datengeber
     } = features;
-
-    /* MAPPING */   
-    const datengeberMap = {    
-        'ADAC': 'ADAC', 
-        'RadVIS': 'RadVIS',
-        'RadKULTUR': 'RadKULTUR',
-        'SB_Fahrradreparaturstationen(Konstanz)': 'Stadt Konstanz',
-        'Frelo-Radreparaturstationen': 'Stadt Freiburg im Breisgau'       
-    };
-
-    let logo = '';
     
-    for (let key in datengeberMap) {
-        if (Datengeber == key && !Datengeber.includes('TFIS')) {
-            logo += popupImages(datengeberMap[key]);            
-        }
-    };
-
     /* POPUP CONTENT */
     return `
-        ${logo == '' ? '' : `
+        ${Datengeber == 'Touristisches Freizeitinformationssystem' ? '' : `
         <table>            
             <tr>
-                ${logo}               
+                ${popupImages(Datengeber)}               
             </tr>           
         </table><br>
         `}
-        <table>
-            ${!RadVIS_ID ? '' : `
+        <table>          
             <tr>
                 <td class='att'>ID</td>
-                <td class='attContent'>${RadVIS_ID}</td>
+                <td class='attContent'>${ID}</td>
             </tr> 
-            `}
+             ${!externeId ? '' : `
+            <tr>
+                <td class='att'>Externe ID</td>
+                <td class='attContent'>${externeId}</td>
+            </tr> 
+            `}          
             ${!Name ? '' : `
             <tr>
                 <td class='att'>Name</td>
                 <td class='attContent'>${Name}</td>
             </tr> 
-            `}
+            `}            
             ${!Betreiber ? '' : `
             <tr>
                 <td class='att'>Betreiber</td>
                 <td class='attContent'>${Betreiber}</td>
             </tr> 
             `}      
-            ${!Zuestaendig_in_RadVIS ? '' : `
+            ${!zuestaendigInRadVIS ? '' : `
                 <tr>
                     <td class='att'>Zuständig in RadVIS</td>
-                    <td class='attContent'>${Zuestaendig_in_RadVIS}</td>
+                    <td class='attContent'>${zuestaendigInRadVIS}</td>
                 </tr> 
             `}
-            ${!Servicestation_Typ ? '' : `
+            ${!servicestationTyp ? '' : `
                 <tr>
                     <td class='att'>Servicestation-Typ</td>
-                    <td class='attContent'>${Servicestation_Typ}</td>
+                    <td class='attContent'>${servicestationTyp}</td>
                 </tr>
             `}
             ${!Marke ? '' : `
@@ -109,16 +97,16 @@ export function popupContent(features) {
                 <td class='attContent'>${Fahrradhalterung}</td>
             </tr> 
             `}
-            ${!Gebuehren ? '' : `
+            ${!Gebühren ? '' : `
             <tr>
                 <td class='att'>Gebühren</td>
-                <td class='attContent'>${Gebuehren}</td>
+                <td class='attContent'>${Gebühren}</td>
             </tr> 
             `}
-            ${!Oeffnungszeiten ? '' : `
+            ${!Öffnungszeiten ? '' : `
             <tr>
                 <td class='att'>Öffnungszeiten</td>
-                <td class='attContent'>${Oeffnungszeiten}</td>
+                <td class='attContent'>${Öffnungszeiten}</td>
             </tr> 
             `}
             ${!Beschreibung ? '' : `
