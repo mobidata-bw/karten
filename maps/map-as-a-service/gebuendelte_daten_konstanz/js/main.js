@@ -2,7 +2,7 @@
 import { map } from '../../../gebuendelte_daten/js/main.js';
 import { shapeKonstanz, lineShapeKonstanz, fillShapeKonstanz } from './initializeMap.js';
 import {
-    popups,
+    setupLayerInteractions,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
 import {

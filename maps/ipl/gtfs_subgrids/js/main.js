@@ -6,7 +6,10 @@ import {
     setupLayerInteractions,
     addSources, addLayers
 } from '../../../../src/js/initializeMap.js';
-import { shapeTransitAssociations, lineShapeTransitAssociations } from './initializeMap.js';
+import {
+    shapeTransitAssociations, lineShapeTransitAssociations,
+    centroidsTransitAssocications, transitAssociationsSigns
+} from './initializeMap.js';
 import { sourceTransitShapes } from './layers.js';
 import { layersTransitAssociations } from './layersTransitAssociations.js';
 import { layersMunicipalUtilities } from './layersMunicipalUtilities.js';
@@ -36,8 +39,8 @@ window.addEventListener('DOMContentLoaded', () => {
         // ==============================
         // SOURCES AND LAYERS
         // ============================== 
-        map.addSource('shapeTransitAssociations', shapeTransitAssociations);
-        map.addLayer(lineShapeTransitAssociations);
+        map.addSource('shapeTransitAssociations', shapeTransitAssociations); map.addLayer(lineShapeTransitAssociations);
+        map.addSource('centroidsTransitAssocications', centroidsTransitAssocications); map.addLayer(transitAssociationsSigns);
 
         map.on('styledata', () => {
             if (map.getLayer('lineShape')) {

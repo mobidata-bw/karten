@@ -55,33 +55,38 @@ basemapConfig = {
 // ============================== 
 export function styleBasemaps(map, layers) {
 
-    const styleName = map.getStyle().name;
-    // console.log(map.getStyle().layers);
+    // when everything was rendered, execute the code once
+    map.once('idle', () => {
 
-    switch (styleName) {
-        case 'Streets':
-        case 'Labeled Aerial Photos':
-            map.moveLayer('lineShape', 'place_other'); map.moveLayer('fillShape', 'place_other');
-            map.moveLayer('lineShape', 'highway-shield'); map.moveLayer('fillShape', 'highway-shield');
-            break;
-        case 'Dark Matter':
-            map.moveLayer('lineShape', 'place_other'); map.moveLayer('fillShape', 'place_other');
-            layers.forEach(layer => {
-                if (layer.id.endsWith('Shape')) {
-                    if (layer.type == 'line') map.setPaintProperty(layer.id, 'line-color', 'white');
-                    else if (layer.type == 'fill') map.setPaintProperty(layer.id, 'fill-color', 'white');
-                }
-            });
-            break;
-        case 'CycloBright':
-        case 'Railway':
-            map.moveLayer('lineShape', 'place-other');
-            map.moveLayer('fillShape', 'place-other');
-            break;
-        case 'bm_web_top':
-            map.moveLayer('lineShape', 'Name_Bahnstrecke_Sonderbahnen');
-            map.moveLayer('fillShape', 'Name_Bahnstrecke_Sonderbahnen');
-            break;
-    };
+        const styleName = map.getStyle().name;
+
+        layers.forEach(layer => {
+
+            const type = layer.id.startsWith('lineShape') ? 'line' : layer.id.startsWith('fillShape') ? 'fill' : null;
+
+            if (!type) return;
+
+            switch (styleName) {
+                case 'Streets':
+                case 'Labeled Aerial Photos':
+                    map.moveLayer(layer.id, 'place_other');
+                    map.moveLayer(layer.id, 'highway-shield');
+                    break;
+                case 'Dark Matter':
+                    map.moveLayer(layer.id, 'place_other');
+                    map.setPaintProperty(layer.id, type === 'line' ? 'line-color' : 'fill-color', 'white');
+                    break;
+                case 'CycloBright':
+                case 'Railway':
+                    map.moveLayer(layer.id, 'place-other');
+                    break;
+                case 'bm_web_top':
+                    map.moveLayer(layer.id, 'Name_Bahnstrecke_Sonderbahnen');
+                    break;
+            }
+
+        });
+        // console.log(map.getStyle().layers);
+    });
 
 };
