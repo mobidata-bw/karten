@@ -1,4 +1,4 @@
-import{o as ct,p as Ke,a as tt,l as it,i as ht,b as dt,c as ut,d as gt,m as pt}from"../../addControlLayers-BdCcY69e.js";import{s as mt,c as ft,i as nt,j as ot,p as Ct}from"../../popupContent-BoJY3RtV.js";import{s as yt,l as rt}from"../../layers-HeZuYLBu.js";import{p as vt}from"../../popupContent-BmLadRYp.js";import{s as st}from"../../setupLayerInteractions-BnLOBWbE.js";import"../../timeStamps-CJ2Ek9ou.js";import"../../popupImages-ZUvzB4LB.js";window.PUBLIC_PATH="/karten/";var Je={exports:{}};/*!
+import{o as ct,p as Ke,a as tt,l as it,i as ht,b as dt,c as ut,d as gt,m as pt}from"../../addControlLayers-BdCcY69e.js";import{s as mt,c as ft,i as nt,j as ot,p as Ct}from"../../popupContent-BoJY3RtV.js";import{s as yt,l as rt}from"../../layers-HeZuYLBu.js";import{p as vt}from"../../popupContent-BSCgNeCL.js";import{s as st}from"../../setupLayerInteractions-BnLOBWbE.js";import"../../timeStamps-CJ2Ek9ou.js";import"../../popupImages-ZUvzB4LB.js";window.PUBLIC_PATH="/karten/";var Je={exports:{}};/*!
  * jsoneditor.js
  *
  * @brief

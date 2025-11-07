@@ -15,28 +15,28 @@ export const layersTransitCompanies = [
     },
     {
         id: 'transitShapes_RMB',
-        label: 'Rombs Touristik GmbH & Co',
+        label: 'Rombs Touristik',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('rmb')
     },
     {
         id: 'transitShapes_ROH',
-        label: 'Röhler StadtBus Roth',
+        label: 'Röhler Stadtbus Roth',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('roh')
     },
     {
         id: 'transitShapes_KLZ',
-        label: 'O.K. Reisen - Kleinhenz GmbH',
+        label: 'O.K. Reisen Kleinhenz',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('klz')
     },
     {
         id: 'transitShapes_ETG',
-        label: 'Ehard Touristik GmbH Schwabach',
+        label: 'Ehard Touristik',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('etg')
@@ -57,14 +57,14 @@ export const layersTransitCompanies = [
     },
     {
         id: 'transitShapes_HGG',
-        label: 'Heiner Geis GmbH',
+        label: 'OmnibusVerkehrBischofsheim',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('hgg')
     },
     {
         id: 'transitShapes_KRG',
-        label: 'Kraus Reisen GmbH',
+        label: 'Kraus-Reisen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('krg')
@@ -78,7 +78,7 @@ export const layersTransitCompanies = [
     },
     {
         id: 'transitShapes_BUR',
-        label: 'Burlein und Sohn & Wagenhäuser',
+        label: 'Burlein Und Sohn & Wagenhäuser Reisen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('bur')
@@ -106,21 +106,21 @@ export const layersTransitCompanies = [
     },
     {
         id: 'transitShapes_OMP',
-        label: 'Omnipart',
+        label: 'OMNIPART Verkehrsdienstleistungen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('omp')
     },
     {
         id: 'transitShapes_LYS',
-        label: 'Lyst-Reisen Stefan Lyding KG',
+        label: 'Lyst Reisen',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('lys')
     },
     {
         id: 'transitShapes_GEI',
-        label: 'Kurt Geis GmbH',
+        label: 'Kurt Geis',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('gei')

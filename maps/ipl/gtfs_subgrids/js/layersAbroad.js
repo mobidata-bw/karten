@@ -27,20 +27,20 @@ export const layersAbroad = [
         ...transitShapes,
         filter: filterSubgrid('bvb')
     },
-    {
-        id: 'transitShapes_BEL',
-        label: 'Nationale Gesellschaft der Belgischen Eisenbahnen',
-        symbol: () => legendLine('#666666'),
-        ...transitShapes,
-        filter: filterSubgrid('bel')
-    },
-    {
-        id: 'transitShapes_ALS',
-        label: 'Fluo Grand Est',
-        symbol: () => legendDoubleLine('#a7007e', '#0065b0'),
-        ...transitShapes,
-        filter: filterSubgrid('als')
-    },
+    // {
+    //     id: 'transitShapes_BEL',
+    //     label: 'Mehrere belgische Verkehrsunternehmen',
+    //     symbol: () => legendLine('#666666'),
+    //     ...transitShapes,
+    //     filter: filterSubgrid('bel')
+    // },
+    // {
+    //     id: 'transitShapes_ALS',
+    //     label: 'Fluo Grand Est',
+    //     symbol: () => legendDoubleLine('#a7007e', '#0065b0'),
+    //     ...transitShapes,
+    //     filter: filterSubgrid('als')
+    // },
     {
         id: 'transitShapes_OBB',
         label: 'Österreichische Bundesbahn',

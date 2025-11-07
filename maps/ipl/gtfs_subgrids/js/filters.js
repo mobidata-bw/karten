@@ -6,14 +6,15 @@ export const prefixes3 = [
     'din', 'tub', 'vrn', 'vvs', 'rvs', 'ovf',
     'sbg', 'rbs', 'rab', 'grh', 'ghu', 'gai',
     'omp', 'sw1', 'frb', 'ddb', 'bvb', 'hgg',
-    'sbb', 'als', 'wvv', 'vgn', 'rmv', 'nth',
-    'hn-', 'bus', 'nvb', 'abs', 'abv', 'avg',
-    'bam', 'bel', 'bur', 'drb', 'inv', 'kgv',
+    'sbb', 'wvv', 'vgn', 'rmv', 'nth',
+    'hn-', 'nvb', 'abs', 'abv', 'avg',
+    'bam', 'bur', 'drb', 'inv', 'kgv',
     'mvv', 'obb', 'rva', 'scw', 'van', 'vvt',
     'vvv', 'avv', 'bcl', 'etg', 'klz', 'rmb',
     'roh', 'smr', 'vgs', 'vog', 'ndo', 'fue',
     'krg', 'esw', 'kra', 'lys', 'gei', 'rbo',
     'osm', 'str', 'stv'
+    // 'bus', 'als', 'bel'
 ];
 
 export function filterSubgrid(id, prefix = 3) {

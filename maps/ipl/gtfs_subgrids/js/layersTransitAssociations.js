@@ -9,7 +9,6 @@ export const layersTransitAssociations = [
     {
         id: 'transitShapes_AVV',
         label: 'Augsburger Verkehrs- und Tarifverbund',
-
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('avv')
@@ -44,7 +43,7 @@ export const layersTransitAssociations = [
     },
     {
         id: 'transitShapes_FDS',
-        label: 'Verkehrs-Gemeinschaft LK Freudenstadt',
+        label: 'Verkehrs-Gemeinschaft Landkreis Freudenstadt',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('fds')
@@ -86,21 +85,21 @@ export const layersTransitAssociations = [
     },
     {
         id: 'transitShapes_VVR',
-        label: 'Move (VVR)',
+        label: 'Verkehrsverbund Schwarzwald-Baar-Heuberg (VVR)',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('vvr')
     },
     {
         id: 'transitShapes_VSB',
-        label: 'Move (VSB)',
+        label: 'Verkehrsverbund Schwarzwald-Baar-Heuberg (VSB)',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('vsb')
     },
     {
         id: 'transitShapes_TVV',
-        label: 'Move (TUTicket)',
+        label: 'Verkehrsverbund Schwarzwald-Baar-Heuberg (TUTicket)',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('tvv')

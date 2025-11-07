@@ -39,13 +39,13 @@ export const layersOther = [
         ...transitShapes,
         filter: filterSubgrid('ddb')
     },
-    {
-        id: 'transitShapes_BUS',
-        label: 'Flix',
-        symbol: () => legendDoubleLine('#a7007e', '#666666'),
-        ...transitShapes,
-        filter: filterSubgrid('bus')
-    },
+    // {
+    //     id: 'transitShapes_BUS',
+    //     label: 'Flix',
+    //     symbol: () => legendDoubleLine('#a7007e', '#666666'),
+    //     ...transitShapes,
+    //     filter: filterSubgrid('bus')
+    // },
     {
         id: 'transitShapes_HN',
         label: 'Bürgerbusverkehre',

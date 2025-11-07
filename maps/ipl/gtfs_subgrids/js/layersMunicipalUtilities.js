@@ -50,21 +50,21 @@ export const layersMunicipalUtilities = [
     },
     {
         id: 'transitShapes_ABV',
-        label: 'Ansbacher Bäder und Verkehr',
+        label: 'Ansbacher Bäder und Verkehrs GmbH',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('abv')
     },
     {
         id: 'transitShapes_BAM',
-        label: 'Stadtverkehr Bamberg',
+        label: 'Stadtwerke Bamberg',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('bam')
     },
     {
         id: 'transitShapes_ABS',
-        label: 'Stadtverkehr Aschaffenburg',
+        label: 'Stadtwerke Aschaffenburg',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('abs')
@@ -99,7 +99,7 @@ export const layersMunicipalUtilities = [
     },
     {
         id: 'transitShapes_FUE',
-        label: 'Stadtverkehr Fürth',
+        label: 'infra Fürth',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('fue')
