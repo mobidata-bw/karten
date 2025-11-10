@@ -36,7 +36,6 @@ export function popupContent(features) {
     } = features;
 
     let date, time;
-
     if (realtime_data_updated_at) {
         ({ date, time } = timeStamps(realtime_data_updated_at));
     };

@@ -50,7 +50,7 @@ const canvas = document.querySelector('#canvas-' + features.id);
 
         // bars        
         for (let chargepoint in chargepoints) {
-            const colors = ['#006eaf', '#ffcc00', '#5ce75c', '#8B0000', '#3a4044'];
+            const colors = ['#006eaf', '#ffcc00', '#059b02', '#ed0000', '#3a4044'];
             const labels = ['gesamt', 'unbekannt', 'verfügbar', 'belegt', 'nicht nutzbar'];
 
             ctx.fillStyle = colors[chargepoint];
