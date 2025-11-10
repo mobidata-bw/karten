@@ -104,9 +104,9 @@ export const layersChargePointsOccupancy = [
         label: 'Echtzeitdaten nicht vorhanden',
         subGroup: 'Belegung',
         filter: [
-            '==', ['get', 'realtime_data_outdated'], true
+            '>', ['get', 'chargepoint_static_count'], 0
         ],
-        color: '#cacaca',
+        color: '#615fdf',
         visibility: 'none',
         ...layers
     },
@@ -118,14 +118,9 @@ export const layersChargePointsOccupancy = [
             'all',
             ['==', ['get', 'chargepoint_available_count'], 0],
             ['==', ['get', 'chargepoint_charging_count'], 0],
-            [
-                'any',
-                ['>', ['get', 'chargepoint_static_count'], 0],
-                ['>', ['get', 'chargepoint_unknown_count'], 0]
-            ],
-            ['==', ['get', 'realtime_data_outdated'], false]
+            ['>', ['get', 'chargepoint_unknown_count'], 0]
         ],
-        color: '#006eaf',
+        color: '#cacaca',
         visibility: 'none',
         ...layers
     },
@@ -141,22 +136,24 @@ export const layersChargePointsOccupancy = [
                 'any',
                 ['>', ['get', 'chargepoint_inoperative_count'], 0],
                 ['>', ['get', 'chargepoint_outoforder_count'], 0]
-            ],
-            ['==', ['get', 'realtime_data_outdated'], false]
+            ]
         ],
-        color: '#3a4044',
+        color: '#ffcc00',
         visibility: 'none',
         ...layers
     },
     {
-        id: 'chargePointsOccupancy_Charging',
-        label: 'Ladesäule frei',
+        id: 'chargePointsOccupancy_ChargingReserved',
+        label: 'Ladesäule belegt',
         subGroup: 'Belegung',
         filter: [
             'all',
-            ['>', ['get', 'chargepoint_charging_count'], 0],
-            ['==', ['get', 'chargepoint_available_count'], 0],
-            ['==', ['get', 'realtime_data_outdated'], false]
+            [
+                'any',
+                ['>', ['get', 'chargepoint_charging_count'], 0],
+                ['>', ['get', 'chargepoint_reserved_count'], 0]
+            ],
+            ['==', ['get', 'chargepoint_available_count'], 0]
         ],
         color: '#ed0000',
         visibility: 'none',
@@ -164,12 +161,10 @@ export const layersChargePointsOccupancy = [
     },
     {
         id: 'chargePointsOccupancy_Available',
-        label: 'Ladesäule belegt',
+        label: 'Ladesäule frei',
         subGroup: 'Belegung',
         filter: [
-            'all',
-            ['>', ['get', 'chargepoint_available_count'], 0],
-            ['==', ['get', 'realtime_data_outdated'], false]
+            '>', ['get', 'chargepoint_available_count'], 0
         ],
         color: '#059b02',
         visibility: 'none',

@@ -18,8 +18,6 @@ export function timeStamps(realtimeDataUpdatedAt) {
         second: '2-digit'
     });
 
-    console.log(realtimeDataUpdatedAt)
-
     return {
         date,
         time

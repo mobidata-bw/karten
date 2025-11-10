@@ -1,25 +1,22 @@
 export function popupCanvas(features) {
 
 
-const canvas = document.querySelector('#canvas-' + features.id);
+    const canvas = document.querySelector('#canvas-' + features.id);
 
     if (canvas) {
 
-       const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d');
 
-        const staticUnknownCount = features.chargepoint_static_count + features.chargepoint_unknown_count;
         const availableCount = features.chargepoint_available_count;
         const occupiedCount = features.chargepoint_charging_count + features.chargepoint_reserved_count;
         const inoperativeOutOfOrderCount = features.chargepoint_inoperative_count + features.chargepoint_outoforder_count;
 
-        const totalCount = staticUnknownCount + availableCount + occupiedCount + inoperativeOutOfOrderCount;
-     
         const chargepoints = [
-            totalCount,
-            staticUnknownCount,
             availableCount,
             occupiedCount,
-            inoperativeOutOfOrderCount
+            inoperativeOutOfOrderCount,
+            features.chargepoint_unknown_count,
+            features.chargepoint_static_count
         ];
 
         //scale bars according to highest value
@@ -50,8 +47,8 @@ const canvas = document.querySelector('#canvas-' + features.id);
 
         // bars        
         for (let chargepoint in chargepoints) {
-            const colors = ['#006eaf', '#ffcc00', '#059b02', '#ed0000', '#3a4044'];
-            const labels = ['gesamt', 'unbekannt', 'verfügbar', 'belegt', 'nicht nutzbar'];
+            const colors = ['#059b02', '#ed0000', '#ffcc00', '#cacaca', '#615fdf'];
+            const labels = ['frei', 'belegt', 'nicht nutzbar', 'unbekannt', 'statisch'];
 
             ctx.fillStyle = colors[chargepoint];
 
@@ -65,28 +62,28 @@ const canvas = document.querySelector('#canvas-' + features.id);
                 ctx.font = '11px, Arial';
             ctx.fillStyle = 'black';
 
-            if (chargepoint == 0) {
-                ctx.fillText(chargepoints[chargepoint], 28, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
-                ctx.fillText(labels[chargepoint], 13, canvasHeight - 2);
-            }
-            else if (chargepoint == 1) {
-                ctx.fillText(chargepoints[chargepoint], 87, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
-                ctx.fillText(labels[chargepoint], 66, canvasHeight - 2);
-            }
-            else if (chargepoint == 2) {
-                ctx.fillText(chargepoints[chargepoint], 146, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
-                ctx.fillText(labels[chargepoint], 127, canvasHeight - 2);
-            }
-            else if (chargepoint == 3) {
-                ctx.fillText(chargepoints[chargepoint], 205, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
-                ctx.fillText(labels[chargepoint], 194, canvasHeight - 2);
-            }
-            else if (chargepoint == 4) {
-                ctx.fillText(chargepoints[chargepoint], 264, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
-                ctx.fillText(labels[chargepoint], 238, canvasHeight - 2);
+            switch (true) {
+                case chargepoint == 0:
+                    ctx.fillText(chargepoints[chargepoint], 28, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
+                    ctx.fillText(labels[chargepoint], 23, canvasHeight - 2);
+                    break;
+                case chargepoint == 1:
+                    ctx.fillText(chargepoints[chargepoint], 87, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
+                    ctx.fillText(labels[chargepoint], 76, canvasHeight - 2);
+                    break;
+                case chargepoint == 2:
+                    ctx.fillText(chargepoints[chargepoint], 146, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
+                    ctx.fillText(labels[chargepoint], 120, canvasHeight - 2);
+                    break;
+                case chargepoint == 3:
+                    ctx.fillText(chargepoints[chargepoint], 205, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
+                    ctx.fillText(labels[chargepoint], 183, canvasHeight - 2);
+                    break;
+                case chargepoint == 4:
+                    ctx.fillText(chargepoints[chargepoint], 264, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
+                    ctx.fillText(labels[chargepoint], 250, canvasHeight - 2);
+                    break;
             };
-
-
         }
 
     }

@@ -8,7 +8,7 @@ import { popupCanvas } from './popupCanvas.js';
 const sources = popupSources();
 
 export function popupContent(features) {
-    // console.log(features);
+    console.log(features);
 
     /* INITIALIZE VARIABLES */
     const {

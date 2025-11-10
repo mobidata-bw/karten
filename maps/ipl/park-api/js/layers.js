@@ -42,33 +42,28 @@ export const sourceParkApiBicycle = {
 function parkApiOccupancy({ id, layerGroup, layerFilter }) {
     return [
         {
+            id: `parkApi${id}Occupancy_All`,
+            label: 'Alle',
+            subGroup: 'Belegung',
+            filter: layerFilter,
+            color: 'orange',
+            scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'site', 'spot'],
+            ...layerGroup,
+            visibility: 'none'
+        },
+        {
             id: `parkApi${id}Occupancy_NoRealtimeInformation`,
             label: 'Echtzeitdaten nicht vorhanden',
             subGroup: 'Belegung',
             filter: [
-                'any',
-                /* PARKING SITE */
-                [
-                    'all',
-                    ['==', ['get', 'parking_object'], 'site'],
-                    ['==', ['get', 'has_realtime_data'], false],
-                    layerFilter
-                ],
-                /* PARKING SPOT */
-                [
-                    'all',
-                    ['==', ['get', 'parking_object'], 'spot'],
-                    [
-                        'any',
-                        ['==', ['get', 'realtime_status'], 'UNKNOWN'],
-                        ['==', ['get', 'has_realtime_data'], false]
-                    ],
-                    layerFilter
-                ]
+                'all',
+                ['==', ['get', 'has_realtime_data'], false],
+                layerFilter               
             ],
             color: '#615fdf',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
-            ...layerGroup
+            ...layerGroup,
+            visibility: 'none'
         },
         {
             id: `parkApi${id}Occupancy_OutdatedRealtimeInformation`,
@@ -83,6 +78,53 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#cacaca',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
+            ...layerGroup,
+            visibility: 'none'
+        },
+        {
+            id: `parkApi${id}Occupancy_Unknown`,
+            label: 'Status unbekannt',
+            subGroup: 'Belegung',
+            // filter: [
+            //     'all',
+            //     // ['==', ['get', 'realtime_opening_status'], 'UNKNOWN'],
+            //     ['==', ['get', 'has_realtime_data'], true],
+            //     [
+            //         'any',
+            //         [
+            //             'all',
+            //             ['==', ['get', 'parking_object'], 'site'],
+            //             ['!', ['has', 'realtime_free_capacity']]
+            //         ],
+            //         [
+            //             'all',
+            //             ['==', ['get', 'parking_object'], 'spot'],
+            //             ['==', ['get', 'realtime_status'], 'UNKNOWN'],
+            //         ]
+            //     ],
+            //     layerFilter
+            // ],
+             filter: [
+                'all',
+                // ['==', ['get', 'realtime_opening_status'], 'UNKNOWN'],
+                ['==', ['get', 'has_realtime_data'], true],
+                [
+                    'any',
+                    [
+                        'all',
+                        ['==', ['get', 'parking_object'], 'site'],
+                        ['==', ['get', 'realtime_opening_status'], 'UNKNOWN']
+                    ],
+                    [
+                        'all',
+                        ['==', ['get', 'parking_object'], 'spot'],
+                        ['==', ['get', 'realtime_status'], 'UNKNOWN']
+                    ]
+                ],
+                layerFilter
+            ],
+            color: 'black',
+            scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'site'],
             ...layerGroup
         },
         {
@@ -96,7 +138,8 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#880000',
             scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'site'],
-            ...layerGroup
+            ...layerGroup,
+            visibility: 'none'
         },
         {
             id: `parkApi${id}Occupancy_VeryLowAvailability`,
@@ -131,7 +174,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
                     ],
-                    layerFilter
+                    layerFilter,
                 ],
                 /* PARKING SPOT */
                 [
@@ -149,7 +192,8 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#ed0000',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
-            ...layerGroup
+            ...layerGroup,
+            visibility: 'none'
         },
         {
             id: `parkApi${id}Occupancy_LowAvailability`,
@@ -197,7 +241,8 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#dfab27',
             scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'on_street_disabled', 'site'],
-            ...layerGroup
+            ...layerGroup,
+            visibility: 'none'
         },
         {
             id: `parkApi${id}Occupancy_HighAvailability`,
@@ -246,7 +291,8 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#059b02',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
-            ...layerGroup
+            ...layerGroup,
+            visibility: 'none'
         }
     ];
 };
