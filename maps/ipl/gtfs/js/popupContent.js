@@ -93,100 +93,101 @@ export function popupContentTransitShapes(features) {
     } = features;
 
     /* SUBGRIDS */
-    const defas = "DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)";
+    const defas = 'DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)';
     const subgrids = {
         /* DEUTSCHE BAHN */
-        "drb": { subgrid: "DB Regio Bus Bayern", description: "", source: defas },
-        "ovf": { subgrid: "Ominbusverkehr Franken", description: "", source: defas },
-        "rab": { subgrid: "Regionalverkehr Alb-Bodensee", description: "", source: "Regionalverkehr Alb-Bodensee" },
-        "rbo": { subgrid: "Regionalbus Ostbayern", description: "", source: defas },
-        "rbs": { subgrid: "Regional Bus Stuttgart", description: "", source: "Regional Bus Stuttgart" },
-        "rva": { subgrid: "Regionalverkehr Allgäu", description: "", source: defas },
-        "rvs": { subgrid: "Südwestbus", description: "", source: "Südwestbus" },
-        "sbg": { subgrid: "Südbadenbus", description: "", source: "Südbadenbus", },
+        'drb': { subgrid: 'DB Regio Bus Bayern', source: defas },
+        'ovf': { subgrid: 'Ominbusverkehr Franken', source: defas },
+        'rab': { subgrid: 'Regionalverkehr Alb-Bodensee' },
+        'rbo': { subgrid: 'Regionalbus Ostbayern', source: defas },
+        'rbs': { subgrid: 'Regional Bus Stuttgart', },
+        'rva': { subgrid: 'Regionalverkehr Allgäu', source: defas },
+        'rvs': { subgrid: 'Südwestbus' },
+        'sbg': { subgrid: 'Südbadenbus' },
         /* TRANSIT ASSOCIATIONS */
-        "avv": { subgrid: "Augsburger Verkehrs- und Tarifverbund", description: "Kürzel: AVV", source: defas },
-        "bod": { subgrid: "Bodensee-Oberschwaben-Verkehrsverbund", description: "Kürzel: bodo", source: "Bodensee-Oberschwaben-Verkehrsverbund" },
-        "cw": { subgrid: "Verkehrsgesellschaft Bäderkreis Calw", description: "VGC", source: "Verkehrsgesellschaft Bäderkreis Calw" },
-        "din": { subgrid: "Donau-Iller-Nahverkehrsverbund", description: "Kürzel: DING; übernimmt Datenlieferung für den Heidenheimer Tarifverbund (HTV)", source: "Donau-Iller-Nahverkehrsverbund" },
-        "fds": { subgrid: "Verkehrsgemeinschaft Freudenstadt", description: "Kürzel: vgf", source: "Verkehrsgemeinschaft Freudenstadt" },
-        "hnv": { subgrid: "Heilbronner Hohenloher Haller Nahverkehr", description: "Kürzel: HNV", source: "Heilbronner Hohenloher Haller Nahverkehr" },
-        "kvv": { subgrid: "Karlsruher Verkehrsverbund", description: "Kürzel: KVV", source: "Karlsruher Verkehrsverbund" },
-        "mvv": { subgrid: "Münchner Verkehrs- und Tarifverbund", description: "Kürzel: MVV", source: defas },
-        "oam": { subgrid: "OstalbMobil", description: "Kürzel: OAM", source: "OstalbMobil" },
-        "rmv": { subgrid: "Rhein-Main-Verkehrsverbund", description: "Kürzel: RMV", source: "Rhein-Main-Verkehrsverbund Servicegesellschaft" },
-        "tgo": { subgrid: "Tarifverbund Ortenau", description: "Kürzel: TGO", source: "Tarifverbund Ortenau" },
-        "tub": { subgrid: "Verkehrsverbund Neckar-Alb-Donau", description: "Kürzel: naldo", source: "Verkehrsverbund Neckar-Alb-Donau" },
-        "tvv": { subgrid: "Verkehrsverbund Schwarzwald-Baar-Heuberg (TUTicket)", description: "Kürzel: Move; Landratsamt liefert nur die Daten im Landkreis Tuttlingen, auch nach Aufgehen des ehemaligen Verkehrsverbundes TUTicket in Move", source: "Landratsamt Tuttlingen" },
-        "vgn": { subgrid: "Verkehrsverbund Großraum Nürnberg", description: "Kürzel: VGN", source: defas },
-        "vhb": { subgrid: "Verkehrsverbund Hegau-Bodensee", description: "Kürzel: VHB", source: "Verkehrsverbund Hegau-Bodensee" },
-        "vpe": { subgrid: "Verkehrsverbund Pforzheim-Enzkreis", description: "Kürzel: VPE", source: "Verkehrsverbund Pforzheim-Enzkreis" },
-        "vrn": { subgrid: "Verkehrsverbund Rhein-Neckar", description: "Kürzel: VRN", source: "Verkehrsverbund Rhein-Neckar" },
-        "vsb": { subgrid: "Verkehrsverbund Schwarzwald-Baar-Heuberg (VSB)", description: "Kürzel: Move; Landratsamt liefert nur die Daten im Schwarzwald-Baar-Kreis, auch nach Aufgehen des ehemaligen Verkehrsverbundes Schwarzald-Baar in Move", source: "Landratsamt Schwarzwald-Baar-Kreis" },
-        "vsh": { subgrid: "Kreisverkehr Schwäbisch Hall", description: "Kürzel: KVSH", source: "Kreisverkehr Schwäbisch Hall" },
-        "vvr": { subgrid: "Verkehrsverbund Schwarzwald-Baar-Heuberg (VVR)", description: "Kürzel: Move; Landratsamt liefert nur die Daten im Landkreis Rottweil, auch nach Aufgehen des ehemaligen Verkehrsverbundes Rottweil in Move", source: "Landratsamt Rottweil" },
-        "vvs": { subgrid: "Verkehrsverbund Stuttgart", description: "Kürzel: VVS", source: "Verkehrsverbund Stuttgart" },
-        "wvv": { subgrid: "Würzburger Versorgungs- und Verkehrs-GmbH", description: "Kürzel: WVV", source: defas },
+        'avv': { subgrid: 'Augsburger Verkehrs- und Tarifverbund', abb: 'AVV', source: defas },
+        'bod': { subgrid: 'Bodensee-Oberschwaben-Verkehrsverbund', abb: 'bodo' },
+        'cw': { subgrid: 'Verkehrsgesellschaft Bäderkreis Calw', abb: 'VGC' },
+        'din': { subgrid: 'Donau-Iller-Nahverkehrsverbund', abb: 'DING', description: 'DING übernimmt Datenlieferung für den Heidenheimer Tarifverbund (HTV)' },
+        'fds': { subgrid: 'Verkehrsgemeinschaft Freudenstadt', abb: 'vgf' },
+        'hnv': { subgrid: 'Heilbronner Hohenloher Haller Nahverkehr', abb: 'HNV' },
+        'kvv': { subgrid: 'Karlsruher Verkehrsverbund', abb: 'KVV' },
+        'mvv': { subgrid: 'Münchner Verkehrs- und Tarifverbund', abb: 'MVV', source: defas },
+        'oam': { subgrid: 'OstalbMobil', abb: 'OAM' },
+        'rmv': { subgrid: 'Rhein-Main-Verkehrsverbund', abb: 'RMV', source: 'Rhein-Main-Verkehrsverbund Servicegesellschaft' },
+        'tgo': { subgrid: 'Tarifverbund Ortenau', abb: 'TGO' },
+        'tub': { subgrid: 'Verkehrsverbund Neckar-Alb-Donau', abb: 'naldo' },
+        'tvv': { subgrid: 'Verkehrsverbund Schwarzwald-Baar-Heuberg (TUTicket)', abb: 'Move', source: 'Landratsamt Tuttlingen', description: 'Landratsamt liefert nur die Daten im Landkreis Tuttlingen, auch nach Aufgehen des ehemaligen Verkehrsverbundes TUTicket in Move' },
+        'vgn': { subgrid: 'Verkehrsverbund Großraum Nürnberg', abb: 'VGN', source: defas },
+        'vhb': { subgrid: 'Verkehrsverbund Hegau-Bodensee', abb: 'VHB' },
+        'vpe': { subgrid: 'Verkehrsverbund Pforzheim-Enzkreis', abb: 'VPE' },
+        'vrn': { subgrid: 'Verkehrsverbund Rhein-Neckar', abb: 'VRN' },
+        'vsb': { subgrid: 'Verkehrsverbund Schwarzwald-Baar-Heuberg (VSB)', abb: 'Move', source: 'Landratsamt Schwarzwald-Baar-Kreis', description: 'Landratsamt liefert nur die Daten im Schwarzwald-Baar-Kreis, auch nach Aufgehen des ehemaligen Verkehrsverbundes Schwarzald-Baar in Move' },
+        'vsh': { subgrid: 'Kreisverkehr Schwäbisch Hall', description: 'KVSH' },
+        'vvr': { subgrid: 'Verkehrsverbund Schwarzwald-Baar-Heuberg (VVR)', abb: 'Move', source: 'Landratsamt Rottweil', description: 'Landratsamt liefert nur die Daten im Landkreis Rottweil, auch nach Aufgehen des ehemaligen Verkehrsverbundes Rottweil in Move' },
+        'vvs': { subgrid: 'Verkehrsverbund Stuttgart', abb: 'VVS' },
+        'wvv': { subgrid: 'Würzburger Versorgungs- und Verkehrs-GmbH', abb: 'WVV', source: defas },
         /* MUNICIPAL UTILITIES */
-        "abs": { subgrid: "Stadtwerke Aschaffenburg", description: "", source: defas },
-        "abv": { subgrid: "Ansbacher Bäder und Verkehrs GmbH", description: "", source: defas },
-        "avg": { subgrid: "Augsburger Verkehrsgesellschaft", description: "Kürzel: AVG", source: defas },
-        "bam": { subgrid: "Stadtwerke Bamberg", description: "", source: defas },
-        "esw": { subgrid: "Erlanger Stadtwerke", description: "", source: defas },
-        "frb": { subgrid: "Freiburger Verkehrs AG", description: "", source: "Freiburger Verkehrs AG" },
-        "fue": { subgrid: "infra Fürth", description: "", source: defas },
-        "inv": { subgrid: "Ingolstädter Verkehrsgesellschaft", description: "Kürzel: INVG", source: defas },
-        "kgv": { subgrid: "Kahlgrund Verkehrs-Gesellschaft", description: "Kürzel: KVG", source: defas },
-        "ndo": { subgrid: "Landkreis Neuburg-Schrobenhausen", description: "", source: defas },
-        "scw": { subgrid: "Stadtwerke Schweinfurt", description: "", source: defas },
-        "sw1": { subgrid: "Südwestdeutsche Landesverkehrs-GmbH", description: "Kürzel: SWEG", source: "Südwestdeutsche Landesverkehrs-GmbH" },
-        "van": { subgrid: "Verkehrs-Aktiengesellschaft Nürnberg", description: "Kürzel: VAG Nürnberg", source: defas },
-        "vgs": { subgrid: "Zweckverband Personennahverkehr Saarland", description: "ehemals Verkehrsmanagement-Gesellschaft Saar mbH (VGS)", source: "Durchgängige elektronische Fahrgastinformation (DELFI)" },
-        "vu": { subgrid: "Verkehrsgemeinschaft am Bayerischen Untermain", description: "Kürzel: VAB", source: defas },
+        'abs': { subgrid: 'Stadtwerke Aschaffenburg', source: defas },
+        'abv': { subgrid: 'Ansbacher Bäder und Verkehrs GmbH', source: defas },
+        'avg': { subgrid: 'Augsburger Verkehrsgesellschaft', abb: 'AVG', source: defas },
+        'bam': { subgrid: 'Stadtwerke Bamberg', source: defas },
+        'esw': { subgrid: 'Erlanger Stadtwerke', source: defas },
+        'frb': { subgrid: 'Freiburger Verkehrs AG' },
+        'fue': { subgrid: 'infra Fürth', source: defas },
+        'inv': { subgrid: 'Ingolstädter Verkehrsgesellschaft', abb: 'INVG', source: defas },
+        'kgv': { subgrid: 'Kahlgrund Verkehrs-Gesellschaft', abb: 'KVG', source: defas },
+        'ndo': { subgrid: 'Landkreis Neuburg-Schrobenhausen', source: defas },
+        'scw': { subgrid: 'Stadtwerke Schweinfurt', source: defas },
+        'sw1': { subgrid: 'Südwestdeutsche Landesverkehrs-GmbH', abb: 'SWEG' },
+        'van': { subgrid: 'Verkehrs-Aktiengesellschaft Nürnberg', abb: 'VAG Nürnberg', source: defas },
+        'vgs': { subgrid: 'Zweckverband Personennahverkehr Saarland', source: 'Durchgängige elektronische Fahrgastinformation (DELFI)', description: 'ehemals Verkehrsmanagement-Gesellschaft Saar mbH (VGS)' },
+        'vu': { subgrid: 'Verkehrsgemeinschaft am Bayerischen Untermain', abb: 'VAB', source: defas },
         /* TRANSIT COMPANIES */
-        "bcl": { subgrid: "BusClassic", description: "Teil der Weiglein-Firmengruppe", source: defas },
-        "bur": { subgrid: "Burlein Und Sohn & Wagenhäuser Reisen", description: "", source: defas },
-        "etg": { subgrid: "Ehard Touristik", description: "", source: defas },
-        "gai": { subgrid: "Omnibusverkehr Gairing & Omnibus Weidachstein", description: "", source: defas },
-        "gei": { subgrid: "Kurt Geis", description: "", source: defas },
-        "ghu": { subgrid: "Gute Reise Hauck", description: "", source: defas },
-        "grh": { subgrid: "Grasmann-Reisen", description: "", source: defas },
-        "hgg": { subgrid: "OmnibusVerkehrBischofsheim", description: "", source: defas },
-        "klz": { subgrid: "O.K. Reisen Kleinhenz", description: "", source: defas },
-        "kra": { subgrid: "Omnibus Kraus", description: "", source: defas },
-        "krg": { subgrid: "Kraus-Reisen", description: "", source: defas },
-        "lys": { subgrid: "Lyst Reisen", description: "", source: defas },
-        "omp": { subgrid: "OMNIPART Verkehrsdienstleistungen", description: "", source: defas },
-        "osm": { subgrid: "Omnibus-Service Mellrichstadt", description: "", source: defas },
-        "rmb": { subgrid: "Rombs Touristik", description: "", source: defas },
-        "roh": { subgrid: "Röhler Stadtbus Roth", description: "", source: defas },
-        "smr": { subgrid: "Schmetterling Reisen", description: "", source: defas },
-        "vog": { subgrid: "Vogel Omnibus", description: "", source: defas },
+        'bcl': { subgrid: 'BusClassic', source: defas, description: 'Teil der Weiglein-Firmengruppe' },
+        'bur': { subgrid: 'Burlein Und Sohn & Wagenhäuser Reisen', source: defas },
+        'etg': { subgrid: 'Ehard Touristik', source: defas },
+        'gai': { subgrid: 'Omnibusverkehr Gairing & Omnibus Weidachstein', source: defas },
+        'gei': { subgrid: 'Kurt Geis', source: defas },
+        'ghu': { subgrid: 'Gute Reise Hauck', source: defas },
+        'grh': { subgrid: 'Grasmann-Reisen', source: defas },
+        'hgg': { subgrid: 'OmnibusVerkehrBischofsheim', source: defas },
+        'klz': { subgrid: 'O.K. Reisen Kleinhenz', source: defas },
+        'kra': { subgrid: 'Omnibus Kraus', source: defas },
+        'krg': { subgrid: 'Kraus-Reisen', source: defas },
+        'lys': { subgrid: 'Lyst Reisen', source: defas },
+        'omp': { subgrid: 'OMNIPART Verkehrsdienstleistungen', source: defas },
+        'osm': { subgrid: 'Omnibus-Service Mellrichstadt', source: defas },
+        'rmb': { subgrid: 'Rombs Touristik', source: defas },
+        'roh': { subgrid: 'Röhler Stadtbus Roth', source: defas },
+        'smr': { subgrid: 'Schmetterling Reisen', source: defas },
+        'vog': { subgrid: 'Vogel Omnibus', source: defas },
         /* ABROAD */
-        "als": { subgrid: "Fluo Grand Est", description: "umfasst in der Region Grand Est das Elsass und Lothringen", source: "Fluo Grand Est" },
-        "bel": { subgrid: "Mehrere belgische Verkehrsunternehmen", description: "iRail ist eine belgische Non-Profit-Organisation, der sich als Open-Data-Initiative für den freien Zugang zu Mobilitätsdaten engagiert.", source: "iRail" },
-        "bvb": { subgrid: "Basler Verkehrsbetrieb", description: "", source: "Basler Verkehrsbetrieb" },
-        "obb": { subgrid: "Österreichische Bundesbahn", description: "", source: "Mobilitätsverbünde Österreich OG" },
-        "sbb": { subgrid: "Schweizer Bundesbahn", description: "Landesweites Netz", source: "Basler Verkehrsbetrieb" },
-        "stv": { subgrid: "Steirischer Verkehrsverbund", description: "", source: "Mobilitätsverbünde Österreich OG" },
-        "vvt": { subgrid: "Verkehrsverbund Tirol", description: "", source: "Mobilitätsverbünde Österreich OG" },
-        "vvv": { subgrid: "Verkehrsverbund Vorarlberg", description: "", source: "Mobilitätsverbünde Österreich OG" },
+        'als': { subgrid: 'Fluo Grand Est', description: 'Elsass und Lothringen in der Region Grand Est' },
+        'bel': { subgrid: 'Mehrere belgische Verkehrsunternehmen', source: 'iRail', description: 'iRail ist eine belgische Non-Profit-Organisation, der sich als Open-Data-Initiative für den freien Zugang zu Mobilitätsdaten engagiert' },
+        'bvb': { subgrid: 'Basler Verkehrsbetrieb' },
+        'obb': { subgrid: 'Österreichische Bundesbahn', source: 'Mobilitätsverbünde Österreich OG' },
+        'sbb': { subgrid: 'Schweizer Bundesbahn', source: 'Basler Verkehrsbetrieb', description: 'Landesweites Netz', },
+        'stv': { subgrid: 'Steirischer Verkehrsverbund', source: 'Mobilitätsverbünde Österreich OG' },
+        'vvt': { subgrid: 'Verkehrsverbund Tirol', source: 'Mobilitätsverbünde Österreich OG' },
+        'vvv': { subgrid: 'Verkehrsverbund Vorarlberg', source: 'Mobilitätsverbünde Österreich OG' },
         /* OTHER */
-        "ddb": { subgrid: "Mehrere Eisenbahngesellschaften", description: "", source: "Europäisches Fahrplanzentrum" },
-        "nvb": { subgrid: "Nahverkehrsgesellschaft Baden-Württemberg", description: "seitens der Nahverkehrsgesellschaft Baden-Württemberg eingepflegte Linien", source: "Nahverkehrsgesellschaft Baden-Württemberg" },
-        "bus": { subgrid: "Flix", description: "FlixBus und FlixTrain", source: "DELFI" },
-        "hn": { subgrid: "Bürgerbusverkehre", description: "enthalten sind Bürgerbusverkehre, die nicht über Verkehrsverbünde abgebildet werden", source: "Match Rider im Auftrag der Bürgerbus-Vereine" },
-        "nth": { subgrid: "Verkehrsgemeinschaft Mittelthüringen", description: "Thüringer Landesnetz", source: "Verkehrsgemeinschaft Mittelthüringen" }
+        'ddb': { subgrid: 'Mehrere Eisenbahngesellschaften', source: 'Europäisches Fahrplanzentrum' },
+        'nvb': { subgrid: 'Nahverkehrsgesellschaft Baden-Württemberg', description: 'seitens der Nahverkehrsgesellschaft Baden-Württemberg eingepflegte Linien' },
+        'bus': { subgrid: 'Flix', source: 'Durchgängige elektronische Fahrgastinformation (DELFI)', description: 'FlixBus und FlixTrain', },
+        'hn': { subgrid: 'Bürgerbusverkehre', source: 'Match Rider im Auftrag der Bürgerbus-Vereine', description: 'enthalten sind Bürgerbusverkehre, die nicht über Verkehrsverbünde abgebildet werden' },
+        'nth': { subgrid: 'Verkehrsgemeinschaft Mittelthüringen', description: 'Thüringer Landesnetz' }
     }
 
     const routeIdsPrefix = route_ids.split("-")[0];
-    let subgrid = '', description = '', source = '';
+    let subgrid = '', abb = '', source = '', description = '';
     for (let i in subgrids) {
         i = i.split("-")[0];
         if (routeIdsPrefix == i) {
             subgrid += subgrids[i].subgrid;
-            description += subgrids[i].description;
-            source += subgrids[i].source;
+            if (subgrids[i].source) source += subgrids[i].source;
+            if (subgrids[i].abb) abb += subgrids[i].abb;
+            if (subgrids[i].description) description += subgrids[i].description;
         }
         else {
             subgrid == '';
@@ -219,13 +220,13 @@ export function popupContentTransitShapes(features) {
         ${subgrid == '' ? '' : (`
         <br><table>
         <div class="title title2">Teilnetz</div>
-            ${subgrid == source ? `
+            ${!source ? `
             <tr>
                 <td class="att">Name/Datengeber</td>
                 <td class="attContent">${subgrid}</td>
             </tr>
             ` : ''}
-            ${subgrid != source ? `
+            ${subgrid && source ? `
             <tr>
                 <td class="att">Name</td>
                 <td class="attContent">${subgrid}</td>
@@ -234,7 +235,13 @@ export function popupContentTransitShapes(features) {
                 <td class="attContent">${source}</td>
             </tr>
             ` : ''}
-            ${description == '' ? '' : `
+             ${!abb ? '' : `
+            <tr>
+                <td class="att">Kurzform</td>
+                <td class="attContent">${abb}</td>
+            </tr>
+            `}         
+            ${!description ? '' : `
             <tr>
                 <td class="att">Beschreibung</td>
                 <td class="attContent">${description}</td>

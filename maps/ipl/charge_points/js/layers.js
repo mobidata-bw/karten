@@ -5,7 +5,7 @@ export const sourceChargePoints = {
     layer: 'MobiData-BW:charge_points',
     style: 'MobiData-BW:mdbw_charge_points_dynamic',
     bounds: [5.2, 47.2, 15.8, 55.7],
-    server: 'test'
+    // server: 'test'
 };
 
 
