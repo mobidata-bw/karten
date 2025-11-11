@@ -60,51 +60,14 @@ export const layersChargePointsPower = [
 ];
 
 export const layersChargePointsOccupancy = [
-    // {
-    //     id: 'chargePointsOccupancy_Static',
-    //     label: 'Echtzeitdaten nicht vorhanden',
-    //     subGroup: 'Belegung',
-    //     filter:
-    //         [
-    //             'all',
-    //             ['>', ['get', 'chargepoint_static_count'], 0],
-    //             ['==', ['get', 'chargepoint_outoforder_count'], 0],
-    //             ['==', ['get', 'chargepoint_unknown_count'], 0],
-    //             ['==', ['get', 'chargepoint_inoperative_count'], 0],
-    //             ['==', ['get', 'chargepoint_available_count'], 0],
-    //             ['==', ['get', 'chargepoint_charging_count'], 0]
-    //         ],
-    //     color: '#615fdf',
-    //     visibility: 'none',
-    //     ...layers
-    // },
-    // {
-    //     id: 'chargePointsOccupancy_Realtime',
-    //     label: 'Echtzeitdaten verfügbar',
-    //     subGroup: 'Belegung',
-    //     filter:
-    //         [
-    //             'all',
-    //             ['==', ['get', 'chargepoint_static_count'], 0],
-    //             [
-    //                 'any',
-    //                 ['>', ['get', 'chargepoint_outoforder_count'], 0],
-    //                 ['>', ['get', 'chargepoint_unknown_count'], 0],
-    //                 ['>', ['get', 'chargepoint_inoperative_count'], 0],
-    //                 ['>', ['get', 'chargepoint_available_count'], 0],
-    //                 ['>', ['get', 'chargepoint_charging_count'], 0]
-    //             ]
-    //         ],
-    //     color: '#dfab27',
-    //     visibility: 'none',
-    //     ...layers
-    // }
     {
-        id: 'chargePointsOccupancy_OutdatedRealtimeInformation',
+        id: 'chargePointsOccupancy_NoRealtimeInformation',
         label: 'Echtzeitdaten nicht vorhanden',
         subGroup: 'Belegung',
         filter: [
-            '>', ['get', 'chargepoint_static_count'], 0
+            'all',
+            ['>', ['get', 'chargepoint_static_count'], 0],
+            ['==', ['get', 'chargepoint_available_count'], 0]
         ],
         color: '#615fdf',
         visibility: 'none',
@@ -118,6 +81,10 @@ export const layersChargePointsOccupancy = [
             'all',
             ['==', ['get', 'chargepoint_available_count'], 0],
             ['==', ['get', 'chargepoint_charging_count'], 0],
+            ['==', ['get', 'chargepoint_reserved_count'], 0],
+            ['==', ['get', 'chargepoint_inoperative_count'], 0],
+            ['==', ['get', 'chargepoint_outoforder_count'], 0],
+            ['==', ['get', 'chargepoint_static_count'], 0],
             ['>', ['get', 'chargepoint_unknown_count'], 0]
         ],
         color: '#cacaca',
@@ -132,6 +99,9 @@ export const layersChargePointsOccupancy = [
             'all',
             ['==', ['get', 'chargepoint_available_count'], 0],
             ['==', ['get', 'chargepoint_charging_count'], 0],
+            ['==', ['get', 'chargepoint_reserved_count'], 0],
+            // ['==', ['get', 'chargepoint_unknown_count'], 0],
+            ['==', ['get', 'chargepoint_static_count'], 0],
             [
                 'any',
                 ['>', ['get', 'chargepoint_inoperative_count'], 0],

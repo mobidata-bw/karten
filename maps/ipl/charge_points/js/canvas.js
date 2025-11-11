@@ -58,14 +58,24 @@ export function popupCanvas(features) {
                 barHeight,
                 barWidth,
                 -chargepoints[chargepoint] * scaleFactor
-            ),
-                ctx.font = '11px, Arial';
+            );
+            ctx.font = '11px, Arial';
             ctx.fillStyle = 'black';
+
+            let position;
 
             switch (true) {
                 case chargepoint == 0:
-                    ctx.fillText(chargepoints[chargepoint], 28, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
-                    ctx.fillText(labels[chargepoint], 23, canvasHeight - 2);
+                    ctx.fillText(labels[chargepoint], 24, canvasHeight - 2);
+                    switch (true) {
+                        case availableCount.toString().length == 3:
+                            position = 23;
+                            break;
+                        case availableCount.toString().length == 1:
+                            position = 28;
+                            break;
+                    }
+                    ctx.fillText(chargepoints[chargepoint], position, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
                     break;
                 case chargepoint == 1:
                     ctx.fillText(chargepoints[chargepoint], 87, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
