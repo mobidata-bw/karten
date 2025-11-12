@@ -19,7 +19,8 @@ export const sourceParkApiCar = {
 export const sourceParkApiCarLines = {
     layer: 'MobiData-BW:park-api_car_lines',
     style: 'MobiData-BW:mdbw_lines',
-    bounds: [7, 46, 10, 50]
+    bounds: [7, 46, 10, 50],
+    promoteId: 'id'
 };
 
 export const sourceParkApiCarPolygons = {
@@ -31,8 +32,7 @@ export const sourceParkApiCarPolygons = {
 export const sourceParkApiBicycle = {
     layer: 'MobiData-BW:park-api_bicycle',
     style: 'MobiData-BW:mdbw_park-api_parking-object',
-    bounds: [7.1, 47.5, 13.5, 53.8],
-    // server: 'test'
+    bounds: [7.1, 47.5, 13.5, 53.8]
 };
 
 
@@ -42,28 +42,33 @@ export const sourceParkApiBicycle = {
 function parkApiOccupancy({ id, layerGroup, layerFilter }) {
     return [
         {
-            id: `parkApi${id}Occupancy_All`,
-            label: 'Alle',
-            subGroup: 'Belegung',
-            filter: layerFilter,
-            color: 'orange',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'site', 'spot'],
-            ...layerGroup,
-            visibility: 'none'
-        },
-        {
             id: `parkApi${id}Occupancy_NoRealtimeInformation`,
             label: 'Echtzeitdaten nicht vorhanden',
             subGroup: 'Belegung',
             filter: [
-                'all',
-                ['==', ['get', 'has_realtime_data'], false],
-                layerFilter               
+                'any',
+                /* PARKING SITE */
+                [
+                    'all',
+                    ['==', ['get', 'parking_object'], 'site'],
+                    ['==', ['get', 'has_realtime_data'], false],
+                    layerFilter
+                ],
+                /* PARKING SPOT */
+                [
+                    'all',
+                    ['==', ['get', 'parking_object'], 'spot'],
+                    [
+                        'any',
+                        ['==', ['get', 'realtime_status'], 'UNKNOWN'],
+                        ['==', ['get', 'has_realtime_data'], false]
+                    ],
+                    layerFilter
+                ]
             ],
             color: '#615fdf',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
-            ...layerGroup,
-            visibility: 'none'
+            ...layerGroup
         },
         {
             id: `parkApi${id}Occupancy_OutdatedRealtimeInformation`,
@@ -78,53 +83,6 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#cacaca',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
-            ...layerGroup,
-            visibility: 'none'
-        },
-        {
-            id: `parkApi${id}Occupancy_Unknown`,
-            label: 'Status unbekannt',
-            subGroup: 'Belegung',
-            // filter: [
-            //     'all',
-            //     // ['==', ['get', 'realtime_opening_status'], 'UNKNOWN'],
-            //     ['==', ['get', 'has_realtime_data'], true],
-            //     [
-            //         'any',
-            //         [
-            //             'all',
-            //             ['==', ['get', 'parking_object'], 'site'],
-            //             ['!', ['has', 'realtime_free_capacity']]
-            //         ],
-            //         [
-            //             'all',
-            //             ['==', ['get', 'parking_object'], 'spot'],
-            //             ['==', ['get', 'realtime_status'], 'UNKNOWN'],
-            //         ]
-            //     ],
-            //     layerFilter
-            // ],
-             filter: [
-                'all',
-                // ['==', ['get', 'realtime_opening_status'], 'UNKNOWN'],
-                ['==', ['get', 'has_realtime_data'], true],
-                [
-                    'any',
-                    [
-                        'all',
-                        ['==', ['get', 'parking_object'], 'site'],
-                        ['==', ['get', 'realtime_opening_status'], 'UNKNOWN']
-                    ],
-                    [
-                        'all',
-                        ['==', ['get', 'parking_object'], 'spot'],
-                        ['==', ['get', 'realtime_status'], 'UNKNOWN']
-                    ]
-                ],
-                layerFilter
-            ],
-            color: 'black',
-            scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'site'],
             ...layerGroup
         },
         {
@@ -138,8 +96,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#880000',
             scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'site'],
-            ...layerGroup,
-            visibility: 'none'
+            ...layerGroup
         },
         {
             id: `parkApi${id}Occupancy_VeryLowAvailability`,
@@ -174,7 +131,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                         ['==', ['get', 'realtime_data_outdated'], false],
                         ['==', ['get', 'source_id'], 55]
                     ],
-                    layerFilter,
+                    layerFilter
                 ],
                 /* PARKING SPOT */
                 [
@@ -192,8 +149,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#ed0000',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
-            ...layerGroup,
-            visibility: 'none'
+            ...layerGroup
         },
         {
             id: `parkApi${id}Occupancy_LowAvailability`,
@@ -241,8 +197,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#dfab27',
             scope: ['car', 'bicycle', 'item', 'buildings', 'buildings_disabled', 'on_street_disabled', 'site'],
-            ...layerGroup,
-            visibility: 'none'
+            ...layerGroup
         },
         {
             id: `parkApi${id}Occupancy_HighAvailability`,
@@ -291,8 +246,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
             ],
             color: '#059b02',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],
-            ...layerGroup,
-            visibility: 'none'
+            ...layerGroup
         }
     ];
 };
@@ -623,56 +577,52 @@ if (geometry == 'polygon') {
             {
                 id: `parkApi${id}Type_Other_Circle`,
                 label: 'Sonstige',
-                filter:
+                filter: [
+                    'all',
                     [
-                        'all',
-                        [
-                            'any',
-                            ['==', ['get', 'type'], 'OTHER'],
-                            ['!', ['has', 'type']]
-                        ],
-                        ['<', ['zoom'], zoom],
-                        ['==', ['get', 'geojson'], 'POLYGON']
+                        'any',
+                        ['==', ['get', 'type'], 'OTHER'],
+                        ['!', ['has', 'type']]
                     ],
+                    ['<', ['zoom'], zoom],
+                    ['==', ['get', 'geojson'], 'POLYGON']
+                ],
                 color: '#cacaca',
                 ...properties
             },
             {
                 id: `parkApi${id}Type_OnStreet_Circle`,
                 label: 'Straßen-Parkplatz',
-                filter:
-                    [
-                        'all',
-                        ['==', ['get', 'type'], 'ON_STREET'],
-                        ['<', ['zoom'], zoom],
-                        ['==', ['get', 'geojson'], 'POLYGON']
-                    ],
+                filter: [
+                    'all',
+                    ['==', ['get', 'type'], 'ON_STREET'],
+                    ['<', ['zoom'], zoom],
+                    ['==', ['get', 'geojson'], 'POLYGON']
+                ],
                 color: 'black',
                 ...properties
             },
             {
                 id: `parkApi${id}Type_OffStreet_Circle`,
                 label: 'Parkplatz abseits der Straße',
-                filter:
-                    [
-                        'all',
-                        ['==', ['get', 'type'], 'OFF_STREET_PARKING_GROUND'],
-                        ['<', ['zoom'], zoom],
-                        ['==', ['get', 'geojson'], 'POLYGON']
-                    ],
+                filter: [
+                    'all',
+                    ['==', ['get', 'type'], 'OFF_STREET_PARKING_GROUND'],
+                    ['<', ['zoom'], zoom],
+                    ['==', ['get', 'geojson'], 'POLYGON']
+                ],
                 color: '#009688',
                 ...properties
             },
             {
                 id: `parkApi${id}Type_CarPark_Circle`,
                 label: 'Parkhaus',
-                filter:
-                    [
-                        'all',
-                        ['==', ['get', 'type'], 'CAR_PARK'],
-                        ['<', ['zoom'], zoom],
-                        ['==', ['get', 'geojson'], 'POLYGON']
-                    ],
+                filter: [
+                    'all',
+                    ['==', ['get', 'type'], 'CAR_PARK'],
+                    ['<', ['zoom'], zoom],
+                    ['==', ['get', 'geojson'], 'POLYGON']
+                ],
                 color: '#5587eb',
                 ...properties
             }

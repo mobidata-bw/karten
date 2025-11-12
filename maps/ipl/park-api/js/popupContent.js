@@ -8,7 +8,7 @@ import { popupCanvas } from './popupCanvas.js';
 const sources = popupSources();
 
 export function popupContent(features) {
-    console.log(features);
+    // console.log(features);
 
     /* INITIALIZE VARIABLES */
     const {
@@ -77,28 +77,38 @@ export function popupContent(features) {
             <tr>
                 <td class="att2">alle (frei/gesamt)</td>
                 <td class="attContent2">
-                ${(has_realtime_data == false || !realtime_free_capacity) ? '-' : realtime_free_capacity}
-                / 
-                ${(!realtime_capacity && capacity == undefined) ? '-' : (realtime_capacity ? realtime_capacity : capacity)}
+                    ${(has_realtime_data == false || !realtime_free_capacity) ? '-' : realtime_free_capacity.toLocaleString()}
+                    / 
+                    ${(!realtime_capacity && capacity == undefined) ? '-' : (realtime_capacity ? realtime_capacity.toLocaleString() : capacity.toLocaleString())}
                 </td>
             </tr>
             `}
             ${(!capacity_disabled || capacity_disabled == '0') ? '' : `
-            <tr><td class="att2">für Behinderte</td><td class="attContent2">${capacity_disabled}</td></tr>
+            <tr>
+                <td class="att2">für Behinderte</td><td class="attContent2">${capacity_disabled}</td>
+            </tr>
             `}
             ${(!capacity_woman || capacity_woman == '0') ? '' : `
-            <tr><td class="att2">für Frauen</td><td class="attContent2">${capacity_woman}</td></tr>
+            <tr>
+                <td class="att2">für Frauen</td><td class="attContent2">${capacity_woman}</td>
+            </tr>
             `}
             ${(!capacity_family || capacity_family == '0') ? '' : `
-            <tr><td class="att2">für Familien</td><td class="attContent2">${capacity_family}</td></tr>
+            <tr>
+                <td class="att2">für Familien</td><td class="attContent2">${capacity_family}</td>
+            </tr>
             `}
             ${(!capacity_charging || capacity_charging == '0') ? '' : `
-            <tr><td class="att2">mit Lademöglichkeit</td><td class="attContent2">${capacity_charging}</td></tr>
+            <tr>
+                <td class="att2">mit Lademöglichkeit</td><td class="attContent2">${capacity_charging}</td>
+            </tr>
             `}
             ${(!capacity_carsharing || capacity_carsharing == '0') ? '' : `
-            <tr><td class="att2">für Carsharing</td><td class="attContent2">${capacity_carsharing}</td></tr>
+            <tr>
+                <td class="att2">für Carsharing</td><td class="attContent2">${capacity_carsharing}</td>
+            </tr>
             `}
-            `;
+    `;
 
     const htmlContent = `
         <table>

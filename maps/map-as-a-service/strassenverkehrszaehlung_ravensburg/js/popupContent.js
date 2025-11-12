@@ -1,5 +1,5 @@
 import { basePath } from '../../../../src/utils/paths.js';
-import { popupImages } from "../../../../src/js/popupImages.js";
+// import { popupImages } from "../../../../src/js/popupImages.js";
 
 
 export function popupContent(features) {
@@ -35,11 +35,7 @@ export function popupContent(features) {
 
     /* POPUP CONTENT */
     return `
-        <table>
-             <tr>
-                ${popupImages('Stadt Ravensburg')}
-            </tr>
-        </table><br><table>       
+        <table>         
             <tr>
                 <td class="att">ID</td>
                 <td class="attContent">${ID}</td>
@@ -61,13 +57,45 @@ export function popupContent(features) {
             </tr><tr>
                 <td class="att">Letzte Zählung</td>
                 <td class="attContent">${DATUM}</td>
-            </tr>       
-        </table><table>    
-            <tr>
-                ${`<td class="attContentLink"><a href="${filePath}/files/${ID}/${DATUM}/${NAME}.pdf" target="_blank">&#10149 PDF</a></td>`}  
-                ${`<td class="attContentLink"><a href="${filePath}/files/${ID}/${DATUM}/${NAME}.xlsx" target="_blank">&#10149 XLSX</a></td>`}                  
-            </tr>
+            </tr>             
         </table>
     `;
 
 };
+
+
+// return `
+//         <table>
+//             <tr>
+//                 ${popupImages('Stadt Ravensburg')}
+//             </tr>
+//         </table><br><table>       
+//             <tr>
+//                 <td class="att">ID</td>
+//                 <td class="attContent">${ID}</td>
+//             </tr><tr>             
+//                 <td class="att">Name</td>
+//                 <td class="attContent">${NAME}</td>
+//             </tr><tr>
+//                 <td class="att">Kraftfahrzeug</td>
+//                 <td class="attContent">${KFZ.toLocaleString()}</td>
+//             </tr><tr>
+//                 <td class="att">Fahrrad</td>
+//                 <td class="attContent">${RAD.toLocaleString()}</td>
+//             </tr><tr>
+//                 <td class="att">Fußgänger</td>
+//                 <td class="attContent">${FUSSGAENGER.toLocaleString()}</td>
+//             </tr><tr>
+//                 <td class="att">Schwerlastverkehr</td>
+//                 <td class="attContent">${SV.toLocaleString()}</td>
+//             </tr><tr>
+//                 <td class="att">Letzte Zählung</td>
+//                 <td class="attContent">${DATUM}</td>
+//             </tr>       
+//         </table><table>    
+//             <tr>
+//                 ${`<td class="attContentLink"><a href="${filePath}/files/${ID}/${DATUM}/${NAME}.pdf" target="_blank">&#10149 PDF</a></td>`}  
+//                 ${`<td class="attContentLink"><a href="${filePath}/files/${ID}/${DATUM}/${NAME}.xlsx" target="_blank">&#10149 XLSX</a></td>`}                  
+//             </tr>
+//         </table>
+//     `;

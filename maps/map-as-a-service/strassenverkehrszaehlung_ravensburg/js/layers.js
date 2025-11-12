@@ -12,7 +12,7 @@ export const sourceCountRavensburg = setFilePath({ format: 'geojson', directory:
 // ==============================
 const layers = {
     source: 'sourceCountRavensburg',
-    group: 'Straßenverkehrszählung Ravensburg',
+    group: 'Straßenverkehrszählung',
 };
 
 const filter = [
@@ -56,56 +56,51 @@ export const layersCountRavensburg = [
     {
         id: 'countRavensburg1',
         label: 'bis 1 Tsd.',
-        filter:
-            [
-                "<=", filter, 1000
-            ],
+        filter: [
+            "<=", filter, 1000
+        ],
         color: '#ffe600',
         ...layers
     },
     {
         id: 'countRavensburg2',
         label: '1 - 5 Tsd.',
-        filter:
-            [
-                'all',
-                [">", filter, 1000],
-                ["<=", filter, 5000]
-            ],
+        filter: [
+            'all',
+            [">", filter, 1000],
+            ["<=", filter, 5000]
+        ],
         color: '#f6b500',
         ...layers
     },
     {
         id: 'countRavensburg3',
         label: '5 Tsd. - 15 Tsd.',
-        filter:
-            [
-                'all',
-                [">", filter, 5000],
-                ["<=", filter, 15000]
-            ],
+        filter: [
+            'all',
+            [">", filter, 5000],
+            ["<=", filter, 15000]
+        ],
         color: '#e78300',
         ...layers
     },
     {
         id: 'countRavensburg4',
         label: '15 Tsd. - 30 Tsd.',
-        filter:
-            [
-                'all',
-                [">", filter, 15000],
-                ["<=", filter, 30000]
-            ],
+        filter: [
+            'all',
+            [">", filter, 15000],
+            ["<=", filter, 30000]
+        ],
         color: '#d25000',
         ...layers
     },
     {
         id: 'countRavensburg5',
         label: 'über 30 Tsd.',
-        filter:
-            [
-                ">", filter, 30000
-            ],
+        filter: [
+            ">", filter, 30000
+        ],
         color: '#b70101',
         ...layers
     }
