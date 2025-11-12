@@ -26,13 +26,22 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
     // ==============================
     // MAP
     // ==============================   
-    const params = new URLSearchParams(window.location.search);
+    const searchParams = new URLSearchParams(window.location.search);
+    const hasSearchParams = searchParams.has('zoom') && searchParams.has('lng') && searchParams.has('lat');
+    const hashParams = location.hash;
+
     let lng, lat, zoom;
 
-    if (params.has('zoom') && params.has('lng') && params.has('lat')) {
-        lng = parseFloat(params.get('lng'));
-        lat = parseFloat(params.get('lat'));
-        zoom = parseFloat(params.get('zoom'));
+    if (hasSearchParams) {
+        lng = parseFloat(searchParams.get('lng'));
+        lat = parseFloat(searchParams.get('lat'));
+        zoom = parseFloat(searchParams.get('zoom'));
+    }
+    else if (hashParams) {
+        const hashParamsArray = hashParams.slice(1).split('/');
+        zoom = hashParamsArray[0];
+        lat = hashParamsArray[1];
+        lng = hashParamsArray[2];
     }
     else if (configZoom && configCenter) {
         lng = configCenter[0];
@@ -68,11 +77,15 @@ export function initializeMap({ configZoom, configCenter, configMinZoom, configS
 
     function setUrlParams() {
         map.on('moveend', () => {
-            const { lng, lat } = map.getCenter();
             const url = new URL(window.location.href);
-            url.searchParams.set('lng', lng.toFixed(6));
-            url.searchParams.set('lat', lat.toFixed(6));
-            url.searchParams.set('zoom', map.getZoom().toFixed(2));
+            if (hasSearchParams) {
+                url.searchParams.delete("lat");
+                url.searchParams.delete("lng");
+                url.searchParams.delete("zoom");
+            };
+            const { lng, lat } = map.getCenter();
+            const zoom = map.getZoom().toFixed(2);
+            url.hash = `#${zoom}/${lat.toFixed(5)}/${lng.toFixed(5)}`;
             history.replaceState(history.state, '', url.href);
         })
     };

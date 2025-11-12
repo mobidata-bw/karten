@@ -24,6 +24,7 @@ export function popupCanvas(features) {
             }
         };
 
+        /* GENERAL SETTING */
         const canvasHeight = canvas.height; // canvas height, stems from popups.js 
         const canvasWidth = canvas.width; // canvas width, stems from popups.js                   
         const labellingHeight = 15; // space for column titles
@@ -42,7 +43,6 @@ export function popupCanvas(features) {
         ctx.lineTo(canvasWidth, diagramHeight); // from 1|0 to 200/80
         ctx.stroke();
 
-
         for (let chargepoint in chargepoints) {
 
             /* SET COLORS AND LABELS */
@@ -56,12 +56,14 @@ export function popupCanvas(features) {
 
             /* FILL RECT */
             ctx.fillRect(barX, barHeight, barWidth, -chargepoints[chargepoint] * scaleFactor);
+
+            /* FILL TEXT */
             ctx.font = '11px, Arial';
             ctx.fillStyle = 'black';
             ctx.textAlign = 'center';
 
-            /* FILL TEXT */        
             const centerX = barX + barWidth / 2;
+
             ctx.fillText(chargepoints[chargepoint], centerX, (diagramHeight - labellingCountsMargin) - (chargepoints[chargepoint] * scaleFactor));
             ctx.fillText(labels[chargepoint], centerX, canvasHeight - 2);
 

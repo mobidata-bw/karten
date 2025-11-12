@@ -6,14 +6,15 @@ export function popupCanvas(feature) {
     const startYear = 2013;
     const endYear = 2024;
 
-    // scale bars according to highest value
+    /* BAR SCALING ACCORDING TO HIGHEST VALUE */
     let maxValue = 0;
     for (let year = startYear; year <= endYear; year++) {
         if (maxValue < feature[`${year}_ALL`]) {
             maxValue = feature[`${year}_ALL`];
         }
-    }
+    };
 
+    /* GENERAL SETTING */
     const canvasHeight = canvas.height; // canvas height, stems from popups.js 
     const canvasWidth = canvas.width; // canvas width, stems from popups.js                   
     const labellingHeight = 15; // space for column titles
@@ -34,7 +35,6 @@ export function popupCanvas(feature) {
         ctx.lineTo(canvasWidth, diagramHeight); // from 1|0 to 200/80
         ctx.stroke();
 
-        // bars        
         for (let year = startYear, i = 0; year <= endYear; year++, i++) {
 
             const countsAttributYear = `${year}_ALL`;
@@ -43,7 +43,7 @@ export function popupCanvas(feature) {
             let intcountsAttributeValue;
             if (countsEndYear >= 1000000) {
                 intcountsAttributeValue = (counts / 1000000).toFixed(1);
-            }  else {
+            } else {
                 intcountsAttributeValue = (counts / 1000).toFixed(0);
             }
             const strcountsAttributeValue = intcountsAttributeValue.toString().replace('.', ',');
@@ -52,39 +52,45 @@ export function popupCanvas(feature) {
             const strYearExtract = intYearExtract.toString();
             const strYearExtractShortForm = "'" + strYearExtract.substring(2, 5);
 
-
             /* BAR COLORS */
             let barColor;
 
-            if (counts <= 100000) {
-                barColor = '#ffe600';
-            } else if (counts > 100000 && counts <= 500000) {
-                barColor = '#f6b500';
-            } else if (counts > 500000 && counts <= 1000000) {
-                barColor = '#e78300';
-            } else if (counts > 1000000 && counts <= 2000000) {
-                barColor = '#d25000';
-            } else if (counts > 2000000) {
-                barColor = '#b70101';
-            } else {
-                barColor = '#cacaca';
-            }
+            switch (true) {
+                case counts <= 100000:
+                    barColor = '#ffe600';
+                    break;
+                case counts > 100000 && counts <= 500000:
+                    barColor = '#f6b500';
+                    break;
+                case counts > 500000 && counts <= 1000000:
+                    barColor = '#e78300';
+                    break;
+                case counts > 1000000 && counts <= 2000000:
+                    barColor = '#d25000';
+                    break;
+                case counts > 2000000:
+                    barColor = '#b70101';
+                    break;
+            };
 
             ctx.fillStyle = barColor;
 
-            // context fill
-            ctx.fillRect(
-                (3 + i) + i * barWidth,
-                barHeight,
-                barWidth,
-                -feature[countsAttributYear] * scaleFactor),
-                // labellings
-                ctx.font = '11px, Arial';
+            /* GET X-COORDINATE WHERE EACH BAR BEGINS */
+            const barX = (3 + i) + i * barWidth;
+
+            /* FILL RECT */
+            ctx.fillRect(barX, barHeight, barWidth, -feature[countsAttributYear] * scaleFactor);
+
+            /* FILL TEXT */
+            ctx.font = '11px, Arial';
             ctx.fillStyle = 'black';
-            if (counts != 0) {
-                ctx.fillText(strcountsAttributeValue, 8 + (i * 1) + (i * barWidth), (diagramHeight - labellingCountsMargin) - (feature[countsAttributYear] * scaleFactor));
-            }
-            ctx.fillText(strYearExtractShortForm, 8 + (i * 1) + (i * barWidth), canvasHeight);
+            ctx.textAlign = 'center';
+
+            const centerX = barX + barWidth / 2;
+
+            if (counts != 0) ctx.fillText(strcountsAttributeValue, centerX, (diagramHeight - labellingCountsMargin) - (feature[countsAttributYear] * scaleFactor));
+
+            ctx.fillText(strYearExtractShortForm, centerX, canvasHeight);
 
         }
     }
