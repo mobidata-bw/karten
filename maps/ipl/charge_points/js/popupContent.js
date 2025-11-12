@@ -1,6 +1,6 @@
 import { iplPath } from '../../../../src/utils/paths.js';
 import { popupImages } from '../../../../src/js/popupImages.js';
-import { popupCanvas } from './canvas.js';
+import { popupCanvas } from './popupCanvas.js';
 
 
 export function popupContent(features) {
