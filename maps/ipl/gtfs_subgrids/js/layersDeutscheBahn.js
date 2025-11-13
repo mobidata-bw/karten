@@ -15,7 +15,7 @@ export const layersDeutscheBahn = [
     },
     {
         id: 'transitShapes_DRB',
-        label: 'DB Regio Bus Bayern',
+        label: 'Regio Bus Bayern',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('drb')

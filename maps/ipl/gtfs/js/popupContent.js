@@ -96,7 +96,7 @@ export function popupContentTransitShapes(features) {
     const defas = 'DEFAS Bayern (Angebot der Bayerischen Eisenbahngesellschaft)';
     const subgrids = {
         /* DEUTSCHE BAHN */
-        'drb': { subgrid: 'DB Regio Bus Bayern', source: defas },
+        'drb': { subgrid: 'Regio Bus Bayern', source: defas },
         'ovf': { subgrid: 'Ominbusverkehr Franken', source: defas },
         'rab': { subgrid: 'Regionalverkehr Alb-Bodensee' },
         'rbo': { subgrid: 'Regionalbus Ostbayern', source: defas },
@@ -198,7 +198,7 @@ export function popupContentTransitShapes(features) {
     return `
         <table>
             <tr>
-                ${(subgrid == 'Verschiedene Eisenbahngesellschaften' || subgrid == '') ? '' :
+                ${(subgrid == 'Mehrere Eisenbahngesellschaften' || subgrid == '') ? '' :
             (subgrid.startsWith('Verkehrsverbund Schwarzwald-Baar-Heuberg') ? popupImages("Move") : popupImages(subgrid))}
                 <th class="title">${route_names}</th>
             </tr>

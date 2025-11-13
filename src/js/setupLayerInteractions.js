@@ -13,22 +13,25 @@ export function setupLayerInteractions(map, layers, popupContent, sources) {
     // ==============================   
     map.on('click', layer.id, (e) => {
 
-      const feature = e.features[0];
-      const geometry = feature.geometry;
-      let coordinates;
+      const { features, lngLat } = e;
+      const zoom = map.getZoom();  // console.log(zoom);
+      /* If zoom is higher than 12 all clicked features are considered */
+      /* Otherwise only the first feature is used */
+      const clickedFeatures = zoom > 12 ? features : [features[0]];
 
-      if (geometry.type === 'Point') {
-        coordinates = geometry.coordinates;
-      } else {
-        coordinates = [e.lngLat.lng, e.lngLat.lat];
-      }
+      clickedFeatures.forEach(clickedFeature => {
 
-      const properties = feature.properties;
+        const geometry = clickedFeature.geometry;
+        /* Set coordinates for points or polygons and lines */
+        const coordinates = geometry.type == 'Point' ? geometry.coordinates : [lngLat.lng, lngLat.lat];
+        const properties = clickedFeature.properties;
 
-      new maplibregl.Popup()
-        .setLngLat(coordinates)
-        .setHTML(popupContent(properties))
-        .addTo(map);
+        new maplibregl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(popupContent(properties))
+          .addTo(map);
+
+      });
 
     });
 

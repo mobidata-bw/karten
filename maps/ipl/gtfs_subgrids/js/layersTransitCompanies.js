@@ -99,7 +99,7 @@ export const layersTransitCompanies = [
     },
     {
         id: 'transitShapes_GAI',
-        label: 'Omnibus Weidachstein',
+        label: 'Omnibusverkehr Gairing & Omnibus Weidachstein',
         symbol: () => legendLine('#a7007e'),
         ...transitShapes,
         filter: filterSubgrid('gai')

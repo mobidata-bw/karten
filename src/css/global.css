@@ -142,6 +142,11 @@ body {
 	color: red;
 }
 
+/* Prevent pie distortion when divTable has many lines */
+.canvasPie {
+	height: fit-content;
+}
+
 @media (max-width: 575px) {
 
 	.maplibregl-popup-content {

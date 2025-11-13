@@ -19,7 +19,7 @@ export const sourceUids = {
     'Goldbeck': 'goldbeck',
     'Kienzler': 'kienzler',
     'Ministerium für Verkehr Baden-Württemberg': '^p.{1}m_',
-    'NVBW': 'bfrk',
+    'Nahverkehrsgesellschaft Baden-Württemberg': 'bfrk',
     'Open-Data-Plattform Schweiz': 'opendata_swiss',
     'PARK SERVICE HÜFNER GmbH + Co. KG': 'huefner',
     'Parkraumgesellschaft Baden-Württemberg mbH': 'pbw',

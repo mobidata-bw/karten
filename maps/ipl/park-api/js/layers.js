@@ -64,7 +64,7 @@ function parkApiOccupancy({ id, layerGroup, layerFilter }) {
                         ['==', ['get', 'has_realtime_data'], false]
                     ],
                     layerFilter
-                ]
+                ],
             ],
             color: '#615fdf',
             scope: ['car', 'bicycle', 'item', 'buildings', 'on_street', 'buildings_disabled', 'on_street_disabled', 'site', 'spot'],

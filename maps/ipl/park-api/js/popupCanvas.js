@@ -4,8 +4,6 @@ export function popupCanvas(features) {
     const realtimeCapacity = features.realtime_capacity;
     const realtimeFreeCapacity = features.realtime_free_capacity;
 
-    // console.log("capacity:", capacity, "realtimeCapacity:", realtimeCapacity, "realtimeFreeCapacity:", realtimeFreeCapacity);
-
     if ((realtimeFreeCapacity && capacity) && (capacity != 0 || realtimeCapacity != 0)) {
         const anchor = document.getElementById("anchor-" + features.id);
 
@@ -29,7 +27,7 @@ export function popupCanvas(features) {
             let freeShareFactor = freeShare * 2;
             let occupiedShareFactor = (1 - freeShare) * 2;
 
-            const colors = ['#5ce75c', '#8B0000'];
+            const colors = ['#059b02', '#ed0000'];
             const labels = [freeShareLabel, occupiedShareLabel];
             const angles = [Math.PI * freeShareFactor, Math.PI * occupiedShareFactor];
             const offset = 1;
